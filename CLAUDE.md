@@ -99,6 +99,15 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-06-04
+**Actividades:**
+- Lectura completa de los documentos de contenido y requerimientos
+- Creación de `wireframes.html` — las 5 páginas interactivas con switch desktop/mobile (Home, Nosotros, Servicios, Testimonios, Contacto+FAQ)
+- Creación del sistema de diseño completo:
+  - `design-tokens.json` — fuente de verdad de colores, tipografía, espaciado, sombras, radios y transiciones
+  - `DESIGN.md` — razonamiento de cada decisión de diseño (paleta, tipografía, componentes, accesibilidad)
+  - `design-preview.html` — preview interactivo con sidebar, 14 secciones y todos los componentes reales del sitio
+
 ### 2026-06-02
 **Actividades:**
 - Inicialización del repositorio en GitHub (`argihm-jpg/DALMA_WEB`)

@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D'ALMA CLINIC — Sistema de Diseño</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --bone-50:   #FDFCFA;
+      --bone-100:  #FAF9F7;
+      --bone-200:  #F5F1EC;
+      --bone-300:  #EDE6DC;
+      --bone-400:  #D8CBBE;
+      --bone-500:  #C4B4A3;
+      --taupe-400: #A89992;
+      --taupe-500: #8B817B;
+      --taupe-600: #736A64;
+      --taupe-700: #5F5651;
+      --taupe-800: #4A4340;
+      --taupe-900: #352F2D;
+      --white:     #FFFFFF;
+
+      --color-bg-base:           var(--bone-100);
+      --color-bg-surface:        var(--bone-200);
+      --color-bg-muted:          var(--bone-300);
+      --color-bg-inverse:        var(--taupe-700);
+      --color-text-primary:      var(--taupe-700);
+      --color-text-secondary:    var(--taupe-500);
+      --color-text-muted:        var(--taupe-400);
+      --color-text-inverse:      var(--bone-100);
+      --color-border:            var(--bone-400);
+      --color-border-subtle:     var(--bone-300);
+      --color-interactive:       var(--taupe-700);
+      --color-interactive-hover: var(--taupe-800);
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Montserrat', system-ui, sans-serif;
+
+      --space-1:  4px;  --space-2:  8px;  --space-3:  12px;
+      --space-4:  16px; --space-5:  20px; --space-6:  24px;
+      --space-8:  32px; --space-10: 40px; --space-12: 48px;
+      --space-16: 64px; --space-20: 80px; --space-24: 96px;
+
+      --radius-sm:   2px;   --radius-md:   4px;
+      --radius-lg:   8px;   --radius-xl:   12px;
+      --radius-2xl:  16px;  --radius-full: 9999px;
+
+      --shadow-sm:    0 1px 3px rgba(95,86,81,.06), 0 1px 2px rgba(95,86,81,.04);
+      --shadow-md:    0 4px 12px rgba(95,86,81,.08), 0 2px 4px rgba(95,86,81,.04);
+      --shadow-lg:    0 8px 24px rgba(95,86,81,.10), 0 4px 8px rgba(95,86,81,.06);
+      --shadow-xl:    0 16px 40px rgba(95,86,81,.12), 0 8px 16px rgba(95,86,81,.06);
+      --shadow-inner: inset 0 2px 4px rgba(95,86,81,.08);
+
+      --transition-fast:   150ms ease;
+      --transition-normal: 250ms ease;
+      --transition-slow:   400ms ease;
+    }
+
+    /* ─── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-text-primary);
+      background: var(--color-bg-base);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SHELL ──────────────────────────────────────────── */
+    .ds-shell {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .ds-sidebar {
+      position: sticky; top: 0; height: 100vh;
+      overflow-y: auto;
+      background: var(--taupe-900);
+      padding: var(--space-6) 0;
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .ds-sidebar-header {
+      padding: 0 var(--space-6) var(--space-6);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      margin-bottom: var(--space-2);
+    }
+    .ds-sidebar-logo {
+      font-family: var(--font-display); font-size: 1.25rem;
+      font-weight: 300; color: var(--bone-200); letter-spacing: .08em;
+    }
+    .ds-sidebar-meta {
+      font-size: .65rem; font-weight: 500; color: var(--taupe-500);
+      letter-spacing: .12em; text-transform: uppercase; margin-top: 4px;
+    }
+    .ds-nav-link {
+      display: block; padding: 8px var(--space-6);
+      font-size: .75rem; font-weight: 500; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--taupe-400);
+      text-decoration: none;
+      transition: color var(--transition-fast), background var(--transition-fast);
+    }
+    .ds-nav-link:hover, .ds-nav-link.active {
+      color: var(--bone-200); background: rgba(255,255,255,.06);
+    }
+    .ds-sidebar::-webkit-scrollbar { width: 3px; }
+    .ds-sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 2px; }
+
+    /* Main */
+    .ds-main { padding: var(--space-16) var(--space-12); max-width: 980px; }
+
+    /* ─── SECTION ────────────────────────────────────────── */
+    .ds-section { margin-bottom: var(--space-24); scroll-margin-top: var(--space-8); }
+    .ds-section-header {
+      margin-bottom: var(--space-8); padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+    .ds-section-title {
+      font-family: var(--font-display); font-size: 2rem;
+      font-weight: 300; color: var(--color-text-primary); letter-spacing: -.01em;
+    }
+    .ds-section-desc {
+      margin-top: var(--space-2); font-size: .875rem;
+      color: var(--color-text-secondary); line-height: 1.6;
+    }
+
+    /* ─── LAYOUT HELPERS ─────────────────────────────────── */
+    .ds-grid   { display: grid; gap: var(--space-4); }
+    .ds-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .ds-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .ds-grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .ds-grid-5 { grid-template-columns: repeat(5, 1fr); }
+    .ds-flex   { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: flex-start; }
+    .ds-category {
+      font-size: .7rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--taupe-500); margin-bottom: var(--space-3);
+    }
+
+    /* ─── SWATCHES ───────────────────────────────────────── */
+    .swatch { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+    .swatch-color { height: 64px; }
+    .swatch-info  { padding: 10px 12px; background: var(--white); }
+    .swatch-name  { font-size: .7rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--taupe-700); }
+    .swatch-hex   { font-size: .75rem; color: var(--taupe-500); font-family: monospace; margin-top: 2px; }
+    .swatch-desc  { font-size: .65rem; color: var(--taupe-400); margin-top: 3px; line-height: 1.4; }
+
+    .token-row {
+      display: flex; align-items: center; gap: var(--space-4);
+      padding: 12px var(--space-4); background: var(--white);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+    }
+    .token-dot { width: 32px; height: 32px; border-radius: var(--radius-md); flex-shrink: 0; border: 1px solid var(--bone-300); }
+    .token-name { font-family: monospace; font-size: .8rem; color: var(--taupe-700); font-weight: 600; }
+    .token-desc { font-size: .75rem; color: var(--taupe-500); margin-top: 2px; }
+
+    /* ─── TYPOGRAPHY ─────────────────────────────────────── */
+    .type-row {
+      padding: var(--space-6); background: var(--white);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+      display: flex; align-items: baseline; gap: var(--space-6);
+    }
+    .type-meta { min-width: 145px; flex-shrink: 0; }
+    .type-role { font-family: monospace; font-size: .7rem; font-weight: 600; color: var(--taupe-600); letter-spacing: .05em; }
+    .type-spec { font-size: .65rem; color: var(--taupe-400); margin-top: 3px; line-height: 1.5; }
+    .type-sample { flex: 1; }
+
+    /* ─── SPACING ────────────────────────────────────────── */
+    .spacing-row {
+      display: flex; align-items: center; gap: var(--space-4);
+      padding: 10px var(--space-4); background: var(--white);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+    }
+    .spacing-bar  { background: var(--bone-400); height: 8px; border-radius: var(--radius-full); flex-shrink: 0; }
+    .spacing-label { font-family: monospace; font-size: .75rem; color: var(--taupe-700); min-width: 64px; }
+    .spacing-px   { font-size: .75rem; color: var(--taupe-400); }
+
+    /* ─── RADIUS ─────────────────────────────────────────── */
+    .radius-box {
+      background: var(--bone-400); width: 80px; height: 80px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 3px;
+    }
+    .radius-lbl { font-family: monospace; font-size: .6rem; color: var(--taupe-700); font-weight: 600; }
+    .radius-val { font-size: .55rem; color: var(--taupe-600); }
+
+    /* ─── SHADOWS ────────────────────────────────────────── */
+    .shadow-card {
+      background: var(--white); border-radius: var(--radius-xl);
+      padding: var(--space-6); text-align: center;
+    }
+    .shadow-name { font-family: monospace; font-size: .75rem; font-weight: 600; color: var(--taupe-700); margin-bottom: 4px; }
+    .shadow-desc-text { font-size: .7rem; color: var(--taupe-500); }
+
+    /* ─── BUTTONS ────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: var(--space-2); font-family: var(--font-body);
+      font-size: .875rem; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; text-decoration: none;
+      cursor: pointer; border: none; outline: none;
+      transition: all var(--transition-fast); white-space: nowrap;
+    }
+    .btn-sm  { padding: 10px var(--space-5); font-size: .75rem; }
+    .btn-md  { padding: 14px var(--space-8); }
+    .btn-lg  { padding: 18px var(--space-10); font-size: 1rem; }
+    .btn-pill { border-radius: var(--radius-full); }
+
+    .btn-primary { background: var(--taupe-700); color: var(--white); }
+    .btn-primary:hover  { background: var(--taupe-800); }
+    .btn-primary:active { background: var(--taupe-900); }
+    .btn-primary:focus-visible { outline: 2px solid var(--taupe-700); outline-offset: 3px; }
+
+    .btn-secondary { background: transparent; color: var(--taupe-700); border: 1.5px solid var(--taupe-700); }
+    .btn-secondary:hover { background: var(--bone-200); }
+
+    .btn-ghost {
+      background: transparent; color: var(--taupe-700);
+      padding-left: 0; padding-right: 0; border-radius: 0;
+      border-bottom: 1px solid transparent;
+    }
+    .btn-ghost:hover { border-bottom-color: var(--taupe-700); }
+
+    .btn-whatsapp { background: #25D366; color: var(--white); border-radius: var(--radius-full); }
+    .btn-whatsapp:hover { background: #1ebe5d; }
+
+    .btn-disabled { background: var(--bone-400); color: var(--taupe-400); cursor: not-allowed; border-radius: var(--radius-full); }
+
+    /* ─── BADGES ─────────────────────────────────────────── */
+    .badge {
+      display: inline-flex; align-items: center;
+      font-family: var(--font-body); font-size: .65rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase; padding: 4px 10px;
+      border-radius: var(--radius-sm);
+    }
+    .badge-default { background: var(--bone-300); color: var(--taupe-600); }
+    .badge-dark    { background: var(--taupe-700); color: var(--bone-100); }
+    .badge-outline { border: 1px solid var(--taupe-500); color: var(--taupe-600); background: transparent; }
+
+    /* ─── CARDS ──────────────────────────────────────────── */
+    .card-service {
+      background: var(--bone-200); border: 1px solid var(--bone-400);
+      border-radius: var(--radius-lg); padding: var(--space-6);
+      box-shadow: var(--shadow-md);
+      transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+    }
+    .card-service:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+    .card-service-title {
+      font-family: var(--font-display); font-size: 1.375rem; font-weight: 400;
+      color: var(--taupe-700); line-height: 1.3; margin: var(--space-3) 0;
+    }
+    .card-service-body {
+      font-size: .875rem; color: var(--taupe-500); line-height: 1.65;
+      margin-bottom: var(--space-5);
+    }
+
+    .card-team {
+      background: var(--bone-100); border-radius: var(--radius-xl);
+      overflow: hidden; box-shadow: var(--shadow-sm); text-align: center;
+    }
+    .card-team-photo {
+      width: 100%; aspect-ratio: 1 / 1; background: var(--bone-300);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--taupe-400); font-size: .75rem; letter-spacing: .06em;
+    }
+    .card-team-info { padding: var(--space-5) var(--space-4); }
+    .card-team-name { font-family: var(--font-display); font-size: 1.125rem; font-weight: 400; color: var(--taupe-700); }
+    .card-team-role {
+      font-size: .75rem; color: var(--taupe-500); letter-spacing: .06em;
+      text-transform: uppercase; margin-top: 4px;
+    }
+
+    .card-testimonial {
+      background: var(--bone-200); border-radius: var(--radius-xl);
+      padding: var(--space-6) var(--space-6) var(--space-6) var(--space-8);
+      border-left: 2px solid var(--taupe-500); box-shadow: var(--shadow-sm);
+    }
+    .card-testimonial-quote {
+      font-family: var(--font-display); font-size: 1.1rem; font-weight: 300;
+      color: var(--taupe-700); line-height: 1.65; font-style: italic;
+      margin-bottom: var(--space-4);
+    }
+    .card-testimonial-author {
+      font-size: .8rem; font-weight: 600; color: var(--taupe-600);
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .card-testimonial-treatment { font-size: .75rem; color: var(--taupe-500); margin-top: 3px; }
+
+    /* ─── FORMS ──────────────────────────────────────────── */
+    .form-group { display: flex; flex-direction: column; gap: var(--space-2); }
+    .form-label {
+      font-size: .7rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--taupe-600);
+    }
+    .form-input, .form-select, .form-textarea {
+      font-family: var(--font-body); font-size: .9rem; color: var(--taupe-700);
+      background: var(--bone-200); border: 1.5px solid var(--bone-400);
+      border-radius: var(--radius-md); padding: 12px var(--space-4);
+      outline: none; transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      width: 100%;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--taupe-400); }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--taupe-600); box-shadow: var(--shadow-inner); background: var(--bone-100);
+    }
+    .form-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+    .form-select { appearance: none; cursor: pointer; }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    .nav-demo { background: var(--bone-100); border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); }
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-4) var(--space-8);
+      background: rgba(250,249,247,.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--bone-300);
+    }
+    .nav-logo {
+      font-family: var(--font-display); font-size: 1.375rem; font-weight: 300;
+      color: var(--taupe-700); letter-spacing: .06em; text-decoration: none;
+    }
+    .nav-links { display: flex; gap: var(--space-8); list-style: none; }
+    .nav-links a {
+      font-size: .8rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--taupe-600); text-decoration: none; transition: color var(--transition-fast);
+    }
+    .nav-links a:hover { color: var(--taupe-900); }
+    .nav-mobile-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-4) var(--space-5); background: var(--bone-100);
+      border-bottom: 1px solid var(--bone-300);
+    }
+    .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 22px; height: 1.5px; background: var(--taupe-700); display: block; border-radius: 2px; }
+
+    /* ─── ACCORDION ──────────────────────────────────────── */
+    .accordion { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--bone-400); }
+    .accordion-item { border-bottom: 1px solid var(--bone-400); }
+    .accordion-item:last-child { border-bottom: none; }
+    .accordion-trigger {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-5) var(--space-6); background: var(--bone-100);
+      border: none; cursor: pointer; transition: background var(--transition-fast); text-align: left;
+    }
+    .accordion-trigger:hover, .accordion-trigger.open { background: var(--bone-200); }
+    .accordion-title { font-family: var(--font-display); font-size: 1.125rem; font-weight: 400; color: var(--taupe-700); }
+    .accordion-icon {
+      font-size: 1.375rem; font-weight: 300; color: var(--taupe-500);
+      line-height: 1; transition: transform var(--transition-normal); flex-shrink: 0;
+    }
+    .accordion-trigger.open .accordion-icon { transform: rotate(45deg); }
+    .accordion-body { max-height: 0; overflow: hidden; transition: max-height 300ms ease; }
+    .accordion-body.open { max-height: 300px; }
+    .accordion-content {
+      padding: 0 var(--space-6) var(--space-5); background: var(--bone-200);
+      font-size: .875rem; color: var(--taupe-500); line-height: 1.7;
+    }
+
+    /* ─── DIVIDERS ───────────────────────────────────────── */
+    .divider { border: none; border-top: 1px solid var(--bone-400); margin: var(--space-4) 0; }
+    .divider-subtle { border-top-color: var(--bone-300); }
+    .divider-strong { border-top-color: var(--taupe-500); }
+    .divider-ornament {
+      display: flex; align-items: center; gap: var(--space-4);
+      color: var(--taupe-400); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+    }
+    .divider-ornament::before, .divider-ornament::after {
+      content: ''; flex: 1; border-top: 1px solid var(--bone-400);
+    }
+
+    /* ─── DARK SECTION ───────────────────────────────────── */
+    .section-dark {
+      background: var(--taupe-700); border-radius: var(--radius-2xl);
+      padding: var(--space-12) var(--space-10); color: var(--bone-100);
+    }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero-mini {
+      background: var(--bone-200); border-radius: var(--radius-2xl);
+      padding: var(--space-16) var(--space-12); text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-mini::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(216,203,190,.3) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: .7rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--taupe-500); margin-bottom: var(--space-4);
+    }
+    .hero-title {
+      font-family: var(--font-display); font-size: clamp(2rem,5vw,3.5rem);
+      font-weight: 300; color: var(--taupe-700); letter-spacing: -.02em;
+      line-height: 1.15; margin-bottom: var(--space-6);
+    }
+    .hero-subtitle {
+      font-size: .9rem; color: var(--taupe-500); line-height: 1.7;
+      max-width: 480px; margin: 0 auto var(--space-8);
+    }
+    .hero-ctas { display: flex; gap: var(--space-3); justify-content: center; flex-wrap: wrap; }
+
+    .whatsapp-float {
+      display: inline-flex; align-items: center; gap: var(--space-3);
+      background: #25D366; color: var(--white); font-size: .8rem; font-weight: 600;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: 14px var(--space-6); border-radius: var(--radius-full);
+      box-shadow: 0 4px 16px rgba(37,211,102,.4); text-decoration: none;
+      transition: all var(--transition-fast);
+    }
+    .whatsapp-float:hover { background: #1ebe5d; transform: translateY(-1px); }
+    .wa-icon { width: 20px; height: 20px; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .ds-shell { grid-template-columns: 1fr; }
+      .ds-sidebar { display: none; }
+      .ds-main { padding: var(--space-8) var(--space-5); }
+      .ds-grid-4, .ds-grid-5 { grid-template-columns: repeat(2, 1fr); }
+      .ds-grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .type-row { flex-direction: column; gap: var(--space-3); }
+      .type-meta { min-width: unset; }
+    }
+    @media (max-width: 560px) {
+      .ds-grid-2, .ds-grid-3, .ds-grid-4, .ds-grid-5 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="ds-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="ds-sidebar">
+    <div class="ds-sidebar-header">
+      <div class="ds-sidebar-logo">D'ALMA</div>
+      <div class="ds-sidebar-meta">Sistema de Diseño v1.0</div>
+    </div>
+    <a href="#colores"     class="ds-nav-link">Colores</a>
+    <a href="#tipografia"  class="ds-nav-link">Tipografía</a>
+    <a href="#espaciado"   class="ds-nav-link">Espaciado</a>
+    <a href="#radios"      class="ds-nav-link">Radios</a>
+    <a href="#sombras"     class="ds-nav-link">Sombras</a>
+    <a href="#botones"     class="ds-nav-link">Botones</a>
+    <a href="#badges"      class="ds-nav-link">Badges</a>
+    <a href="#cards"       class="ds-nav-link">Cards</a>
+    <a href="#formularios" class="ds-nav-link">Formularios</a>
+    <a href="#navegacion"  class="ds-nav-link">Navegación</a>
+    <a href="#acordeon"    class="ds-nav-link">Acordeón</a>
+    <a href="#divisores"   class="ds-nav-link">Divisores</a>
+    <a href="#oscuro"      class="ds-nav-link">Sección oscura</a>
+    <a href="#hero"        class="ds-nav-link">Hero preview</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="ds-main">
+
+    <!-- PAGE HEADER -->
+    <div style="margin-bottom:var(--space-16);">
+      <div style="font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--taupe-400);margin-bottom:var(--space-3);">D'ALMA CLINIC</div>
+      <h1 style="font-family:var(--font-display);font-size:3rem;font-weight:300;color:var(--taupe-700);letter-spacing:-.02em;line-height:1.1;">Sistema de Diseño</h1>
+      <p style="margin-top:var(--space-3);font-size:.9rem;color:var(--taupe-500);">Referencia visual completa · Versión 1.0.0 · 2026-06-04</p>
+    </div>
+
+    <!-- ══ COLORES ══════════════════════════════════════════ -->
+    <section class="ds-section" id="colores">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Colores</h2>
+        <p class="ds-section-desc">Paleta tierra extendida a partir de los 5 colores oficiales. Sin acentos brillantes — la sofisticación emerge de la coherencia.</p>
+      </div>
+
+      <div class="ds-category">Familia Bone — fondos y superficies</div>
+      <div class="ds-grid ds-grid-5" style="margin-bottom:var(--space-6);">
+        <div class="swatch"><div class="swatch-color" style="background:#FDFCFA;border:1px solid #ede6dc;"></div><div class="swatch-info"><div class="swatch-name">bone-50</div><div class="swatch-hex">#FDFCFA</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#FAF9F7;border:1px solid #ede6dc;"></div><div class="swatch-info"><div class="swatch-name">bone-100</div><div class="swatch-hex">#FAF9F7</div><div class="swatch-desc">Background base</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#F5F1EC;"></div><div class="swatch-info"><div class="swatch-name">bone-200</div><div class="swatch-hex">#F5F1EC</div><div class="swatch-desc">Beige hueso · cards</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#EDE6DC;"></div><div class="swatch-info"><div class="swatch-name">bone-300</div><div class="swatch-hex">#EDE6DC</div><div class="swatch-desc">Fills, dividers</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#D8CBBE;"></div><div class="swatch-info"><div class="swatch-name">bone-400</div><div class="swatch-hex">#D8CBBE</div><div class="swatch-desc">Arena suave · bordes</div></div></div>
+      </div>
+
+      <div class="ds-category">Familia Taupe — texto e interactivos</div>
+      <div class="ds-grid ds-grid-5" style="margin-bottom:var(--space-8);">
+        <div class="swatch"><div class="swatch-color" style="background:#C4B4A3;"></div><div class="swatch-info"><div class="swatch-name">bone-500</div><div class="swatch-hex">#C4B4A3</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#A89992;"></div><div class="swatch-info"><div class="swatch-name">taupe-400</div><div class="swatch-hex">#A89992</div><div class="swatch-desc">Placeholder</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#8B817B;"></div><div class="swatch-info"><div class="swatch-name">taupe-500</div><div class="swatch-hex">#8B817B</div><div class="swatch-desc">Taupe elegante</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#5F5651;"></div><div class="swatch-info"><div class="swatch-name">taupe-700</div><div class="swatch-hex">#5F5651</div><div class="swatch-desc">Gris café · primario</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#352F2D;"></div><div class="swatch-info"><div class="swatch-name">taupe-900</div><div class="swatch-hex">#352F2D</div><div class="swatch-desc">Máximo contraste</div></div></div>
+      </div>
+
+      <div class="ds-category">Tokens semánticos</div>
+      <div class="ds-grid ds-grid-2" style="gap:var(--space-2);">
+        <div class="token-row"><div class="token-dot" style="background:var(--bone-100);"></div><div><div class="token-name">--color-bg-base</div><div class="token-desc">Fondo de página</div></div></div>
+        <div class="token-row"><div class="token-dot" style="background:var(--bone-200);"></div><div><div class="token-name">--color-bg-surface</div><div class="token-desc">Fondo de cards / secciones</div></div></div>
+        <div class="token-row"><div class="token-dot" style="background:var(--bone-300);"></div><div><div class="token-name">--color-bg-muted</div><div class="token-desc">Fills de input, fills sutiles</div></div></div>
+        <div class="token-row"><div class="token-dot" style="background:var(--taupe-700);"></div><div><div class="token-name">--color-bg-inverse</div><div class="token-desc">Secciones oscuras</div></div></div>
+        <div class="token-row"><div class="token-dot" style="background:var(--taupe-700);"></div><div><div class="token-name">--color-text-primary</div><div class="token-desc">Texto principal y headings</div></div></div>
+        <div class="token-row"><div class="token-dot" style="background:var(--taupe-500);"></div><div><div class="token-name">--color-text-secondary</div><div class="token-desc">Texto de apoyo, captions</div></div></div>
+        <div class="token-row"><div class="token-dot" style="background:var(--bone-400);"></div><div><div class="token-name">--color-border</div><div class="token-desc">Bordes de cards e inputs</div></div></div>
+        <div class="token-row"><div class="token-dot" style="background:var(--taupe-700);"></div><div><div class="token-name">--color-interactive</div><div class="token-desc">Botones y links activos</div></div></div>
+      </div>
+    </section>
+
+    <!-- ══ TIPOGRAFÍA ════════════════════════════════════════ -->
+    <section class="ds-section" id="tipografia">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Tipografía</h2>
+        <p class="ds-section-desc"><strong>Cormorant Garamond</strong> para editorial y frases de marca. <strong>Montserrat</strong> para UI, body y funcional. Nunca usar Cormorant en botones o formularios.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:var(--space-3);">
+        <div class="type-row">
+          <div class="type-meta"><div class="type-role">hero-title</div><div class="type-spec">Cormorant · 60px · Light · leading 1.2</div></div>
+          <div class="type-sample" style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3.75rem);font-weight:300;letter-spacing:-.02em;line-height:1.2;color:var(--taupe-700);">Cuidarte también es una forma de amor propio.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-role">section-title</div><div class="type-spec">Cormorant · 36px · Light · leading 1.35</div></div>
+          <div class="type-sample" style="font-family:var(--font-display);font-size:2.25rem;font-weight:300;letter-spacing:-.01em;line-height:1.35;color:var(--taupe-700);">Nuestros Servicios</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-role">card-title</div><div class="type-spec">Cormorant · 24px · Regular · leading 1.35</div></div>
+          <div class="type-sample" style="font-family:var(--font-display);font-size:1.5rem;font-weight:400;line-height:1.35;color:var(--taupe-700);">Hydrafacial & Faciales Avanzados</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-role">quote</div><div class="type-spec">Cormorant · 20px · Light Italic · leading 1.65</div></div>
+          <div class="type-sample" style="font-family:var(--font-display);font-size:1.25rem;font-weight:300;font-style:italic;line-height:1.65;color:var(--taupe-600);">"Lo más bonito no es solo verse diferente... es volver a sentirse bien con uno mismo."</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-role">label</div><div class="type-spec">Montserrat · 12px · Semibold · tracking 0.16em</div></div>
+          <div class="type-sample" style="font-family:var(--font-body);font-size:.75rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--taupe-500);">Inyectables</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-role">nav</div><div class="type-spec">Montserrat · 14px · Medium · tracking 0.08em</div></div>
+          <div class="type-sample" style="font-family:var(--font-body);font-size:.875rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--taupe-600);">Servicios</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-role">body</div><div class="type-spec">Montserrat · 16px · Regular · leading 1.65</div></div>
+          <div class="type-sample" style="font-family:var(--font-body);font-size:1rem;font-weight:400;line-height:1.65;color:var(--taupe-600);">En D'ALMA CLINIC creemos que sentirse bien contigo también cambia la forma en la que vives. Creamos un espacio cálido y moderno para hombres y mujeres que buscan tratamientos personalizados.</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-role">cta</div><div class="type-spec">Montserrat · 14px · Semibold · tracking 0.06em</div></div>
+          <div class="type-sample" style="font-family:var(--font-body);font-size:.875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--taupe-700);">Agenda tu cita</div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta"><div class="type-role">caption</div><div class="type-spec">Montserrat · 12px · Regular · tracking 0.04em</div></div>
+          <div class="type-sample" style="font-family:var(--font-body);font-size:.75rem;font-weight:400;letter-spacing:.04em;color:var(--taupe-400);">*Los resultados pueden variar según cada persona. Se recomienda valoración médica previa.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ ESPACIADO ═════════════════════════════════════════ -->
+    <section class="ds-section" id="espaciado">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Espaciado</h2>
+        <p class="ds-section-desc">Sistema base 4px. Todos los valores son múltiplos exactos para garantizar alineación en cualquier pantalla.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:var(--space-2);">
+        <div class="spacing-row"><div class="spacing-label">space-1</div><div class="spacing-bar" style="width:4px;"></div><div class="spacing-px">4px — micro, gaps de íconos</div></div>
+        <div class="spacing-row"><div class="spacing-label">space-2</div><div class="spacing-bar" style="width:8px;"></div><div class="spacing-px">8px — xs, padding de badges</div></div>
+        <div class="spacing-row"><div class="spacing-label">space-3</div><div class="spacing-bar" style="width:12px;"></div><div class="spacing-px">12px — sm</div></div>
+        <div class="spacing-row"><div class="spacing-label">space-4</div><div class="spacing-bar" style="width:16px;"></div><div class="spacing-px">16px — base, padding de inputs</div></div>
+        <div class="spacing-row"><div class="spacing-label">space-5</div><div class="spacing-bar" style="width:20px;"></div><div class="spacing-px">20px</div></div>
+        <div class="spacing-row"><div class="spacing-label">space-6</div><div class="spacing-bar" style="width:24px;"></div><div class="spacing-px">24px — md, padding interno de cards</div></div>
+        <div class="spacing-row"><div class="spacing-label">space-8</div><div class="spacing-bar" style="width:32px;"></div><div class="spacing-px">32px — lg, gap entre cards</div></div>
+        <div class="spacing-row"><div class="spacing-label">space-10</div><div class="spacing-bar" style="width:40px;"></div><div class="spacing-px">40px</div></div>
+        <div class="spacing-row"><div class="spacing-label">space-12</div><div class="spacing-bar" style="width:48px;"></div><div class="spacing-px">48px — xl, padding de secciones mobile</div></div>
+        <div class="spacing-row"><div class="spacing-label">space-16</div><div class="spacing-bar" style="width:64px;"></div><div class="spacing-px">64px — 2xl</div></div>
+        <div class="spacing-row"><div class="spacing-label">space-20</div><div class="spacing-bar" style="width:80px;"></div><div class="spacing-px">80px — 3xl, padding secciones desktop</div></div>
+        <div class="spacing-row"><div class="spacing-label">space-24</div><div class="spacing-bar" style="width:96px;"></div><div class="spacing-px">96px — 4xl</div></div>
+      </div>
+    </section>
+
+    <!-- ══ RADIOS ═════════════════════════════════════════════ -->
+    <section class="ds-section" id="radios">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Border Radius</h2>
+        <p class="ds-section-desc">Suaves sin exagerar. Botones en pill, cards con <code>lg</code>/<code>xl</code>.</p>
+      </div>
+      <div class="ds-flex">
+        <div><div class="radius-box" style="border-radius:0;"><span class="radius-lbl">none</span><span class="radius-val">0</span></div></div>
+        <div><div class="radius-box" style="border-radius:2px;"><span class="radius-lbl">sm</span><span class="radius-val">2px</span></div></div>
+        <div><div class="radius-box" style="border-radius:4px;"><span class="radius-lbl">md</span><span class="radius-val">4px</span></div></div>
+        <div><div class="radius-box" style="border-radius:8px;"><span class="radius-lbl">lg</span><span class="radius-val">8px</span></div></div>
+        <div><div class="radius-box" style="border-radius:12px;"><span class="radius-lbl">xl</span><span class="radius-val">12px</span></div></div>
+        <div><div class="radius-box" style="border-radius:16px;"><span class="radius-lbl">2xl</span><span class="radius-val">16px</span></div></div>
+        <div><div class="radius-box" style="border-radius:9999px;width:auto;padding:0 28px;height:44px;"><span class="radius-lbl">full</span><span class="radius-val">∞</span></div></div>
+      </div>
+    </section>
+
+    <!-- ══ SOMBRAS ═══════════════════════════════════════════ -->
+    <section class="ds-section" id="sombras">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Sombras</h2>
+        <p class="ds-section-desc">Sombras cálidas tintadas de taupe — no gris neutro. Profundidad sin artificialidad.</p>
+      </div>
+      <div class="ds-grid ds-grid-3" style="gap:var(--space-6);">
+        <div class="shadow-card" style="box-shadow:var(--shadow-sm);"><div class="shadow-name">shadow-sm</div><div class="shadow-desc-text">Input hover, elementos sutiles</div></div>
+        <div class="shadow-card" style="box-shadow:var(--shadow-md);"><div class="shadow-name">shadow-md</div><div class="shadow-desc-text">Cards en reposo</div></div>
+        <div class="shadow-card" style="box-shadow:var(--shadow-lg);"><div class="shadow-name">shadow-lg</div><div class="shadow-desc-text">Cards en hover, dropdowns</div></div>
+        <div class="shadow-card" style="box-shadow:var(--shadow-xl);"><div class="shadow-name">shadow-xl</div><div class="shadow-desc-text">Modales, drawers</div></div>
+        <div class="shadow-card" style="box-shadow:var(--shadow-inner);"><div class="shadow-name">shadow-inner</div><div class="shadow-desc-text">Inputs activos / focus</div></div>
+      </div>
+    </section>
+
+    <!-- ══ BOTONES ═══════════════════════════════════════════ -->
+    <section class="ds-section" id="botones">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Botones</h2>
+        <p class="ds-section-desc">Cuatro variantes + tres tamaños. El primario siempre en pill shape. Pasar el mouse para ver hover.</p>
+      </div>
+
+      <div class="ds-category">Variantes</div>
+      <div class="ds-flex" style="margin-bottom:var(--space-8);align-items:center;">
+        <button class="btn btn-primary btn-md btn-pill">Agenda tu cita</button>
+        <button class="btn btn-secondary btn-md btn-pill">Conoce los servicios</button>
+        <button class="btn btn-ghost btn-md">Ver todos →</button>
+        <a class="btn btn-whatsapp btn-md" href="#">
+          <svg class="wa-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+
+      <div class="ds-category">Tamaños</div>
+      <div class="ds-flex" style="margin-bottom:var(--space-8);align-items:center;">
+        <button class="btn btn-primary btn-sm btn-pill">Pequeño</button>
+        <button class="btn btn-primary btn-md btn-pill">Mediano</button>
+        <button class="btn btn-primary btn-lg btn-pill">Grande</button>
+      </div>
+
+      <div class="ds-category">Estado desactivado</div>
+      <div class="ds-flex">
+        <button class="btn btn-disabled btn-md" disabled>No disponible</button>
+      </div>
+    </section>
+
+    <!-- ══ BADGES ════════════════════════════════════════════ -->
+    <section class="ds-section" id="badges">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Badges & Tags</h2>
+        <p class="ds-section-desc">Etiquetas de categoría para los servicios. Siempre mayúsculas con tracking amplio.</p>
+      </div>
+      <div class="ds-flex">
+        <span class="badge badge-default">Inyectables</span>
+        <span class="badge badge-default">Faciales</span>
+        <span class="badge badge-default">Capilares</span>
+        <span class="badge badge-default">Regeneración</span>
+        <span class="badge badge-default">Láser</span>
+        <span class="badge badge-dark">Destacado</span>
+        <span class="badge badge-outline">Nuevo</span>
+      </div>
+    </section>
+
+    <!-- ══ CARDS ═════════════════════════════════════════════ -->
+    <section class="ds-section" id="cards">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Cards</h2>
+        <p class="ds-section-desc">Tres tipos: servicio, equipo y testimonio. Pasar el mouse sobre las de servicio para ver el hover.</p>
+      </div>
+
+      <div class="ds-category">Card de Servicio</div>
+      <div class="ds-grid ds-grid-3" style="margin-bottom:var(--space-8);">
+        <div class="card-service">
+          <span class="badge badge-default">Faciales</span>
+          <div class="card-service-title">Hydrafacial</div>
+          <div class="card-service-body">Limpieza profunda, exfoliación, extracción e hidratación. Piel fresca y luminosa desde la primera sesión.</div>
+          <button class="btn btn-ghost btn-sm" style="padding-left:0;">Ver tratamiento →</button>
+        </div>
+        <div class="card-service">
+          <span class="badge badge-default">Inyectables</span>
+          <div class="card-service-title">Botox</div>
+          <div class="card-service-body">Suaviza líneas de expresión con resultados naturales. Requiere valoración médica previa.</div>
+          <button class="btn btn-ghost btn-sm" style="padding-left:0;">Ver tratamiento →</button>
+        </div>
+        <div class="card-service">
+          <span class="badge badge-default">Regeneración</span>
+          <div class="card-service-title">PDRN</div>
+          <div class="card-service-body">Tratamiento regenerador para mejorar calidad de piel, cicatrices, textura e hidratación.</div>
+          <button class="btn btn-ghost btn-sm" style="padding-left:0;">Ver tratamiento →</button>
+        </div>
+      </div>
+
+      <div class="ds-category">Card de Equipo</div>
+      <div class="ds-grid ds-grid-3" style="margin-bottom:var(--space-8);">
+        <div class="card-team"><div class="card-team-photo">Foto profesional</div><div class="card-team-info"><div class="card-team-name">Ana María</div><div class="card-team-role">Directora</div></div></div>
+        <div class="card-team"><div class="card-team-photo">Foto profesional</div><div class="card-team-info"><div class="card-team-name">Dra. Nombre</div><div class="card-team-role">Médico Estético</div></div></div>
+        <div class="card-team"><div class="card-team-photo">Foto profesional</div><div class="card-team-info"><div class="card-team-name">María José</div><div class="card-team-role">Atención y Recepción</div></div></div>
+      </div>
+
+      <div class="ds-category">Card de Testimonio</div>
+      <div class="ds-grid ds-grid-2">
+        <div class="card-testimonial">
+          <div class="card-testimonial-quote">"Me encantó porque me explicaron todo antes de empezar y el resultado se ve completamente natural."</div>
+          <div class="card-testimonial-author">M.R.</div>
+          <div class="card-testimonial-treatment">Fillers · Armonización facial</div>
+        </div>
+        <div class="card-testimonial">
+          <div class="card-testimonial-quote">"Llegué con muchas dudas y salí sintiéndome tranquila y muy bien atendida."</div>
+          <div class="card-testimonial-author">L.G.</div>
+          <div class="card-testimonial-treatment">Botox · Primera vez</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ FORMULARIOS ═══════════════════════════════════════ -->
+    <section class="ds-section" id="formularios">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Formularios</h2>
+        <p class="ds-section-desc">Inputs sobre fondo bone-200, labels uppercase. Hacer clic para ver el estado focus.</p>
+      </div>
+      <div style="max-width:480px;display:flex;flex-direction:column;gap:var(--space-5);">
+        <div class="form-group">
+          <label class="form-label">Nombre completo</label>
+          <input class="form-input" type="text" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Teléfono / WhatsApp</label>
+          <input class="form-input" type="tel" placeholder="+52 624 000 0000">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Servicio de interés</label>
+          <select class="form-select">
+            <option value="" disabled selected>Selecciona un tratamiento</option>
+            <option>Hydrafacial</option>
+            <option>Botox</option>
+            <option>Fillers y armonización</option>
+            <option>PDRN</option>
+            <option>Depilación láser</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mensaje (opcional)</label>
+          <textarea class="form-textarea" placeholder="¿Tienes alguna pregunta o algo que quieras contarnos?"></textarea>
+        </div>
+        <button class="btn btn-primary btn-md btn-pill" style="align-self:flex-start;">Enviar mensaje</button>
+      </div>
+    </section>
+
+    <!-- ══ NAVEGACIÓN ════════════════════════════════════════ -->
+    <section class="ds-section" id="navegacion">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Navegación</h2>
+        <p class="ds-section-desc">Desktop: logo + links + CTA. Mobile: logo centrado + hamburger. Fondo frosted glass al hacer scroll.</p>
+      </div>
+
+      <div class="ds-category">Desktop</div>
+      <div class="nav-demo" style="margin-bottom:var(--space-6);">
+        <div class="nav-bar">
+          <a href="#" class="nav-logo">D'<em style="font-style:italic;">ALMA</em></a>
+          <ul class="nav-links">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Nosotros</a></li>
+            <li><a href="#">Servicios</a></li>
+            <li><a href="#">Testimonios</a></li>
+            <li><a href="#">Contacto</a></li>
+          </ul>
+          <button class="btn btn-primary btn-sm btn-pill">Agendar cita</button>
+        </div>
+      </div>
+
+      <div class="ds-category">Mobile (375px)</div>
+      <div class="nav-demo" style="max-width:375px;">
+        <div class="nav-mobile-bar">
+          <div style="width:30px;"></div>
+          <a href="#" class="nav-logo" style="font-size:1.125rem;">D'<em style="font-style:italic;">ALMA</em></a>
+          <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ ACORDEÓN ══════════════════════════════════════════ -->
+    <section class="ds-section" id="acordeon">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Acordeón</h2>
+        <p class="ds-section-desc">Para la sección de Servicios. Ícono + / × animado. Hacer clic para interactuar.</p>
+      </div>
+      <div class="accordion">
+        <div class="accordion-item">
+          <button class="accordion-trigger open" onclick="toggleAccordion(this)">
+            <span class="accordion-title">Botox</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body open">
+            <div class="accordion-content">
+              <p>El Botox utiliza toxina botulínica purificada para relajar músculos del rostro y suavizar líneas de expresión. Da una apariencia más fresca y descansada.</p>
+              <p style="margin-top:var(--space-3);color:var(--taupe-600);">Marcas: Linurase, Otesaly, Dysport · Requiere valoración médica</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            <span class="accordion-title">Fillers y Armonización Facial</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-content">
+              <p>Rellenos dérmicos a base de ácido hialurónico para hidratar, dar soporte y armonizar zonas específicas del rostro. Enfoque en equilibrio natural.</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            <span class="accordion-title">Hydrafacial</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-content">
+              <p>Tratamiento facial no invasivo de limpieza, exfoliación, extracción e hidratación. Resultados visibles desde la primera sesión. Ideal para hombres y mujeres.</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" onclick="toggleAccordion(this)">
+            <span class="accordion-title">Depilación Láser</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-content">
+              <p>Reduce progresivamente el crecimiento del vello. Para hombres y mujeres en múltiples zonas: axila, bikini, piernas, brazos, espalda, rostro y más.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ DIVISORES ═════════════════════════════════════════ -->
+    <section class="ds-section" id="divisores">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Divisores</h2>
+        <p class="ds-section-desc">Tres variantes de línea más un divisor ornamental para separaciones de sección.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:var(--space-8);background:var(--white);padding:var(--space-8);border-radius:var(--radius-xl);">
+        <div><div style="font-size:.7rem;color:var(--taupe-400);margin-bottom:var(--space-3);">Sutil</div><hr class="divider divider-subtle"></div>
+        <div><div style="font-size:.7rem;color:var(--taupe-400);margin-bottom:var(--space-3);">Estándar</div><hr class="divider"></div>
+        <div><div style="font-size:.7rem;color:var(--taupe-400);margin-bottom:var(--space-3);">Fuerte</div><hr class="divider divider-strong"></div>
+        <div><div style="font-size:.7rem;color:var(--taupe-400);margin-bottom:var(--space-3);">Ornamental</div><div class="divider-ornament">D'ALMA</div></div>
+      </div>
+    </section>
+
+    <!-- ══ SECCIÓN OSCURA ════════════════════════════════════ -->
+    <section class="ds-section" id="oscuro">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Sección Oscura</h2>
+        <p class="ds-section-desc">Para alternancia visual — cita de marca, CTA final, footer.</p>
+      </div>
+      <div class="section-dark">
+        <div style="font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--taupe-400);margin-bottom:var(--space-4);">D'ALMA CLINIC</div>
+        <div style="font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.5rem);font-weight:300;color:var(--bone-200);line-height:1.3;letter-spacing:-.01em;margin-bottom:var(--space-5);font-style:italic;">
+          "No se trata de cambiar quién eres...<br>se trata de volver a sentirte tú."
+        </div>
+        <p style="font-size:.875rem;color:var(--taupe-400);margin-bottom:var(--space-8);line-height:1.6;">Tratamientos personalizados, tecnología moderna y resultados naturales.</p>
+        <div class="ds-flex">
+          <button class="btn btn-md btn-pill" style="background:var(--bone-200);color:var(--taupe-700);">Agenda tu cita</button>
+          <button class="btn btn-secondary btn-md btn-pill" style="border-color:var(--taupe-500);color:var(--bone-300);">Conoce los servicios</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ HERO PREVIEW ══════════════════════════════════════ -->
+    <section class="ds-section" id="hero">
+      <div class="ds-section-header">
+        <h2 class="ds-section-title">Hero Preview</h2>
+        <p class="ds-section-desc">Composición final de los elementos del sistema. Dirección visual del sitio.</p>
+      </div>
+      <div class="hero-mini">
+        <div class="hero-eyebrow">D'ALMA CLINIC · Cabo San Lucas, BCS</div>
+        <h1 class="hero-title">
+          Cuidarte también es una<br>forma de amor propio.
+        </h1>
+        <p class="hero-subtitle">
+          Un espacio cálido y moderno para hombres y mujeres que buscan tratamientos personalizados, resultados naturales y una experiencia distinta.
+        </p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary btn-lg btn-pill">Agenda tu cita</button>
+          <button class="btn btn-secondary btn-lg btn-pill">Conoce los servicios</button>
+        </div>
+        <div style="margin-top:var(--space-10);">
+          <a class="whatsapp-float" href="#">
+            <svg class="wa-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Chatear por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div style="padding-top:var(--space-8);border-top:1px solid var(--bone-300);text-align:center;padding-bottom:var(--space-12);">
+      <div style="font-family:var(--font-display);font-size:1.5rem;font-weight:300;color:var(--taupe-600);letter-spacing:.06em;margin-bottom:var(--space-2);">D'ALMA CLINIC</div>
+      <div style="font-size:.7rem;color:var(--taupe-400);letter-spacing:.1em;text-transform:uppercase;">Sistema de Diseño · Versión 1.0.0 · 2026-06-04</div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  function toggleAccordion(trigger) {
+    const body = trigger.nextElementSibling;
+    const isOpen = trigger.classList.contains('open');
+    trigger.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+  }
+
+  const sections = document.querySelectorAll('.ds-section');
+  const navLinks = document.querySelectorAll('.ds-nav-link');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.ds-nav-link[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(s => io.observe(s));
+</script>
+</body>
+</html>

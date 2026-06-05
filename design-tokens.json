@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "project": "D'ALMA CLINIC",
+    "version": "1.0.0",
+    "created": "2026-06-04",
+    "description": "Design tokens for D'ALMA CLINIC — clínica estética minimalista, cálida y elegante"
+  },
+
+  "color": {
+    "palette": {
+      "bone-50":  { "value": "#FDFCFA", "description": "Lightest tint of bone" },
+      "bone-100": { "value": "#FAF9F7", "description": "Blanco limpio — background base" },
+      "bone-200": { "value": "#F5F1EC", "description": "Beige hueso — surface/card background" },
+      "bone-300": { "value": "#EDE6DC", "description": "Light tint of arena" },
+      "bone-400": { "value": "#D8CBBE", "description": "Arena suave — borders, dividers" },
+      "bone-500": { "value": "#C4B4A3", "description": "Mid arena — subtle accents" },
+      "taupe-400": { "value": "#A89992", "description": "Light taupe — placeholder text" },
+      "taupe-500": { "value": "#8B817B", "description": "Taupe elegante — secondary text, icons" },
+      "taupe-600": { "value": "#736A64", "description": "Dark taupe — emphasis text" },
+      "taupe-700": { "value": "#5F5651", "description": "Gris café profundo — primary text, buttons" },
+      "taupe-800": { "value": "#4A4340", "description": "Darker — hover states" },
+      "taupe-900": { "value": "#352F2D", "description": "Darkest — high contrast text" },
+      "white":     { "value": "#FFFFFF", "description": "Pure white — text on dark" },
+      "black":     { "value": "#1A1715", "description": "Near black — max contrast" }
+    },
+
+    "semantic": {
+      "bg": {
+        "base":    { "ref": "bone-100",  "description": "Page background" },
+        "surface": { "ref": "bone-200",  "description": "Card / section background" },
+        "muted":   { "ref": "bone-300",  "description": "Subtle fills, dividers" },
+        "inverse": { "ref": "taupe-700", "description": "Dark section background" }
+      },
+      "text": {
+        "primary":   { "ref": "taupe-700", "description": "Body text, headings" },
+        "secondary": { "ref": "taupe-500", "description": "Supporting text, captions" },
+        "muted":     { "ref": "taupe-400", "description": "Placeholders, hints" },
+        "inverse":   { "ref": "bone-100",  "description": "Text on dark backgrounds" }
+      },
+      "border": {
+        "default": { "ref": "bone-400",  "description": "Standard borders" },
+        "subtle":  { "ref": "bone-300",  "description": "Light dividers" },
+        "strong":  { "ref": "taupe-500", "description": "Emphasis borders" }
+      },
+      "interactive": {
+        "default":  { "ref": "taupe-700", "description": "Primary button / link" },
+        "hover":    { "ref": "taupe-800", "description": "Hover state" },
+        "active":   { "ref": "taupe-900", "description": "Active / pressed state" },
+        "disabled": { "ref": "bone-400",  "description": "Disabled state" }
+      }
+    }
+  },
+
+  "typography": {
+    "fontFamily": {
+      "display": "'Cormorant Garamond', Georgia, serif",
+      "body":    "'Montserrat', system-ui, sans-serif"
+    },
+    "fontSize": {
+      "xs":   "0.75rem",
+      "sm":   "0.875rem",
+      "base": "1rem",
+      "lg":   "1.125rem",
+      "xl":   "1.25rem",
+      "2xl":  "1.5rem",
+      "3xl":  "1.875rem",
+      "4xl":  "2.25rem",
+      "5xl":  "3rem",
+      "6xl":  "3.75rem",
+      "7xl":  "4.5rem"
+    },
+    "fontWeight": {
+      "light":    300,
+      "regular":  400,
+      "medium":   500,
+      "semibold": 600,
+      "bold":     700
+    },
+    "lineHeight": {
+      "none":    1,
+      "tight":   1.2,
+      "snug":    1.35,
+      "normal":  1.5,
+      "relaxed": 1.65,
+      "loose":   1.8
+    },
+    "letterSpacing": {
+      "tight":   "-0.02em",
+      "normal":  "0",
+      "wide":    "0.04em",
+      "wider":   "0.08em",
+      "widest":  "0.16em"
+    }
+  },
+
+  "spacing": {
+    "1":  "4px",
+    "2":  "8px",
+    "3":  "12px",
+    "4":  "16px",
+    "5":  "20px",
+    "6":  "24px",
+    "8":  "32px",
+    "10": "40px",
+    "12": "48px",
+    "16": "64px",
+    "20": "80px",
+    "24": "96px",
+    "32": "128px",
+    "40": "160px"
+  },
+
+  "borderRadius": {
+    "none": "0",
+    "sm":   "2px",
+    "md":   "4px",
+    "lg":   "8px",
+    "xl":   "12px",
+    "2xl":  "16px",
+    "full": "9999px"
+  },
+
+  "shadow": {
+    "none":  "none",
+    "sm":    "0 1px 3px rgba(95,86,81,0.06), 0 1px 2px rgba(95,86,81,0.04)",
+    "md":    "0 4px 12px rgba(95,86,81,0.08), 0 2px 4px rgba(95,86,81,0.04)",
+    "lg":    "0 8px 24px rgba(95,86,81,0.10), 0 4px 8px rgba(95,86,81,0.06)",
+    "xl":    "0 16px 40px rgba(95,86,81,0.12), 0 8px 16px rgba(95,86,81,0.06)",
+    "inner": "inset 0 2px 4px rgba(95,86,81,0.08)"
+  },
+
+  "breakpoint": {
+    "sm":  "480px",
+    "md":  "768px",
+    "lg":  "1024px",
+    "xl":  "1280px",
+    "2xl": "1440px"
+  },
+
+  "transition": {
+    "fast":   "150ms ease",
+    "normal": "250ms ease",
+    "slow":   "400ms ease",
+    "slower": "600ms ease"
+  }
+}

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D'ALMA CLINIC — Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bone-100:#FAF9F7;--bone-200:#F5F1EC;--bone-300:#EDE6DC;
+      --bone-400:#D8CBBE;--bone-500:#C4B4A3;
+      --taupe-400:#A89992;--taupe-500:#8B817B;--taupe-600:#736A64;
+      --taupe-700:#5F5651;--taupe-800:#4A4340;--taupe-900:#352F2D;
+      --white:#FFFFFF;
+      --fd:'Cormorant Garamond',Georgia,serif;
+      --fb:'Montserrat',system-ui,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--fb);background:#1C1917;-webkit-font-smoothing:antialiased;}
+
+    /* PRESENTATION BAR */
+    .pbar{position:fixed;top:0;left:0;right:0;z-index:9999;height:44px;background:rgba(20,17,15,.95);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.06);}
+    .pbar-lbl{font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(168,153,146,.5);margin-right:4px;}
+    .pb{padding:5px 16px;border-radius:9999px;border:1px solid rgba(255,255,255,.14);background:transparent;color:rgba(168,153,146,.8);font-family:var(--fb);font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all 120ms;}
+    .pb:hover{background:rgba(255,255,255,.08);color:rgba(216,203,190,.9);}
+    .pb.on{background:var(--taupe-700);color:var(--bone-100);border-color:transparent;}
+
+    .frame{margin-top:44px;}
+    .pg{display:none;}.pg.on{display:block;}
+
+    /* SITE NAV */
+    .nav{position:sticky;top:44px;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 56px;height:72px;background:rgba(250,249,247,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--bone-300);}
+    .nav-logo{font-family:var(--fd);font-size:1.5rem;font-weight:300;color:var(--taupe-700);letter-spacing:.06em;text-decoration:none;}
+    .nav-logo em{font-style:italic;font-weight:400;}
+    .nav-links{display:flex;gap:36px;list-style:none;}
+    .nav-links a{font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe-600);text-decoration:none;transition:color 150ms;}
+    .nav-links a:hover,.nav-links a.cur{color:var(--taupe-900);}
+    .nav-links a.cur{border-bottom:1px solid var(--taupe-500);padding-bottom:1px;}
+    .nav-cta{padding:10px 26px;border-radius:9999px;background:var(--taupe-700);color:var(--white);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;transition:background 150ms;}
+    .nav-cta:hover{background:var(--taupe-800);}
+
+    /* SHARED */
+    .ew{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe-400);margin-bottom:12px;}
+    .ew-lt{color:rgba(216,203,190,.45);}
+    .st{font-family:var(--fd);font-size:2.375rem;font-weight:300;color:var(--taupe-700);line-height:1.25;letter-spacing:-.01em;}
+    .bt{font-size:.875rem;color:var(--taupe-500);line-height:1.75;}
+    .bt-lt{color:var(--taupe-400);}
+    .sec{padding:88px 56px;background:var(--bone-100);}
+    .sec-sm{padding:52px 56px;background:var(--bone-100);}
+    .sec-alt{background:var(--bone-200)!important;}
+    .sec-dk{background:var(--taupe-700)!important;}
+    .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+    .ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:28px;}
+    .bp{padding:14px 32px;border-radius:9999px;background:var(--taupe-700);color:var(--white);font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;transition:background 150ms;}
+    .bp:hover{background:var(--taupe-800);}
+    .bp-lt{background:var(--bone-200)!important;color:var(--taupe-700)!important;}
+    .bs{padding:13px 32px;border-radius:9999px;background:transparent;color:var(--taupe-700);border:1.5px solid var(--taupe-700);font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all 150ms;}
+    .bs:hover{background:var(--bone-200);}
+    .bs-lt{color:rgba(250,249,247,.85)!important;border-color:rgba(250,249,247,.3)!important;}
+    .bwa{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:9999px;background:#25D366;color:var(--white);font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:all 150ms;}
+    .bwa:hover{background:#1ebe5d;transform:translateY(-1px);}
+    .wico{width:17px;height:17px;flex-shrink:0;}
+    .bdg{display:inline-block;padding:3px 9px;border-radius:3px;background:var(--bone-300);color:var(--taupe-600);font-size:.58rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;}
+
+    /* WA FLOAT */
+    .wafloat{position:fixed;bottom:28px;right:28px;z-index:200;display:flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:13px 20px;border-radius:9999px;box-shadow:0 4px 20px rgba(37,211,102,.4);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:all 150ms;}
+    .wafloat:hover{background:#1ebe5d;transform:translateY(-2px);}
+
+    /* ═══ HOME ═══ */
+    .hero{display:grid;grid-template-columns:58% 42%;min-height:calc(100vh - 116px);background:var(--bone-200);overflow:hidden;}
+    .hero-content{display:flex;flex-direction:column;justify-content:center;padding:80px 64px 80px 56px;}
+    .hero-h1{font-family:var(--fd);font-size:clamp(2.8rem,4.5vw,4.5rem);font-weight:300;color:var(--taupe-700);line-height:1.12;letter-spacing:-.025em;margin-bottom:20px;}
+    .hero-sub{font-size:.925rem;color:var(--taupe-500);line-height:1.75;max-width:420px;}
+    .hero-img{position:relative;overflow:hidden;}
+    .hero-img img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+    .hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(245,241,236,.2) 0%,transparent 25%);}
+
+    .svc-card{background:var(--bone-100);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);transition:box-shadow 250ms,transform 250ms;cursor:pointer;}
+    .svc-card:hover{box-shadow:0 8px 28px rgba(95,86,81,.12);transform:translateY(-3px);}
+    .svc-card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
+    .svc-card-body{padding:20px;}
+    .svc-card-title{font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);margin:8px 0 6px;line-height:1.3;}
+    .svc-card-txt{font-size:.78rem;color:var(--taupe-500);line-height:1.65;margin-bottom:14px;}
+    .svc-card-lnk{font-size:.72rem;font-weight:600;color:var(--taupe-600);text-decoration:none;}
+
+    .feat-item{padding:32px;border-top:1px solid var(--bone-400);}
+    .feat-ico{font-size:1.25rem;margin-bottom:14px;display:block;}
+    .feat-title{font-family:var(--fd);font-size:1.15rem;font-weight:400;color:var(--taupe-700);margin-bottom:8px;}
+
+    .clinic-strip{position:relative;height:420px;overflow:hidden;}
+    .clinic-strip img{width:100%;height:100%;object-fit:cover;object-position:center 35%;}
+    .clinic-strip::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(53,47,45,.6) 0%,rgba(53,47,45,.2) 55%,transparent 100%);}
+    .clinic-strip-txt{position:absolute;bottom:52px;left:56px;color:var(--bone-100);max-width:500px;z-index:1;}
+
+    .info-strip{background:var(--bone-100);padding:40px 56px;display:flex;justify-content:center;gap:72px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--bone-300);}
+    .info-item{text-align:center;}
+    .info-lbl{font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--taupe-400);margin-bottom:6px;}
+    .info-val{font-family:var(--fd);font-size:1.2rem;font-weight:300;color:var(--taupe-700);}
+    .info-sub{font-size:.78rem;color:var(--taupe-500);margin-top:3px;}
+    .info-div{width:1px;height:48px;background:var(--bone-400);}
+
+    /* ═══ FOOTER ═══ */
+    .footer{background:var(--taupe-900);padding:56px 56px 36px;}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px;}
+    .fbrand{font-family:var(--fd);font-size:1.5rem;font-weight:300;color:var(--bone-200);letter-spacing:.08em;margin-bottom:12px;}
+    .ftagline{font-size:.78rem;color:var(--taupe-500);line-height:1.65;max-width:240px;}
+    .fcol-t{font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--taupe-500);margin-bottom:14px;}
+    .flinks{display:flex;flex-direction:column;gap:9px;}
+    .flinks a{font-size:.78rem;color:var(--taupe-400);text-decoration:none;transition:color 150ms;}
+    .flinks a:hover{color:var(--bone-300);}
+    .fhr{border:none;border-top:1px solid rgba(255,255,255,.07);margin-bottom:24px;}
+    .fbot{display:flex;justify-content:space-between;align-items:center;}
+    .fcopy{font-size:.68rem;color:var(--taupe-600);}
+
+    /* ═══ SERVICIOS ═══ */
+    .pg-hero{position:relative;height:52vh;min-height:380px;overflow:hidden;}
+    .pg-hero img{width:100%;height:100%;object-fit:cover;object-position:center 38%;display:block;}
+    .pg-hero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(53,47,45,.4) 0%,rgba(53,47,45,.72) 100%);}
+    .pg-hero-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 40px;}
+
+    .filter-wrap{padding:28px 56px 0;background:var(--bone-100);border-bottom:1px solid var(--bone-300);}
+    .filter-bar{display:flex;gap:8px;flex-wrap:wrap;}
+    .fp{padding:7px 17px;border-radius:9999px;border:1.5px solid var(--bone-400);background:transparent;color:var(--taupe-600);font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;margin-bottom:20px;transition:all 150ms;}
+    .fp:hover{border-color:var(--taupe-500);color:var(--taupe-700);}
+    .fp.on{background:var(--taupe-700);color:var(--white);border-color:var(--taupe-700);}
+
+    .cat-lbl{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe-400);margin-bottom:20px;padding-top:52px;}
+
+    .ftx{display:grid;grid-template-columns:5fr 6fr;gap:0;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(95,86,81,.1);margin-bottom:24px;}
+    .ftx.rev{grid-template-columns:6fr 5fr;}
+    .ftx-img{position:relative;min-height:360px;}
+    .ftx-img img{width:100%;height:100%;object-fit:cover;display:block;}
+    .ftx-img::after{content:'';position:absolute;inset:0;background:rgba(53,47,45,.05);}
+    .ftx-body{background:var(--bone-200);padding:44px;display:flex;flex-direction:column;justify-content:center;}
+    .ftx.rev .ftx-img{order:2;}
+    .ftx.rev .ftx-body{order:1;}
+    .ftx-title{font-family:var(--fd);font-size:1.875rem;font-weight:300;color:var(--taupe-700);margin:10px 0 14px;line-height:1.2;}
+    .ftx-detail{font-size:.75rem;color:var(--taupe-400);margin-bottom:20px;line-height:1.65;}
+    .ftx-cta{display:inline-flex;align-items:center;font-size:.75rem;font-weight:600;color:var(--taupe-600);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:none;background:none;cursor:pointer;}
+
+    .std-card{background:var(--bone-100);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);transition:box-shadow 250ms,transform 250ms;cursor:pointer;}
+    .std-card:hover{box-shadow:0 8px 28px rgba(95,86,81,.12);transform:translateY(-3px);}
+    .std-card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;}
+    .std-card-body{padding:22px;}
+    .std-card-title{font-family:var(--fd);font-size:1.2rem;font-weight:400;color:var(--taupe-700);margin:9px 0 7px;}
+    .std-card-txt{font-size:.78rem;color:var(--taupe-500);line-height:1.65;margin-bottom:14px;}
+    .std-card-lnk{font-size:.72rem;font-weight:600;color:var(--taupe-600);text-decoration:none;}
+
+    .cta-sec{background:var(--taupe-700);padding:80px 56px;text-align:center;}
+
+    /* ─── MOBILE NAV ─────────────────────────────────────── */
+    .nav-ham{display:none;flex-direction:column;gap:5.5px;cursor:pointer;padding:6px;background:none;border:none;}
+    .nav-ham span{width:22px;height:1.5px;background:var(--taupe-700);display:block;border-radius:2px;transition:all 250ms ease;}
+    .nav-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+    .nav-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+    .nav-mmenu{
+      display:none;position:fixed;top:104px;left:0;right:0;bottom:0;
+      background:var(--bone-100);z-index:98;overflow-y:auto;
+      padding:36px 24px 80px;
+    }
+    .nav-mmenu.open{display:block;animation:mmFade 220ms ease forwards;}
+    @keyframes mmFade{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+    .nav-mmenu ul{list-style:none;}
+    .nav-mmenu li a{
+      display:block;font-family:var(--fd);font-size:2.125rem;font-weight:300;
+      color:var(--taupe-700);text-decoration:none;padding:18px 0;
+      border-bottom:1px solid var(--bone-300);letter-spacing:.01em;
+    }
+    .nav-mmenu .mm-cta{display:block;margin-top:32px;width:100%;text-align:center;
+      padding:15px;border-radius:9999px;background:var(--taupe-700);color:var(--white);
+      font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+      border:none;cursor:pointer;}
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media(max-width:768px){
+      /* Pbar */
+      .pbar-lbl{display:none;}
+
+      /* Nav */
+      .nav{padding:0 20px;height:60px;}
+      .nav-links,.nav-cta{display:none;}
+      .nav-ham{display:flex;}
+
+      /* Hero - stacks: image top, content below */
+      .hero{grid-template-columns:1fr;min-height:auto;}
+      .hero-content{padding:44px 20px 48px;order:2;}
+      .hero-img{height:62vw;min-height:240px;order:1;}
+      .hero-h1{font-size:clamp(2.1rem,8vw,2.8rem);margin-bottom:14px;}
+      .hero-sub{max-width:none;font-size:.875rem;}
+
+      /* Sections */
+      .sec{padding:56px 20px;}
+      .sec-sm{padding:36px 20px;}
+      .sec-dk{padding:56px 20px!important;}
+      .sec-alt{padding:56px 20px!important;}
+
+      /* Grids */
+      .g3{grid-template-columns:1fr;}
+      .g4{grid-template-columns:1fr 1fr;gap:14px;}
+      .st{font-size:1.875rem;}
+
+      /* Feature treatment cards (alternating) */
+      .ftx,.ftx.rev{grid-template-columns:1fr;}
+      .ftx-img{min-height:220px;}
+      .ftx-body{padding:28px 20px;}
+      .ftx.rev .ftx-img{order:unset!important;}
+      .ftx.rev .ftx-body{order:unset!important;}
+
+      /* Services content wrapper */
+      .svc-content{padding:0 20px 56px!important;}
+
+      /* Microneedling 2-col grid */
+      .svc-grid-2{grid-template-columns:1fr!important;}
+
+      /* Clinic strip */
+      .clinic-strip{height:280px;}
+      .clinic-strip-txt{left:20px;right:20px;bottom:24px;}
+
+      /* Info strip */
+      .info-strip{padding:40px 20px;gap:28px;flex-direction:column;}
+      .info-div{display:none;}
+
+      /* Footer */
+      .footer{padding:44px 20px 28px;}
+      .footer-grid{grid-template-columns:1fr 1fr;gap:28px;margin-bottom:28px;}
+      .fbot{flex-direction:column;gap:10px;text-align:center;}
+
+      /* CTA section */
+      .cta-sec{padding:56px 20px;}
+
+      /* Servicios */
+      .filter-wrap{padding:20px 20px 0;}
+      .pg-hero{height:44vh;min-height:240px;}
+
+      /* WA float - icon only circle */
+      .wafloat{padding:13px;border-radius:50%;}
+      .wafloat .wa-txt{display:none;}
+    }
+
+    @media(max-width:480px){
+      .g4{grid-template-columns:1fr;}
+      .footer-grid{grid-template-columns:1fr;}
+      .ctas{flex-direction:column;align-items:stretch;}
+      .ctas .bp,.ctas .bs,.ctas .bwa{width:100%;justify-content:center;}
+      .hero-img{height:72vw;}
+      .clinic-strip{height:220px;}
+      .nav-mmenu li a{font-size:1.75rem;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- PRESENTATION BAR -->
+<div class="pbar">
+  <span class="pbar-lbl">D'ALMA — Mockup del cliente</span>
+  <button class="pb on" onclick="showPg('home',this)">Home</button>
+  <button class="pb" onclick="showPg('servicios',this)">Servicios</button>
+</div>
+
+<div class="frame">
+
+<!-- ══════════════════ HOME ══════════════════ -->
+<div class="pg on" id="pg-home">
+
+  <nav class="nav">
+    <a href="#" class="nav-logo">D'<em>ALMA</em></a>
+    <ul class="nav-links">
+      <li><a href="#" class="cur">Inicio</a></li>
+      <li><a href="#">Nosotros</a></li>
+      <li><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[1]);return false;">Servicios</a></li>
+      <li><a href="#">Testimonios</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+    <button class="nav-cta">Agendar cita</button>
+    <button class="nav-ham" id="ham-home" onclick="toggleMenu('mm-home','ham-home')" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mmenu" id="mm-home">
+    <ul>
+      <li><a href="#" onclick="closeMenu('mm-home','ham-home')">Inicio</a></li>
+      <li><a href="#" onclick="closeMenu('mm-home','ham-home')">Nosotros</a></li>
+      <li><a href="#" onclick="closeMenu('mm-home','ham-home');showPg('servicios',document.querySelectorAll('.pb')[1])">Servicios</a></li>
+      <li><a href="#" onclick="closeMenu('mm-home','ham-home')">Testimonios</a></li>
+      <li><a href="#" onclick="closeMenu('mm-home','ham-home')">Contacto</a></li>
+    </ul>
+    <button class="mm-cta" onclick="closeMenu('mm-home','ham-home')">Agendar cita</button>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="ew">Clínica estética · Cabo San Lucas, BCS</div>
+      <h1 class="hero-h1">Cuidarte también<br>es una forma de<br>amor propio.</h1>
+      <p class="hero-sub">Un espacio cálido y moderno para hombres y mujeres que buscan tratamientos personalizados, tecnología actual y resultados naturales.</p>
+      <div class="ctas">
+        <button class="bp">Agenda tu cita</button>
+        <button class="bs">Conoce los servicios</button>
+        <a class="bwa" href="#">
+          <svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&q=85" alt="Mujer con piel luminosa" loading="eager">
+    </div>
+  </section>
+
+  <!-- TRATAMIENTOS -->
+  <section class="sec">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="ew">Lo que ofrecemos</div>
+      <h2 class="st">Tratamientos destacados</h2>
+      <p class="bt" style="max-width:500px;margin:12px auto 0;">Cada tratamiento inicia con una valoración. Porque lo más importante es entender qué necesitas antes de hacer cualquier cosa.</p>
+    </div>
+    <div class="g4">
+      <div class="svc-card">
+        <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=600&q=80" alt="Hydrafacial" loading="lazy">
+        <div class="svc-card-body"><span class="bdg">Faciales</span><div class="svc-card-title">Hydrafacial</div><div class="svc-card-txt">Limpieza profunda, exfoliación e hidratación. Piel luminosa desde la primera sesión.</div><a class="svc-card-lnk" href="#">Ver tratamiento →</a></div>
+      </div>
+      <div class="svc-card">
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80" alt="Botox" loading="lazy">
+        <div class="svc-card-body"><span class="bdg">Inyectables</span><div class="svc-card-title">Botox</div><div class="svc-card-txt">Suaviza líneas de expresión con resultados naturales y progresivos. Requiere valoración médica.</div><a class="svc-card-lnk" href="#">Ver tratamiento →</a></div>
+      </div>
+      <div class="svc-card">
+        <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80" alt="Fillers" loading="lazy">
+        <div class="svc-card-body"><span class="bdg">Inyectables</span><div class="svc-card-title">Fillers y Armonización</div><div class="svc-card-txt">Hidratación, soporte y armonía facial. Enfoque en equilibrio natural, no en exageración.</div><a class="svc-card-lnk" href="#">Ver tratamiento →</a></div>
+      </div>
+      <div class="svc-card">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80" alt="PDRN" loading="lazy">
+        <div class="svc-card-body"><span class="bdg">Regeneración</span><div class="svc-card-title">PDRN & Exosomas</div><div class="svc-card-txt">Revitalización celular para mejorar textura, luminosidad e hidratación desde adentro.</div><a class="svc-card-lnk" href="#">Ver tratamiento →</a></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;"><button class="bs" onclick="showPg('servicios',document.querySelectorAll('.pb')[1])">Ver todos los servicios</button></div>
+  </section>
+
+  <!-- QUOTE DARK -->
+  <section class="sec sec-dk" style="padding:88px 56px;text-align:center;">
+    <div class="ew ew-lt" style="margin-bottom:18px;">D'ALMA CLINIC</div>
+    <blockquote style="font-family:var(--fd);font-size:clamp(1.6rem,3.2vw,2.75rem);font-weight:300;color:var(--bone-200);line-height:1.35;letter-spacing:-.01em;font-style:italic;max-width:700px;margin:0 auto 24px;">"No se trata de cambiar quién eres...<br>se trata de volver a sentirte tú."</blockquote>
+    <p class="bt bt-lt" style="max-width:460px;margin:0 auto 32px;">Queremos que venir a D'ALMA se sienta distinto. Un espacio donde te sientas cómodo, seguro y bien contigo mismo.</p>
+    <div class="ctas" style="justify-content:center;margin-top:0;">
+      <button class="bp bp-lt">Conoce nuestra historia</button>
+      <button class="bs bs-lt">Ver servicios</button>
+    </div>
+  </section>
+
+  <!-- FILOSOFÍA -->
+  <section class="sec sec-alt" style="padding:88px 56px;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <div class="ew">Nuestra filosofía</div>
+      <h2 class="st">¿Por qué D'ALMA?</h2>
+    </div>
+    <div class="g3">
+      <div class="feat-item"><span class="feat-ico">✦</span><div class="feat-title">Valoración antes que nada</div><p class="bt">Nunca aplicamos un tratamiento sin entender quién eres. Cada persona es diferente y eso importa.</p></div>
+      <div class="feat-item"><span class="feat-ico">✦</span><div class="feat-title">Resultados naturales</div><p class="bt">Buscamos armonía. No cambiar quién eres, sino ayudarte a sentirte tú — con más confianza.</p></div>
+      <div class="feat-item"><span class="feat-ico">✦</span><div class="feat-title">Espacio cálido e inclusivo</div><p class="bt">Para hombres y mujeres. Sin apariencia fría ni elitista. Aquí no te sentirás fuera de lugar.</p></div>
+    </div>
+  </section>
+
+  <!-- CLINIC STRIP -->
+  <div class="clinic-strip">
+    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=85" alt="Interior D'ALMA Clinic" loading="lazy">
+    <div class="clinic-strip-txt">
+      <div class="ew" style="color:rgba(216,203,190,.5);margin-bottom:14px;">Cabo San Lucas, BCS</div>
+      <div style="font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--bone-200);line-height:1.35;margin-bottom:20px;">"Tu piel también cuenta<br>tu historia."</div>
+      <button class="bp bp-lt" style="font-size:.72rem;">Agendar valoración</button>
+    </div>
+  </div>
+
+  <!-- INFO STRIP -->
+  <div class="info-strip">
+    <div class="info-item"><div class="info-lbl">Horario</div><div class="info-val">Lunes a domingo</div><div class="info-sub">10:00 am – 8:00 pm</div></div>
+    <div class="info-div"></div>
+    <div class="info-item"><div class="info-lbl">Ubicación</div><div class="info-val">Plaza Patio</div><div class="info-sub">Cabo San Lucas, BCS</div></div>
+    <div class="info-div"></div>
+    <div class="info-item"><div class="info-lbl">Agendar</div><div style="margin-top:8px;"><a class="bwa" href="#" style="font-size:.7rem;"><svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enviar WhatsApp</a></div></div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" style="font-size:.7rem;"><svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Agendar por WhatsApp</a></div></div>
+      <div><div class="fcol-t">Páginas</div><div class="flinks"><a href="#">Inicio</a><a href="#">Nosotros</a><a href="#">Servicios</a><a href="#">Testimonios</a><a href="#">Contacto</a></div></div>
+      <div><div class="fcol-t">Servicios</div><div class="flinks"><a href="#">Botox</a><a href="#">Fillers</a><a href="#">Hydrafacial</a><a href="#">PDRN</a><a href="#">Depilación láser</a></div></div>
+      <div><div class="fcol-t">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
+    </div>
+    <hr class="fhr">
+    <div class="fbot"><div class="fcopy">© 2026 D'ALMA CLINIC · Todos los derechos reservados</div><div class="fcopy"><a href="#" style="color:var(--taupe-500);text-decoration:none;">Aviso de privacidad</a></div></div>
+  </footer>
+</div><!-- /home -->
+
+
+<!-- ══════════════════ SERVICIOS ══════════════════ -->
+<div class="pg" id="pg-servicios">
+
+  <nav class="nav">
+    <a href="#" class="nav-logo">D'<em>ALMA</em></a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;">Inicio</a></li>
+      <li><a href="#">Nosotros</a></li>
+      <li><a href="#" class="cur">Servicios</a></li>
+      <li><a href="#">Testimonios</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+    <button class="nav-cta">Agendar cita</button>
+    <button class="nav-ham" id="ham-svc" onclick="toggleMenu('mm-svc','ham-svc')" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mmenu" id="mm-svc">
+    <ul>
+      <li><a href="#" onclick="closeMenu('mm-svc','ham-svc');showPg('home',document.querySelectorAll('.pb')[0])">Inicio</a></li>
+      <li><a href="#" onclick="closeMenu('mm-svc','ham-svc')">Nosotros</a></li>
+      <li><a href="#" onclick="closeMenu('mm-svc','ham-svc')">Servicios</a></li>
+      <li><a href="#" onclick="closeMenu('mm-svc','ham-svc')">Testimonios</a></li>
+      <li><a href="#" onclick="closeMenu('mm-svc','ham-svc')">Contacto</a></li>
+    </ul>
+    <button class="mm-cta" onclick="closeMenu('mm-svc','ham-svc')">Agendar cita</button>
+  </div>
+
+  <!-- PAGE HERO -->
+  <div class="pg-hero">
+    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1600&q=85" alt="Servicios D'ALMA" loading="eager">
+    <div class="pg-hero-ov"></div>
+    <div class="pg-hero-c">
+      <div class="ew ew-lt" style="margin-bottom:14px;">Lo que hacemos</div>
+      <h1 style="font-family:var(--fd);font-size:clamp(2.2rem,4.5vw,3.75rem);font-weight:300;color:var(--bone-100);line-height:1.2;letter-spacing:-.02em;margin-bottom:16px;">Servicios</h1>
+      <p style="font-size:.9rem;color:rgba(216,203,190,.8);max-width:480px;line-height:1.7;">Cada tratamiento está pensado para ayudarte a sentirte bien contigo, de forma natural, cercana y personalizada.</p>
+    </div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filter-wrap">
+    <div class="filter-bar">
+      <button class="fp on">Todos</button>
+      <button class="fp">Inyectables</button>
+      <button class="fp">Regeneración</button>
+      <button class="fp">Faciales</button>
+      <button class="fp">Capilares</button>
+      <button class="fp">Depilación</button>
+      <button class="fp">Especializados</button>
+    </div>
+  </div>
+
+  <!-- SERVICES CONTENT -->
+  <div class="svc-content" style="background:var(--bone-100);padding:0 56px 88px;">
+
+    <!-- INYECTABLES -->
+    <div class="cat-lbl">Inyectables</div>
+
+    <div class="ftx" style="margin-bottom:24px;">
+      <div class="ftx-img"><img src="https://images.unsplash.com/photo-1590439471364-192aa70c0b53?auto=format&fit=crop&w=800&q=85" alt="Botox"></div>
+      <div class="ftx-body">
+        <span class="bdg">Inyectables</span>
+        <div class="ftx-title">Botox</div>
+        <p class="bt" style="margin-bottom:12px;font-style:italic;color:var(--taupe-600);">"A veces no queremos vernos diferentes... solo más descansados."</p>
+        <p class="bt" style="margin-bottom:14px;">Toxina botulínica purificada para relajar temporalmente músculos del rostro, suavizando líneas de expresión de forma natural.</p>
+        <div class="ftx-detail"><strong style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe-600);">Marcas disponibles</strong><br>Linurase · Otesaly · Dysport<br><span style="color:var(--taupe-500);">Requiere valoración médica previa.</span></div>
+        <div style="display:flex;gap:12px;align-items:center;"><button class="bp" style="font-size:.72rem;padding:11px 24px;">Agendar valoración</button><button class="ftx-cta">Saber más →</button></div>
+      </div>
+    </div>
+
+    <div class="ftx rev" style="margin-bottom:48px;">
+      <div class="ftx-img"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=85" alt="Fillers"></div>
+      <div class="ftx-body">
+        <span class="bdg">Inyectables</span>
+        <div class="ftx-title">Fillers y Armonización Facial</div>
+        <p class="bt" style="margin-bottom:12px;font-style:italic;color:var(--taupe-600);">"No se trata de exagerar. Se trata de armonía."</p>
+        <p class="bt" style="margin-bottom:14px;">Rellenos de ácido hialurónico para hidratar, dar soporte y armonizar zonas específicas del rostro. Labios, rinomodelación, mentón, ojeras y más.</p>
+        <div class="ftx-detail"><strong style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe-600);">Marcas disponibles</strong><br>Rejeneusse · Revofil · Starfill · E.P.T.Q.<br><span style="color:var(--taupe-500);">Densidades Fine, Plus y Ultra según zona.</span></div>
+        <div style="display:flex;gap:12px;align-items:center;"><button class="bp" style="font-size:.72rem;padding:11px 24px;">Agendar valoración</button><button class="ftx-cta">Saber más →</button></div>
+      </div>
+    </div>
+
+    <!-- FACIALES -->
+    <div class="cat-lbl" style="padding-top:0;">Faciales</div>
+
+    <div class="ftx" style="margin-bottom:24px;">
+      <div class="ftx-img"><img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=800&q=85" alt="Hydrafacial"></div>
+      <div class="ftx-body">
+        <span class="bdg">Faciales</span>
+        <div class="ftx-title">Hydrafacial</div>
+        <p class="bt" style="margin-bottom:12px;font-style:italic;color:var(--taupe-600);">"Tu piel también necesita respirar."</p>
+        <p class="bt" style="margin-bottom:14px;">Tratamiento facial no invasivo que limpia, exfolia, extrae e hidrata. Resultados visibles desde la primera sesión. Ideal para hombres y mujeres como tratamiento de entrada.</p>
+        <div class="ftx-detail">Poros visibles · Piel cansada · Falta de hidratación<br><span style="color:var(--taupe-500);">Puede integrarse en paquetes de mantenimiento mensual.</span></div>
+        <div style="display:flex;gap:12px;align-items:center;"><button class="bp" style="font-size:.72rem;padding:11px 24px;">Agendar cita</button><button class="ftx-cta">Saber más →</button></div>
+      </div>
+    </div>
+
+    <div class="svc-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:48px;">
+      <div class="std-card">
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&crop=bottom&w=700&q=80" alt="Microneedling">
+        <div class="std-card-body"><span class="bdg">Faciales</span><div class="std-card-title">Microneedling y Despigmentantes</div><div class="std-card-txt">Microcanales con activos específicos para manchas, cicatrices de acné, textura y arrugas finas.</div><a class="std-card-lnk" href="#">Ver tratamiento →</a></div>
+      </div>
+      <div style="background:var(--bone-200);border-radius:10px;border:1px solid var(--bone-400);padding:36px;display:flex;flex-direction:column;justify-content:center;">
+        <div class="ew" style="margin-bottom:10px;">¿No sabes cuál elegir?</div>
+        <div style="font-family:var(--fd);font-size:1.5rem;font-weight:300;color:var(--taupe-700);line-height:1.3;margin-bottom:12px;">Una valoración lo cambia todo.</div>
+        <p class="bt" style="margin-bottom:20px;">Te explicamos qué tratamiento es el más adecuado para ti según tu piel y tus objetivos.</p>
+        <button class="bp" style="align-self:flex-start;font-size:.72rem;padding:11px 24px;">Agenda sin costo</button>
+      </div>
+    </div>
+
+    <!-- REGENERACIÓN -->
+    <div class="cat-lbl" style="padding-top:0;">Regeneración y Revitalización</div>
+
+    <div class="ftx rev" style="margin-bottom:48px;">
+      <div class="ftx-img"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=85" alt="PDRN"></div>
+      <div class="ftx-body">
+        <span class="bdg">Regeneración</span>
+        <div class="ftx-title">PDRN & Exosomas</div>
+        <p class="bt" style="margin-bottom:12px;font-style:italic;color:var(--taupe-600);">"Tu piel también puede regenerarse desde adentro."</p>
+        <p class="bt" style="margin-bottom:14px;">Tratamientos regeneradores que mejoran calidad de piel, hidratación, textura y luminosidad. Excelente opción de entrada por sus resultados visibles.</p>
+        <div class="ftx-detail"><strong style="font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe-600);">Opciones disponibles</strong><br>ReMedium PDRN · Otesaly PDRN · Natural-B · Aquashine PTX · Exo-Xelle</div>
+        <div style="display:flex;gap:12px;align-items:center;"><button class="bp" style="font-size:.72rem;padding:11px 24px;">Agendar valoración</button><button class="ftx-cta">Saber más →</button></div>
+      </div>
+    </div>
+
+    <!-- MÁS TRATAMIENTOS -->
+    <div class="cat-lbl" style="padding-top:0;">Más tratamientos</div>
+    <div class="g3">
+      <div class="std-card">
+        <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=600&q=80" alt="Capilares">
+        <div class="std-card-body"><span class="bdg">Capilares</span><div class="std-card-title">Tratamientos Capilares</div><div class="std-card-txt">PTx-HL, Dermaheal P-HL y Dr. CYJ Hair Filler. Para fortalecer y revitalizar cabello y cuero cabelludo.</div><a class="std-card-lnk" href="#">Ver tratamiento →</a></div>
+      </div>
+      <div class="std-card">
+        <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?auto=format&fit=crop&w=600&q=80" alt="Depilación láser">
+        <div class="std-card-body"><span class="bdg">Depilación</span><div class="std-card-title">Depilación Láser</div><div class="std-card-txt">Para hombres y mujeres. Axila, bikini, piernas, brazos, espalda, rostro y más zonas.</div><a class="std-card-lnk" href="#">Ver tratamiento →</a></div>
+      </div>
+      <div class="std-card">
+        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Especializados">
+        <div class="std-card-body"><span class="bdg">Especializados</span><div class="std-card-title">Verrugas, Queloides y Plasmapen</div><div class="std-card-txt">Procedimientos especializados bajo valoración médica. Triamcinolona intralesional y técnicas específicas.</div><a class="std-card-lnk" href="#">Ver tratamiento →</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-sec">
+    <div class="ew ew-lt" style="margin-bottom:16px;">¿No sabes por dónde empezar?</div>
+    <h2 style="font-family:var(--fd);font-size:2.25rem;font-weight:300;color:var(--bone-200);line-height:1.3;margin-bottom:16px;">Agenda una valoración.</h2>
+    <p class="bt bt-lt" style="max-width:440px;margin:0 auto 32px;">Te explicamos qué tratamiento es más adecuado para ti según tu piel, tus objetivos y tu presupuesto. Sin compromiso.</p>
+    <div class="ctas" style="justify-content:center;margin-top:0;">
+      <button class="bp bp-lt">Agenda tu cita</button>
+      <a class="bwa" href="#"><svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Preguntar por WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" style="font-size:.7rem;"><svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Agendar por WhatsApp</a></div></div>
+      <div><div class="fcol-t">Páginas</div><div class="flinks"><a href="#">Inicio</a><a href="#">Nosotros</a><a href="#">Servicios</a><a href="#">Testimonios</a><a href="#">Contacto</a></div></div>
+      <div><div class="fcol-t">Servicios</div><div class="flinks"><a href="#">Botox</a><a href="#">Fillers</a><a href="#">Hydrafacial</a><a href="#">PDRN</a><a href="#">Depilación láser</a></div></div>
+      <div><div class="fcol-t">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
+    </div>
+    <hr class="fhr">
+    <div class="fbot"><div class="fcopy">© 2026 D'ALMA CLINIC · Todos los derechos reservados</div><div class="fcopy"><a href="#" style="color:var(--taupe-500);text-decoration:none;">Aviso de privacidad</a></div></div>
+  </footer>
+</div><!-- /servicios -->
+
+</div><!-- /frame -->
+
+<a class="wafloat" href="#">
+  <svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="wa-txt">WhatsApp</span>
+</a>
+
+<script>
+  function showPg(name, btn) {
+    // Close any open mobile menus first
+    document.querySelectorAll('.nav-mmenu').forEach(m => m.classList.remove('open'));
+    document.querySelectorAll('.nav-ham').forEach(h => h.classList.remove('open'));
+
+    document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+    document.getElementById('pg-' + name).classList.add('on');
+    document.querySelectorAll('.pb').forEach(b => b.classList.remove('on'));
+    if (btn) btn.classList.add('on');
+    window.scrollTo(0, 0);
+  }
+
+  function toggleMenu(menuId, hamId) {
+    const menu = document.getElementById(menuId);
+    const ham  = document.getElementById(hamId);
+    const isOpen = menu.classList.contains('open');
+
+    // Close all menus first
+    document.querySelectorAll('.nav-mmenu').forEach(m => m.classList.remove('open'));
+    document.querySelectorAll('.nav-ham').forEach(h => h.classList.remove('open'));
+
+    if (!isOpen) {
+      menu.classList.add('open');
+      ham.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }
+
+  function closeMenu(menuId, hamId) {
+    document.getElementById(menuId).classList.remove('open');
+    document.getElementById(hamId).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Filter pills
+  document.querySelectorAll('.fp').forEach(fp => {
+    fp.addEventListener('click', function() {
+      this.closest('.filter-bar').querySelectorAll('.fp').forEach(b => b.classList.remove('on'));
+      this.classList.add('on');
+    });
+  });
+
+  // Close menu on resize back to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      document.querySelectorAll('.nav-mmenu').forEach(m => m.classList.remove('open'));
+      document.querySelectorAll('.nav-ham').forEach(h => h.classList.remove('open'));
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+</body>
+</html>

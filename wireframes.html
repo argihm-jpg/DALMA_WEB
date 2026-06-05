@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D'ALMA CLINIC — Wireframes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bone-100:#FAF9F7;--bone-200:#F5F1EC;--bone-300:#EDE6DC;
+      --bone-400:#D8CBBE;--bone-500:#C4B4A3;
+      --taupe-400:#A89992;--taupe-500:#8B817B;--taupe-600:#736A64;
+      --taupe-700:#5F5651;--taupe-800:#4A4340;--taupe-900:#352F2D;
+      --white:#FFFFFF;
+      --fd:'Cormorant Garamond',Georgia,serif;
+      --fb:'Montserrat',system-ui,sans-serif;
+      --rfull:9999px;--r2xl:16px;--rxl:12px;--rlg:8px;--rmd:4px;
+      --shmd:0 4px 12px rgba(95,86,81,.08),0 2px 4px rgba(95,86,81,.04);
+      --shlg:0 8px 24px rgba(95,86,81,.10),0 4px 8px rgba(95,86,81,.06);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--fb);background:#2C2825;color:var(--taupe-700);-webkit-font-smoothing:antialiased;}
+
+    /* CONTROL BAR */
+    .ctrl{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--taupe-900);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:12px;}
+    .ctrl-logo{font-family:var(--fd);font-size:1rem;font-weight:300;color:var(--bone-400);letter-spacing:.1em;white-space:nowrap;}
+    .ctrl-meta{font-size:.58rem;color:var(--taupe-500);letter-spacing:.1em;text-transform:uppercase;margin-top:2px;}
+    .ctrl-pages{display:flex;gap:3px;}
+    .cb{padding:6px 13px;border-radius:var(--rfull);border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--taupe-400);font-family:var(--fb);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all 120ms ease;white-space:nowrap;}
+    .cb:hover{background:rgba(255,255,255,.08);color:var(--bone-300);}
+    .cb.active{background:var(--taupe-700);color:var(--bone-100);border-color:transparent;}
+    .vp-btns{display:flex;gap:3px;}
+    .vb{padding:6px 11px;border-radius:var(--rfull);border:1px solid rgba(255,255,255,.12);background:transparent;color:var(--taupe-400);font-family:var(--fb);font-size:.62rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all 120ms ease;}
+    .vb:hover{background:rgba(255,255,255,.08);color:var(--bone-300);}
+    .vb.active{background:rgba(255,255,255,.12);color:var(--bone-200);border-color:rgba(255,255,255,.2);}
+
+    /* STAGE */
+    .stage{margin-top:56px;min-height:calc(100vh - 56px);display:flex;justify-content:center;padding:28px 20px 64px;}
+    .vpf{background:var(--bone-100);border-radius:var(--r2xl);overflow:hidden;transition:width 350ms ease;box-shadow:0 24px 80px rgba(0,0,0,.5);width:1280px;max-width:100%;}
+    .vpf.mobile{width:375px;}
+
+    /* PAGE SWITCH */
+    .page{display:none;}.page.active{display:block;}
+
+    /* NAV DESKTOP */
+    .snav{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:rgba(250,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--bone-300);position:sticky;top:0;z-index:100;}
+    .snav-logo{font-family:var(--fd);font-size:1.375rem;font-weight:300;color:var(--taupe-700);letter-spacing:.08em;text-decoration:none;}
+    .snav-links{display:flex;gap:32px;list-style:none;}
+    .snav-links a{font-size:.73rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe-600);text-decoration:none;}
+    .snav-links a.active{color:var(--taupe-900);border-bottom:1px solid var(--taupe-500);padding-bottom:1px;}
+    .nav-cta{padding:9px 22px;border-radius:var(--rfull);background:var(--taupe-700);color:var(--white);font-size:.73rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;}
+
+    /* NAV MOBILE */
+    .snav-m{display:none;align-items:center;justify-content:space-between;padding:15px 20px;background:rgba(250,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--bone-300);position:sticky;top:0;z-index:100;}
+    .ham{display:flex;flex-direction:column;gap:5px;padding:4px;}
+    .ham span{width:20px;height:1.5px;background:var(--taupe-700);display:block;border-radius:2px;}
+
+    /* FOOTER DESKTOP */
+    .sfoot{background:var(--taupe-900);padding:48px;}
+    .sfoot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:36px;}
+    .fbrand{font-family:var(--fd);font-size:1.5rem;font-weight:300;color:var(--bone-200);letter-spacing:.08em;margin-bottom:10px;}
+    .ftagline{font-size:.78rem;color:var(--taupe-500);line-height:1.6;}
+    .fcol-t{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--taupe-500);margin-bottom:10px;}
+    .fcol-links{display:flex;flex-direction:column;gap:7px;}
+    .fcol-links a{font-size:.78rem;color:var(--taupe-400);text-decoration:none;}
+    .fdiv{border:none;border-top:1px solid rgba(255,255,255,.08);margin-bottom:20px;}
+    .fbot{display:flex;justify-content:space-between;}
+    .fcopy{font-size:.68rem;color:var(--taupe-600);}
+
+    /* FOOTER MOBILE */
+    .sfoot-m{display:none;background:var(--taupe-900);padding:36px 20px;}
+
+    /* SECTION */
+    .sec{padding:72px 48px;}.sec-sm{padding:44px 48px;}.sec-alt{background:var(--bone-200);}.sec-dk{background:var(--taupe-700);}
+
+    /* EYEBROW */
+    .ew{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe-400);margin-bottom:10px;}
+    .ew-lt{color:rgba(216,203,190,.5);}
+
+    /* HEADINGS */
+    .st{font-family:var(--fd);font-size:2.25rem;font-weight:300;color:var(--taupe-700);line-height:1.25;letter-spacing:-.01em;}
+    .st-lt{color:var(--bone-200);}
+
+    /* BODY */
+    .bt{font-size:.875rem;color:var(--taupe-500);line-height:1.7;}
+    .bt-lt{color:var(--taupe-400);}
+
+    /* BUTTONS */
+    .bp{padding:13px 30px;border-radius:var(--rfull);background:var(--taupe-700);color:var(--white);font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;display:inline-block;}
+    .bp-lt{background:var(--bone-200);color:var(--taupe-700);}
+    .bs{padding:12px 30px;border-radius:var(--rfull);background:transparent;color:var(--taupe-700);border:1.5px solid var(--taupe-700);font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-block;}
+    .bs-lt{color:var(--bone-300);border-color:var(--taupe-500);}
+    .bsm{padding:9px 18px;border-radius:var(--rfull);background:var(--taupe-700);color:var(--white);font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;}
+    .bwa{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:var(--rfull);background:#25D366;color:var(--white);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;}
+    .wai{width:17px;height:17px;flex-shrink:0;}
+    .ctas{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:24px;}
+
+    /* BADGE */
+    .bdg{display:inline-block;padding:3px 8px;border-radius:var(--rmd);background:var(--bone-300);color:var(--taupe-600);font-size:.58rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;}
+
+    /* IMAGE PH */
+    .iph{background:var(--bone-300);border-radius:var(--rlg);display:flex;align-items:center;justify-content:center;color:var(--taupe-400);font-size:.68rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;flex-direction:column;gap:6px;}
+
+    /* SERVICE CARD */
+    .sc{background:var(--bone-200);border:1px solid var(--bone-400);border-radius:var(--rlg);padding:22px;box-shadow:var(--shmd);}
+    .sc-t{font-family:var(--fd);font-size:1.2rem;font-weight:400;color:var(--taupe-700);margin:9px 0 7px;line-height:1.3;}
+    .sc-b{font-size:.78rem;color:var(--taupe-500);line-height:1.65;margin-bottom:14px;}
+    .sc-l{font-size:.72rem;font-weight:600;color:var(--taupe-600);text-decoration:none;}
+
+    /* TEAM CARD */
+    .tc{background:var(--bone-100);border-radius:var(--rxl);overflow:hidden;box-shadow:var(--shmd);text-align:center;}
+    .tc-p{width:100%;aspect-ratio:1/1;background:var(--bone-300);display:flex;align-items:center;justify-content:center;color:var(--taupe-400);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;}
+    .tc-i{padding:14px;}
+    .tc-n{font-family:var(--fd);font-size:1.05rem;font-weight:400;color:var(--taupe-700);}
+    .tc-r{font-size:.68rem;color:var(--taupe-500);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;}
+
+    /* TESTIMONIAL */
+    .tcard{background:var(--bone-200);border-radius:var(--rxl);padding:26px 26px 26px 30px;border-left:2px solid var(--taupe-500);}
+    .tcard-q{font-family:var(--fd);font-size:.975rem;font-weight:300;font-style:italic;color:var(--taupe-700);line-height:1.65;margin-bottom:14px;}
+    .tcard-a{font-size:.72rem;font-weight:600;color:var(--taupe-600);letter-spacing:.06em;text-transform:uppercase;}
+    .tcard-tx{font-size:.68rem;color:var(--taupe-400);margin-top:2px;}
+
+    /* FAQ */
+    .faq-item{border-bottom:1px solid var(--bone-400);}
+    .faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 0;cursor:pointer;}
+    .faq-qt{font-family:var(--fd);font-size:.975rem;font-weight:400;color:var(--taupe-700);}
+    .faq-ic{color:var(--taupe-500);font-size:1.2rem;}
+    .faq-a{padding:0 0 16px;font-size:.85rem;color:var(--taupe-500);line-height:1.7;}
+
+    /* FORM */
+    .fl{display:block;font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--taupe-600);margin-bottom:5px;}
+    .fi,.fsel,.fta{width:100%;font-family:var(--fb);font-size:.83rem;color:var(--taupe-700);background:var(--bone-200);border:1.5px solid var(--bone-400);border-radius:var(--rmd);padding:10px 13px;outline:none;}
+    .fta{resize:vertical;min-height:88px;line-height:1.6;}
+    .fg{margin-bottom:16px;}
+
+    /* ACCORDION */
+    .acc{border:1px solid var(--bone-400);border-radius:var(--rlg);overflow:hidden;}
+    .ai{border-bottom:1px solid var(--bone-400);}
+    .ai:last-child{border-bottom:none;}
+    .at{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;background:var(--bone-100);width:100%;border:none;cursor:pointer;text-align:left;}
+    .at.open{background:var(--bone-200);}
+    .att{font-family:var(--fd);font-size:1rem;font-weight:400;color:var(--taupe-700);}
+    .ati{color:var(--taupe-500);font-size:1.1rem;transition:transform 300ms;}
+    .at.open .ati{transform:rotate(45deg);}
+    .ab{max-height:0;overflow:hidden;transition:max-height 300ms ease;}
+    .ab.open{max-height:300px;}
+    .ac{padding:0 22px 16px;background:var(--bone-200);font-size:.85rem;color:var(--taupe-500);line-height:1.7;}
+
+    /* GRIDS */
+    .g2{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+    .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;}
+    .g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:20px;}
+    .g-img{display:grid;grid-template-columns:2fr 3fr;gap:56px;align-items:center;}
+    .g-img-r{display:grid;grid-template-columns:3fr 2fr;gap:56px;align-items:center;}
+    .g-half{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+
+    /* MAP */
+    .mapp{background:var(--bone-300);border-radius:var(--rlg);height:260px;display:flex;align-items:center;justify-content:center;color:var(--taupe-400);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--bone-400);flex-direction:column;gap:6px;}
+
+    /* INFO */
+    .ir{display:flex;gap:10px;margin-bottom:14px;align-items:flex-start;}
+    .ii{font-size:.9rem;color:var(--taupe-500);margin-top:1px;flex-shrink:0;width:18px;}
+    .il{font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe-500);}
+    .iv{font-size:.83rem;color:var(--taupe-700);margin-top:2px;line-height:1.5;}
+
+    /* DIVIDER */
+    .dorn{display:flex;align-items:center;gap:14px;color:var(--taupe-400);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;}
+    .dorn::before,.dorn::after{content:'';flex:1;border-top:1px solid var(--bone-400);}
+
+    /* FILTER */
+    .fbar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:28px;}
+    .fp{padding:6px 14px;border-radius:var(--rfull);border:1.5px solid var(--bone-400);background:transparent;color:var(--taupe-600);font-size:.67rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;}
+    .fp.active{background:var(--taupe-700);color:var(--white);border-color:var(--taupe-700);}
+
+    /* HIGHLIGHT */
+    .hlb{background:var(--bone-200);border:1px solid var(--bone-400);border-radius:var(--rxl);padding:26px;text-align:center;}
+    .hlb-ic{font-size:1.4rem;margin-bottom:10px;}
+    .hlb-t{font-family:var(--fd);font-size:1.075rem;font-weight:400;color:var(--taupe-700);margin-bottom:7px;}
+    .hlb-b{font-size:.78rem;color:var(--taupe-500);line-height:1.6;}
+
+    /* BEFORE/AFTER */
+    .bap{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-radius:var(--rlg);overflow:hidden;}
+    .bal{font-size:.58rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-align:center;margin-top:5px;color:var(--taupe-500);}
+
+    /* WA FLOAT */
+    .waf{position:fixed;bottom:20px;right:20px;display:flex;align-items:center;gap:7px;background:#25D366;color:var(--white);padding:12px 18px;border-radius:var(--rfull);box-shadow:0 4px 20px rgba(37,211,102,.45);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;z-index:50;}
+    .waf-m{position:fixed;bottom:14px;right:14px;width:50px;height:50px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.5);z-index:50;display:none;}
+
+    /* MOBILE OVERRIDES */
+    .vpf.mobile .snav{display:none;}
+    .vpf.mobile .snav-m{display:flex;}
+    .vpf.mobile .sec{padding:44px 18px;}
+    .vpf.mobile .sec-sm{padding:30px 18px;}
+    .vpf.mobile .g2,.vpf.mobile .g3,.vpf.mobile .g4,.vpf.mobile .g-img,.vpf.mobile .g-img-r,.vpf.mobile .g-half{grid-template-columns:1fr;gap:18px;}
+    .vpf.mobile .st{font-size:1.625rem;}
+    .vpf.mobile .sfoot{display:none;}
+    .vpf.mobile .sfoot-m{display:block;}
+    .vpf.mobile .waf{display:none;}
+    .vpf.mobile .waf-m{display:flex;}
+    .vpf.mobile .sfoot-grid{grid-template-columns:1fr;}
+    .vpf.mobile .hero-img{display:none;}
+  </style>
+</head>
+<body>
+
+<!-- CONTROL BAR -->
+<div class="ctrl">
+  <div>
+    <div class="ctrl-logo">D'ALMA CLINIC</div>
+    <div class="ctrl-meta">Wireframes · 5 páginas · v1.0</div>
+  </div>
+  <div class="ctrl-pages">
+    <button class="cb active" onclick="showPg('home',this)">Home</button>
+    <button class="cb" onclick="showPg('nosotros',this)">Nosotros</button>
+    <button class="cb" onclick="showPg('servicios',this)">Servicios</button>
+    <button class="cb" onclick="showPg('testimonios',this)">Testimonios</button>
+    <button class="cb" onclick="showPg('contacto',this)">Contacto</button>
+  </div>
+  <div class="vp-btns">
+    <button class="vb active" onclick="setVP('desktop',this)">🖥 Desktop</button>
+    <button class="vb" onclick="setVP('mobile',this)">📱 Mobile</button>
+  </div>
+</div>
+
+<!-- STAGE -->
+<div class="stage">
+<div class="vpf" id="vpf">
+
+  <!-- NAV DESKTOP -->
+  <nav class="snav" id="snav">
+    <a href="#" class="snav-logo">D'<em style="font-style:italic">ALMA</em></a>
+    <ul class="snav-links" id="navL">
+      <li><a href="#" data-pg="home">Inicio</a></li>
+      <li><a href="#" data-pg="nosotros">Nosotros</a></li>
+      <li><a href="#" data-pg="servicios">Servicios</a></li>
+      <li><a href="#" data-pg="testimonios">Testimonios</a></li>
+      <li><a href="#" data-pg="contacto">Contacto</a></li>
+    </ul>
+    <button class="nav-cta">Agendar cita</button>
+  </nav>
+
+  <!-- NAV MOBILE -->
+  <nav class="snav-m">
+    <div style="width:28px"></div>
+    <a href="#" class="snav-logo" style="font-size:1.1rem">D'<em style="font-style:italic">ALMA</em></a>
+    <div class="ham"><span></span><span></span><span></span></div>
+  </nav>
+
+
+  <!-- ════════════════════ HOME ════════════════════ -->
+  <div class="page active" id="page-home">
+
+    <!-- HERO -->
+    <div style="position:relative;background:var(--bone-200);min-height:560px;display:flex;align-items:center;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(216,203,190,.35) 0%,transparent 55%);pointer-events:none;"></div>
+      <div style="position:relative;z-index:1;max-width:580px;padding:72px 56px;">
+        <div class="ew" style="margin-bottom:14px;">Clínica estética · Cabo San Lucas, BCS</div>
+        <h1 style="font-family:var(--fd);font-size:clamp(2.2rem,4vw,3.75rem);font-weight:300;color:var(--taupe-700);line-height:1.15;letter-spacing:-.02em;margin-bottom:18px;">
+          Cuidarte también<br>es una forma de<br>amor propio.
+        </h1>
+        <p style="font-size:.9rem;color:var(--taupe-500);line-height:1.7;max-width:440px;margin-bottom:28px;">
+          Un espacio cálido y moderno para hombres y mujeres que buscan tratamientos personalizados y resultados naturales.
+        </p>
+        <div class="ctas" style="margin-top:0;">
+          <button class="bp">Agenda tu cita</button>
+          <button class="bs">Conoce los servicios</button>
+          <a class="bwa" href="#">
+            <svg class="wai" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="iph hero-img" style="position:absolute;right:0;top:0;bottom:0;width:42%;border-radius:0;">
+        <span style="font-size:1.75rem;">🌿</span>
+        <span>Foto hero — interior clínica</span>
+      </div>
+    </div>
+
+    <!-- TRATAMIENTOS -->
+    <div class="sec">
+      <div style="text-align:center;margin-bottom:36px;">
+        <div class="ew">Lo que ofrecemos</div>
+        <h2 class="st">Tratamientos destacados</h2>
+        <p class="bt" style="max-width:500px;margin:10px auto 0;">Cada tratamiento inicia con una valoración y una pregunta: ¿qué necesitas para sentirte mejor contigo?</p>
+      </div>
+      <div class="g4">
+        <div class="sc"><span class="bdg">Faciales</span><div class="sc-t">Hydrafacial</div><div class="sc-b">Limpieza profunda, exfoliación e hidratación. Luminosidad desde la primera sesión.</div><a class="sc-l" href="#">Ver más →</a></div>
+        <div class="sc"><span class="bdg">Inyectables</span><div class="sc-t">Botox</div><div class="sc-b">Suaviza líneas de expresión con resultados naturales. Requiere valoración médica.</div><a class="sc-l" href="#">Ver más →</a></div>
+        <div class="sc"><span class="bdg">Inyectables</span><div class="sc-t">Fillers y Armonización</div><div class="sc-b">Hidratación, soporte y armonía facial. Enfoque en naturalidad y equilibrio.</div><a class="sc-l" href="#">Ver más →</a></div>
+        <div class="sc"><span class="bdg">Regeneración</span><div class="sc-t">PDRN & Exosomas</div><div class="sc-b">Revitalización celular para mejorar textura, luminosidad e hidratación profunda.</div><a class="sc-l" href="#">Ver más →</a></div>
+      </div>
+      <div style="text-align:center;margin-top:32px;"><button class="bs">Ver todos los servicios</button></div>
+    </div>
+
+    <!-- CITA OSCURA -->
+    <div class="sec sec-dk" style="text-align:center;">
+      <div class="ew ew-lt" style="margin-bottom:14px;">D'ALMA CLINIC</div>
+      <blockquote style="font-family:var(--fd);font-size:clamp(1.4rem,2.8vw,2.5rem);font-weight:300;color:var(--bone-200);line-height:1.35;font-style:italic;max-width:640px;margin:0 auto 20px;">"No se trata de cambiar quién eres...<br>se trata de volver a sentirte tú."</blockquote>
+      <p class="bt bt-lt" style="max-width:460px;margin:0 auto 26px;">Queremos que venir a D'ALMA se sienta distinto.</p>
+      <div class="ctas" style="justify-content:center;margin-top:0;">
+        <button class="bp bp-lt">Conoce nuestra historia</button>
+        <button class="bs bs-lt">Nuestros servicios</button>
+      </div>
+    </div>
+
+    <!-- ¿POR QUÉ D'ALMA? -->
+    <div class="sec sec-alt">
+      <div style="text-align:center;margin-bottom:36px;">
+        <div class="ew">Nuestra filosofía</div>
+        <h2 class="st">¿Por qué D'ALMA?</h2>
+      </div>
+      <div class="g3">
+        <div class="hlb"><div class="hlb-ic">✦</div><div class="hlb-t">Atención personalizada</div><div class="hlb-b">Cada paciente inicia con una valoración. Nunca aplicamos tratamientos sin conocer tu caso.</div></div>
+        <div class="hlb"><div class="hlb-ic">✦</div><div class="hlb-t">Resultados naturales</div><div class="hlb-b">Buscamos armonía y naturalidad. No cambiar quién eres, sino ayudarte a sentirte tú.</div></div>
+        <div class="hlb"><div class="hlb-ic">✦</div><div class="hlb-t">Un espacio cálido</div><div class="hlb-b">Sin apariencia clínica fría. Para hombres y mujeres que quieren sentirse bienvenidos.</div></div>
+      </div>
+    </div>
+
+    <!-- INFO STRIP -->
+    <div class="sec-sm" style="background:var(--bone-100);">
+      <div style="display:flex;justify-content:center;gap:64px;flex-wrap:wrap;text-align:center;">
+        <div><div class="ew" style="margin-bottom:6px;">Horario</div><div style="font-family:var(--fd);font-size:1.2rem;font-weight:300;color:var(--taupe-700);">Lunes a domingo</div><div style="font-size:.83rem;color:var(--taupe-500);margin-top:3px;">10:00 am – 8:00 pm</div></div>
+        <div><div class="ew" style="margin-bottom:6px;">Ubicación</div><div style="font-family:var(--fd);font-size:1.2rem;font-weight:300;color:var(--taupe-700);">Plaza Patio</div><div style="font-size:.83rem;color:var(--taupe-500);margin-top:3px;">Cabo San Lucas, BCS</div></div>
+        <div><div class="ew" style="margin-bottom:6px;">Agendar</div><a class="bwa" href="#"><svg class="wai" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enviar WhatsApp</a></div>
+      </div>
+    </div>
+  </div><!-- /home -->
+
+
+  <!-- ════════════════════ NOSOTROS ════════════════════ -->
+  <div class="page" id="page-nosotros">
+
+    <div class="sec-sm sec-alt" style="text-align:center;padding-top:56px;padding-bottom:56px;">
+      <div class="ew" style="margin-bottom:10px;">Quiénes somos</div>
+      <h1 class="st" style="font-size:2.625rem;">Nosotros</h1>
+      <p class="bt" style="max-width:500px;margin:12px auto 0;">Más que una clínica — un espacio donde las personas pueden sentirse cómodas, seguras y bien consigo mismas.</p>
+    </div>
+
+    <!-- ANA MARÍA -->
+    <div class="sec">
+      <div class="g-img">
+        <div class="iph" style="height:460px;"><span style="font-size:2rem;">👩</span><span>Foto de Ana María</span></div>
+        <div>
+          <div class="ew" style="margin-bottom:14px;">Directora</div>
+          <h2 style="font-family:var(--fd);font-size:1.875rem;font-weight:300;color:var(--taupe-700);line-height:1.25;margin-bottom:18px;">Hola, soy Ana María.</h2>
+          <p class="bt" style="margin-bottom:14px;">Comunicóloga, periodista y directora de D'ALMA CLINIC. Años de experiencia en el desarrollo y operación de clínicas estéticas.</p>
+          <p class="bt" style="margin-bottom:14px;">Cuando una persona comienza a cuidarse, no solamente cambia por fuera... cambia su seguridad, su energía y la manera en que se ve a sí misma.</p>
+          <p class="bt" style="margin-bottom:24px;">Por eso nació D'ALMA: un espacio para hombres y mujeres que quieren verse bien, sentirse bien y regalarse un momento para ellos.</p>
+          <button class="bp">Conoce nuestros servicios</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- EQUIPO -->
+    <div class="sec sec-alt">
+      <div style="text-align:center;margin-bottom:36px;"><div class="ew">Las personas detrás de D'ALMA</div><h2 class="st">Nuestro equipo</h2></div>
+      <div class="g4">
+        <div class="tc"><div class="tc-p">Foto profesional</div><div class="tc-i"><div class="tc-n">Ana María</div><div class="tc-r">Directora</div></div></div>
+        <div class="tc"><div class="tc-p">Foto profesional</div><div class="tc-i"><div class="tc-n">Dra. ———</div><div class="tc-r">Médico Estético</div></div></div>
+        <div class="tc"><div class="tc-p">Foto profesional</div><div class="tc-i"><div class="tc-n">Dra. ———</div><div class="tc-r">Médico Estético</div></div></div>
+        <div class="tc"><div class="tc-p">Foto profesional</div><div class="tc-i"><div class="tc-n">María José</div><div class="tc-r">Atención y Recepción</div></div></div>
+      </div>
+    </div>
+
+    <!-- VALORES -->
+    <div class="sec">
+      <div style="text-align:center;margin-bottom:36px;"><div class="ew">Lo que nos mueve</div><h2 class="st">Nuestra forma de trabajar</h2></div>
+      <div class="g3">
+        <div style="padding:24px 0;border-top:2px solid var(--bone-400);"><div style="font-family:var(--fd);font-size:1.2rem;font-weight:400;color:var(--taupe-700);margin-bottom:8px;">Valoración antes que todo</div><div class="bt">Nunca aplicamos un tratamiento sin entender quién eres y qué necesitas.</div></div>
+        <div style="padding:24px 0;border-top:2px solid var(--bone-400);"><div style="font-family:var(--fd);font-size:1.2rem;font-weight:400;color:var(--taupe-700);margin-bottom:8px;">Confianza y acompañamiento</div><div class="bt">Te explicamos cada paso. Sin presión ni promesas exageradas.</div></div>
+        <div style="padding:24px 0;border-top:2px solid var(--bone-400);"><div style="font-family:var(--fd);font-size:1.2rem;font-weight:400;color:var(--taupe-700);margin-bottom:8px;">Inclusivo y accesible</div><div class="bt">Hombres y mujeres. No te sentirás fuera de lugar ni juzgado.</div></div>
+      </div>
+    </div>
+
+    <!-- CTA DARK -->
+    <div class="sec sec-dk" style="text-align:center;">
+      <div class="ew ew-lt" style="margin-bottom:14px;">Queremos conocerte</div>
+      <h2 style="font-family:var(--fd);font-size:2.125rem;font-weight:300;color:var(--bone-200);line-height:1.3;margin-bottom:14px;">Tu piel también cuenta tu historia.</h2>
+      <p class="bt bt-lt" style="max-width:400px;margin:0 auto 24px;">Agenda una valoración y cuéntanos qué necesitas.</p>
+      <div class="ctas" style="justify-content:center;margin-top:0;">
+        <button class="bp bp-lt">Agenda tu cita</button>
+        <a class="bwa" href="#"><svg class="wai" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enviar WhatsApp</a>
+      </div>
+    </div>
+  </div><!-- /nosotros -->
+
+
+  <!-- ════════════════════ SERVICIOS ════════════════════ -->
+  <div class="page" id="page-servicios">
+
+    <div class="sec-sm sec-alt" style="text-align:center;padding-top:56px;padding-bottom:56px;">
+      <div class="ew" style="margin-bottom:10px;">Lo que hacemos</div>
+      <h1 class="st" style="font-size:2.625rem;">Servicios</h1>
+      <p class="bt" style="max-width:520px;margin:12px auto 0;">Cada tratamiento está pensado para ayudarte a sentirte bien contigo, de forma natural, cercana y personalizada.</p>
+    </div>
+
+    <div class="sec">
+      <div class="fbar">
+        <button class="fp active">Todos</button>
+        <button class="fp">Inyectables</button>
+        <button class="fp">Regeneración</button>
+        <button class="fp">Faciales</button>
+        <button class="fp">Capilares</button>
+        <button class="fp">Depilación</button>
+        <button class="fp">Especializados</button>
+      </div>
+
+      <!-- INYECTABLES -->
+      <div style="margin-bottom:36px;">
+        <div class="ew" style="margin-bottom:14px;">Inyectables</div>
+        <div class="acc">
+          <div class="ai">
+            <button class="at open" onclick="toggleAcc(this)"><span class="att">Botox</span><span class="ati">+</span></button>
+            <div class="ab open">
+              <div class="ac">
+                <div class="g-half" style="gap:28px;">
+                  <div><p style="margin-bottom:8px;"><strong style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe-600);">¿Qué es?</strong><br>Toxina botulínica purificada para relajar músculos y suavizar líneas de expresión.</p><p><strong style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe-600);">Resultado</strong><br>Rostro más descansado, expresión natural. Visible en 4–10 días.</p></div>
+                  <div><p style="margin-bottom:8px;"><strong style="font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe-600);">Marcas</strong><br>Linurase, Otesaly, Dysport</p><p style="font-size:.78rem;color:var(--taupe-600);margin-bottom:14px;">Requiere valoración médica.</p><button class="bsm">Agendar valoración</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ai">
+            <button class="at" onclick="toggleAcc(this)"><span class="att">Fillers y Armonización Facial</span><span class="ati">+</span></button>
+            <div class="ab"><div class="ac"><p>Rellenos de ácido hialurónico para labios, rinomodelación, mentón y ojera. Marcas: Rejeneusse, Revofil, Starfill y E.P.T.Q.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REGENERACIÓN -->
+      <div style="margin-bottom:36px;">
+        <div class="ew" style="margin-bottom:14px;">Regeneración y Revitalización</div>
+        <div class="acc">
+          <div class="ai"><button class="at" onclick="toggleAcc(this)"><span class="att">PDRN</span><span class="ati">+</span></button><div class="ab"><div class="ac"><p>Tratamiento regenerador para mejorar textura, hidratación y cicatrices. Opciones: ReMedium PDRN y Otesaly PDRN.</p></div></div></div>
+          <div class="ai"><button class="at" onclick="toggleAcc(this)"><span class="att">Exosomas, Aquashine y Natural-B</span><span class="ati">+</span></button><div class="ab"><div class="ac"><p>Revitalizadores para piel opaca, deshidratación y primeros signos de edad. Natural-B, Aquashine PTX y Exo-Xelle.</p></div></div></div>
+        </div>
+      </div>
+
+      <!-- FACIALES -->
+      <div style="margin-bottom:36px;">
+        <div class="ew" style="margin-bottom:14px;">Faciales</div>
+        <div class="acc">
+          <div class="ai"><button class="at" onclick="toggleAcc(this)"><span class="att">Hydrafacial</span><span class="ati">+</span></button><div class="ab"><div class="ac"><p>Limpieza profunda, exfoliación, extracción e hidratación. Resultados desde la primera sesión.</p></div></div></div>
+          <div class="ai"><button class="at" onclick="toggleAcc(this)"><span class="att">Microneedling y Despigmentantes</span><span class="ati">+</span></button><div class="ab"><div class="ac"><p>Microcanales con activos específicos: Dermaheal, PTx-SB, Inbioamber, PTx-SR. Para manchas, cicatrices y textura.</p></div></div></div>
+        </div>
+      </div>
+
+      <!-- OTROS -->
+      <div class="g3">
+        <div class="sc"><span class="bdg">Capilares</span><div class="sc-t">Tratamientos Capilares</div><div class="sc-b">PTx-HL, Dermaheal P-HL, Dr. CYJ Hair Filler para debilidad y caída capilar.</div><a class="sc-l" href="#">Ver más →</a></div>
+        <div class="sc"><span class="bdg">Depilación</span><div class="sc-t">Depilación Láser</div><div class="sc-b">Para hombres y mujeres. Axila, bikini, piernas, brazos, espalda, rostro y más.</div><a class="sc-l" href="#">Ver más →</a></div>
+        <div class="sc"><span class="bdg">Especializados</span><div class="sc-t">Verrugas, Queloides y Plasmapen</div><div class="sc-b">Bajo valoración médica. Triamcinolona intralesional y plasmapen.</div><a class="sc-l" href="#">Ver más →</a></div>
+      </div>
+    </div>
+
+    <div class="sec-sm sec-alt" style="text-align:center;">
+      <div class="ew" style="margin-bottom:10px;">¿No sabes por dónde empezar?</div>
+      <h2 style="font-family:var(--fd);font-size:1.75rem;font-weight:300;color:var(--taupe-700);margin-bottom:12px;">Agenda una valoración.</h2>
+      <p class="bt" style="max-width:380px;margin:0 auto 22px;">Te explicamos qué tratamiento es mejor para ti según tu piel, tus objetivos y tu presupuesto.</p>
+      <div class="ctas" style="justify-content:center;margin-top:0;">
+        <button class="bp">Agenda tu cita</button>
+        <a class="bwa" href="#"><svg class="wai" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Preguntar por WhatsApp</a>
+      </div>
+    </div>
+  </div><!-- /servicios -->
+
+
+  <!-- ════════════════════ TESTIMONIOS ════════════════════ -->
+  <div class="page" id="page-testimonios">
+
+    <div class="sec-sm sec-dk" style="text-align:center;padding-top:60px;padding-bottom:60px;">
+      <div class="ew ew-lt" style="margin-bottom:10px;">Lo que dicen nuestros pacientes</div>
+      <h1 style="font-family:var(--fd);font-size:2.625rem;font-weight:300;color:var(--bone-200);line-height:1.2;">Testimonios</h1>
+      <p class="bt bt-lt" style="max-width:460px;margin:12px auto 0;">"Lo más bonito no es solo verse diferente... es volver a sentirse bien con uno mismo."</p>
+    </div>
+
+    <div class="sec">
+      <div class="g2" style="margin-bottom:22px;">
+        <div class="tcard"><div class="tcard-q">"Me encantó porque me explicaron todo antes de empezar y el resultado se ve completamente natural."</div><div class="tcard-a">M.R.</div><div class="tcard-tx">Fillers · Armonización facial</div></div>
+        <div class="tcard"><div class="tcard-q">"Llegué con muchas dudas y salí sintiéndome tranquila y muy bien atendida. Todo fue muy cálido."</div><div class="tcard-a">L.G.</div><div class="tcard-tx">Botox · Primera vez</div></div>
+      </div>
+      <div class="g3">
+        <div class="tcard"><div class="tcard-q">"No quería verme diferente, solo más fresca, y justo eso logramos."</div><div class="tcard-a">P.M.</div><div class="tcard-tx">Hydrafacial · Botox preventivo</div></div>
+        <div class="tcard"><div class="tcard-q">"Como hombre nunca pensé que me sentiría tan cómodo en una clínica estética."</div><div class="tcard-a">R.A.</div><div class="tcard-tx">Microneedling · Depilación</div></div>
+        <div class="tcard"><div class="tcard-q">"El seguimiento después del tratamiento fue lo que más me sorprendió."</div><div class="tcard-a">C.V.</div><div class="tcard-tx">PDRN · Exosomas</div></div>
+      </div>
+    </div>
+
+    <!-- BEFORE / AFTER -->
+    <div class="sec sec-alt">
+      <div style="text-align:center;margin-bottom:36px;">
+        <div class="ew" style="margin-bottom:10px;">Con autorización de los pacientes</div>
+        <h2 class="st">Antes y después</h2>
+        <p class="bt" style="max-width:460px;margin:10px auto 0;">Resultados reales, misma luz y ángulo. Naturalidad ante todo.</p>
+      </div>
+      <div class="g3">
+        <div><div class="bap"><div class="iph" style="height:180px;border-radius:0;font-size:.62rem;">Antes</div><div class="iph" style="height:180px;border-radius:0;font-size:.62rem;background:var(--bone-200);">Después</div></div><div class="bal">Botox · Frente y entrecejo</div></div>
+        <div><div class="bap"><div class="iph" style="height:180px;border-radius:0;font-size:.62rem;">Antes</div><div class="iph" style="height:180px;border-radius:0;font-size:.62rem;background:var(--bone-200);">Después</div></div><div class="bal">Hydrafacial · 3 sesiones</div></div>
+        <div><div class="bap"><div class="iph" style="height:180px;border-radius:0;font-size:.62rem;">Antes</div><div class="iph" style="height:180px;border-radius:0;font-size:.62rem;background:var(--bone-200);">Después</div></div><div class="bal">Fillers · Labios y ojera</div></div>
+      </div>
+      <p style="text-align:center;font-size:.7rem;color:var(--taupe-400);margin-top:20px;">* Los resultados varían según cada persona. Fotos publicadas con autorización firmada.</p>
+    </div>
+
+    <div class="sec-sm sec-dk" style="text-align:center;">
+      <div class="ew ew-lt" style="margin-bottom:12px;">¿Listo para empezar?</div>
+      <h2 style="font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--bone-200);margin-bottom:12px;">Queremos que venir a D'ALMA se sienta distinto.</h2>
+      <div class="ctas" style="justify-content:center;margin-top:18px;">
+        <button class="bp bp-lt">Agenda tu cita</button>
+        <a class="bwa" href="#"><svg class="wai" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enviar WhatsApp</a>
+      </div>
+    </div>
+  </div><!-- /testimonios -->
+
+
+  <!-- ════════════════════ CONTACTO ════════════════════ -->
+  <div class="page" id="page-contacto">
+
+    <div class="sec-sm sec-alt" style="text-align:center;padding-top:56px;padding-bottom:56px;">
+      <div class="ew" style="margin-bottom:10px;">Estamos aquí para ti</div>
+      <h1 class="st" style="font-size:2.625rem;">Contacto</h1>
+      <p class="bt" style="max-width:420px;margin:12px auto 0;">La forma más rápida de agendar es por WhatsApp. También puedes escribirnos y te respondemos pronto.</p>
+    </div>
+
+    <!-- FORMULARIO + INFO -->
+    <div class="sec">
+      <div class="g-half">
+        <div>
+          <div class="ew" style="margin-bottom:18px;">Escríbenos</div>
+          <h2 style="font-family:var(--fd);font-size:1.75rem;font-weight:300;color:var(--taupe-700);margin-bottom:22px;">Agenda tu cita</h2>
+          <div class="fg"><label class="fl">Nombre completo</label><input class="fi" type="text" placeholder="Tu nombre"></div>
+          <div class="fg"><label class="fl">Teléfono / WhatsApp</label><input class="fi" type="tel" placeholder="+52 624 000 0000"></div>
+          <div class="fg"><label class="fl">Servicio de interés</label><select class="fsel"><option value="" disabled selected>Selecciona un tratamiento</option><option>Hydrafacial</option><option>Botox</option><option>Fillers y armonización</option><option>PDRN / Exosomas</option><option>Depilación láser</option><option>Valoración general</option></select></div>
+          <div class="fg"><label class="fl">Mensaje (opcional)</label><textarea class="fta" placeholder="¿Tienes alguna pregunta?"></textarea></div>
+          <button class="bp" style="width:100%;text-align:center;display:block;">Enviar mensaje</button>
+          <p style="font-size:.67rem;color:var(--taupe-400);margin-top:10px;line-height:1.6;">Al enviar, aceptas nuestro aviso de privacidad.</p>
+        </div>
+        <div>
+          <div class="ew" style="margin-bottom:18px;">Información</div>
+          <h2 style="font-family:var(--fd);font-size:1.75rem;font-weight:300;color:var(--taupe-700);margin-bottom:24px;">Encuéntranos</h2>
+          <div class="ir"><div class="ii">📍</div><div><div class="il">Dirección</div><div class="iv">Plaza Patio, De Las Brisas 2404<br>Brisas del Pacífico, Cabo San Lucas, BCS</div></div></div>
+          <div class="ir"><div class="ii">🕐</div><div><div class="il">Horario</div><div class="iv">Lunes a domingo · 10:00 am – 8:00 pm</div></div></div>
+          <div class="ir"><div class="ii">💬</div><div><div class="il">WhatsApp</div><div class="iv" style="color:var(--taupe-400);">Pendiente de definir</div></div></div>
+          <div class="ir" style="margin-bottom:22px;"><div class="ii">📸</div><div><div class="il">Instagram</div><div class="iv" style="color:var(--taupe-400);">Pendiente de definir</div></div></div>
+          <a class="bwa" href="#" style="margin-bottom:22px;display:inline-flex;"><svg class="wai" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Chatear por WhatsApp</a>
+          <div class="mapp"><div style="font-size:1.4rem;">📍</div><div>Google Maps · Plaza Patio<br>Cabo San Lucas</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="sec sec-alt">
+      <div style="text-align:center;margin-bottom:36px;"><div class="ew" style="margin-bottom:10px;">Preguntas frecuentes</div><h2 class="st">FAQ</h2></div>
+      <div style="max-width:700px;margin:0 auto;">
+        <div class="faq-item"><div class="faq-q"><span class="faq-qt">¿Necesito cita previa?</span><span class="faq-ic">+</span></div><div class="faq-a">Sí. Recomendamos agendar para darte una atención personalizada y valorar qué tratamiento es mejor para ti.</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="faq-qt">¿Los tratamientos son para hombres y mujeres?</span><span class="faq-ic">+</span></div><div class="faq-a">Sí. D'ALMA CLINIC está pensado para hombres y mujeres que quieren sentirse bien y cuidar su imagen de forma natural.</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="faq-qt">¿Los resultados se ven naturales?</span><span class="faq-ic">+</span></div><div class="faq-a">Sí. Nuestro enfoque es buscar resultados armónicos y personalizados adecuados a cada rostro o necesidad.</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="faq-qt">¿Qué tratamiento me conviene si nunca me he hecho nada?</span><span class="faq-ic">+</span></div><div class="faq-a">Lo ideal es iniciar con una valoración. Muchas personas empiezan con Hydrafacial, microneedling o una valoración para Botox preventivo.</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="faq-qt">¿El Botox cambia mi expresión?</span><span class="faq-ic">+</span></div><div class="faq-a">No debería. Cuando se aplica correctamente, busca suavizar líneas de expresión manteniendo naturalidad.</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="faq-qt">¿Qué diferencia hay entre Botox y fillers?</span><span class="faq-ic">+</span></div><div class="faq-a">El Botox relaja músculos que generan líneas de expresión. Los fillers dan soporte, volumen o armonía en zonas específicas.</div></div>
+        <div class="faq-item"><div class="faq-q"><span class="faq-qt">¿Puedo combinar tratamientos?</span><span class="faq-ic">+</span></div><div class="faq-a">Sí, pero siempre bajo valoración para definir tiempos, prioridades y seguridad.</div></div>
+        <div class="faq-item" style="border-bottom:none;"><div class="faq-q"><span class="faq-qt">¿Cuántas sesiones necesito?</span><span class="faq-ic">+</span></div><div class="faq-a">Depende del tratamiento, la piel y el objetivo. En la valoración se explica el plan recomendado para tu caso.</div></div>
+      </div>
+    </div>
+
+  </div><!-- /contacto -->
+
+
+  <!-- FOOTER DESKTOP -->
+  <footer class="sfoot">
+    <div class="sfoot-grid">
+      <div>
+        <div class="fbrand">D'ALMA CLINIC</div>
+        <div class="ftagline">Un espacio cálido y moderno para hombres y mujeres que buscan tratamientos personalizados y resultados naturales.</div>
+        <div style="margin-top:18px;"><a class="bwa" href="#" style="font-size:.7rem;"><svg class="wai" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Agendar por WhatsApp</a></div>
+      </div>
+      <div><div class="fcol-t">Páginas</div><div class="fcol-links"><a href="#">Inicio</a><a href="#">Nosotros</a><a href="#">Servicios</a><a href="#">Testimonios</a><a href="#">Contacto</a></div></div>
+      <div><div class="fcol-t">Servicios</div><div class="fcol-links"><a href="#">Botox</a><a href="#">Fillers</a><a href="#">Hydrafacial</a><a href="#">PDRN</a><a href="#">Depilación láser</a></div></div>
+      <div><div class="fcol-t">Horario</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.7;">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
+    </div>
+    <hr class="fdiv">
+    <div class="fbot"><div class="fcopy">© 2026 D'ALMA CLINIC · Todos los derechos reservados</div><div class="fcopy"><a href="#" style="color:var(--taupe-500);text-decoration:none;">Aviso de privacidad</a></div></div>
+  </footer>
+
+  <!-- FOOTER MOBILE -->
+  <footer class="sfoot-m">
+    <div style="text-align:center;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:24px;">
+      <div class="fbrand" style="margin-bottom:8px;">D'ALMA CLINIC</div>
+      <div class="ftagline" style="font-size:.75rem;max-width:260px;margin:0 auto 18px;">Tratamientos personalizados, resultados naturales.</div>
+      <a class="bwa" href="#" style="font-size:.68rem;display:inline-flex;"><svg class="wai" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Agendar por WhatsApp</a>
+    </div>
+    <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:20px;">
+      <a href="#" style="font-size:.72rem;color:var(--taupe-400);text-decoration:none;">Inicio</a>
+      <a href="#" style="font-size:.72rem;color:var(--taupe-400);text-decoration:none;">Nosotros</a>
+      <a href="#" style="font-size:.72rem;color:var(--taupe-400);text-decoration:none;">Servicios</a>
+      <a href="#" style="font-size:.72rem;color:var(--taupe-400);text-decoration:none;">Testimonios</a>
+      <a href="#" style="font-size:.72rem;color:var(--taupe-400);text-decoration:none;">Contacto</a>
+    </div>
+    <div style="text-align:center;font-size:.62rem;color:var(--taupe-600);">© 2026 D'ALMA CLINIC · <a href="#" style="color:var(--taupe-500);text-decoration:none;">Aviso de privacidad</a></div>
+  </footer>
+
+  <!-- WA FLOAT DESKTOP -->
+  <a class="waf" href="#"><svg class="wai" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+
+  <!-- WA FLOAT MOBILE -->
+  <a class="waf-m" href="#"><svg style="width:26px;height:26px;fill:white;" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+</div><!-- /vpf -->
+</div><!-- /stage -->
+
+<script>
+  function showPg(name, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    document.querySelectorAll('.cb').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    document.querySelectorAll('#navL a').forEach(a => a.classList.toggle('active', a.dataset.pg === name));
+    window.scrollTo(0, 56);
+  }
+
+  function setVP(mode, btn) {
+    document.getElementById('vpf').classList.toggle('mobile', mode === 'mobile');
+    document.querySelectorAll('.vb').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+  }
+
+  function toggleAcc(trigger) {
+    const body = trigger.nextElementSibling;
+    const open = trigger.classList.contains('open');
+    trigger.classList.toggle('open', !open);
+    body.classList.toggle('open', !open);
+  }
+
+  document.querySelectorAll('#navL a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const pg = a.dataset.pg;
+      const btn = [...document.querySelectorAll('.cb')].find(b => b.textContent.trim().toLowerCase().startsWith(pg.substring(0,4)));
+      showPg(pg, btn);
+    });
+  });
+</script>
+</body>
+</html>
