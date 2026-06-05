@@ -107,6 +107,7 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
   - `design-tokens.json` — fuente de verdad de colores, tipografía, espaciado, sombras, radios y transiciones
   - `DESIGN.md` — razonamiento de cada decisión de diseño (paleta, tipografía, componentes, accesibilidad)
   - `design-preview.html` — preview interactivo con sidebar, 14 secciones y todos los componentes reales del sitio
+- Creación de `mockup.html` — mockup de alta fidelidad con imágenes reales de Unsplash, páginas Home y Servicios, diseño responsive con hamburger mobile
 
 ### 2026-06-02
 **Actividades:**
