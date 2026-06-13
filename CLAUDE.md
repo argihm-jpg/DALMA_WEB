@@ -40,11 +40,26 @@ Humano · elegante · cálido · moderno · natural · accesible.
 No debe percibirse como clínica fría, exclusiva o intimidante. Dirigido a hombres y mujeres.
 
 ## Estructura del Sitio (5 secciones)
-1. **Home** — Hero, tratamientos destacados, botones CTA
-2. **Nosotros** — Historia de Ana María, equipo
-3. **Servicios** — Acordeones o tarjetas por categoría
-4. **Testimonios** — Pacientes reales, fotos naturales, before/after con autorización
-5. **Contacto + FAQ** — WhatsApp, Instagram, mapa, horario, preguntas frecuentes
+
+### Home — estructura aprobada (2026-06-12)
+1. Hero — headline "Cuidarte también es una forma de amor propio." + imagen aspiracional (bienestar/amor propio, no interior clínica) + CTAs
+2. Tratamientos destacados — 4 cards de servicios destacados
+3. Testimonios — carrusel con cards demo (5 testimonios); contenido final pendiente de la cliente
+4. Sección oscura — cita de marca "No se trata de cambiar quién eres…"
+5. ¿Por qué D'ALMA? — 3 pilares de filosofía
+6. CTA + mapa — layout 2 columnas: izquierda título "Tu piel también cuenta tu historia." + botón; derecha placeholder Google Maps (Plaza Patio, Cabo San Lucas) + horario
+
+### Nosotros
+Historia de Ana María, equipo
+
+### Servicios
+Acordeones o tarjetas por categoría
+
+### Testimonios
+Pacientes reales, fotos naturales, before/after con autorización
+
+### Contacto + FAQ
+WhatsApp, Instagram, mapa, horario, preguntas frecuentes
 
 ## Servicios
 
@@ -95,9 +110,44 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 - [descripción de cada cambio o decisión importante]
 ```
 
+## Estado Actual de Archivos (2026-06-12)
+
+| Archivo | Estado | Notas |
+|---|---|---|
+| `design-preview.html` | ✅ Estable — no modificar | Sistema de diseño v1.0. Fuente de verdad visual. |
+| `design-tokens.json` | ✅ Estable — no modificar | Tokens de color, tipografía, espaciado. |
+| `wireframes.html` | ✅ Aprobado | Home actualizada: testimonios + CTA+mapa. 5 páginas. |
+| `mockup.html` | ✅ Aprobado | Home actualizada: testimonios + CTA+mapa sobre imagen. 2 páginas (Home, Servicios). |
+| `DESIGN.md` | ✅ Estable | Razonamiento de decisiones de diseño. |
+
+### Decisiones de diseño fijadas (no revertir sin acuerdo con Bruno/cliente)
+- **Hero**: imagen aspiracional de bienestar/amor propio — no interior de clínica.
+- **Testimonios en Home**: carrusel con 5 cards demo. Copys finales pendientes de la cliente.
+- **Sección final Home**: layout 2 columnas con imagen de fondo. Izquierda: título + CTA. Derecha: mapa + horario. El Info Strip separado fue eliminado.
+- **Cards de testimonios**: `bone-100` de fondo, `border-left: 2px taupe-500`, Cormorant Garamond italic.
+- **Mapa**: placeholder visual. Se integrará Google Maps real cuando esté disponible.
+
 ---
 
 ## Historial de Sesiones
+
+### 2026-06-12 (sesión 2)
+**Actividades:**
+- Modificación de `mockup.html` — únicamente la página Home (`#pg-home`)
+- Nueva sección Testimonios: carrusel visual de alta fidelidad insertado entre TRATAMIENTOS y QUOTE DARK. 5 cards demo con quote, ★★★★★, nombre/apellido y tratamiento. Cards con bg bone-100, border-left taupe-500, Cormorant Garamond italic. Desktop: 3 cards visibles; mobile: 1 card. Dots + flechas prev/next. Autoscroll 4s, pausa en hover e interacción, respeta prefers-reduced-motion.
+- Sección final CTA + mapa: reemplaza CLINIC STRIP simple + INFO STRIP por composición de dos columnas sobre la misma imagen de fondo (URL sin cambios). Izquierda: título "Tu piel también cuenta tu historia." + botón CTA. Derecha: card glassmorphism (backdrop-filter blur) con eyebrow "Cabo San Lucas, BCS", placeholder de mapa (📍 Google Maps · Plaza Patio), horario. Colapsa a 1 columna en mobile.
+- CSS nuevo: `.tc-card`, `.tc-stars`, `.tc-quote`, `.tc-author`, `.tc-treat`, `.tco-*` (carousel), `.cs-inner`, `.cs-map-card`, `.cs-map-ph` + media queries adicionales.
+- No se modificaron: `wireframes.html`, `design-preview.html`, imagen hero, imagen clinic strip, página Servicios, nav, footer, estilos globales.
+
+### 2026-06-12 (sesión 1)
+**Actividades:**
+- Modificación de `wireframes.html` — únicamente la página Home (`#page-home`)
+- Hero: cambio del placeholder "Foto hero — interior clínica" por "Imagen aspiracional · bienestar · confianza · amor propio" (ícono ✦ en lugar de 🌿)
+- Nueva sección de testimonios: carrusel con 5 cards demo entre TRATAMIENTOS y CITA OSCURA. Autoscroll 4s, pausa en hover e interacción manual, indicadores de posición, respeta `prefers-reduced-motion`. Desktop: 3 cards visibles; mobile: 1 card. Sin librerías externas.
+- Sección final CTA+Mapa: reemplaza el Info Strip por layout de dos columnas (desktop). Izquierda: título "Tu piel también cuenta tu historia." + botones CTA. Derecha: eyebrow "Cabo San Lucas, BCS" + placeholder de mapa (Google Maps · Plaza Patio) + horario. Colapsa a 1 columna en mobile con `g-half`.
+- CSS mínimo agregado: estilos de carrusel, `.tcard-stars`, override mobile `.crs-slide{width:100%}`
+- JS del carrusel: función `window.crsGoTo` expuesta para reset al cambiar viewport desktop↔mobile
+- No se modificaron: `mockup.html`, `design-preview.html`, páginas Nosotros/Servicios/Testimonios/Contacto, navegación, footer, tokens de diseño
 
 ### 2026-06-04
 **Actividades:**

@@ -103,6 +103,29 @@
     .info-sub{font-size:.78rem;color:var(--taupe-500);margin-top:3px;}
     .info-div{width:1px;height:48px;background:var(--bone-400);}
 
+    /* ═══ TESTIMONIOS ═══ */
+    .tc-card{background:var(--bone-100);border-radius:10px;padding:24px 24px 24px 28px;border-left:2px solid var(--taupe-500);box-shadow:0 2px 8px rgba(95,86,81,.06);display:flex;flex-direction:column;}
+    .tc-stars{color:var(--taupe-500);font-size:.68rem;letter-spacing:2px;margin-bottom:12px;}
+    .tc-quote{font-family:var(--fd);font-size:1.05rem;font-weight:300;font-style:italic;color:var(--taupe-700);line-height:1.65;flex:1;margin-bottom:16px;}
+    .tc-author{font-size:.73rem;font-weight:600;color:var(--taupe-600);letter-spacing:.08em;text-transform:uppercase;}
+    .tc-treat{font-size:.68rem;color:var(--taupe-400);margin-top:3px;}
+    .tco-wrap{overflow:hidden;}
+    .tco-track{display:flex;gap:24px;transition:transform 500ms ease;will-change:transform;}
+    .tco-slide{flex-shrink:0;width:calc((100% - 48px)/3);}
+    .tco-dots{display:flex;justify-content:center;gap:8px;margin-top:24px;}
+    .tco-dot{width:6px;height:6px;border-radius:9999px;background:var(--bone-400);border:none;cursor:pointer;padding:0;transition:background 250ms,width 250ms;}
+    .tco-dot.on{background:var(--taupe-500);width:20px;}
+    .tco-ctrls{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px;}
+    .tco-arr{width:36px;height:36px;border-radius:9999px;border:1.5px solid var(--bone-400);background:transparent;color:var(--taupe-500);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 150ms;}
+    .tco-arr:hover{background:var(--bone-200);border-color:var(--taupe-500);color:var(--taupe-700);}
+    .tco-note{text-align:center;font-size:.62rem;color:var(--taupe-400);margin-top:18px;}
+    @media(prefers-reduced-motion:reduce){.tco-track{transition:none;}}
+
+    /* ═══ CTA + MAPA (sobre imagen clinic strip) ═══ */
+    .cs-inner{position:absolute;inset:0;padding:52px 56px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;color:var(--bone-100);z-index:1;}
+    .cs-map-card{background:rgba(250,249,247,.1);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(216,203,190,.18);border-radius:12px;padding:24px;}
+    .cs-map-ph{background:rgba(255,255,255,.05);border:1px solid rgba(216,203,190,.14);border-radius:8px;height:180px;display:flex;align-items:center;justify-content:center;margin:12px 0;}
+
     /* ═══ FOOTER ═══ */
     .footer{background:var(--taupe-900);padding:56px 56px 36px;}
     .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px;}
@@ -252,6 +275,18 @@
       .clinic-strip{height:220px;}
       .nav-mmenu li a{font-size:1.75rem;}
     }
+
+    /* ─── TESTIMONIOS + CTA-MAPA RESPONSIVE ──────────── */
+    @media(max-width:768px){
+      .tco-slide{width:100%;}
+      .clinic-strip{height:auto!important;min-height:500px;}
+      .cs-inner{grid-template-columns:1fr;padding:44px 20px;gap:24px;align-content:center;}
+      .cs-map-card{padding:18px;}
+      .cs-map-ph{height:150px;}
+    }
+    @media(max-width:480px){
+      .cs-inner{padding:36px 20px;}
+    }
   </style>
 </head>
 <body>
@@ -341,6 +376,70 @@
     <div style="text-align:center;margin-top:40px;"><button class="bs" onclick="showPg('servicios',document.querySelectorAll('.pb')[1])">Ver todos los servicios</button></div>
   </section>
 
+  <!-- TESTIMONIOS -->
+  <section class="sec sec-alt">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="ew">Lo que dicen nuestros pacientes</div>
+      <h2 class="st">Testimonios</h2>
+    </div>
+    <div class="tco-wrap" id="tco-wrap">
+      <div class="tco-track" id="tco-track">
+        <div class="tco-slide">
+          <div class="tc-card">
+            <div class="tc-stars">★★★★★</div>
+            <div class="tc-quote">"El trato fue increíble desde el primer momento. Me explicaron todo con paciencia y sin ninguna presión."</div>
+            <div class="tc-author">Sofía Arriaga</div>
+            <div class="tc-treat">Hydrafacial</div>
+          </div>
+        </div>
+        <div class="tco-slide">
+          <div class="tc-card">
+            <div class="tc-stars">★★★★★</div>
+            <div class="tc-quote">"No esperaba sentirme tan cómodo. El ambiente es muy cálido y los resultados se ven completamente naturales."</div>
+            <div class="tc-author">Carlos Medina</div>
+            <div class="tc-treat">Botox</div>
+          </div>
+        </div>
+        <div class="tco-slide">
+          <div class="tc-card">
+            <div class="tc-stars">★★★★★</div>
+            <div class="tc-quote">"Llegué con muchas dudas y salí con mucha claridad. La valoración previa lo hizo todo más fácil."</div>
+            <div class="tc-author">Gabriela Rojas</div>
+            <div class="tc-treat">Fillers · Armonización facial</div>
+          </div>
+        </div>
+        <div class="tco-slide">
+          <div class="tc-card">
+            <div class="tc-stars">★★★★★</div>
+            <div class="tc-quote">"La atención fue muy profesional y me dieron seguimiento después del tratamiento. Muy buena experiencia."</div>
+            <div class="tc-author">Laura Villanueva</div>
+            <div class="tc-treat">PDRN · Revitalización</div>
+          </div>
+        </div>
+        <div class="tco-slide">
+          <div class="tc-card">
+            <div class="tc-stars">★★★★★</div>
+            <div class="tc-quote">"Nunca había ido a una clínica estética y me sentí completamente bienvenida. Sin lugar a dudas vuelvo."</div>
+            <div class="tc-author">Patricia Elizondo</div>
+            <div class="tc-treat">Microneedling</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tco-dots" id="tco-dots">
+      <button class="tco-dot on" aria-label="Testimonio 1"></button>
+      <button class="tco-dot" aria-label="Testimonio 2"></button>
+      <button class="tco-dot" aria-label="Testimonio 3"></button>
+      <button class="tco-dot" aria-label="Testimonio 4"></button>
+      <button class="tco-dot" aria-label="Testimonio 5"></button>
+    </div>
+    <div class="tco-ctrls">
+      <button class="tco-arr" id="tco-prev" aria-label="Anterior">&#8249;</button>
+      <button class="tco-arr" id="tco-next" aria-label="Siguiente">&#8250;</button>
+    </div>
+    <p class="tco-note">* Contenido de muestra — los testimonios finales serán definidos por la cliente.</p>
+  </section>
+
   <!-- QUOTE DARK -->
   <section class="sec sec-dk" style="padding:88px 56px;text-align:center;">
     <div class="ew ew-lt" style="margin-bottom:18px;">D'ALMA CLINIC</div>
@@ -365,23 +464,30 @@
     </div>
   </section>
 
-  <!-- CLINIC STRIP -->
-  <div class="clinic-strip">
+  <!-- CTA + MAPA -->
+  <div class="clinic-strip" style="height:460px;">
     <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=85" alt="Interior D'ALMA Clinic" loading="lazy">
-    <div class="clinic-strip-txt">
-      <div class="ew" style="color:rgba(216,203,190,.5);margin-bottom:14px;">Cabo San Lucas, BCS</div>
-      <div style="font-family:var(--fd);font-size:2rem;font-weight:300;color:var(--bone-200);line-height:1.35;margin-bottom:20px;">"Tu piel también cuenta<br>tu historia."</div>
-      <button class="bp bp-lt" style="font-size:.72rem;">Agendar valoración</button>
+    <div class="cs-inner">
+      <!-- IZQUIERDA: título + CTA -->
+      <div>
+        <div style="font-family:var(--fd);font-size:clamp(1.6rem,2.4vw,2.25rem);font-weight:300;color:var(--bone-200);line-height:1.3;margin-bottom:26px;">"Tu piel también cuenta<br>tu historia."</div>
+        <button class="bp bp-lt" style="font-size:.72rem;">Agendar valoración</button>
+      </div>
+      <!-- DERECHA: eyebrow + placeholder mapa -->
+      <div>
+        <div class="cs-map-card">
+          <div class="ew" style="color:rgba(216,203,190,.55);margin-bottom:14px;">Cabo San Lucas, BCS</div>
+          <div class="cs-map-ph">
+            <div style="text-align:center;color:rgba(216,203,190,.65);letter-spacing:.06em;text-transform:uppercase;line-height:1.75;">
+              <div style="font-size:1.5rem;margin-bottom:8px;">📍</div>
+              <div style="font-size:.75rem;">Google Maps</div>
+              <div style="font-size:.67rem;opacity:.8;margin-top:4px;">Plaza Patio · Cabo San Lucas, BCS</div>
+            </div>
+          </div>
+          <div style="font-size:.7rem;color:rgba(216,203,190,.45);line-height:1.6;">Lunes a domingo · 10:00 am – 8:00 pm</div>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <!-- INFO STRIP -->
-  <div class="info-strip">
-    <div class="info-item"><div class="info-lbl">Horario</div><div class="info-val">Lunes a domingo</div><div class="info-sub">10:00 am – 8:00 pm</div></div>
-    <div class="info-div"></div>
-    <div class="info-item"><div class="info-lbl">Ubicación</div><div class="info-val">Plaza Patio</div><div class="info-sub">Cabo San Lucas, BCS</div></div>
-    <div class="info-div"></div>
-    <div class="info-item"><div class="info-lbl">Agendar</div><div style="margin-top:8px;"><a class="bwa" href="#" style="font-size:.7rem;"><svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enviar WhatsApp</a></div></div>
   </div>
 
   <!-- FOOTER -->
@@ -625,6 +731,69 @@
       document.body.style.overflow = '';
     }
   });
+
+  // HOME TESTIMONIALS CAROUSEL
+  (function(){
+    var TOTAL = 5;
+    var current = 0;
+    var timer = null;
+    var userPaused = false;
+    var DELAY = 4000;
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var wrap    = document.getElementById('tco-wrap');
+    var track   = document.getElementById('tco-track');
+    var dots    = document.querySelectorAll('.tco-dot');
+    var prevBtn = document.getElementById('tco-prev');
+    var nextBtn = document.getElementById('tco-next');
+
+    if (!wrap || !track) return;
+
+    function getPerView() { return window.innerWidth <= 768 ? 1 : 3; }
+    function getMax()     { return TOTAL - getPerView(); }
+
+    function goTo(idx) {
+      var max = getMax();
+      current = idx < 0 ? max : idx > max ? 0 : idx;
+      var pv  = getPerView();
+      var gap = pv > 1 ? 24 : 0;
+      var cardW = (wrap.offsetWidth - gap * (pv - 1)) / pv;
+      track.style.transform = 'translateX(-' + (current * (cardW + gap)) + 'px)';
+      dots.forEach(function(d, i){ d.classList.toggle('on', i === current); });
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    function startTimer() {
+      if (prefersReduced) return;
+      clearInterval(timer);
+      timer = setInterval(function(){ if (!userPaused) next(); }, DELAY);
+    }
+
+    function manualAction(fn) {
+      userPaused = true;
+      fn();
+      clearInterval(timer);
+      setTimeout(function(){ userPaused = false; startTimer(); }, 6000);
+    }
+
+    wrap.addEventListener('mouseenter', function(){ userPaused = true; });
+    wrap.addEventListener('mouseleave', function(){ userPaused = false; });
+    prevBtn.addEventListener('click', function(){ manualAction(prev); });
+    nextBtn.addEventListener('click', function(){ manualAction(next); });
+    dots.forEach(function(d, i){
+      d.addEventListener('click', function(){ manualAction(function(){ goTo(i); }); });
+    });
+
+    window.addEventListener('resize', function(){
+      clearInterval(timer);
+      setTimeout(function(){ goTo(0); startTimer(); }, 300);
+    });
+
+    goTo(0);
+    startTimer();
+  })();
 </script>
 </body>
 </html>

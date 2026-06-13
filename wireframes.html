@@ -189,6 +189,19 @@
     .waf{position:fixed;bottom:20px;right:20px;display:flex;align-items:center;gap:7px;background:#25D366;color:var(--white);padding:12px 18px;border-radius:var(--rfull);box-shadow:0 4px 20px rgba(37,211,102,.45);font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;z-index:50;}
     .waf-m{position:fixed;bottom:14px;right:14px;width:50px;height:50px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.5);z-index:50;display:none;}
 
+    /* CAROUSEL */
+    .crs-wrap{overflow:hidden;position:relative;}
+    .crs-track{display:flex;gap:22px;transition:transform 500ms ease;will-change:transform;}
+    .crs-slide{flex-shrink:0;width:calc((100% - 44px)/3);}
+    .crs-dots{display:flex;justify-content:center;gap:8px;margin-top:20px;}
+    .crs-dot{width:6px;height:6px;border-radius:var(--rfull);background:var(--bone-400);border:none;cursor:pointer;padding:0;transition:background 250ms,width 250ms;}
+    .crs-dot.active{background:var(--taupe-500);width:20px;}
+    .crs-controls{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px;}
+    .crs-arr{width:34px;height:34px;border-radius:var(--rfull);border:1.5px solid var(--bone-400);background:transparent;color:var(--taupe-500);font-size:1.1rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 150ms ease;}
+    .crs-arr:hover{background:var(--bone-200);border-color:var(--taupe-500);color:var(--taupe-700);}
+    .tcard-stars{color:var(--taupe-500);font-size:.72rem;letter-spacing:3px;margin-bottom:9px;}
+    @media(prefers-reduced-motion:reduce){.crs-track{transition:none;}}
+
     /* MOBILE OVERRIDES */
     .vpf.mobile .snav{display:none;}
     .vpf.mobile .snav-m{display:flex;}
@@ -202,6 +215,7 @@
     .vpf.mobile .waf-m{display:flex;}
     .vpf.mobile .sfoot-grid{grid-template-columns:1fr;}
     .vpf.mobile .hero-img{display:none;}
+    .vpf.mobile .crs-slide{width:100%;}
   </style>
 </head>
 <body>
@@ -274,8 +288,9 @@
         </div>
       </div>
       <div class="iph hero-img" style="position:absolute;right:0;top:0;bottom:0;width:42%;border-radius:0;">
-        <span style="font-size:1.75rem;">🌿</span>
-        <span>Foto hero — interior clínica</span>
+        <span style="font-size:1.5rem;color:var(--taupe-500);">✦</span>
+        <span>Imagen aspiracional</span>
+        <span style="font-size:.6rem;opacity:.75;text-align:center;">bienestar · confianza · amor propio</span>
       </div>
     </div>
 
@@ -293,6 +308,70 @@
         <div class="sc"><span class="bdg">Regeneración</span><div class="sc-t">PDRN & Exosomas</div><div class="sc-b">Revitalización celular para mejorar textura, luminosidad e hidratación profunda.</div><a class="sc-l" href="#">Ver más →</a></div>
       </div>
       <div style="text-align:center;margin-top:32px;"><button class="bs">Ver todos los servicios</button></div>
+    </div>
+
+    <!-- TESTIMONIOS CAROUSEL -->
+    <div class="sec sec-alt">
+      <div style="text-align:center;margin-bottom:36px;">
+        <div class="ew">Lo que dicen nuestros pacientes</div>
+        <h2 class="st">Testimonios</h2>
+      </div>
+      <div class="crs-wrap" id="crs-wrap">
+        <div class="crs-track" id="crs-track">
+          <div class="crs-slide">
+            <div class="tcard">
+              <div class="tcard-stars">★★★★★</div>
+              <div class="tcard-q">"El trato fue increíble desde el primer momento. Me explicaron todo con paciencia y sin ninguna presión."</div>
+              <div class="tcard-a">Sofía Arriaga</div>
+              <div class="tcard-tx">Hydrafacial</div>
+            </div>
+          </div>
+          <div class="crs-slide">
+            <div class="tcard">
+              <div class="tcard-stars">★★★★★</div>
+              <div class="tcard-q">"No esperaba sentirme tan cómodo. El ambiente es muy cálido y los resultados se ven completamente naturales."</div>
+              <div class="tcard-a">Carlos Medina</div>
+              <div class="tcard-tx">Botox</div>
+            </div>
+          </div>
+          <div class="crs-slide">
+            <div class="tcard">
+              <div class="tcard-stars">★★★★★</div>
+              <div class="tcard-q">"Llegué con muchas dudas y salí con mucha claridad. La valoración previa lo hizo todo más fácil."</div>
+              <div class="tcard-a">Gabriela Rojas</div>
+              <div class="tcard-tx">Fillers · Armonización facial</div>
+            </div>
+          </div>
+          <div class="crs-slide">
+            <div class="tcard">
+              <div class="tcard-stars">★★★★★</div>
+              <div class="tcard-q">"La atención fue muy profesional y me dieron seguimiento después del tratamiento. Muy buena experiencia."</div>
+              <div class="tcard-a">Laura Villanueva</div>
+              <div class="tcard-tx">PDRN · Revitalización</div>
+            </div>
+          </div>
+          <div class="crs-slide">
+            <div class="tcard">
+              <div class="tcard-stars">★★★★★</div>
+              <div class="tcard-q">"Nunca había ido a una clínica estética y me sentí completamente bienvenida. Sin lugar a dudas vuelvo."</div>
+              <div class="tcard-a">Patricia Elizondo</div>
+              <div class="tcard-tx">Microneedling</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="crs-dots" id="crs-dots">
+        <button class="crs-dot active" aria-label="Ir al testimonio 1"></button>
+        <button class="crs-dot" aria-label="Ir al testimonio 2"></button>
+        <button class="crs-dot" aria-label="Ir al testimonio 3"></button>
+        <button class="crs-dot" aria-label="Ir al testimonio 4"></button>
+        <button class="crs-dot" aria-label="Ir al testimonio 5"></button>
+      </div>
+      <div class="crs-controls">
+        <button class="crs-arr" id="crs-prev" aria-label="Anterior">&#8249;</button>
+        <button class="crs-arr" id="crs-next" aria-label="Siguiente">&#8250;</button>
+      </div>
+      <p style="text-align:center;font-size:.62rem;color:var(--taupe-400);margin-top:18px;">* Contenido de muestra — los testimonios finales serán definidos por la cliente.</p>
     </div>
 
     <!-- CITA OSCURA -->
@@ -319,12 +398,32 @@
       </div>
     </div>
 
-    <!-- INFO STRIP -->
-    <div class="sec-sm" style="background:var(--bone-100);">
-      <div style="display:flex;justify-content:center;gap:64px;flex-wrap:wrap;text-align:center;">
-        <div><div class="ew" style="margin-bottom:6px;">Horario</div><div style="font-family:var(--fd);font-size:1.2rem;font-weight:300;color:var(--taupe-700);">Lunes a domingo</div><div style="font-size:.83rem;color:var(--taupe-500);margin-top:3px;">10:00 am – 8:00 pm</div></div>
-        <div><div class="ew" style="margin-bottom:6px;">Ubicación</div><div style="font-family:var(--fd);font-size:1.2rem;font-weight:300;color:var(--taupe-700);">Plaza Patio</div><div style="font-size:.83rem;color:var(--taupe-500);margin-top:3px;">Cabo San Lucas, BCS</div></div>
-        <div><div class="ew" style="margin-bottom:6px;">Agendar</div><a class="bwa" href="#"><svg class="wai" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Enviar WhatsApp</a></div>
+    <!-- CTA + MAPA -->
+    <div class="sec">
+      <div class="g-half" style="align-items:center;">
+        <!-- IZQUIERDA: título + CTA -->
+        <div>
+          <h2 style="font-family:var(--fd);font-size:clamp(1.5rem,2.4vw,2.125rem);font-weight:300;color:var(--taupe-700);line-height:1.25;margin-bottom:26px;">Tu piel también<br>cuenta tu historia.</h2>
+          <div class="ctas" style="margin-top:0;">
+            <button class="bp">Agenda tu cita</button>
+            <a class="bwa" href="#"><svg class="wai" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+          </div>
+        </div>
+        <!-- DERECHA: eyebrow + mapa + horario -->
+        <div>
+          <div class="ew" style="margin-bottom:10px;">Cabo San Lucas, BCS</div>
+          <div class="mapp" style="height:240px;">
+            <div style="font-size:1.4rem;">📍</div>
+            <div style="text-align:center;line-height:1.7;">
+              Google Maps<br>
+              <span style="font-size:.72rem;color:var(--taupe-500);">Plaza Patio · Cabo San Lucas, BCS</span>
+            </div>
+          </div>
+          <div style="margin-top:14px;font-size:.78rem;color:var(--taupe-500);display:flex;gap:6px;align-items:baseline;">
+            <span style="font-size:.62rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe-400);">Horario</span>
+            <span>Lunes a domingo · 10:00 am – 8:00 pm</span>
+          </div>
+        </div>
       </div>
     </div>
   </div><!-- /home -->
@@ -624,6 +723,8 @@
     document.getElementById('vpf').classList.toggle('mobile', mode === 'mobile');
     document.querySelectorAll('.vb').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
+    // Reset carousel after layout change (wait for CSS transition)
+    setTimeout(function(){ if (window.crsGoTo) window.crsGoTo(0); }, 380);
   }
 
   function toggleAcc(trigger) {
@@ -641,6 +742,70 @@
       showPg(pg, btn);
     });
   });
+
+  // CAROUSEL
+  (function() {
+    var TOTAL = 5;
+    var current = 0;
+    var timer = null;
+    var userPaused = false;
+    var DELAY = 4000;
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var wrap  = document.getElementById('crs-wrap');
+    var track = document.getElementById('crs-track');
+    var dots  = document.querySelectorAll('.crs-dot');
+    var prevBtn = document.getElementById('crs-prev');
+    var nextBtn = document.getElementById('crs-next');
+
+    function getPerView() {
+      return document.getElementById('vpf').classList.contains('mobile') ? 1 : 3;
+    }
+
+    function getMax() {
+      return TOTAL - getPerView();
+    }
+
+    function goTo(idx) {
+      var max = getMax();
+      current = idx < 0 ? max : idx > max ? 0 : idx;
+      var pv  = getPerView();
+      var gap = 22;
+      var containerW = wrap.offsetWidth;
+      var cardW = (containerW - gap * (pv - 1)) / pv;
+      track.style.transform = 'translateX(-' + (current * (cardW + gap)) + 'px)';
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+    }
+
+    window.crsGoTo = goTo;
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    function startTimer() {
+      if (prefersReduced) return;
+      clearInterval(timer);
+      timer = setInterval(function() { if (!userPaused) next(); }, DELAY);
+    }
+
+    function manualInteract(fn) {
+      userPaused = true;
+      fn();
+      clearInterval(timer);
+      setTimeout(function() { userPaused = false; startTimer(); }, 6000);
+    }
+
+    wrap.addEventListener('mouseenter', function() { userPaused = true; });
+    wrap.addEventListener('mouseleave', function() { userPaused = false; });
+    prevBtn.addEventListener('click', function() { manualInteract(prev); });
+    nextBtn.addEventListener('click', function() { manualInteract(next); });
+    dots.forEach(function(d, i) {
+      d.addEventListener('click', function() { manualInteract(function() { goTo(i); }); });
+    });
+
+    goTo(0);
+    startTimer();
+  })();
 </script>
 </body>
 </html>
