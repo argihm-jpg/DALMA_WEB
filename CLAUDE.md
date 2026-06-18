@@ -131,6 +131,41 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-06-17 (sesión 6)
+**Actividades:**
+- Card de Botox (Home): se volvió a usar `inyeccion-facial-desde-arriba-vertical.jpg` (nueva versión 640×1138). `object-fit:cover` heredado del CSS global; `object-position:center 30%` inline para centrar el encuadre en la zona relevante (rostro + inyección). La card mantiene la misma altura que las demás.
+
+### 2026-06-17 (sesión 5)
+**Actividades:**
+- Card de Botox (Home): ajuste localizado de encuadre con `object-fit:contain` + `background:var(--bone-100)` inline. La imagen se muestra completa dentro del contenedor `1/1` sin zoom excesivo. La card mantiene la misma altura que las demás.
+
+### 2026-06-17 (sesión 4)
+**Actividades:**
+- Card de Botox (Home): reemplazada imagen `inyeccion-facial-desde-arriba-vertical.jpg` por `preparando-rostro-para-inyeccion-horizontal.jpg`. Eliminado el `aspect-ratio:3/4` inline que quedó de la sesión anterior. La card recupera uniformidad visual con las demás.
+
+### 2026-06-17 (sesión 3)
+**Actividades:**
+- Ajuste localizado en la card de Botox (Home): añadido `aspect-ratio:3/4` inline en el `<img>`. Sobrescribe el `1/1` global solo para esta imagen, reduciendo el zoom sin afectar las demás cards.
+
+### 2026-06-17 (sesión 2)
+**Actividades:**
+- Ajuste de encuadre en cards de "Tratamientos destacados" (Home): cambio de `aspect-ratio:4/3` a `1/1` en `.svc-card img`. Corrige el zoom excesivo de imágenes verticales (Botox, PDRN & Exosomas). Solo afecta las 4 cards del Home.
+
+### 2026-06-17
+**Actividades:**
+- Reemplazo de imágenes en `mockup.html` — solo las indicadas, sin modificar estructura, copys ni estilos
+- Home: hero → `imagen-para-hero-home-horizontal.png` (object-position: right center); card Botox → `inyeccion-facial-desde-arriba-vertical.jpg`; card PDRN & Exosomas → `rostro-microneedling-frente-vertical.jpg`
+- Servicios: Botox → `aplicando-tratamiento-senora-vertical.jpg`; Fillers → `preparacion-rostro-linea-vertical.jpg`; Hydrafacial → `aplicacion-crema-rostro-vertical.jpg`; PDRN & Exosomas → `tratamiento-facial-persona-recostada-vertical.jpg`
+- Ajustes de `object-position` por imagen para optimizar el encuadre sin deformar
+
+### 2026-06-16
+**Actividades:**
+- Modificación de `mockup.html` — únicamente secciones Hero (Home) y Botox (Servicios)
+- Hero H1: reemplazado "Cuidarte también es una forma de amor propio." por "Cuidarte no es vanidad, es bienestar."
+- Hero subtítulo: reemplazado "Un espacio cálido y moderno para hombres y mujeres que buscan tratamientos personalizados, tecnología actual y resultados naturales." por "Nos especializamos en medicina estética, regenerativa y bienestar integral para rostro y cuerpo."
+- Botox (Servicios): eliminado el bloque "Marcas disponibles / Linurase · Otesaly · Dysport"; se conserva "Requiere valoración médica previa."
+- No se modificaron: `wireframes.html`, `design-preview.html`, imágenes, estilos, estructura general
+
 ### 2026-06-12 (sesión 2)
 **Actividades:**
 - Modificación de `mockup.html` — únicamente la página Home (`#pg-home`)
