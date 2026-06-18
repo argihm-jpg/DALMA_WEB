@@ -131,6 +131,14 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-06-17 — Resumen de sesión
+**Actividades:**
+- Ajuste de imágenes en Home y Servicios para alinearlas mejor con los comentarios de Anita (encuadre, recorte, `object-position`)
+- Reemplazo y ajuste visual de imágenes en las cards de "Tratamientos destacados" del Home (Botox, PDRN & Exosomas)
+- Incorporación de imágenes de referencia desde `imagenes-candidatas/` al repositorio
+- Desarrollo visual inicial de la sección/página **Contacto** en `mockup.html`, basado en la estructura existente de `wireframes.html`: hero, formulario de contacto, info + mapa placeholder, FAQ, footer
+- La sección Contacto queda como primera versión visual — pendiente de revisión y ajustes posteriores
+
 ### 2026-06-17 (sesión 6)
 **Actividades:**
 - Card de Botox (Home): se volvió a usar `inyeccion-facial-desde-arriba-vertical.jpg` (nueva versión 640×1138). `object-fit:cover` heredado del CSS global; `object-position:center 30%` inline para centrar el encuadre en la zona relevante (rostro + inyección). La card mantiene la misma altura que las demás.
