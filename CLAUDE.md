@@ -149,6 +149,8 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 - Revisión del repositorio GitHub (`argihm-jpg/DALMA_WEB`) — repo local en sync con main, sin commits nuevos desde 2026-06-18
 - Identificados 6 archivos locales no trackeados (no están en GitHub ni estaban en CLAUDE.md): `D_Alma_Clinica.md`, `Propuesta_Web_DAlma.md`, `calendario-implementacion.html`, `llms.txt`, `robots.txt`, `sitemap.xml`
 - Actualización de CLAUDE.md: dominio `dalmaclinic.com.mx` agregado a Datos del Negocio; nueva sección Propuesta Comercial; tabla de archivos ampliada con los 6 archivos nuevos
+- Revisión ponytail de `mockup.html` y aplicación de limpiezas: CSS muerto eliminado (`.clinic-strip-txt`, `.info-strip` y 6 reglas relacionadas + sus overrides responsive); dos bloques `@media(max-width:768px)` y dos `480px` fusionados en uno cada uno; SVG de WhatsApp definido una vez como `<symbol id="ico-wa">` y referenciado con `<use>` en los 7 lugares donde aparecía (~3 KB menos); `showPg()` ahora resetea `body.style.overflow` directamente, eliminando llamadas redundantes a `closeMenu` en los onclick de navegación
+- Commit `5b00d30` — "Limpieza ponytail: reduce complejidad en mockup.html y actualiza CLAUDE.md"
 
 ### 2026-06-17 — Resumen de sesión
 **Actividades:**
