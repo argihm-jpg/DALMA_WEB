@@ -6,6 +6,7 @@ El proyecto lo elabora **Bruno Sandoval**. La directora del negocio es **Ana Mar
 
 ## Datos del Negocio
 - **Nombre comercial:** D'ALMA CLINIC
+- **Dominio:** `dalmaclinic.com.mx`
 - **Dirección:** Plaza Patio, De Las Brisas 2404, Brisas del Pacífico, Cabo San Lucas, Baja California Sur
 - **Horario:** Lunes a domingo, 10:00 am – 8:00 pm
 - **WhatsApp:** Pendiente de definir
@@ -110,15 +111,27 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 - [descripción de cada cambio o decisión importante]
 ```
 
-## Estado Actual de Archivos (2026-06-12)
+## Propuesta Comercial
+- **Documento:** `Propuesta_Web_DAlma.md`
+- **Fecha de emisión:** Abril 27, 2026 | **Vigencia:** 30 días | **Entrega:** 18 días hábiles | **Revisiones:** 3 rondas
+- **Inversión:** $19,800 MXN + IVA (50% inicio · 50% entrega)
+- **Incluye:** Hasta 5 secciones, dominio 1 año, SSL, WhatsApp, formulario de contacto, Google Business
+
+## Estado Actual de Archivos (actualizado 2026-06-20)
 
 | Archivo | Estado | Notas |
 |---|---|---|
 | `design-preview.html` | ✅ Estable — no modificar | Sistema de diseño v1.0. Fuente de verdad visual. |
 | `design-tokens.json` | ✅ Estable — no modificar | Tokens de color, tipografía, espaciado. |
 | `wireframes.html` | ✅ Aprobado | Home actualizada: testimonios + CTA+mapa. 5 páginas. |
-| `mockup.html` | ✅ Aprobado | Home actualizada: testimonios + CTA+mapa sobre imagen. 2 páginas (Home, Servicios). |
+| `mockup.html` | ✅ En desarrollo | Home + Servicios aprobados; Contacto en primera versión. |
 | `DESIGN.md` | ✅ Estable | Razonamiento de decisiones de diseño. |
+| `D_Alma_Clinica.md` | 📄 Referencia | Documento completo de la clínica (480 líneas). Sirve como `llms.txt` estructurado para IA. |
+| `Propuesta_Web_DAlma.md` | 📄 Referencia | Propuesta comercial de Bruno para el cliente. |
+| `calendario-implementacion.html` | 📄 Referencia | Calendario visual de 6 fases: Arranque → Diseño → Desarrollo → Integraciones+SEO → Revisiones → Entrega/Publicación. |
+| `llms.txt` | 🌐 SEO/GEO | Archivo para rastreadores de IA (GEO). Usa URLs `dalmaclinic.com.mx`. No commitear hasta tener dominio activo. |
+| `robots.txt` | 🌐 SEO | Configurado para `dalmaclinic.com.mx`. Permite todos los bots incl. IA. No commitear hasta tener dominio activo. |
+| `sitemap.xml` | 🌐 SEO | 5 URLs de `dalmaclinic.com.mx`. No commitear hasta tener dominio activo. |
 
 ### Decisiones de diseño fijadas (no revertir sin acuerdo con Bruno/cliente)
 - **Hero**: imagen aspiracional de bienestar/amor propio — no interior de clínica.
@@ -130,6 +143,12 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 ---
 
 ## Historial de Sesiones
+
+### 2026-06-20
+**Actividades:**
+- Revisión del repositorio GitHub (`argihm-jpg/DALMA_WEB`) — repo local en sync con main, sin commits nuevos desde 2026-06-18
+- Identificados 6 archivos locales no trackeados (no están en GitHub ni estaban en CLAUDE.md): `D_Alma_Clinica.md`, `Propuesta_Web_DAlma.md`, `calendario-implementacion.html`, `llms.txt`, `robots.txt`, `sitemap.xml`
+- Actualización de CLAUDE.md: dominio `dalmaclinic.com.mx` agregado a Datos del Negocio; nueva sección Propuesta Comercial; tabla de archivos ampliada con los 6 archivos nuevos
 
 ### 2026-06-17 — Resumen de sesión
 **Actividades:**
