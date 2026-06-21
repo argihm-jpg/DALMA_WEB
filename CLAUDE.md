@@ -132,6 +132,7 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 | `llms.txt` | 🌐 SEO/GEO | Archivo para rastreadores de IA (GEO). Usa URLs `dalmaclinic.com.mx`. No commitear hasta tener dominio activo. |
 | `robots.txt` | 🌐 SEO | Configurado para `dalmaclinic.com.mx`. Permite todos los bots incl. IA. No commitear hasta tener dominio activo. |
 | `sitemap.xml` | 🌐 SEO | 5 URLs de `dalmaclinic.com.mx`. No commitear hasta tener dominio activo. |
+| `DALMA_PREVIEW/` | 🚫 Local only — no commitear | Copia estática del mockup para despliegue manual en Cloudflare. Regenerar si cambia `mockup.html`. |
 
 ### Decisiones de diseño fijadas (no revertir sin acuerdo con Bruno/cliente)
 - **Hero**: imagen aspiracional de bienestar/amor propio — no interior de clínica.
@@ -147,6 +148,8 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 ### 2026-06-21
 **Actividades:**
 - Desarrollo visual de la página **Nosotros** en `mockup.html` usando la estructura y textos de `wireframes.html`
+- Mockup publicado temporalmente en Cloudflare para revisión de Anita: `https://dalma-mockup.clinic-dalma.workers.dev`
+- `DALMA_PREVIEW/` es una copia local estática (no en git) usada para el despliegue manual. Si se modifica `mockup.html`, regenerar la carpeta y volver a desplegar.
 - Imágenes usadas: `directora.jpg` (Ana María / bio + tarjeta equipo), `doctora.jpg` (2 tarjetas Dra. —), `recepcion.jpg` (María José)
 - Se añadió botón "Nosotros" al pbar y se actualizaron los índices de pb[1]→pb[2] (Servicios) en Home y Contacto
 - Desarrollo visual de la página **Testimonios** en `mockup.html` con placeholders elegantes para antes/después
