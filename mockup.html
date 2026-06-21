@@ -94,14 +94,6 @@
     .clinic-strip{position:relative;height:420px;overflow:hidden;}
     .clinic-strip img{width:100%;height:100%;object-fit:cover;object-position:center 35%;}
     .clinic-strip::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(53,47,45,.6) 0%,rgba(53,47,45,.2) 55%,transparent 100%);}
-    .clinic-strip-txt{position:absolute;bottom:52px;left:56px;color:var(--bone-100);max-width:500px;z-index:1;}
-
-    .info-strip{background:var(--bone-100);padding:40px 56px;display:flex;justify-content:center;gap:72px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--bone-300);}
-    .info-item{text-align:center;}
-    .info-lbl{font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--taupe-400);margin-bottom:6px;}
-    .info-val{font-family:var(--fd);font-size:1.2rem;font-weight:300;color:var(--taupe-700);}
-    .info-sub{font-size:.78rem;color:var(--taupe-500);margin-top:3px;}
-    .info-div{width:1px;height:48px;background:var(--bone-400);}
 
     /* ═══ TESTIMONIOS ═══ */
     .tc-card{background:var(--bone-100);border-radius:10px;padding:24px 24px 24px 28px;border-left:2px solid var(--taupe-500);box-shadow:0 2px 8px rgba(95,86,81,.06);display:flex;flex-direction:column;}
@@ -243,11 +235,6 @@
 
       /* Clinic strip */
       .clinic-strip{height:280px;}
-      .clinic-strip-txt{left:20px;right:20px;bottom:24px;}
-
-      /* Info strip */
-      .info-strip{padding:40px 20px;gap:28px;flex-direction:column;}
-      .info-div{display:none;}
 
       /* Footer */
       .footer{padding:44px 20px 28px;}
@@ -264,6 +251,13 @@
       /* WA float - icon only circle */
       .wafloat{padding:13px;border-radius:50%;}
       .wafloat .wa-txt{display:none;}
+
+      /* Testimonios + CTA-mapa */
+      .tco-slide{width:100%;}
+      .clinic-strip{height:auto!important;min-height:500px;}
+      .cs-inner{grid-template-columns:1fr;padding:44px 20px;gap:24px;align-content:center;}
+      .cs-map-card{padding:18px;}
+      .cs-map-ph{height:150px;}
     }
 
     @media(max-width:480px){
@@ -274,17 +268,6 @@
       .hero-img{height:72vw;}
       .clinic-strip{height:220px;}
       .nav-mmenu li a{font-size:1.75rem;}
-    }
-
-    /* ─── TESTIMONIOS + CTA-MAPA RESPONSIVE ──────────── */
-    @media(max-width:768px){
-      .tco-slide{width:100%;}
-      .clinic-strip{height:auto!important;min-height:500px;}
-      .cs-inner{grid-template-columns:1fr;padding:44px 20px;gap:24px;align-content:center;}
-      .cs-map-card{padding:18px;}
-      .cs-map-ph{height:150px;}
-    }
-    @media(max-width:480px){
       .cs-inner{padding:36px 20px;}
     }
 
@@ -372,7 +355,7 @@
         <button class="bp">Agenda tu cita</button>
         <button class="bs">Conoce los servicios</button>
         <a class="bwa" href="#">
-          <svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>
           WhatsApp
         </a>
       </div>
@@ -527,7 +510,7 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" style="font-size:.7rem;"><svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Agendar por WhatsApp</a></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>Agendar por WhatsApp</a></div></div>
       <div><div class="fcol-t">Páginas</div><div class="flinks"><a href="#">Inicio</a><a href="#">Nosotros</a><a href="#">Servicios</a><a href="#">Testimonios</a><a href="#">Contacto</a></div></div>
       <div><div class="fcol-t">Servicios</div><div class="flinks"><a href="#">Botox</a><a href="#">Fillers</a><a href="#">Hydrafacial</a><a href="#">PDRN</a><a href="#">Depilación láser</a></div></div>
       <div><div class="fcol-t">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
@@ -828,14 +811,14 @@
     <p class="bt bt-lt" style="max-width:440px;margin:0 auto 32px;">Te explicamos qué tratamiento es más adecuado para ti según tu piel, tus objetivos y tu presupuesto. Sin compromiso.</p>
     <div class="ctas" style="justify-content:center;margin-top:0;">
       <button class="bp bp-lt">Agenda tu cita</button>
-      <a class="bwa" href="#"><svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Preguntar por WhatsApp</a>
+      <a class="bwa" href="#"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>Preguntar por WhatsApp</a>
     </div>
   </div>
 
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" style="font-size:.7rem;"><svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Agendar por WhatsApp</a></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>Agendar por WhatsApp</a></div></div>
       <div><div class="fcol-t">Páginas</div><div class="flinks"><a href="#">Inicio</a><a href="#">Nosotros</a><a href="#">Servicios</a><a href="#">Testimonios</a><a href="#">Contacto</a></div></div>
       <div><div class="fcol-t">Servicios</div><div class="flinks"><a href="#">Botox</a><a href="#">Fillers</a><a href="#">Hydrafacial</a><a href="#">PDRN</a><a href="#">Depilación láser</a></div></div>
       <div><div class="fcol-t">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
@@ -1083,7 +1066,7 @@
           </div>
         </div>
         <a class="bwa" href="#" style="margin-bottom:26px;display:inline-flex;">
-          <svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>
           Chatear por WhatsApp
         </a>
         <div class="ct-map">
@@ -1135,7 +1118,7 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" style="font-size:.7rem;"><svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Agendar por WhatsApp</a></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>Agendar por WhatsApp</a></div></div>
       <div><div class="fcol-t">Páginas</div><div class="flinks"><a href="#">Inicio</a><a href="#">Nosotros</a><a href="#">Servicios</a><a href="#">Testimonios</a><a href="#">Contacto</a></div></div>
       <div><div class="fcol-t">Servicios</div><div class="flinks"><a href="#">Botox</a><a href="#">Fillers</a><a href="#">Hydrafacial</a><a href="#">PDRN</a><a href="#">Depilación láser</a></div></div>
       <div><div class="fcol-t">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
@@ -1147,17 +1130,18 @@
 
 </div><!-- /frame -->
 
+<svg style="display:none"><symbol id="ico-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol></svg>
+
 <a class="wafloat" href="#">
-  <svg class="wico" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>
   <span class="wa-txt">WhatsApp</span>
 </a>
 
 <script>
   function showPg(name, btn) {
-    // Close any open mobile menus first
     document.querySelectorAll('.nav-mmenu').forEach(m => m.classList.remove('open'));
     document.querySelectorAll('.nav-ham').forEach(h => h.classList.remove('open'));
-
+    document.body.style.overflow = '';
     document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
     document.getElementById('pg-' + name).classList.add('on');
     document.querySelectorAll('.pb').forEach(b => b.classList.remove('on'));
