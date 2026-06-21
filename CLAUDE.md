@@ -131,6 +131,12 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-06-21
+**Actividades:**
+- Desarrollo visual de la página **Nosotros** en `mockup.html` usando la estructura y textos de `wireframes.html`
+- Imágenes usadas: `directora.jpg` (Ana María / bio + tarjeta equipo), `doctora.jpg` (2 tarjetas Dra. —), `recepcion.jpg` (María José)
+- Se añadió botón "Nosotros" al pbar y se actualizaron los índices de pb[1]→pb[2] (Servicios) en Home y Contacto
+
 ### 2026-06-17 — Resumen de sesión
 **Actividades:**
 - Ajuste de imágenes en Home y Servicios para alinearlas mejor con los comentarios de Anita (encuadre, recorte, `object-position`)
