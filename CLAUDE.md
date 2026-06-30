@@ -145,6 +145,35 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-06-29 (sesión 3)
+**Actividades:**
+- Habilitada navegación interna completa en `mockup.html` para mejorar la revisión de Anita. No se modificaron textos, diseño ni imágenes.
+- Añadida función `goToService(id)`: navega a Servicios + hace scroll suave al bloque del tratamiento.
+- Añadidos IDs en Servicios: `svc-botox`, `svc-fillers`, `svc-hydrafacial`, `svc-pdrn-exosomas`, `svc-depilacion`.
+- CTAs hacia **Servicios**: "Conoce los servicios", "Ver servicios", "Conoce nuestros servicios" → `showPg('servicios',...)`.
+- CTA hacia **Nosotros**: "Conoce nuestra historia" → `showPg('nosotros',...)`.
+- CTAs hacia **Contacto**: todos los botones "Agendar cita" (nav-cta + mm-cta × 5 páginas), "Agenda tu cita", "Agendar valoración", "Agendar cita" (Hydrafacial), todos los links WA ("Enviar WhatsApp", "Preguntar por WhatsApp", "Agendar por WhatsApp", botón flotante).
+- Cards destacadas de Home: "Ver tratamiento →" usa `goToService()` con el ID correspondiente.
+- Footers (5 en total, replace_all): columna Páginas y columna Servicios con navegación interna funcional.
+- Únicos `href="#"` sin destino: "Aviso de privacidad" (5 footers) y botón WhatsApp dentro de la página Contacto (número pendiente de Anita).
+
+### 2026-06-29 (sesión 2)
+**Actividades:**
+- Limpieza de CTAs sin destino real en la página **Servicios** de `mockup.html`: eliminados todos los botones "Saber más →" (ftx-cards) y enlaces "Ver tratamiento →" (std-cards) dentro de Servicios. No existen páginas individuales por tratamiento, por lo que estos CTAs generaban expectativa falsa de navegación.
+- Reemplazado "Agenda sin costo" por "Agendar valoración" en el bloque de valoración de Servicios — no hay confirmación de Anita de que la valoración sea gratuita.
+- Eliminado "Sin compromiso." del CTA section al fondo de Servicios — condición comercial no validada por la cliente.
+- Los "Ver tratamiento →" del **Home** (cards Tratamientos Destacados) se conservaron intactos.
+- No se tocaron: Home, Nosotros, Testimonios, Contacto, imágenes, `wireframes.html`, `design-preview.html`, `DALMA_PREVIEW/`, `Docs Word/D´ALMA CLINIC TRATAMIENTOS.md`.
+
+### 2026-06-29 (sesión 1)
+**Actividades:**
+- Integración en la página **Servicios** de `mockup.html` de los tiempos aproximados, recuperación y beneficios principales de cada tratamiento, tomados del archivo `Docs Word/D´ALMA CLINIC TRATAMIENTOS.md` (información de Anita). No se inventó ni reescribió ningún dato.
+- Tratamientos con bloque `svc-meta` (3 columnas): Botox, Fillers y Armonización Facial, Hydrafacial.
+- PDRN & Exosomas: bloque `svc-dual` con dos mini-bloques internos (PDRN / Exosomas). Se mantuvo como una sola sección.
+- Tratamientos con bloque `svc-info` (compacto): Microneedling y Despigmentantes, Tratamientos Capilares, Depilación Láser, Verrugas/Queloides/Plasmapen.
+- CSS nuevo: `.svc-meta`, `.svc-meta-lbl`, `.svc-meta-val`, `.svc-dual`, `.svc-dual-block`, `.svc-dual-name`, `.svc-info`, `.svc-info-row`. Responsive: apila a 1 columna en `max-width:768px`.
+- No se modificaron: Home, Nosotros, Testimonios, Contacto, imágenes, navegación, footer, `wireframes.html`, `design-preview.html`, `DALMA_PREVIEW/`, `Docs Word/D´ALMA CLINIC TRATAMIENTOS.md`.
+
 ### 2026-06-21
 **Actividades:**
 - Desarrollo visual de la página **Nosotros** en `mockup.html` usando la estructura y textos de `wireframes.html`
