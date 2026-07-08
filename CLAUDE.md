@@ -145,6 +145,13 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-07-07
+**Actividades:**
+- Actualización de imágenes en `mockup.html` para alinear mejor la identidad visual de D'ALMA: solo rutas, sin modificar textos, estilos ni navegación.
+- Home: card Hydrafacial → `home-card-hydrafacial-aquapure-vertical.png`; bloque CTA+Mapa → `home-footer-dalma-still-life-horizontal.png`.
+- Contacto: header → `home-footer-dalma-still-life-horizontal.png` (misma imagen que footer Home).
+- Servicios (Más tratamientos): cards Tratamientos Capilares, Depilación Láser y Verrugas/Queloides/Plasmapen → imágenes de `imagenes-candidatas/`.
+
 ### 2026-06-29 (sesión 3)
 **Actividades:**
 - Habilitada navegación interna completa en `mockup.html` para mejorar la revisión de Anita. No se modificaron textos, diseño ni imágenes.
