@@ -84,6 +84,7 @@ WhatsApp, Instagram, mapa, horario, preguntas frecuentes
 - **Verrugas, queloides y plasmapen** — Bajo valoración médica; triamcinolona intralesional
 
 ## Requerimientos Técnicos
+- **Regla obligatoria de responsividad:** toda modificación al sitio (HTML, CSS, JS, imágenes, layout, componentes nuevos) debe funcionar correctamente en cualquier tamaño de pantalla — mobile, tablet y desktop — sin excepción, sin importar de qué se trate el cambio. Antes de dar por terminada una tarea, verificar visualmente el resultado en al menos un breakpoint mobile (`≤768px`) y uno desktop.
 - Responsive (mobile-first, optimizado para celular)
 - Integración futura: Meta Business, Facebook Ads, Instagram, WhatsApp Business, Google Analytics, Google Search Console
 
@@ -144,6 +145,17 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 ---
 
 ## Historial de Sesiones
+
+### 2026-07-12
+**Actividades:**
+- Auditoría de UX de la página Servicios: se detectaron 3 formatos de tarjeta distintos, filtros de categoría decorativos (no filtraban nada) y varios tratamientos sin botón de acción. Rediseño completo: 9 tratamientos unificados en un solo formato de tarjeta (`.std-card`), filtros funcionando de verdad vía `data-cat`, `goToService()` corregido para resetear el filtro activo. Banner "¿No sabes cuál elegir?" retirado a petición de Bruno.
+- Hero de Home: corregido bug de responsividad — la imagen vivía en una columna de 42% con `object-position` fijo y se cortaba/desaparecía al redimensionar. Rediseñado como imagen de fondo completo + tarjeta de texto flotante con glassmorphism (`backdrop-filter: blur`).
+- Imágenes reales incorporadas: Hydrafacial (Home), 6 tratamientos en Servicios (Botox, Fillers, Hydrafacial, Microneedling, Capilares, PDRN&Exosomas) desde `imagenes-candidatas/SERVICIOS/`, y foto de Ana María en Nosotros (`DIRECTORA 1.jpg` / `DIRECTORA 2.jpg`, comprimidas de 24 MB / 21.8 MB a ~100 KB antes de usarlas en el sitio).
+- Barra de presentación del mockup (pbar): scroll horizontal en mobile en vez de desbordarse y cortar el último botón.
+- Orden del menú principal cambiado a Inicio · Servicios · Nosotros · Testimonios · Contacto (Servicios antes que Nosotros, prioriza conversión sobre historia de marca).
+- Reescritura de copy en tono "Humano · Elegante · Cálido · Moderno · Natural · Accesible": Hero, bio de Ana María, y las 8 descripciones de tratamientos de Servicios. Ningún dato médico, tiempo, marca o beneficio real fue alterado — solo estilo de redacción. Limpieza de em-dashes en todo el copy visible del sitio.
+- Página Testimonios: la sección de testimonios pasó de grilla estática a carrusel rotativo, reutilizando (no duplicando) el componente que ya usaba Home.
+- **Sitio convertido a bilingüe ES/EN**: sistema `data-i18n` vanilla JS embebido (sin dependencias ni fetch externo, por compatibilidad con `file://`), 224 strings traducidos con calidad nativa, selector "ES · EN" en nav (desktop + mobile) y footer, persistencia en `localStorage`. Cobertura verificada automáticamente contra el HTML (0 huecos). Regla permanente establecida: todo cambio de copy futuro debe sincronizarse en ambos idiomas sin que se tenga que recordar — documentada en memoria de Claude para esta sesión y las siguientes.
 
 ### 2026-07-07
 **Actividades:**
