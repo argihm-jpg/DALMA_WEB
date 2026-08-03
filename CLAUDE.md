@@ -146,6 +146,36 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-08-02 (sesión 7)
+**Actividades:**
+- Retirado el botón verde de WhatsApp del hero de Home (quedaban "Agenda tu cita" y "Conoce los servicios"). Se elimina para una presentación inicial más limpia; el botón flotante de WhatsApp global y los demás botones de WhatsApp del sitio (Nosotros, Servicios, Testimonios, Contacto, footer) quedan intactos.
+
+### 2026-08-02 (sesión 6)
+**Actividades:**
+- Retirada la frase "Al enviar, aceptas nuestro aviso de privacidad." / "By submitting, you agree to our Privacy Notice." debajo del formulario de Contacto, por decisión de diseño: el enlace de Aviso de privacidad vive únicamente en el footer (columna Páginas). Limpiadas las claves `cont.form.privacy_pre` y `footer.privacy_lc` (sin uso tras el retiro).
+
+### 2026-08-02 (sesión 5)
+**Actividades:**
+- Servicios: agregado label discreto "Filtrar por categoría" / "Filter by category" justo arriba de la barra de filtros, con el estilo `.ew` (eyebrow) ya usado en el resto del sitio. Sin cambios de lógica de filtrado ni de layout de cards.
+
+### 2026-08-02 (sesión 4)
+**Actividades:**
+- Aviso de privacidad: el enlace visible ya no vive en la barra de copyright del footer (ahí existía pero con el mismo color/tamaño que el texto de copyright, sin subrayado, por eso no se distinguía como enlace). Se movió a la columna "Páginas" del footer en las 5 páginas, con el mismo estilo que los demás enlaces de esa columna. La frase debajo del formulario de Contacto (ya existente antes de esta sesión) se dejó sin tocar.
+
+### 2026-08-02 (sesión 3)
+**Actividades:**
+- Corregidos 4 bugs técnicos detectados en la auditoría del mockup, solo en `mockup.html`: (1) aviso de privacidad de Contacto ya no se destruye al cambiar ES/EN (el párrafo pasó de `data-i18n` a `data-i18n-html`, conservando el enlace); (2) navegación entre páginas internas ya no anima el scroll hacia arriba (`showPg()` usa `window.scrollTo({behavior:'instant'})`, sin tocar el `scroll-behavior:smooth` global ni el scroll suave de `goToService()`); (3) los puntos del carrusel de testimonios ahora reflejan solo posiciones reales según el ancho (3 en desktop/tablet, 5 en mobile, recalculado en resize), aplicado a las dos instancias del carrusel; (4) el logo D'ALMA en las 5 páginas ahora navega a Home y cierra el menú mobile si estaba abierto.
+
+### 2026-08-02 (sesión 2)
+**Actividades:**
+- Barra de filtros de Servicios: centrada en desktop/tablet (`justify-content:center`), y en mobile pasó de wrap asimétrico (3+3+1) a grilla de 2 columnas con el 7º botón ("Especializados") centrado en su propia fila. Sin cambios de lógica, categorías ni iconos.
+- Corregido detalle preexistente: el título "Depilación Láser" no tenía `data-i18n`; ahora usa `svc.depilacion.title` (ES "Depilación Láser" / EN "Laser Hair Removal") y cambia de idioma correctamente.
+- FAQ de Contacto: no existía accordion funcional (solo la pregunta 1 tenía respuesta, visible de forma permanente; las preguntas 2-8 no tenían `.fq-a` en el HTML ni había JS que las abriera). Implementado accordion real y accesible (`button`, `aria-expanded`, una sola respuesta abierta a la vez, ícono `+` que rota, transición de altura). La pregunta 1 quedó funcional con su respuesta existente; las preguntas 2-8 quedan con botón deshabilitado (no se inventó contenido clínico) hasta que Anita entregue esas respuestas.
+
+### 2026-08-02
+**Actividades:**
+- Ajuste UX en Servicios (post-revisión de Anita), solo en `mockup.html`: frase funcional breve agregada en cada uno de los 8 tratamientos (debajo del título, antes de la frase poética/descripción, clase nueva `.svc-functional`); CTAs variados y honestos por tratamiento (siempre hacia Contacto, sin WhatsApp ni páginas falsas); grid de Servicios (`#svc-grid`) ajustado a 2 columnas en desktop/tablet y 1 en mobile, sin tocar el `.g3` global que usan Home/Nosotros/Testimonios. Traducciones ES/EN agregadas para todo lo nuevo, selector de idioma verificado.
+
 ### 2026-07-12
 **Actividades:**
 - Auditoría de UX de la página Servicios: se detectaron 3 formatos de tarjeta distintos, filtros de categoría decorativos (no filtraban nada) y varios tratamientos sin botón de acción. Rediseño completo: 9 tratamientos unificados en un solo formato de tarjeta (`.std-card`), filtros funcionando de verdad vía `data-cat`, `goToService()` corregido para resetear el filtro activo. Banner "¿No sabes cuál elegir?" retirado a petición de Bruno.
