@@ -146,6 +146,10 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-08-09 (sesión 9)
+**Actividades:**
+- Agregados bloques resumidos de FAQ en Home (3 preguntas: q1, q2, q3) y Servicios (5 preguntas: q1, q7, q9, q11, q12), reutilizando las mismas claves i18n y respuestas ya integradas en Contacto (sin duplicar texto, sin nuevas traducciones). Nuevo H2 compartido `faq.shared.h2` ("Preguntas frecuentes"/"Frequently asked questions"). IDs únicos por sección (`home-fq-*`, `svc-fq-*`), Contacto conserva sus 12 FAQ e IDs originales sin cambios.
+
 ### 2026-08-09 (sesión 8)
 **Actividades:**
 - Integradas las 12 FAQ definitivas de `dalma_faqs_contacto.md` en Contacto, reemplazando las 8 placeholder; accordion 100% funcional (sin preguntas deshabilitadas), traducidas fielmente al inglés.
