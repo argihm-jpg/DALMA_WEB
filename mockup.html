@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D'ALMA CLINIC — Mockup</title>
+  <title>D'ALMA CLINIC | Medicina Estética en Cabo San Lucas</title>
+  <meta name="description" content="Tratamientos regenerativos para la piel en Cabo San Lucas. Agenda una valoración y encuentra tu mejor versión.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -180,11 +181,19 @@
     .std-card-body{padding:22px;}
     .std-card-title{font-family:var(--fd);font-size:1.2rem;font-weight:400;color:var(--taupe-700);margin:9px 0 7px;}
     .std-card-txt{font-size:.78rem;color:var(--taupe-500);line-height:1.65;margin-bottom:14px;}
-    .std-card-lnk{font-size:.72rem;font-weight:600;color:var(--taupe-600);text-decoration:none;}
+    .std-card-lnk{font-size:.72rem;font-weight:600;color:var(--taupe-600);text-decoration:none;background:none;border:none;padding:0;font-family:inherit;cursor:pointer;display:inline-block;}
     .svc-functional{font-size:.82rem;font-weight:500;color:var(--taupe-600);line-height:1.6;margin:0 0 8px;}
 
+    /* Servicios cards: secondary info collapsed by default, revealed on hover/focus/click */
+    .svc-toggle:hover,.svc-toggle:focus-visible{color:var(--taupe-800);}
+    .svc-toggle:focus-visible{outline:2px solid var(--taupe-500);outline-offset:2px;}
+    .svc-more{max-height:0;opacity:0;overflow:hidden;margin-top:8px;transition:max-height 420ms ease,opacity 320ms ease;}
+    .std-card:hover .svc-more,
+    .std-card:focus-within .svc-more,
+    .std-card.open .svc-more{max-height:700px;opacity:1;}
+
     /* Servicios grid: more breathing room than the standard 3-col .g3 */
-    #svc-grid{grid-template-columns:repeat(2,1fr);gap:32px;}
+    #svc-grid{grid-template-columns:repeat(2,1fr);gap:32px;align-items:start;}
 
     .cta-sec{background:var(--taupe-700);padding:80px 56px;text-align:center;}
 
@@ -605,7 +614,7 @@
   <section class="sec">
     <div class="ftx" style="margin-bottom:0;">
       <div class="ftx-img">
-        <img src="imagenes-candidatas/directora-perfil-vertical.jpg" alt="Ana María, Directora de D'ALMA CLINIC" data-i18n-alt="alt.directora_hero" loading="eager" style="object-position:center 8%;">
+        <img src="imagenes-candidatas/directora-perfil-vertical.png" alt="Ana María, Directora de D'ALMA CLINIC" data-i18n-alt="alt.directora_hero" loading="eager" style="object-position:center 8%;">
       </div>
       <div class="ftx-body">
         <div class="ew" style="margin-bottom:14px;" data-i18n="nos.ana.eyebrow">Directora</div>
@@ -772,14 +781,17 @@
           <span class="bdg" data-i18n="badge.inyectables">Inyectables</span>
           <div class="std-card-title">Botox</div>
           <p class="svc-functional" data-i18n="svc.botox.func">Ideal para suavizar líneas de expresión sin perder naturalidad.</p>
-          <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.botox.quote">"A veces no queremos vernos diferentes... solo más descansados."</p>
-          <div class="std-card-txt" data-i18n="svc.botox.txt">Suaviza líneas de expresión con resultados naturales y progresivos, relajando temporalmente los músculos del rostro con toxina botulínica purificada. Requiere valoración médica previa.</div>
-          <div class="svc-info">
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.botox.duracion">15–30 min</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="svc.botox.recuperacion">Mismo día</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.botox.beneficio">Suaviza líneas de expresión y mantiene una apariencia natural.</span></div>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-botox" aria-expanded="false" aria-controls="svc-more-botox"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <div class="svc-more" id="svc-more-botox">
+            <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.botox.quote">"A veces no queremos vernos diferentes... solo más descansados."</p>
+            <div class="std-card-txt" data-i18n="svc.botox.txt">Suaviza líneas de expresión con resultados naturales y progresivos, relajando temporalmente los músculos del rostro con toxina botulínica purificada. Requiere valoración médica previa.</div>
+            <div class="svc-info">
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.botox.duracion">15–30 min</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="svc.botox.recuperacion">Mismo día</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.botox.beneficio">Suaviza líneas de expresión y mantiene una apariencia natural.</span></div>
+            </div>
+            <button class="bp" data-i18n="svc.botox.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda una valoración</button>
           </div>
-          <button class="bp" data-i18n="svc.botox.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda una valoración</button>
         </div>
       </div>
 
@@ -789,15 +801,18 @@
           <span class="bdg" data-i18n="badge.inyectables">Inyectables</span>
           <div class="std-card-title" data-i18n="svc.fillers.title">Fillers y Armonización Facial</div>
           <p class="svc-functional" data-i18n="svc.fillers.func">Para equilibrar facciones y aportar volumen e hidratación al rostro.</p>
-          <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.fillers.quote">"No se trata de exagerar. Se trata de armonía."</p>
-          <div class="std-card-txt" data-i18n="svc.fillers.txt">Rellenos de ácido hialurónico que hidratan, dan soporte y devuelven armonía a zonas específicas del rostro: labios, mentón, ojeras y rinomodelación, entre otras.</div>
-          <div class="svc-info">
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.fillers.duracion">30–60 min</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="svc.fillers.recuperacion">24–72 horas leves</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.fillers.beneficio">Armoniza facciones, aporta volumen e hidratación.</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.marcas">Marcas</span>Rejeneusse · Revofil · Starfill · E.P.T.Q.</div>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-fillers" aria-expanded="false" aria-controls="svc-more-fillers"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <div class="svc-more" id="svc-more-fillers">
+            <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.fillers.quote">"No se trata de exagerar. Se trata de armonía."</p>
+            <div class="std-card-txt" data-i18n="svc.fillers.txt">Rellenos de ácido hialurónico que hidratan, dan soporte y devuelven armonía a zonas específicas del rostro: labios, mentón, ojeras y rinomodelación, entre otras.</div>
+            <div class="svc-info">
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.fillers.duracion">30–60 min</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="svc.fillers.recuperacion">24–72 horas leves</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.fillers.beneficio">Armoniza facciones, aporta volumen e hidratación.</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.marcas">Marcas</span>Rejeneusse · Revofil · Starfill · E.P.T.Q.</div>
+            </div>
+            <button class="bp" data-i18n="svc.fillers.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Contacta a un especialista</button>
           </div>
-          <button class="bp" data-i18n="svc.fillers.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Contacta a un especialista</button>
         </div>
       </div>
 
@@ -807,14 +822,17 @@
           <span class="bdg" data-i18n="badge.faciales">Faciales</span>
           <div class="std-card-title">Hydrafacial</div>
           <p class="svc-functional" data-i18n="svc.hydrafacial.func">Ideal para limpiar profundamente. Hidrata y devuelve luminosidad a la piel.</p>
-          <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.hydrafacial.quote">"Tu piel también necesita respirar."</p>
-          <div class="std-card-txt" data-i18n="svc.hydrafacial.txt">Un tratamiento facial no invasivo que limpia, exfolia, extrae e hidrata en una sola sesión, con resultados visibles desde el primer día. Ideal como puerta de entrada, para hombres y mujeres.</div>
-          <div class="svc-info">
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.hydrafacial.duracion">30–45 min</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="svc.hydrafacial.recuperacion">Sin recuperación</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.hydrafacial.beneficio">Limpieza profunda, hidratación y efecto glow inmediato.</span></div>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-hydrafacial" aria-expanded="false" aria-controls="svc-more-hydrafacial"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <div class="svc-more" id="svc-more-hydrafacial">
+            <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.hydrafacial.quote">"Tu piel también necesita respirar."</p>
+            <div class="std-card-txt" data-i18n="svc.hydrafacial.txt">Un tratamiento facial no invasivo que limpia, exfolia, extrae e hidrata en una sola sesión, con resultados visibles desde el primer día. Ideal como puerta de entrada, para hombres y mujeres.</div>
+            <div class="svc-info">
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.hydrafacial.duracion">30–45 min</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="svc.hydrafacial.recuperacion">Sin recuperación</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.hydrafacial.beneficio">Limpieza profunda, hidratación y efecto glow inmediato.</span></div>
+            </div>
+            <button class="bp" data-i18n="svc.hydrafacial.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda una cita</button>
           </div>
-          <button class="bp" data-i18n="svc.hydrafacial.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda una cita</button>
         </div>
       </div>
 
@@ -824,13 +842,16 @@
           <span class="bdg" data-i18n="badge.faciales">Faciales</span>
           <div class="std-card-title" data-i18n="svc.micro.title">Microneedling y Despigmentantes</div>
           <p class="svc-functional" data-i18n="svc.micro.func">Ideal para tratar la hiperpigmentación, las manchas solares y el melasma.</p>
-          <div class="std-card-txt" data-i18n="svc.micro.txt">Microcanales que llevan activos específicos más a fondo en la piel, ideales para manchas, cicatrices de acné, textura irregular y líneas finas.</div>
-          <div class="svc-info">
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.dur_45_60">45–60 min</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="svc.micro.recuperacion">1–3 días leves</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.micro.beneficio">Estimula colágeno y mejora la textura de la piel.</span></div>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-microneedling" aria-expanded="false" aria-controls="svc-more-microneedling"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <div class="svc-more" id="svc-more-microneedling">
+            <div class="std-card-txt" data-i18n="svc.micro.txt">Microcanales que llevan activos específicos más a fondo en la piel, ideales para manchas, cicatrices de acné, textura irregular y líneas finas.</div>
+            <div class="svc-info">
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.dur_45_60">45–60 min</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="svc.micro.recuperacion">1–3 días leves</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.micro.beneficio">Estimula colágeno y mejora la textura de la piel.</span></div>
+            </div>
+            <button class="bp" data-i18n="svc.micro.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Encuentra el tratamiento ideal para ti</button>
           </div>
-          <button class="bp" data-i18n="svc.micro.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Encuentra el tratamiento ideal para ti</button>
         </div>
       </div>
 
@@ -840,23 +861,26 @@
           <span class="bdg" data-i18n="badge.regeneracion">Regeneración</span>
           <div class="std-card-title">PDRN &amp; Exosomas</div>
           <p class="svc-functional" data-i18n="svc.pdrn.func">Tratamiento para un rejuvenecimiento avanzado, reparación profunda y regeneración celular y elasticidad de la piel.</p>
-          <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.pdrn.quote">"Tu piel también puede regenerarse desde adentro."</p>
-          <div class="std-card-txt" data-i18n="svc.pdrn.txt">Tratamientos regeneradores que mejoran la calidad de la piel: más hidratación, mejor textura y luminosidad. Una excelente opción de entrada, con resultados que se notan rápido.</div>
-          <div class="svc-dual" style="margin-bottom:14px;">
-            <div class="svc-dual-block">
-              <div class="svc-dual-name">PDRN</div>
-              <div class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</div><div class="svc-meta-val" style="margin-bottom:6px;"><span data-i18n="svc.pdrn.duracion">30–45 min</span></div>
-              <div class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</div><div class="svc-meta-val" style="margin-bottom:6px;"><span data-i18n="svc.pdrn.recuperacion">24–48 horas leves</span></div>
-              <div class="svc-meta-lbl" data-i18n="lbl.marcas">Marcas</div><div class="svc-meta-val">ReMedium PDRN · Otesaly PDRN</div>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-pdrn-exosomas" aria-expanded="false" aria-controls="svc-more-pdrn-exosomas"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <div class="svc-more" id="svc-more-pdrn-exosomas">
+            <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.pdrn.quote">"Tu piel también puede regenerarse desde adentro."</p>
+            <div class="std-card-txt" data-i18n="svc.pdrn.txt">Tratamientos regeneradores que mejoran la calidad de la piel: más hidratación, mejor textura y luminosidad. Una excelente opción de entrada, con resultados que se notan rápido.</div>
+            <div class="svc-dual" style="margin-bottom:14px;">
+              <div class="svc-dual-block">
+                <div class="svc-dual-name">PDRN</div>
+                <div class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</div><div class="svc-meta-val" style="margin-bottom:6px;"><span data-i18n="svc.pdrn.duracion">30–45 min</span></div>
+                <div class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</div><div class="svc-meta-val" style="margin-bottom:6px;"><span data-i18n="svc.pdrn.recuperacion">24–48 horas leves</span></div>
+                <div class="svc-meta-lbl" data-i18n="lbl.marcas">Marcas</div><div class="svc-meta-val">ReMedium PDRN · Otesaly PDRN</div>
+              </div>
+              <div class="svc-dual-block">
+                <div class="svc-dual-name" data-i18n="svc.exo_name">Exosomas</div>
+                <div class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</div><div class="svc-meta-val" style="margin-bottom:6px;"><span data-i18n="svc.exo.duracion">30–60 min</span></div>
+                <div class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</div><div class="svc-meta-val" style="margin-bottom:6px;"><span data-i18n="lbl.min">Mínimo</span></div>
+                <div class="svc-meta-lbl" data-i18n="lbl.marcas">Marcas</div><div class="svc-meta-val">Natural-B · Aquashine PTX · Exo-Xelle</div>
+              </div>
             </div>
-            <div class="svc-dual-block">
-              <div class="svc-dual-name" data-i18n="svc.exo_name">Exosomas</div>
-              <div class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</div><div class="svc-meta-val" style="margin-bottom:6px;"><span data-i18n="svc.exo.duracion">30–60 min</span></div>
-              <div class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</div><div class="svc-meta-val" style="margin-bottom:6px;"><span data-i18n="lbl.min">Mínimo</span></div>
-              <div class="svc-meta-lbl" data-i18n="lbl.marcas">Marcas</div><div class="svc-meta-val">Natural-B · Aquashine PTX · Exo-Xelle</div>
-            </div>
+            <button class="bp" data-i18n="svc.pdrn.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Contacta a un especialista</button>
           </div>
-          <button class="bp" data-i18n="svc.pdrn.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Contacta a un especialista</button>
         </div>
       </div>
 
@@ -866,13 +890,16 @@
           <span class="bdg" data-i18n="badge.capilares">Capilares</span>
           <div class="std-card-title" data-i18n="svc.capilares.title">Tratamientos Capilares</div>
           <p class="svc-functional" data-i18n="svc.capilares.func">Para fortalecer el cabello y mejorar la salud del cuero cabelludo.</p>
-          <div class="std-card-txt" data-i18n="svc.capilares.txt">Fortalece y revitaliza cabello y cuero cabelludo con PTx-HL, Dermaheal P-HL y Dr. CYJ Hair Filler.</div>
-          <div class="svc-info">
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.dur_45_60">45–60 min</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="lbl.min">Mínimo</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.capilares.beneficio">Fortalece el cabello y favorece su crecimiento.</span></div>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-capilares" aria-expanded="false" aria-controls="svc-more-capilares"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <div class="svc-more" id="svc-more-capilares">
+            <div class="std-card-txt" data-i18n="svc.capilares.txt">Fortalece y revitaliza cabello y cuero cabelludo con PTx-HL, Dermaheal P-HL y Dr. CYJ Hair Filler.</div>
+            <div class="svc-info">
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.dur_45_60">45–60 min</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="lbl.min">Mínimo</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.capilares.beneficio">Fortalece el cabello y favorece su crecimiento.</span></div>
+            </div>
+            <button class="bp" data-i18n="svc.capilares.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Contáctanos para recibir información</button>
           </div>
-          <button class="bp" data-i18n="svc.capilares.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Contáctanos para recibir información</button>
         </div>
       </div>
 
@@ -882,13 +909,16 @@
           <span class="bdg" data-i18n="badge.depilacion">Depilación</span>
           <div class="std-card-title" data-i18n="svc.depilacion.title">Depilación Láser</div>
           <p class="svc-functional" data-i18n="svc.depilacion.func">Elimina el vello no deseado y suaviza la piel.</p>
-          <div class="std-card-txt" data-i18n="svc.depilacion.txt">Para hombres y mujeres, en axila, bikini, piernas, brazos, espalda, rostro y más zonas.</div>
-          <div class="svc-info">
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.depilacion.duracion">15–60 min</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="lbl.min">Mínimo</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.depilacion.beneficio">Reduce el vello y mejora la suavidad de la piel.</span></div>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-depilacion" aria-expanded="false" aria-controls="svc-more-depilacion"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <div class="svc-more" id="svc-more-depilacion">
+            <div class="std-card-txt" data-i18n="svc.depilacion.txt">Para hombres y mujeres, en axila, bikini, piernas, brazos, espalda, rostro y más zonas.</div>
+            <div class="svc-info">
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.depilacion.duracion">15–60 min</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="lbl.min">Mínimo</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.depilacion.beneficio">Reduce el vello y mejora la suavidad de la piel.</span></div>
+            </div>
+            <button class="bp" data-i18n="svc.depilacion.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda una cita</button>
           </div>
-          <button class="bp" data-i18n="svc.depilacion.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda una cita</button>
         </div>
       </div>
 
@@ -898,13 +928,16 @@
           <span class="bdg" data-i18n="badge.especializados">Especializados</span>
           <div class="std-card-title" data-i18n="svc.especial.title">Verrugas, Queloides y Plasmapen</div>
           <p class="svc-functional" data-i18n="svc.especial.func">Tratamientos avanzados diseñados para borrar imperfecciones y renovar la vitalidad de tu piel de forma segura.</p>
-          <div class="std-card-txt" data-i18n="svc.especial.txt">Procedimientos para verrugas, queloides y otras marcas de la piel, siempre bajo valoración médica, con triamcinolona intralesional y técnicas específicas según el caso.</div>
-          <div class="svc-info">
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.especial.duracion">20–45 min</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="svc.especial.recuperacion">Variable</span></div>
-            <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.especial.beneficio">Tratamientos personalizados según las necesidades del paciente.</span></div>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-especializados" aria-expanded="false" aria-controls="svc-more-especializados"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <div class="svc-more" id="svc-more-especializados">
+            <div class="std-card-txt" data-i18n="svc.especial.txt">Procedimientos para verrugas, queloides y otras marcas de la piel, siempre bajo valoración médica, con triamcinolona intralesional y técnicas específicas según el caso.</div>
+            <div class="svc-info">
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.duracion">Duración</span><span data-i18n="svc.especial.duracion">20–45 min</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.recuperacion">Recuperación</span><span data-i18n="svc.especial.recuperacion">Variable</span></div>
+              <div class="svc-info-row"><span class="svc-meta-lbl" data-i18n="lbl.beneficio">Beneficio</span><span data-i18n="svc.especial.beneficio">Tratamientos personalizados según las necesidades del paciente.</span></div>
+            </div>
+            <button class="bp" data-i18n="svc.especial.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Contacta a un especialista</button>
           </div>
-          <button class="bp" data-i18n="svc.especial.cta" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Contacta a un especialista</button>
         </div>
       </div>
 
@@ -1220,29 +1253,52 @@
     </div>
     <div style="max-width:720px;margin:0 auto;">
       <div class="fq-item">
-        <button class="fq-q" type="button" id="fq-btn-1" aria-expanded="false" aria-controls="fq-a-1"><span class="fq-qt" data-i18n="faq.q1">¿Necesito cita previa?</span><span class="fq-ic">+</span></button>
-        <div class="fq-a" id="fq-a-1" role="region" aria-labelledby="fq-btn-1" data-i18n="faq.a1">Sí. Recomendamos agendar para darte una atención personalizada y valorar qué tratamiento es mejor para ti.</div>
+        <button class="fq-q" type="button" id="fq-btn-1" aria-expanded="false" aria-controls="fq-a-1"><span class="fq-qt" data-i18n="faq.q1">¿Cómo puedo saber qué tratamiento de medicina estética es el adecuado para mí?</span><span class="fq-ic">+</span></button>
+        <div class="fq-a" id="fq-a-1" role="region" aria-labelledby="fq-btn-1" data-i18n="faq.a1">Cada piel, rostro y cuerpo tienen necesidades diferentes. Por eso, antes de recomendar un procedimiento realizamos una valoración personalizada para conocer tus objetivos, antecedentes y necesidades, y así ofrecerte opciones adecuadas para ti.</div>
       </div>
       <div class="fq-item">
-        <button class="fq-q" type="button" disabled><span class="fq-qt" data-i18n="faq.q2">¿Los tratamientos son para hombres y mujeres?</span><span class="fq-ic">+</span></button>
+        <button class="fq-q" type="button" id="fq-btn-2" aria-expanded="false" aria-controls="fq-a-2"><span class="fq-qt" data-i18n="faq.q2">¿Necesito una valoración antes de realizarme un tratamiento estético?</span><span class="fq-ic">+</span></button>
+        <div class="fq-a" id="fq-a-2" role="region" aria-labelledby="fq-btn-2" data-i18n="faq.a2">Sí. La valoración es importante para conocer tu estado de salud, revisar la zona que deseas tratar, resolver tus dudas y determinar si el procedimiento es conveniente para ti. No todos los tratamientos funcionan igual para todas las personas.</div>
       </div>
       <div class="fq-item">
-        <button class="fq-q" type="button" disabled><span class="fq-qt" data-i18n="faq.q3">¿Los resultados se ven naturales?</span><span class="fq-ic">+</span></button>
+        <button class="fq-q" type="button" id="fq-btn-3" aria-expanded="false" aria-controls="fq-a-3"><span class="fq-qt" data-i18n="faq.q3">¿Un tratamiento de medicina estética puede cambiar demasiado mi rostro?</span><span class="fq-ic">+</span></button>
+        <div class="fq-a" id="fq-a-3" role="region" aria-labelledby="fq-btn-3" data-i18n="faq.a3">Nuestro objetivo no es cambiar quién eres, sino ayudarte a verte más fresca, cuidada y segura, respetando tus facciones con resultados naturales. Los resultados dependen del tratamiento, la cantidad de producto, la técnica y las características de cada persona.</div>
       </div>
       <div class="fq-item">
-        <button class="fq-q" type="button" disabled><span class="fq-qt" data-i18n="faq.q4">¿Qué tratamiento me conviene si nunca me he hecho nada?</span><span class="fq-ic">+</span></button>
+        <button class="fq-q" type="button" id="fq-btn-4" aria-expanded="false" aria-controls="fq-a-4"><span class="fq-qt" data-i18n="faq.q4">¿Existe el riesgo de que mi rostro o mi piel se deformen?</span><span class="fq-ic">+</span></button>
+        <div class="fq-a" id="fq-a-4" role="region" aria-labelledby="fq-btn-4" data-i18n="faq.a4">Cuando los procedimientos están bien indicados, se utilizan productos adecuados y son realizados por personal capacitado, se busca obtener un resultado armónico y natural. Todos los tratamientos pueden tener riesgos o efectos secundarios, por eso es fundamental realizar una valoración previa y seguir las indicaciones posteriores.</div>
       </div>
       <div class="fq-item">
-        <button class="fq-q" type="button" disabled><span class="fq-qt" data-i18n="faq.q5">¿El Botox cambia mi expresión?</span><span class="fq-ic">+</span></button>
+        <button class="fq-q" type="button" id="fq-btn-5" aria-expanded="false" aria-controls="fq-a-5"><span class="fq-qt" data-i18n="faq.q5">¿A qué edad puedo comenzar a cuidar mi piel o realizarme tratamientos estéticos?</span><span class="fq-ic">+</span></button>
+        <div class="fq-a" id="fq-a-5" role="region" aria-labelledby="fq-btn-5" data-i18n="faq.a5">No existe una sola edad para comenzar. El cuidado de la piel puede iniciarse desde edades tempranas con limpieza, hidratación y protección solar. Los procedimientos de medicina estética se recomiendan según las necesidades de cada persona, no solamente por su edad.</div>
       </div>
       <div class="fq-item">
-        <button class="fq-q" type="button" disabled><span class="fq-qt" data-i18n="faq.q6">¿Qué diferencia hay entre Botox y fillers?</span><span class="fq-ic">+</span></button>
+        <button class="fq-q" type="button" id="fq-btn-6" aria-expanded="false" aria-controls="fq-a-6"><span class="fq-qt" data-i18n="faq.q6">¿Cuál es la mejor edad para comenzar a aplicarse bótox?</span><span class="fq-ic">+</span></button>
+        <div class="fq-a" id="fq-a-6" role="region" aria-labelledby="fq-btn-6" data-i18n="faq.a6">No hay una edad exacta para todas las personas. La toxina botulínica se recomienda de acuerdo con la fuerza muscular, las líneas de expresión, los antecedentes y los objetivos de cada paciente. Siempre debe realizarse una valoración antes de aplicarla.</div>
       </div>
       <div class="fq-item">
-        <button class="fq-q" type="button" disabled><span class="fq-qt" data-i18n="faq.q7">¿Puedo combinar tratamientos?</span><span class="fq-ic">+</span></button>
+        <button class="fq-q" type="button" id="fq-btn-7" aria-expanded="false" aria-controls="fq-a-7"><span class="fq-qt" data-i18n="faq.q7">¿Cuál es la diferencia entre Botox y rellenos faciales con ácido hialurónico?</span><span class="fq-ic">+</span></button>
+        <div class="fq-a" id="fq-a-7" role="region" aria-labelledby="fq-btn-7" data-i18n="faq.a7">La toxina botulínica ayuda a suavizar temporalmente las líneas producidas por el movimiento de los músculos. Los rellenos faciales, como los elaborados con ácido hialurónico, se utilizan para aportar volumen, definir ciertas zonas o suavizar surcos. Son procedimientos distintos y solamente se recomiendan cuando están indicados para cada paciente.</div>
+      </div>
+      <div class="fq-item">
+        <button class="fq-q" type="button" id="fq-btn-8" aria-expanded="false" aria-controls="fq-a-8"><span class="fq-qt" data-i18n="faq.q8">¿Por qué debo usar protector solar si casi no me expongo al sol?</span><span class="fq-ic">+</span></button>
+        <div class="fq-a" id="fq-a-8" role="region" aria-labelledby="fq-btn-8" data-i18n="faq.a8">La radiación ultravioleta se acumula con el tiempo y puede favorecer la aparición de manchas, arrugas y envejecimiento prematuro. El protector solar es una parte esencial del cuidado diario y también ayuda a mantener los resultados de muchos tratamientos estéticos.</div>
+      </div>
+      <div class="fq-item">
+        <button class="fq-q" type="button" id="fq-btn-9" aria-expanded="false" aria-controls="fq-a-9"><span class="fq-qt" data-i18n="faq.q9">¿Qué tratamiento puede ayudarme a mejorar la hidratación, textura y luminosidad de mi piel?</span><span class="fq-ic">+</span></button>
+        <div class="fq-a" id="fq-a-9" role="region" aria-labelledby="fq-btn-9" data-i18n="faq.a9">Dependiendo de las necesidades de tu piel, pueden recomendarse tratamientos como Hydrafacial, Dermapen, exosomas, bioestimuladores u otros protocolos personalizados. Algunos ayudan con limpieza facial profunda e hidratación, mientras que otros buscan mejorar la textura y estimular la producción de colágeno.</div>
+      </div>
+      <div class="fq-item">
+        <button class="fq-q" type="button" id="fq-btn-10" aria-expanded="false" aria-controls="fq-a-10"><span class="fq-qt" data-i18n="faq.q10">¿Los tratamientos de medicina estética son dolorosos y requieren recuperación?</span><span class="fq-ic">+</span></button>
+        <div class="fq-a" id="fq-a-10" role="region" aria-labelledby="fq-btn-10" data-i18n="faq.a10">La mayoría provoca molestias leves y tolerables, aunque esto depende del procedimiento y de la sensibilidad de cada persona. Algunos permiten regresar rápidamente a las actividades diarias y otros pueden ocasionar inflamación, sensibilidad, enrojecimiento o pequeños moretones temporales. Durante la valoración te explicaremos qué puedes esperar y qué cuidados necesitas.</div>
+      </div>
+      <div class="fq-item">
+        <button class="fq-q" type="button" id="fq-btn-11" aria-expanded="false" aria-controls="fq-a-11"><span class="fq-qt" data-i18n="faq.q11">¿Qué debo saber antes de iniciar depilación láser?</span><span class="fq-ic">+</span></button>
+        <div class="fq-a" id="fq-a-11" role="region" aria-labelledby="fq-btn-11" data-i18n="faq.a11">Antes de iniciar depilación láser, lo más importante es conocer tu piel, las características de tu vello y la zona que deseas tratar. En D'ALMA realizamos una valoración para explicarte qué puedes esperar, cuántas sesiones podrían recomendarse y qué cuidados necesitas antes y después del procedimiento.</div>
       </div>
       <div class="fq-item" style="border-bottom:none;">
-        <button class="fq-q" type="button" disabled><span class="fq-qt" data-i18n="faq.q8">¿Cuántas sesiones necesito?</span><span class="fq-ic">+</span></button>
+        <button class="fq-q" type="button" id="fq-btn-12" aria-expanded="false" aria-controls="fq-a-12"><span class="fq-qt" data-i18n="faq.q12">¿Qué tratamiento puede ayudar con manchas, melasma o cicatrices de acné?</span><span class="fq-ic">+</span></button>
+        <div class="fq-a" id="fq-a-12" role="region" aria-labelledby="fq-btn-12" data-i18n="faq.a12">Cada piel necesita un plan distinto. Dependiendo del tipo de mancha, la sensibilidad de tu piel, tus antecedentes y tus objetivos, pueden recomendarse opciones como microneedling, Dermapen, despigmentantes, exosomas u otros protocolos personalizados. La valoración nos ayuda a elegir una alternativa segura y adecuada para ti.</div>
       </div>
     </div>
   </section>
@@ -1295,6 +1351,8 @@ const I18N = {
     "badge.depilacion": "Depilación",
     "badge.especializados": "Especializados",
     "svc.filter.label": "Filtrar por categoría",
+    "svc.more.show": "Ver más",
+    "svc.more.hide": "Ver menos",
     "filter.all": "Todos",
     "filter.inyectables": "Inyectables",
     "filter.regeneracion": "Regeneración",
@@ -1495,15 +1553,30 @@ const I18N = {
     "cont.info.cta_wa": "Chatear por WhatsApp",
     "cont.faq.eyebrow": "Preguntas frecuentes",
     "cont.faq.h2": "¿Tienes dudas?",
-    "faq.q1": "¿Necesito cita previa?",
-    "faq.a1": "Sí. Recomendamos agendar para darte una atención personalizada y valorar qué tratamiento es mejor para ti.",
-    "faq.q2": "¿Los tratamientos son para hombres y mujeres?",
-    "faq.q3": "¿Los resultados se ven naturales?",
-    "faq.q4": "¿Qué tratamiento me conviene si nunca me he hecho nada?",
-    "faq.q5": "¿El Botox cambia mi expresión?",
-    "faq.q6": "¿Qué diferencia hay entre Botox y fillers?",
-    "faq.q7": "¿Puedo combinar tratamientos?",
-    "faq.q8": "¿Cuántas sesiones necesito?",
+    "faq.q1": "¿Cómo puedo saber qué tratamiento de medicina estética es el adecuado para mí?",
+    "faq.a1": "Cada piel, rostro y cuerpo tienen necesidades diferentes. Por eso, antes de recomendar un procedimiento realizamos una valoración personalizada para conocer tus objetivos, antecedentes y necesidades, y así ofrecerte opciones adecuadas para ti.",
+    "faq.q2": "¿Necesito una valoración antes de realizarme un tratamiento estético?",
+    "faq.a2": "Sí. La valoración es importante para conocer tu estado de salud, revisar la zona que deseas tratar, resolver tus dudas y determinar si el procedimiento es conveniente para ti. No todos los tratamientos funcionan igual para todas las personas.",
+    "faq.q3": "¿Un tratamiento de medicina estética puede cambiar demasiado mi rostro?",
+    "faq.a3": "Nuestro objetivo no es cambiar quién eres, sino ayudarte a verte más fresca, cuidada y segura, respetando tus facciones con resultados naturales. Los resultados dependen del tratamiento, la cantidad de producto, la técnica y las características de cada persona.",
+    "faq.q4": "¿Existe el riesgo de que mi rostro o mi piel se deformen?",
+    "faq.a4": "Cuando los procedimientos están bien indicados, se utilizan productos adecuados y son realizados por personal capacitado, se busca obtener un resultado armónico y natural. Todos los tratamientos pueden tener riesgos o efectos secundarios, por eso es fundamental realizar una valoración previa y seguir las indicaciones posteriores.",
+    "faq.q5": "¿A qué edad puedo comenzar a cuidar mi piel o realizarme tratamientos estéticos?",
+    "faq.a5": "No existe una sola edad para comenzar. El cuidado de la piel puede iniciarse desde edades tempranas con limpieza, hidratación y protección solar. Los procedimientos de medicina estética se recomiendan según las necesidades de cada persona, no solamente por su edad.",
+    "faq.q6": "¿Cuál es la mejor edad para comenzar a aplicarse bótox?",
+    "faq.a6": "No hay una edad exacta para todas las personas. La toxina botulínica se recomienda de acuerdo con la fuerza muscular, las líneas de expresión, los antecedentes y los objetivos de cada paciente. Siempre debe realizarse una valoración antes de aplicarla.",
+    "faq.q7": "¿Cuál es la diferencia entre Botox y rellenos faciales con ácido hialurónico?",
+    "faq.a7": "La toxina botulínica ayuda a suavizar temporalmente las líneas producidas por el movimiento de los músculos. Los rellenos faciales, como los elaborados con ácido hialurónico, se utilizan para aportar volumen, definir ciertas zonas o suavizar surcos. Son procedimientos distintos y solamente se recomiendan cuando están indicados para cada paciente.",
+    "faq.q8": "¿Por qué debo usar protector solar si casi no me expongo al sol?",
+    "faq.a8": "La radiación ultravioleta se acumula con el tiempo y puede favorecer la aparición de manchas, arrugas y envejecimiento prematuro. El protector solar es una parte esencial del cuidado diario y también ayuda a mantener los resultados de muchos tratamientos estéticos.",
+    "faq.q9": "¿Qué tratamiento puede ayudarme a mejorar la hidratación, textura y luminosidad de mi piel?",
+    "faq.a9": "Dependiendo de las necesidades de tu piel, pueden recomendarse tratamientos como Hydrafacial, Dermapen, exosomas, bioestimuladores u otros protocolos personalizados. Algunos ayudan con limpieza facial profunda e hidratación, mientras que otros buscan mejorar la textura y estimular la producción de colágeno.",
+    "faq.q10": "¿Los tratamientos de medicina estética son dolorosos y requieren recuperación?",
+    "faq.a10": "La mayoría provoca molestias leves y tolerables, aunque esto depende del procedimiento y de la sensibilidad de cada persona. Algunos permiten regresar rápidamente a las actividades diarias y otros pueden ocasionar inflamación, sensibilidad, enrojecimiento o pequeños moretones temporales. Durante la valoración te explicaremos qué puedes esperar y qué cuidados necesitas.",
+    "faq.q11": "¿Qué debo saber antes de iniciar depilación láser?",
+    "faq.a11": "Antes de iniciar depilación láser, lo más importante es conocer tu piel, las características de tu vello y la zona que deseas tratar. En D'ALMA realizamos una valoración para explicarte qué puedes esperar, cuántas sesiones podrían recomendarse y qué cuidados necesitas antes y después del procedimiento.",
+    "faq.q12": "¿Qué tratamiento puede ayudar con manchas, melasma o cicatrices de acné?",
+    "faq.a12": "Cada piel necesita un plan distinto. Dependiendo del tipo de mancha, la sensibilidad de tu piel, tus antecedentes y tus objetivos, pueden recomendarse opciones como microneedling, Dermapen, despigmentantes, exosomas u otros protocolos personalizados. La valoración nos ayuda a elegir una alternativa segura y adecuada para ti.",
     "alt.pdrn_exosomas": "PDRN y Exosomas",
     "alt.capilares": "Tratamientos Capilares",
     "alt.depilacion": "Depilación láser",
@@ -1538,6 +1611,8 @@ const I18N = {
     "badge.depilacion": "Hair Removal",
     "badge.especializados": "Specialized",
     "svc.filter.label": "Filter by category",
+    "svc.more.show": "View more",
+    "svc.more.hide": "View less",
     "filter.all": "All",
     "filter.inyectables": "Injectables",
     "filter.regeneracion": "Regenerative",
@@ -1738,15 +1813,30 @@ const I18N = {
     "cont.info.cta_wa": "Chat on WhatsApp",
     "cont.faq.eyebrow": "Frequently Asked Questions",
     "cont.faq.h2": "Have Questions?",
-    "faq.q1": "Do I need an appointment?",
-    "faq.a1": "Yes. We recommend booking ahead so we can give you personalized attention and determine the best treatment for you.",
-    "faq.q2": "Are treatments available for both men and women?",
-    "faq.q3": "Do the results look natural?",
-    "faq.q4": "Which treatment is right for me if I've never had one before?",
-    "faq.q5": "Will Botox change my expression?",
-    "faq.q6": "What's the difference between Botox and fillers?",
-    "faq.q7": "Can I combine treatments?",
-    "faq.q8": "How many sessions do I need?",
+    "faq.q1": "How can I know which aesthetic medicine treatment is right for me?",
+    "faq.a1": "Every skin, face, and body has different needs. That's why, before recommending any procedure, we carry out a personalized consultation to understand your goals, history, and needs, so we can offer you the options that are right for you.",
+    "faq.q2": "Do I need a consultation before getting an aesthetic treatment?",
+    "faq.a2": "Yes. The consultation is important to understand your health status, review the area you'd like to treat, answer your questions, and determine whether the procedure is right for you. Not every treatment works the same way for everyone.",
+    "faq.q3": "Can an aesthetic medicine treatment change my face too much?",
+    "faq.a3": "Our goal isn't to change who you are, but to help you look fresher, well cared for, and confident, while respecting your features with natural results. Results depend on the treatment, the amount of product used, the technique, and each person's individual characteristics.",
+    "faq.q4": "Is there a risk that my face or skin could become deformed?",
+    "faq.a4": "When procedures are properly indicated, appropriate products are used, and they're performed by trained staff, the goal is a harmonious, natural result. All treatments can carry risks or side effects, which is why a prior consultation and following aftercare instructions are essential.",
+    "faq.q5": "At what age can I start caring for my skin or getting aesthetic treatments?",
+    "faq.a5": "There's no single age to start. Skin care can begin at an early age with cleansing, hydration, and sun protection. Aesthetic medicine procedures are recommended based on each person's needs, not age alone.",
+    "faq.q6": "What's the best age to start getting Botox?",
+    "faq.a6": "There's no exact age that applies to everyone. Botulinum toxin is recommended based on muscle strength, expression lines, medical history, and each patient's goals. A consultation should always be done before applying it.",
+    "faq.q7": "What's the difference between Botox and hyaluronic acid facial fillers?",
+    "faq.a7": "Botulinum toxin helps temporarily soften lines caused by muscle movement. Facial fillers, such as those made with hyaluronic acid, are used to add volume, define certain areas, or soften creases. They are different procedures and are only recommended when indicated for each patient.",
+    "faq.q8": "Why should I use sunscreen if I'm rarely exposed to the sun?",
+    "faq.a8": "Ultraviolet radiation builds up over time and can contribute to dark spots, wrinkles, and premature aging. Sunscreen is an essential part of your daily skin care routine and also helps maintain the results of many aesthetic treatments.",
+    "faq.q9": "Which treatment can help improve my skin's hydration, texture, and radiance?",
+    "faq.a9": "Depending on your skin's needs, treatments such as Hydrafacial, Dermapen, exosomes, biostimulators, or other personalized protocols may be recommended. Some help with deep facial cleansing and hydration, while others aim to improve texture and stimulate collagen production.",
+    "faq.q10": "Are aesthetic medicine treatments painful, and do they require recovery time?",
+    "faq.a10": "Most cause mild, tolerable discomfort, although this depends on the procedure and each person's sensitivity. Some allow you to return to your daily activities quickly, while others may cause temporary swelling, tenderness, redness, or minor bruising. During your consultation, we'll explain what to expect and what aftercare you'll need.",
+    "faq.q11": "What should I know before starting laser hair removal?",
+    "faq.a11": "Before starting laser hair removal, the most important thing is understanding your skin, your hair's characteristics, and the area you'd like to treat. At D'ALMA, we perform a consultation to explain what to expect, how many sessions might be recommended, and what care you'll need before and after the procedure.",
+    "faq.q12": "Which treatment can help with dark spots, melasma, or acne scars?",
+    "faq.a12": "Every skin needs a different plan. Depending on the type of spot, your skin's sensitivity, your history, and your goals, options such as microneedling, Dermapen, depigmenting treatments, exosomes, or other personalized protocols may be recommended. The consultation helps us choose a safe option that's right for you.",
     "alt.pdrn_exosomas": "PDRN and Exosomes",
     "alt.capilares": "Hair Treatments",
     "alt.depilacion": "Laser Hair Removal",
@@ -1784,6 +1874,31 @@ function applyI18n(lang) {
   });
 }
 
+const PAGE_META = {
+  es: {
+    home: { title: "D'ALMA CLINIC | Medicina Estética en Cabo San Lucas", desc: "Tratamientos regenerativos para la piel en Cabo San Lucas. Agenda una valoración y encuentra tu mejor versión." },
+    nosotros: { title: "Nosotros | D'ALMA CLINIC Cabo San Lucas", desc: "Conoce nuestra clínica de medicina estética en Cabo San Lucas, enfocada en bienestar y cuidado de la piel." },
+    servicios: { title: "Nuestros Tratamientos | D'ALMA CLINIC Cabo San Lucas", desc: "Botox, fillers, Hydrafacial, microneedling, exosomas y depilación láser. Agenda una valoración hoy." },
+    testimonios: { title: "Testimonios de Clientes | D'ALMA CLINIC Cabo San Lucas", desc: "Conoce experiencias de pacientes y resuelve dudas sobre tratamientos estéticos en D'ALMA Clinic." },
+    contacto: { title: "Contacto | D'ALMA CLINIC Cabo San Lucas", desc: "Agenda una valoración personalizada o contáctanos para conocer los tratamientos de D'ALMA Clinic." }
+  },
+  en: {
+    home: { title: "D'ALMA CLINIC | Aesthetic Medicine in Cabo San Lucas", desc: "Regenerative skin treatments in Cabo San Lucas. Book a consultation and find your best self." },
+    nosotros: { title: "About Us | D'ALMA CLINIC Cabo San Lucas", desc: "Discover our aesthetic medicine clinic in Cabo San Lucas, focused on wellness and skin care." },
+    servicios: { title: "Our Treatments | D'ALMA CLINIC Cabo San Lucas", desc: "Botox, fillers, Hydrafacial, microneedling, exosomes, and laser hair removal. Book a consultation today." },
+    testimonios: { title: "Client Testimonials | D'ALMA CLINIC Cabo San Lucas", desc: "Discover patient experiences and get answers about aesthetic treatments at D'ALMA Clinic." },
+    contacto: { title: "Contact | D'ALMA CLINIC Cabo San Lucas", desc: "Book a personalized consultation or contact us to learn about D'ALMA Clinic's treatments." }
+  }
+};
+
+function updatePageMeta(name, lang) {
+  var meta = PAGE_META[lang] && PAGE_META[lang][name];
+  if (!meta) return;
+  document.title = meta.title;
+  var descEl = document.querySelector('meta[name="description"]');
+  if (descEl) descEl.setAttribute('content', meta.desc);
+}
+
 function setLang(lang) {
   if (!I18N[lang]) return;
   applyI18n(lang);
@@ -1792,6 +1907,8 @@ function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(function(b) {
     b.classList.toggle('on', b.dataset.lang === lang);
   });
+  var currentPg = document.querySelector('.pg.on');
+  if (currentPg) updatePageMeta(currentPg.id.replace('pg-', ''), lang);
 }
 
   function showPg(name, btn) {
@@ -1803,6 +1920,7 @@ function setLang(lang) {
     document.querySelectorAll('.pb').forEach(b => b.classList.remove('on'));
     if (btn) btn.classList.add('on');
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    updatePageMeta(name, document.documentElement.lang || 'es');
   }
 
   function goToService(id) {
@@ -1839,6 +1957,29 @@ function setLang(lang) {
     document.body.style.overflow = '';
   }
 
+  // Servicios cards: expand/collapse secondary info (Ver más / Ver menos)
+  function setCardExpanded(item, open) {
+    var btn = item.querySelector('.svc-toggle');
+    if (!btn) return;
+    var label = btn.querySelector('.svc-toggle-label');
+    var key = open ? 'svc.more.hide' : 'svc.more.show';
+    var lang = document.documentElement.lang || 'es';
+    label.setAttribute('data-i18n', key);
+    if (I18N[lang] && I18N[lang][key] !== undefined) label.textContent = I18N[lang][key];
+    btn.setAttribute('aria-expanded', String(open));
+    item.classList.toggle('open', open);
+  }
+  document.querySelectorAll('.svc-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.closest('.std-card');
+      var willOpen = !item.classList.contains('open');
+      document.querySelectorAll('#svc-grid .std-card.open').forEach(function(openItem) {
+        if (openItem !== item) setCardExpanded(openItem, false);
+      });
+      setCardExpanded(item, willOpen);
+    });
+  });
+
   // Filter pills (Servicios) - actually filter the treatment grid by category
   document.querySelectorAll('.fp').forEach(fp => {
     fp.addEventListener('click', function() {
@@ -1847,6 +1988,9 @@ function setLang(lang) {
       var cat = this.dataset.cat;
       document.querySelectorAll('#svc-grid [data-cat]').forEach(function(card) {
         card.style.display = (cat === 'todos' || card.dataset.cat === cat) ? '' : 'none';
+      });
+      document.querySelectorAll('#svc-grid .std-card.open').forEach(function(openItem) {
+        setCardExpanded(openItem, false);
       });
     });
   });

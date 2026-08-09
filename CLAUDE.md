@@ -146,6 +146,13 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-08-09 (sesión 8)
+**Actividades:**
+- Integradas las 12 FAQ definitivas de `dalma_faqs_contacto.md` en Contacto, reemplazando las 8 placeholder; accordion 100% funcional (sin preguntas deshabilitadas), traducidas fielmente al inglés.
+- Integrados meta titles y meta descriptions de `dalma_meta_titles_descriptions.md` para las 5 páginas internas: `<title>` y `<meta name="description">` en `<head>` para carga inicial (Home), y diccionario `PAGE_META` (ES/EN) que actualiza ambos dinámicamente en `showPg()` y `setLang()`.
+- Servicios: cards rediseñadas para mostrar solo imagen, categoría, título y frase funcional de forma permanente; el resto (frase poética, descripción, datos rápidos y CTA) se agrupó en `.svc-more`, desplegable con hover/focus en desktop y con botón "Ver más / Ver menos" en mobile. Se cierra la card expandida al cambiar de filtro.
+- Nosotros: actualizada la foto de encabezado de Ana María (`directora-perfil-vertical`) — Anita reemplazó el archivo por una versión editada en formato `.png`; se actualizó la referencia en `mockup.html` (mismo recorte, mismo `alt`, mismo lugar). El `.jpg` anterior queda eliminado del repositorio en este commit.
+
 ### 2026-08-02 (sesión 7)
 **Actividades:**
 - Retirado el botón verde de WhatsApp del hero de Home (quedaban "Agenda tu cita" y "Conoce los servicios"). Se elimina para una presentación inicial más limpia; el botón flotante de WhatsApp global y los demás botones de WhatsApp del sitio (Nosotros, Servicios, Testimonios, Contacto, footer) quedan intactos.
