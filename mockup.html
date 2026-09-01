@@ -160,6 +160,12 @@
     .fp:hover{border-color:var(--taupe-500);color:var(--taupe-700);}
     .fp.on{background:var(--taupe-700);color:var(--white);border-color:var(--taupe-700);}
 
+    .svc-intro{text-align:center;margin-bottom:20px;}
+    .svc-intro-h2{font-family:var(--fd);font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:300;color:var(--taupe-700);line-height:1.25;}
+    .filter-select-wrap{display:flex;justify-content:center;margin:14px 0 20px;padding:0 20px;}
+    .svc-filter-select{appearance:none;-webkit-appearance:none;-moz-appearance:none;font-family:var(--fb);font-size:.72rem;font-weight:600;letter-spacing:.05em;color:var(--taupe-700);background:var(--bone-100) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%238B817B'/></svg>") no-repeat right 20px center;border:1.5px solid var(--bone-400);border-radius:9999px;padding:12px 44px 12px 22px;cursor:pointer;max-width:460px;width:100%;text-align:center;text-align-last:center;transition:border-color 150ms;}
+    .svc-filter-select:hover,.svc-filter-select:focus{border-color:var(--taupe-500);outline:none;}
+
     .reveal{opacity:0;transform:translateY(28px);transition:opacity 650ms cubic-bezier(.16,1,.3,1),transform 650ms cubic-bezier(.16,1,.3,1);}
     .reveal.in{opacity:1;transform:translateY(0);}
     @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
@@ -183,8 +189,8 @@
     .std-card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;}
     .std-card-body{padding:22px;}
     .std-card-title{font-family:var(--fd);font-size:1.2rem;font-weight:400;color:var(--taupe-700);margin:9px 0 7px;}
-    .std-card-txt{font-size:.78rem;color:var(--taupe-500);line-height:1.65;margin-bottom:14px;}
-    .std-card-lnk{font-size:.72rem;font-weight:600;color:var(--taupe-600);text-decoration:none;background:none;border:none;padding:0;font-family:inherit;cursor:pointer;display:inline-block;}
+    .std-card-txt{font-size:.78rem;color:var(--taupe-600);line-height:1.65;margin-bottom:14px;}
+    .std-card-lnk{font-size:.8rem;font-weight:600;color:var(--taupe-700);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;background:none;border:none;padding:0;font-family:inherit;cursor:pointer;display:inline-block;}
     .svc-functional{font-size:.82rem;font-weight:500;color:var(--taupe-600);line-height:1.6;margin:0 0 8px;}
 
     /* Servicios cards: secondary info collapsed by default, revealed on hover/focus/click */
@@ -239,6 +245,11 @@
     @media(max-width:1100px) and (min-width:769px){
       .hero-content{width:min(56%,440px);margin-left:32px;padding:32px 30px;}
       .hero-img img{object-position:62% 20%;}
+
+      /* Nav: not enough room for full links + lang switch + CTA in this range — use hamburger like mobile */
+      .nav{padding:0 20px;height:60px;}
+      .nav-links,.nav-cta{display:none;}
+      .nav-ham{display:flex;}
     }
 
     @media(max-width:768px){
@@ -297,6 +308,9 @@
 
       /* Servicios */
       .filter-wrap{padding:20px 20px 0;}
+      .svc-intro{margin-bottom:14px;}
+      .svc-intro-h2{font-size:1.3rem;}
+      .filter-select-wrap{margin:10px 0 16px;}
       .filter-bar{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
       .fp{margin-bottom:0;text-align:center;white-space:normal;}
       .filter-bar .fp:last-child:nth-child(odd){grid-column:1 / -1;justify-self:center;}
@@ -345,6 +359,7 @@
     .ci-lbl{font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--taupe-400);margin-bottom:3px;}
     .ci-val{font-size:.84rem;color:var(--taupe-700);line-height:1.5;}
     .ci-ph{color:var(--taupe-400)!important;}
+    .ci-row-focus{outline:2px solid var(--taupe-400);outline-offset:8px;border-radius:6px;background:var(--bone-200);transition:background 200ms ease;}
     .ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
     .fq-item{border-bottom:1px solid var(--bone-400);}
     .fq-q{display:flex;justify-content:space-between;align-items:center;width:100%;padding:18px 0;background:none;border:none;font:inherit;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent;}
@@ -354,7 +369,7 @@
     .fq-qt{font-family:var(--fd);font-size:.975rem;font-weight:400;color:var(--taupe-700);}
     .fq-ic{color:var(--taupe-500);font-size:1.1rem;flex-shrink:0;margin-left:16px;transition:transform 250ms;}
     .fq-item.open .fq-ic{transform:rotate(45deg);}
-    .fq-a{max-height:0;overflow:hidden;font-size:.84rem;color:var(--taupe-500);line-height:1.7;transition:max-height 320ms ease,padding-bottom 320ms ease;}
+    .fq-a{max-height:0;overflow:hidden;font-size:.84rem;color:var(--taupe-600);line-height:1.7;transition:max-height 320ms ease,padding-bottom 320ms ease;}
     .fq-item.open .fq-a{max-height:400px;padding-bottom:18px;}
     @media(max-width:768px){
       .ct-grid{grid-template-columns:1fr;gap:40px;}
@@ -388,7 +403,7 @@
       <li><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button></div>
-    <button class="nav-cta" data-i18n="nav.book" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agendar cita</button>
+    <button class="nav-cta" data-i18n="nav.book" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agenda tu valoración</button>
     <button class="nav-ham" id="ham-home" onclick="toggleMenu('mm-home','ham-home')" data-i18n-aria="nav.menu_aria" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
@@ -402,7 +417,7 @@
       <li><a href="#" onclick="closeMenu('mm-home','ham-home');showPg('contacto',document.querySelectorAll('.pb')[4])" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <div class="lang-switch lang-switch-mobile" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang('es')">Español</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button></div>
-    <button class="mm-cta" onclick="closeMenu('mm-home','ham-home');showPg('contacto',document.querySelectorAll('.pb')[4])"><span data-i18n="nav.book">Agendar cita</span></button>
+    <button class="mm-cta" onclick="closeMenu('mm-home','ham-home');showPg('contacto',document.querySelectorAll('.pb')[4])"><span data-i18n="nav.book">Agenda tu valoración</span></button>
   </div>
 
   <!-- HERO -->
@@ -410,7 +425,7 @@
     <div class="hero-content">
       <h1 class="ew hero-business-h1" data-i18n="home.hero.h1">Clínica de medicina estética &amp; regenerativa · Cabo San Lucas</h1>
       <p class="hero-statement" data-i18n="home.hero.statement">No se trata de cambiar quién eres, sino de volver a sentirte bien contigo.</p>
-      <p class="hero-sub" data-i18n="home.hero.p">Medicina estética y regenerativa para rostro y cuerpo, con valoración personalizada, resultados naturales y un trato cercano.</p>
+      <p class="hero-sub" data-i18n="home.hero.p">Medicina estética y regenerativa en Cabo San Lucas, con valoración médica y tratamientos pensados para ti.</p>
       <div class="ctas">
         <button class="bp" data-i18n="home.hero.cta1" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agenda tu valoración</button>
         <button class="bs" data-i18n="home.hero.cta2" onclick="showPg('servicios',document.querySelectorAll('.pb')[2])">Conoce nuestros tratamientos</button>
@@ -426,7 +441,7 @@
     <div style="text-align:center;margin-bottom:48px;">
       <div class="ew" data-i18n="home.treat.eyebrow">Lo que ofrecemos</div>
       <h2 class="st" data-i18n="home.treat.h2">Tratamientos destacados</h2>
-      <p class="bt" style="max-width:500px;margin:12px auto 0;" data-i18n="home.treat.p">Cada tratamiento inicia con una valoración. Porque lo más importante es entender qué necesitas antes de hacer cualquier cosa.</p>
+      <p class="bt" style="max-width:500px;margin:12px auto 0;" data-i18n="home.treat.p">No tienes que saber qué tratamiento necesitas. Cuéntanos qué te gustaría mejorar y te orientamos.</p>
     </div>
     <div class="g4">
       <div class="svc-card">
@@ -529,11 +544,12 @@
     <div style="text-align:center;margin-bottom:52px;">
       <div class="ew" data-i18n="home.phil.eyebrow">Nuestra filosofía</div>
       <h2 class="st" data-i18n="home.phil.h2">¿Por qué D'ALMA?</h2>
+      <p class="bt" style="max-width:500px;margin:12px auto 0;" data-i18n="home.phil.sub">Primero te escuchamos. Después vemos qué necesitas.</p>
     </div>
     <div class="g3">
-      <div class="feat-item"><span class="feat-ico">✦</span><div class="feat-title" data-i18n="home.phil.f1.title">Valoración antes que nada</div><p class="bt" data-i18n="home.phil.f1.txt">Nunca aplicamos un tratamiento sin entender quién eres. Cada persona es diferente y eso importa.</p></div>
-      <div class="feat-item"><span class="feat-ico">✦</span><div class="feat-title" data-i18n="home.phil.f2.title">Resultados naturales</div><p class="bt" data-i18n="home.phil.f2.txt">Buscamos armonía. No cambiar quién eres, sino ayudarte a sentirte tú, con más confianza.</p></div>
-      <div class="feat-item"><span class="feat-ico">✦</span><div class="feat-title" data-i18n="home.phil.f3.title">Espacio cálido e inclusivo</div><p class="bt" data-i18n="home.phil.f3.txt">Para hombres y mujeres. Sin apariencia fría ni elitista. Aquí no te sentirás fuera de lugar.</p></div>
+      <div class="feat-item"><span class="feat-ico">✦</span><div class="feat-title" data-i18n="home.phil.f1.title">Primero te escuchamos</div><p class="bt" data-i18n="home.phil.f1.txt">Antes de recomendarte cualquier tratamiento, queremos saber qué te preocupa y qué estás buscando.</p></div>
+      <div class="feat-item"><span class="feat-ico">✦</span><div class="feat-title" data-i18n="home.phil.f2.title">Resultados naturales</div><p class="bt" data-i18n="home.phil.f2.txt">Buscamos armonía y cambios que se sientan bien contigo, sin perder lo que te hace tú.</p></div>
+      <div class="feat-item"><span class="feat-ico">✦</span><div class="feat-title" data-i18n="home.phil.f3.title">Un espacio cercano</div><p class="bt" data-i18n="home.phil.f3.txt">Creamos un espacio para sentirse cómodo, seguro y acompañado desde que llegas.</p></div>
     </div>
   </section>
 
@@ -587,9 +603,9 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Agenda por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
       <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
-      <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso</a></div></div>
+      <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
     </div>
     <hr class="fhr">
@@ -611,7 +627,7 @@
       <li><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button></div>
-    <button class="nav-cta" data-i18n="nav.book" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agendar cita</button>
+    <button class="nav-cta" data-i18n="nav.book" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agenda tu valoración</button>
     <button class="nav-ham" id="ham-nos" onclick="toggleMenu('mm-nos','ham-nos')" data-i18n-aria="nav.menu_aria" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
@@ -625,7 +641,7 @@
       <li><a href="#" onclick="closeMenu('mm-nos','ham-nos');showPg('contacto',document.querySelectorAll('.pb')[4])" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <div class="lang-switch lang-switch-mobile" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang('es')">Español</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button></div>
-    <button class="mm-cta" onclick="closeMenu('mm-nos','ham-nos');showPg('contacto',document.querySelectorAll('.pb')[4])"><span data-i18n="nav.book">Agendar cita</span></button>
+    <button class="mm-cta" onclick="closeMenu('mm-nos','ham-nos');showPg('contacto',document.querySelectorAll('.pb')[4])"><span data-i18n="nav.book">Agenda tu valoración</span></button>
   </div>
 
   <!-- ENCABEZADO -->
@@ -644,9 +660,9 @@
       <div class="ftx-body">
         <div class="ew" style="margin-bottom:14px;" data-i18n="nos.ana.eyebrow">Directora</div>
         <h2 style="font-family:var(--fd);font-size:clamp(1.75rem,2.8vw,2.25rem);font-weight:300;color:var(--taupe-700);line-height:1.2;margin-bottom:22px;" data-i18n="nos.ana.h2">Hola, soy Ana María.</h2>
-        <p class="bt" style="margin-bottom:14px;" data-i18n="nos.ana.p1">Soy comunicóloga y periodista de formación, y desde hace años he estado vinculada al desarrollo y operación de clínicas estéticas.</p>
-        <p class="bt" style="margin-bottom:14px;" data-i18n="nos.ana.p2">Cuando una persona comienza a cuidarse, muchas veces no cambia solamente por fuera. También cambia la forma en que se mira, la seguridad con la que se siente y la manera en que se relaciona consigo misma.</p>
-        <p class="bt" style="margin-bottom:30px;" data-i18n="nos.ana.p3">Por eso nació D'ALMA: un espacio para mujeres y hombres que quieren verse bien, sentirse bien y regalarse un momento para ellos.</p>
+        <p class="bt" style="margin-bottom:14px;" data-i18n="nos.ana.p1">D'ALMA nació de querer crear el tipo de clínica al que yo misma quisiera llegar: un lugar donde te escuchen, te expliquen y te orienten sin hacerte sentir que tienes que cambiarlo todo. Queremos que cada persona se sienta cómoda, segura y acompañada desde el primer momento.</p>
+        <p class="bt" style="margin-bottom:14px;" data-i18n="nos.ana.p2">Soy comunicóloga y periodista de formación, y desde hace años he estado vinculada al desarrollo y operación de clínicas estéticas.</p>
+        <p class="bt" style="margin-bottom:30px;" data-i18n="nos.ana.p3">Cuando una persona comienza a cuidarse, muchas veces no cambia solamente por fuera. También cambia la forma en que se mira, la seguridad con la que se siente y la manera en que se relaciona consigo misma.</p>
         <button class="bp" data-i18n="nos.ana.cta" onclick="showPg('servicios',document.querySelectorAll('.pb')[2])">Conoce nuestros servicios</button>
       </div>
     </div>
@@ -732,7 +748,7 @@
       <button class="bp bp-lt" data-i18n="home.hero.cta1" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agenda tu valoración</button>
       <a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;">
         <svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>
-        <span data-i18n="cta.enviar_wa">Agenda por WhatsApp</span>
+        <span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span>
       </a>
     </div>
   </div>
@@ -740,9 +756,9 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Agenda por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
       <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
-      <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso</a></div></div>
+      <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
     </div>
     <hr class="fhr">
@@ -764,7 +780,7 @@
       <li><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button></div>
-    <button class="nav-cta" data-i18n="nav.book" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agendar cita</button>
+    <button class="nav-cta" data-i18n="nav.book" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agenda tu valoración</button>
     <button class="nav-ham" id="ham-svc" onclick="toggleMenu('mm-svc','ham-svc')" data-i18n-aria="nav.menu_aria" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
@@ -778,7 +794,7 @@
       <li><a href="#" onclick="closeMenu('mm-svc','ham-svc');showPg('contacto',document.querySelectorAll('.pb')[4])" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <div class="lang-switch lang-switch-mobile" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang('es')">Español</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button></div>
-    <button class="mm-cta" onclick="closeMenu('mm-svc','ham-svc');showPg('contacto',document.querySelectorAll('.pb')[4])"><span data-i18n="nav.book">Agendar cita</span></button>
+    <button class="mm-cta" onclick="closeMenu('mm-svc','ham-svc');showPg('contacto',document.querySelectorAll('.pb')[4])"><span data-i18n="nav.book">Agenda tu valoración</span></button>
   </div>
 
   <!-- PAGE HERO -->
@@ -794,16 +810,22 @@
 
   <!-- FILTERS -->
   <div class="filter-wrap">
+    <div class="svc-intro">
+      <h2 class="svc-intro-h2" data-i18n="svc.intro.h2">¿Qué te gustaría mejorar?</h2>
+      <p class="bt" style="max-width:480px;margin:8px auto 0;" data-i18n="svc.intro.p">Cuéntanos qué te preocupa y te ayudamos a encontrar la mejor opción para ti.</p>
+    </div>
     <div class="ew" style="text-align:center;" data-i18n="svc.filter.label">Filtrar por categoría</div>
-    <div class="filter-bar">
-      <button class="fp on" data-cat="todos" data-i18n="filter.all">Todos</button>
-      <button class="fp" data-cat="inyectables" data-i18n="filter.inyectables">Inyectables</button>
-      <button class="fp" data-cat="regeneracion" data-i18n="filter.regeneracion">Regeneración</button>
-      <button class="fp" data-cat="faciales" data-i18n="filter.faciales">Faciales</button>
-      <button class="fp" data-cat="capilares" data-i18n="filter.capilares">Capilares</button>
-      <button class="fp" data-cat="depilacion" data-i18n="filter.depilacion">Depilación</button>
-      <button class="fp" data-cat="especializados" data-i18n="filter.especializados">Especializados</button>
-      <button class="fp" data-cat="control-peso" data-i18n="filter.control_peso">Control de peso</button>
+    <div class="filter-select-wrap">
+      <select id="svc-filter-select" class="svc-filter-select" aria-label="Filtrar por categoría">
+        <option value="todos" data-i18n="filter.all">Todos</option>
+        <option value="inyectables" data-i18n="filter.inyectables">Líneas de expresión y armonización facial</option>
+        <option value="faciales" data-i18n="filter.faciales">Hidratación, manchas y textura de la piel</option>
+        <option value="regeneracion" data-i18n="filter.regeneracion">Regenerativos</option>
+        <option value="capilares" data-i18n="filter.capilares">Capilares</option>
+        <option value="depilacion" data-i18n="filter.depilacion">Depilación</option>
+        <option value="especializados" data-i18n="filter.especializados">Imperfecciones</option>
+        <option value="control-peso" data-i18n="filter.control_peso">Control de peso</option>
+      </select>
     </div>
   </div>
 
@@ -817,7 +839,7 @@
         <div class="std-card-body">
           <div class="std-card-title">Botox</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.botox.quote">"Suavizar sin dejar de ser tú."</p>
-          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-botox" aria-expanded="false" aria-controls="svc-more-botox"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-botox" aria-expanded="false" aria-controls="svc-more-botox"><span class="svc-toggle-label" data-i18n="svc.more.show">Conoce el tratamiento</span></button>
           <div class="svc-more" id="svc-more-botox">
             <div class="std-card-txt" data-i18n="svc.botox.txt">Tratamiento que ayuda a suavizar líneas de expresión y a prevenir que se hagan más profundas, buscando siempre un resultado natural y respetando la expresión de tu rostro.</div>
             <button class="bp" data-i18n="btn.book_consult" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda tu valoración</button>
@@ -830,7 +852,7 @@
         <div class="std-card-body">
           <div class="std-card-title" data-i18n="svc.fillers.title">Fillers y Armonización Facial</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.fillers.quote">"Equilibrar, no transformar."</p>
-          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-fillers" aria-expanded="false" aria-controls="svc-more-fillers"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-fillers" aria-expanded="false" aria-controls="svc-more-fillers"><span class="svc-toggle-label" data-i18n="svc.more.show">Conoce el tratamiento</span></button>
           <div class="svc-more" id="svc-more-fillers">
             <div class="std-card-txt" data-i18n="svc.fillers.txt">Tratamientos personalizados con ácido hialurónico que permiten recuperar volumen, definir ciertas zonas del rostro y mejorar la armonía facial, siempre buscando resultados naturales y acordes a tus facciones.</div>
             <button class="bp" data-i18n="btn.book_consult" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda tu valoración</button>
@@ -843,7 +865,7 @@
         <div class="std-card-body">
           <div class="std-card-title">Hydrafacial</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.hydrafacial.quote">"Una piel limpia, hidratada y luminosa también se siente diferente."</p>
-          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-hydrafacial" aria-expanded="false" aria-controls="svc-more-hydrafacial"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-hydrafacial" aria-expanded="false" aria-controls="svc-more-hydrafacial"><span class="svc-toggle-label" data-i18n="svc.more.show">Conoce el tratamiento</span></button>
           <div class="svc-more" id="svc-more-hydrafacial">
             <div class="std-card-txt" data-i18n="svc.hydrafacial.txt">Limpieza facial profunda que combina exfoliación, extracción e hidratación para ayudar a mejorar la textura, luminosidad y apariencia general de la piel. Se adapta a diferentes tipos y necesidades de piel.</div>
             <button class="bp" data-i18n="btn.book_consult" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda tu valoración</button>
@@ -854,9 +876,9 @@
       <div id="svc-microneedling" class="std-card" data-cat="faciales">
         <img src="imagenes-candidatas/servicios-microneedling.jpg" alt="Microneedling" style="object-position:center 25%;">
         <div class="std-card-body">
-          <div class="std-card-title" data-i18n="svc.micro.title">Microneedling y Despigmentantes</div>
+          <div class="std-card-title" data-i18n="svc.micro.title">Microneedling / Dermapen / Manchas</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.micro.quote">"Ayudar a tu piel a renovarse desde adentro."</p>
-          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-microneedling" aria-expanded="false" aria-controls="svc-more-microneedling"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-microneedling" aria-expanded="false" aria-controls="svc-more-microneedling"><span class="svc-toggle-label" data-i18n="svc.more.show">Conoce el tratamiento</span></button>
           <div class="svc-more" id="svc-more-microneedling">
             <div class="std-card-txt" data-i18n="svc.micro.txt">Tratamiento que estimula los procesos naturales de renovación de la piel y puede ayudar a mejorar textura, poros, cicatrices, manchas y apariencia general. El protocolo se personaliza de acuerdo con las necesidades de cada piel.</div>
             <button class="bp" data-i18n="btn.book_consult" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda tu valoración</button>
@@ -869,7 +891,7 @@
         <div class="std-card-body">
           <div class="std-card-title">PDRN &amp; Exosomas</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.pdrn.quote">"Cuando tu piel necesita algo más que hidratación."</p>
-          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-pdrn-exosomas" aria-expanded="false" aria-controls="svc-more-pdrn-exosomas"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-pdrn-exosomas" aria-expanded="false" aria-controls="svc-more-pdrn-exosomas"><span class="svc-toggle-label" data-i18n="svc.more.show">Conoce el tratamiento</span></button>
           <div class="svc-more" id="svc-more-pdrn-exosomas">
             <div class="std-card-txt" data-i18n="svc.pdrn.txt">Protocolos de regeneración diseñados para apoyar la reparación y renovación de la piel y mejorar su calidad, elasticidad, luminosidad y apariencia. El tratamiento indicado dependerá de la valoración y de las necesidades de cada paciente.</div>
             <button class="bp" data-i18n="btn.book_consult" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda tu valoración</button>
@@ -882,7 +904,7 @@
         <div class="std-card-body">
           <div class="std-card-title" data-i18n="svc.capilares.title">Tratamientos Capilares</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.capilares.quote">"Cuidar tu cabello también es cuidar cómo te sientes."</p>
-          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-capilares" aria-expanded="false" aria-controls="svc-more-capilares"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-capilares" aria-expanded="false" aria-controls="svc-more-capilares"><span class="svc-toggle-label" data-i18n="svc.more.show">Conoce el tratamiento</span></button>
           <div class="svc-more" id="svc-more-capilares">
             <div class="std-card-txt" data-i18n="svc.capilares.txt">Protocolos personalizados para ayudar a fortalecer el cuero cabelludo, mejorar la calidad del cabello y atender diferentes causas relacionadas con caída, debilitamiento o pérdida de densidad. Antes de iniciar recomendamos una valoración para definir qué tratamiento es el más adecuado.</div>
             <button class="bp" data-i18n="btn.book_consult" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda tu valoración</button>
@@ -895,7 +917,7 @@
         <div class="std-card-body">
           <div class="std-card-title" data-i18n="svc.depilacion.title">Depilación Láser</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.depilacion.quote">"Menos pendiente del vello. Más libertad para sentirte bien en tu piel."</p>
-          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-depilacion" aria-expanded="false" aria-controls="svc-more-depilacion"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-depilacion" aria-expanded="false" aria-controls="svc-more-depilacion"><span class="svc-toggle-label" data-i18n="svc.more.show">Conoce el tratamiento</span></button>
           <div class="svc-more" id="svc-more-depilacion">
             <div class="std-card-txt" data-i18n="svc.depilacion.txt">Tratamiento diseñado para reducir progresivamente el crecimiento del vello en diferentes zonas del rostro y cuerpo. El número de sesiones y el protocolo se ajustan de acuerdo con la zona, el tipo de piel y las características del vello.</div>
             <button class="bp" data-i18n="btn.book_consult" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda tu valoración</button>
@@ -908,7 +930,7 @@
         <div class="std-card-body">
           <div class="std-card-title" data-i18n="svc.especial.title">Verrugas y Queloides</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.especial.quote">"Hay pequeños detalles en la piel que también merecen atención."</p>
-          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-especializados" aria-expanded="false" aria-controls="svc-more-especializados"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-especializados" aria-expanded="false" aria-controls="svc-more-especializados"><span class="svc-toggle-label" data-i18n="svc.more.show">Conoce el tratamiento</span></button>
           <div class="svc-more" id="svc-more-especializados">
             <div class="std-card-txt" data-i18n="svc.especial.txt">Valoramos de manera individual verrugas, cicatrices elevadas, queloides y otras alteraciones de la piel para determinar la opción más adecuada en cada caso. Dependiendo de la valoración médica, pueden utilizarse diferentes técnicas buscando mejorar su apariencia, textura y las molestias que puedan ocasionar.</div>
             <button class="bp" data-i18n="btn.book_consult" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda tu valoración</button>
@@ -921,7 +943,7 @@
         <div class="std-card-body">
           <div class="std-card-title">Plasma Pen</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.plasmapen.quote">"Cuando un pequeño detalle puede hacer una gran diferencia."</p>
-          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-plasmapen" aria-expanded="false" aria-controls="svc-more-plasmapen"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-plasmapen" aria-expanded="false" aria-controls="svc-more-plasmapen"><span class="svc-toggle-label" data-i18n="svc.more.show">Conoce el tratamiento</span></button>
           <div class="svc-more" id="svc-more-plasmapen">
             <div class="std-card-txt" data-i18n="svc.plasmapen.txt">Tecnología utilizada en casos seleccionados para trabajar pequeñas zonas de la piel y mejorar determinadas imperfecciones de forma precisa. Siempre requiere valoración previa para determinar si es la opción adecuada.</div>
             <button class="bp" data-i18n="btn.book_consult" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda tu valoración</button>
@@ -930,13 +952,13 @@
       </div>
 
       <div id="svc-control-peso" class="std-card" data-cat="control-peso">
-        <img src="imagenes-candidatas/control-de-peso.webp" alt="Control de Peso" data-i18n-alt="alt.control_peso">
+        <img src="imagenes-candidatas/control-de-peso.webp" alt="Control de Peso y bienestar" data-i18n-alt="alt.control_peso">
         <div class="std-card-body">
-          <div class="std-card-title" data-i18n="svc.controlpeso.title">Control de Peso</div>
-          <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.controlpeso.quote">"No se trata solo de bajar de peso, sino de sentirte mejor en tu cuerpo."</p>
-          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-control-peso" aria-expanded="false" aria-controls="svc-more-control-peso"><span class="svc-toggle-label" data-i18n="svc.more.show">Ver más</span></button>
+          <div class="std-card-title" data-i18n="svc.controlpeso.title">Control de Peso y bienestar</div>
+          <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.controlpeso.quote">"Un programa pensado para ayudarte a bajar de peso con acompañamiento médico y seguimiento durante todo el proceso."</p>
+          <button class="std-card-lnk svc-toggle" type="button" id="svc-toggle-control-peso" aria-expanded="false" aria-controls="svc-more-control-peso"><span class="svc-toggle-label" data-i18n="svc.more.show">Conoce el tratamiento</span></button>
           <div class="svc-more" id="svc-more-control-peso">
-            <div class="std-card-txt" data-i18n="svc.controlpeso.txt">Programa médico personalizado para acompañar el control de peso de acuerdo con los objetivos, hábitos y necesidades de cada persona. Después de una valoración se determina el protocolo adecuado y, cuando está indicado, pueden integrarse tratamientos de apoyo metabólico dentro de un seguimiento profesional.</div>
+            <div class="std-card-txt" data-i18n="svc.controlpeso.txt">Comenzamos con una valoración para conocer tus antecedentes, objetivos y necesidades. A partir de ahí, el médico define el tratamiento adecuado y da seguimiento a tu evolución. Cuando está indicado, el programa puede incluir tratamiento farmacológico como apoyo.</div>
             <button class="bp" data-i18n="btn.book_consult" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])" style="font-size:.7rem;padding:10px 22px;">Agenda tu valoración</button>
           </div>
         </div>
@@ -982,16 +1004,16 @@
     <p class="bt bt-lt" style="max-width:440px;margin:0 auto 32px;" data-i18n="svc.bottom.p">Te explicamos qué tratamiento es más adecuado para ti según tu piel, tus objetivos y tu presupuesto.</p>
     <div class="ctas" style="justify-content:center;margin-top:0;">
       <button class="bp bp-lt" data-i18n="btn.book_consult" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agenda tu valoración</button>
-      <a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Agenda por WhatsApp</span></a>
+      <a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a>
     </div>
   </div>
 
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Agenda por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
       <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
-      <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso</a></div></div>
+      <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
     </div>
     <hr class="fhr">
@@ -1013,7 +1035,7 @@
       <li><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button></div>
-    <button class="nav-cta" data-i18n="nav.book" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agendar cita</button>
+    <button class="nav-cta" data-i18n="nav.book" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agenda tu valoración</button>
     <button class="nav-ham" id="ham-test" onclick="toggleMenu('mm-test','ham-test')" data-i18n-aria="nav.menu_aria" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
@@ -1027,7 +1049,7 @@
       <li><a href="#" onclick="closeMenu('mm-test','ham-test');showPg('contacto',document.querySelectorAll('.pb')[4])" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <div class="lang-switch lang-switch-mobile" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang('es')">Español</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button></div>
-    <button class="mm-cta" onclick="closeMenu('mm-test','ham-test');showPg('contacto',document.querySelectorAll('.pb')[4])"><span data-i18n="nav.book">Agendar cita</span></button>
+    <button class="mm-cta" onclick="closeMenu('mm-test','ham-test');showPg('contacto',document.querySelectorAll('.pb')[4])"><span data-i18n="nav.book">Agenda tu valoración</span></button>
   </div>
 
   <!-- HERO OSCURO -->
@@ -1132,7 +1154,7 @@
       <button class="bp bp-lt" data-i18n="home.hero.cta1" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agenda tu valoración</button>
       <a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;">
         <svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>
-        <span data-i18n="cta.enviar_wa">Agenda por WhatsApp</span>
+        <span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span>
       </a>
     </div>
   </div>
@@ -1140,9 +1162,9 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Agenda por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
       <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
-      <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso</a></div></div>
+      <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
     </div>
     <hr class="fhr">
@@ -1164,7 +1186,7 @@
       <li><a href="#" class="cur" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button></div>
-    <button class="nav-cta" data-i18n="nav.book" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agendar cita</button>
+    <button class="nav-cta" data-i18n="nav.book" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agenda tu valoración</button>
     <button class="nav-ham" id="ham-contacto" onclick="toggleMenu('mm-contacto','ham-contacto')" data-i18n-aria="nav.menu_aria" aria-label="Menú">
       <span></span><span></span><span></span>
     </button>
@@ -1178,7 +1200,7 @@
       <li><a href="#" onclick="closeMenu('mm-contacto','ham-contacto')" data-i18n="nav.contact">Contacto</a></li>
     </ul>
     <div class="lang-switch lang-switch-mobile" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang('es')">Español</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button></div>
-    <button class="mm-cta" onclick="closeMenu('mm-contacto','ham-contacto')"><span data-i18n="nav.book">Agendar cita</span></button>
+    <button class="mm-cta" onclick="closeMenu('mm-contacto','ham-contacto')"><span data-i18n="nav.book">Agenda tu valoración</span></button>
   </div>
 
   <!-- PAGE HERO -->
@@ -1220,7 +1242,7 @@
             <option data-i18n="cont.form.opt_laser">Depilación Láser</option>
             <option data-i18n="cont.form.opt_especial">Verrugas y Queloides</option>
             <option>Plasma Pen</option>
-            <option data-i18n="cont.form.opt_control_peso">Control de Peso</option>
+            <option data-i18n="cont.form.opt_control_peso">Control de Peso y bienestar</option>
             <option data-i18n="cont.form.opt_other">Otro / No estoy seguro</option>
           </select>
         </div>
@@ -1249,7 +1271,7 @@
             <div class="ci-val" data-i18n="home.map.hours">Lunes a domingo · 10:00 am – 8:00 pm</div>
           </div>
         </div>
-        <div class="ci-row">
+        <div class="ci-row" id="ci-wa-row">
           <div class="ci-icon">💬</div>
           <div>
             <div class="ci-lbl" data-i18n="cont.info.lbl_wa">WhatsApp</div>
@@ -1263,9 +1285,9 @@
             <div class="ci-val ci-ph" data-i18n="cont.info.val_ig_pending">[HANDLE PENDIENTE]</div>
           </div>
         </div>
-        <a class="bwa" href="#" style="margin-bottom:26px;display:inline-flex;">
+        <a class="bwa" href="#ci-wa-row" onclick="focusWaInfo();return false;" style="margin-bottom:26px;display:inline-flex;">
           <svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>
-          <span data-i18n="cta.enviar_wa">Agenda por WhatsApp</span>
+          <span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span>
         </a>
         <div class="ct-map">
           <div style="font-size:1.5rem;">📍</div>
@@ -1339,9 +1361,9 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Agenda por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
       <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
-      <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso</a></div></div>
+      <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
     </div>
     <hr class="fhr">
@@ -1366,7 +1388,7 @@ const I18N = {
     "nav.about": "Nosotros",
     "nav.testimonials": "Testimonios",
     "nav.contact": "Contacto",
-    "nav.book": "Agendar cita",
+    "nav.book": "Agenda tu valoración",
     "nav.menu_aria": "Menú",
     "footer.tagline": "Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.",
     "footer.pages_title": "Páginas",
@@ -1380,35 +1402,37 @@ const I18N = {
     "footer.svc.pdrn": "PDRN / Exosomas",
     "footer.svc.capilares": "Tratamientos Capilares",
     "footer.svc.especial": "Verrugas y Queloides",
-    "footer.svc.control_peso": "Control de Peso",
+    "footer.svc.control_peso": "Control de Peso y bienestar",
     "svc.laser_title": "Depilación láser",
+    "svc.intro.h2": "¿Qué te gustaría mejorar?",
+    "svc.intro.p": "Cuéntanos qué te preocupa y te ayudamos a encontrar la mejor opción para ti.",
     "badge.faciales": "Faciales",
     "badge.inyectables": "Inyectables",
     "badge.regeneracion": "Regeneración",
     "svc.filter.label": "Filtrar por categoría",
-    "svc.more.show": "Ver más",
+    "svc.more.show": "Conoce el tratamiento",
     "svc.more.hide": "Ver menos",
     "filter.all": "Todos",
-    "filter.inyectables": "Inyectables",
-    "filter.regeneracion": "Regeneración",
-    "filter.faciales": "Faciales",
+    "filter.inyectables": "Líneas de expresión y armonización facial",
+    "filter.regeneracion": "Regenerativos",
+    "filter.faciales": "Hidratación, manchas y textura de la piel",
     "filter.capilares": "Capilares",
     "filter.depilacion": "Depilación",
-    "filter.especializados": "Especializados",
+    "filter.especializados": "Imperfecciones",
     "filter.control_peso": "Control de peso",
     "lbl.antes": "Antes",
     "lbl.despues": "Después",
     "btn.book_consult": "Agenda tu valoración",
-    "cta.enviar_wa": "Agenda por WhatsApp",
+    "cta.enviar_wa": "Escríbenos por WhatsApp",
     "home.hero.h1": "Clínica de medicina estética & regenerativa · Cabo San Lucas",
     "home.hero.statement": "No se trata de cambiar quién eres, sino de volver a sentirte bien contigo.",
-    "home.hero.p": "Medicina estética y regenerativa para rostro y cuerpo, con valoración personalizada, resultados naturales y un trato cercano.",
+    "home.hero.p": "Medicina estética y regenerativa en Cabo San Lucas, con valoración médica y tratamientos pensados para ti.",
     "home.hero.cta1": "Agenda tu valoración",
     "home.hero.cta2": "Conoce nuestros tratamientos",
     "home.hero.img_alt": "Mujer con piel luminosa",
     "home.treat.eyebrow": "Lo que ofrecemos",
     "home.treat.h2": "Tratamientos destacados",
-    "home.treat.p": "Cada tratamiento inicia con una valoración. Porque lo más importante es entender qué necesitas antes de hacer cualquier cosa.",
+    "home.treat.p": "No tienes que saber qué tratamiento necesitas. Cuéntanos qué te gustaría mejorar y te orientamos.",
     "home.card.hydrafacial.txt": "Limpieza profunda, exfoliación e hidratación. Piel luminosa desde la primera sesión.",
     "home.card.botox.txt": "Suaviza líneas de expresión con resultados naturales y progresivos. Requiere valoración médica.",
     "home.card.fillers.title": "Fillers y Armonización",
@@ -1440,12 +1464,13 @@ const I18N = {
     "home.quote.cta2": "Ver servicios",
     "home.phil.eyebrow": "Nuestra filosofía",
     "home.phil.h2": "¿Por qué D'ALMA?",
-    "home.phil.f1.title": "Valoración antes que nada",
-    "home.phil.f1.txt": "Nunca aplicamos un tratamiento sin entender quién eres. Cada persona es diferente y eso importa.",
+    "home.phil.sub": "Primero te escuchamos. Después vemos qué necesitas.",
+    "home.phil.f1.title": "Primero te escuchamos",
+    "home.phil.f1.txt": "Antes de recomendarte cualquier tratamiento, queremos saber qué te preocupa y qué estás buscando.",
     "home.phil.f2.title": "Resultados naturales",
-    "home.phil.f2.txt": "Buscamos armonía. No cambiar quién eres, sino ayudarte a sentirte tú, con más confianza.",
-    "home.phil.f3.title": "Espacio cálido e inclusivo",
-    "home.phil.f3.txt": "Para hombres y mujeres. Sin apariencia fría ni elitista. Aquí no te sentirás fuera de lugar.",
+    "home.phil.f2.txt": "Buscamos armonía y cambios que se sientan bien contigo, sin perder lo que te hace tú.",
+    "home.phil.f3.title": "Un espacio cercano",
+    "home.phil.f3.txt": "Creamos un espacio para sentirse cómodo, seguro y acompañado desde que llegas.",
     "home.map.quote": "\"Tu piel también cuenta<br>tu historia.\"",
     "home.map.hours": "Lunes a domingo · 10:00 am – 8:00 pm",
     "nos.hero.eyebrow": "Quiénes somos",
@@ -1453,9 +1478,9 @@ const I18N = {
     "nos.hero.p": "Más que una clínica, un espacio donde puedas sentirte en confianza y bien contigo.",
     "nos.ana.eyebrow": "Directora",
     "nos.ana.h2": "Hola, soy Ana María.",
-    "nos.ana.p1": "Soy comunicóloga y periodista de formación, y desde hace años he estado vinculada al desarrollo y operación de clínicas estéticas.",
-    "nos.ana.p2": "Cuando una persona comienza a cuidarse, muchas veces no cambia solamente por fuera. También cambia la forma en que se mira, la seguridad con la que se siente y la manera en que se relaciona consigo misma.",
-    "nos.ana.p3": "Por eso nació D'ALMA: un espacio para mujeres y hombres que quieren verse bien, sentirse bien y regalarse un momento para ellos.",
+    "nos.ana.p1": "D'ALMA nació de querer crear el tipo de clínica al que yo misma quisiera llegar: un lugar donde te escuchen, te expliquen y te orienten sin hacerte sentir que tienes que cambiarlo todo. Queremos que cada persona se sienta cómoda, segura y acompañada desde el primer momento.",
+    "nos.ana.p2": "Soy comunicóloga y periodista de formación, y desde hace años he estado vinculada al desarrollo y operación de clínicas estéticas.",
+    "nos.ana.p3": "Cuando una persona comienza a cuidarse, muchas veces no cambia solamente por fuera. También cambia la forma en que se mira, la seguridad con la que se siente y la manera en que se relaciona consigo misma.",
     "nos.ana.cta": "Conoce nuestros servicios",
     "nos.team.eyebrow": "Las personas detrás de D'ALMA",
     "nos.team.h2": "Nuestro equipo",
@@ -1488,7 +1513,7 @@ const I18N = {
     "svc.fillers.txt": "Tratamientos personalizados con ácido hialurónico que permiten recuperar volumen, definir ciertas zonas del rostro y mejorar la armonía facial, siempre buscando resultados naturales y acordes a tus facciones.",
     "svc.hydrafacial.quote": "\"Una piel limpia, hidratada y luminosa también se siente diferente.\"",
     "svc.hydrafacial.txt": "Limpieza facial profunda que combina exfoliación, extracción e hidratación para ayudar a mejorar la textura, luminosidad y apariencia general de la piel. Se adapta a diferentes tipos y necesidades de piel.",
-    "svc.micro.title": "Microneedling y Despigmentantes",
+    "svc.micro.title": "Microneedling / Dermapen / Manchas",
     "svc.micro.quote": "\"Ayudar a tu piel a renovarse desde adentro.\"",
     "svc.micro.txt": "Tratamiento que estimula los procesos naturales de renovación de la piel y puede ayudar a mejorar textura, poros, cicatrices, manchas y apariencia general. El protocolo se personaliza de acuerdo con las necesidades de cada piel.",
     "svc.pdrn.quote": "\"Cuando tu piel necesita algo más que hidratación.\"",
@@ -1504,9 +1529,9 @@ const I18N = {
     "svc.especial.txt": "Valoramos de manera individual verrugas, cicatrices elevadas, queloides y otras alteraciones de la piel para determinar la opción más adecuada en cada caso. Dependiendo de la valoración médica, pueden utilizarse diferentes técnicas buscando mejorar su apariencia, textura y las molestias que puedan ocasionar.",
     "svc.plasmapen.quote": "\"Cuando un pequeño detalle puede hacer una gran diferencia.\"",
     "svc.plasmapen.txt": "Tecnología utilizada en casos seleccionados para trabajar pequeñas zonas de la piel y mejorar determinadas imperfecciones de forma precisa. Siempre requiere valoración previa para determinar si es la opción adecuada.",
-    "svc.controlpeso.title": "Control de Peso",
-    "svc.controlpeso.quote": "\"No se trata solo de bajar de peso, sino de sentirte mejor en tu cuerpo.\"",
-    "svc.controlpeso.txt": "Programa médico personalizado para acompañar el control de peso de acuerdo con los objetivos, hábitos y necesidades de cada persona. Después de una valoración se determina el protocolo adecuado y, cuando está indicado, pueden integrarse tratamientos de apoyo metabólico dentro de un seguimiento profesional.",
+    "svc.controlpeso.title": "Control de Peso y bienestar",
+    "svc.controlpeso.quote": "\"Un programa pensado para ayudarte a bajar de peso con acompañamiento médico y seguimiento durante todo el proceso.\"",
+    "svc.controlpeso.txt": "Comenzamos con una valoración para conocer tus antecedentes, objetivos y necesidades. A partir de ahí, el médico define el tratamiento adecuado y da seguimiento a tu evolución. Cuando está indicado, el programa puede incluir tratamiento farmacológico como apoyo.",
     "svc.bottom.eyebrow": "¿No sabes por dónde empezar?",
     "svc.bottom.h2": "Agenda una valoración.",
     "svc.bottom.p": "Te explicamos qué tratamiento es más adecuado para ti según tu piel, tus objetivos y tu presupuesto.",
@@ -1544,7 +1569,7 @@ const I18N = {
     "cont.form.opt_capilares": "Tratamientos Capilares",
     "cont.form.opt_laser": "Depilación Láser",
     "cont.form.opt_especial": "Verrugas y Queloides",
-    "cont.form.opt_control_peso": "Control de Peso",
+    "cont.form.opt_control_peso": "Control de Peso y bienestar",
     "cont.form.opt_other": "Otro / No estoy seguro",
     "cont.form.lbl_msg": "Mensaje (opcional)",
     "cont.form.ph_msg": "¿Tienes alguna pregunta?",
@@ -1589,7 +1614,7 @@ const I18N = {
     "alt.depilacion": "Depilación láser",
     "alt.especializados": "Verrugas y Queloides",
     "alt.plasmapen": "Plasma Pen",
-    "alt.control_peso": "Control de Peso",
+    "alt.control_peso": "Control de Peso y bienestar",
     "alt.interior": "Interior D'ALMA Clinic",
     "alt.directora_hero": "Ana María, Directora de D'ALMA CLINIC",
     "alt.directora_team": "Ana María, Directora",
@@ -1603,7 +1628,7 @@ const I18N = {
     "nav.about": "About",
     "nav.testimonials": "Testimonials",
     "nav.contact": "Contact",
-    "nav.book": "Book an Appointment",
+    "nav.book": "Book Your Consultation",
     "nav.menu_aria": "Menu",
     "footer.tagline": "A warm, modern space for men and women who want to feel their best.",
     "footer.pages_title": "Pages",
@@ -1617,35 +1642,37 @@ const I18N = {
     "footer.svc.pdrn": "PDRN / Exosomes",
     "footer.svc.capilares": "Hair Treatments",
     "footer.svc.especial": "Warts and Keloids",
-    "footer.svc.control_peso": "Weight Management",
+    "footer.svc.control_peso": "Weight Management & Wellness",
     "svc.laser_title": "Laser Hair Removal",
+    "svc.intro.h2": "What would you like to improve?",
+    "svc.intro.p": "Tell us what's on your mind, and we'll help you find the best option for you.",
     "badge.faciales": "Facials",
     "badge.inyectables": "Injectables",
     "badge.regeneracion": "Regenerative",
     "svc.filter.label": "Filter by category",
-    "svc.more.show": "View more",
+    "svc.more.show": "Learn about the treatment",
     "svc.more.hide": "View less",
     "filter.all": "All",
-    "filter.inyectables": "Injectables",
+    "filter.inyectables": "Expression Lines & Facial Harmonization",
     "filter.regeneracion": "Regenerative",
-    "filter.faciales": "Facials",
+    "filter.faciales": "Hydration, Spots & Skin Texture",
     "filter.capilares": "Hair",
     "filter.depilacion": "Hair Removal",
-    "filter.especializados": "Specialized",
+    "filter.especializados": "Imperfections",
     "filter.control_peso": "Weight management",
     "lbl.antes": "Before",
     "lbl.despues": "After",
     "btn.book_consult": "Book Your Consultation",
-    "cta.enviar_wa": "Book via WhatsApp",
+    "cta.enviar_wa": "Message us on WhatsApp",
     "home.hero.h1": "Aesthetic & regenerative medicine clinic · Cabo San Lucas",
     "home.hero.statement": "It's not about changing who you are — it's about feeling good about yourself again.",
-    "home.hero.p": "Aesthetic and regenerative medicine for face and body, with personalized consultations, natural results, and a warm, personal touch.",
+    "home.hero.p": "Aesthetic and regenerative medicine in Cabo San Lucas, with a medical consultation and treatments designed around you.",
     "home.hero.cta1": "Book Your Consultation",
     "home.hero.cta2": "Explore Our Treatments",
     "home.hero.img_alt": "Woman with radiant, glowing skin",
     "home.treat.eyebrow": "What We Offer",
     "home.treat.h2": "Featured Treatments",
-    "home.treat.p": "Every treatment starts with a consultation, because understanding what you need matters more than anything else.",
+    "home.treat.p": "You don't have to know which treatment you need. Tell us what you'd like to improve, and we'll guide you.",
     "home.card.hydrafacial.txt": "Deep cleansing, exfoliation, and hydration for glowing skin from your very first session.",
     "home.card.botox.txt": "Softens expression lines with natural, gradual results. Requires a medical consultation.",
     "home.card.fillers.title": "Fillers & Facial Contouring",
@@ -1677,12 +1704,13 @@ const I18N = {
     "home.quote.cta2": "View Treatments",
     "home.phil.eyebrow": "Our Philosophy",
     "home.phil.h2": "Why D'ALMA?",
-    "home.phil.f1.title": "A Consultation First, Always",
-    "home.phil.f1.txt": "We never apply a treatment without first understanding you. Every person is different, and that matters.",
+    "home.phil.sub": "We listen first. Then we see what you need.",
+    "home.phil.f1.title": "We Listen First",
+    "home.phil.f1.txt": "Before recommending any treatment, we want to understand what's on your mind and what you're looking for.",
     "home.phil.f2.title": "Natural Results",
-    "home.phil.f2.txt": "We look for harmony: not to change who you are, but to help you feel like yourself, with more confidence.",
-    "home.phil.f3.title": "A Warm, Inclusive Space",
-    "home.phil.f3.txt": "For men and women alike. Never cold, never exclusive. Here, you'll always feel like you belong.",
+    "home.phil.f2.txt": "We look for harmony and changes that feel right for you, without losing what makes you, you.",
+    "home.phil.f3.title": "A Welcoming Space",
+    "home.phil.f3.txt": "We've created a space where you can feel comfortable, safe, and supported from the moment you arrive.",
     "home.map.quote": "\"Your skin has<br>a story to tell, too.\"",
     "home.map.hours": "Monday to Sunday · 10:00 am – 8:00 pm",
     "nos.hero.eyebrow": "Who We Are",
@@ -1690,9 +1718,9 @@ const I18N = {
     "nos.hero.p": "More than a clinic — a space where you can feel at ease and good about yourself.",
     "nos.ana.eyebrow": "Director",
     "nos.ana.h2": "Hi, I'm Ana María.",
-    "nos.ana.p1": "I'm a communications professional and journalist by training, and for years I've been involved in the development and operation of aesthetic clinics.",
-    "nos.ana.p2": "When someone starts taking care of themselves, they often don't just change on the outside. The way they see themselves, the confidence they feel, and how they relate to themselves change too.",
-    "nos.ana.p3": "That's why D'ALMA was born: a space for women and men who want to look good, feel good, and give themselves a moment of their own.",
+    "nos.ana.p1": "D'ALMA was born from wanting to create the kind of clinic I myself would want to walk into: a place where you're listened to, where things are explained clearly, and where you're guided without ever feeling like you have to change everything about yourself. We want every person to feel comfortable, safe, and supported from the very first moment.",
+    "nos.ana.p2": "I'm a communications professional and journalist by training, and for years I've been involved in the development and operation of aesthetic clinics.",
+    "nos.ana.p3": "When someone starts taking care of themselves, they often don't just change on the outside. The way they see themselves, the confidence they feel, and how they relate to themselves change too.",
     "nos.ana.cta": "Explore Our Treatments",
     "nos.team.eyebrow": "The People Behind D'ALMA",
     "nos.team.h2": "Our Team",
@@ -1725,7 +1753,7 @@ const I18N = {
     "svc.fillers.txt": "Personalized treatments with hyaluronic acid that help restore volume, define certain areas of the face, and improve facial harmony, always aiming for natural results that suit your features.",
     "svc.hydrafacial.quote": "\"Skin that's clean, hydrated, and radiant feels different, too.\"",
     "svc.hydrafacial.txt": "A deep facial cleanse that combines exfoliation, extraction, and hydration to help improve your skin's texture, radiance, and overall appearance. It adapts to different skin types and needs.",
-    "svc.micro.title": "Microneedling & Pigmentation Treatment",
+    "svc.micro.title": "Microneedling / Dermapen / Dark Spots",
     "svc.micro.quote": "\"Helping your skin renew itself from within.\"",
     "svc.micro.txt": "A treatment that stimulates the skin's natural renewal process and can help improve texture, pores, scarring, dark spots, and overall appearance. The protocol is personalized according to each skin's needs.",
     "svc.pdrn.quote": "\"When your skin needs more than hydration.\"",
@@ -1741,9 +1769,9 @@ const I18N = {
     "svc.especial.txt": "We assess warts, raised scars, keloids, and other skin changes individually to determine the best option for each case. Depending on the medical evaluation, different techniques may be used to help improve their appearance, texture, and any discomfort they may cause.",
     "svc.plasmapen.quote": "\"When a small detail can make a big difference.\"",
     "svc.plasmapen.txt": "Technology used in select cases to work on small areas of the skin and precisely improve certain imperfections. It always requires a prior consultation to determine if it's the right option.",
-    "svc.controlpeso.title": "Weight Management",
-    "svc.controlpeso.quote": "\"It's not just about losing weight — it's about feeling better in your body.\"",
-    "svc.controlpeso.txt": "A personalized medical program to support weight management according to each person's goals, habits, and needs. After a consultation, the appropriate protocol is determined, and when indicated, metabolic support treatments may be included as part of professional follow-up.",
+    "svc.controlpeso.title": "Weight Management & Wellness",
+    "svc.controlpeso.quote": "\"A program designed to help you lose weight with medical guidance and support throughout the process.\"",
+    "svc.controlpeso.txt": "We start with a consultation to understand your background, goals, and needs. From there, the doctor defines the right treatment and follows your progress. When appropriate, the program may include medication as part of that support.",
     "svc.bottom.eyebrow": "Not Sure Where to Start?",
     "svc.bottom.h2": "Book a Consultation.",
     "svc.bottom.p": "We'll help you find the right treatment for your skin, your goals, and your budget.",
@@ -1781,7 +1809,7 @@ const I18N = {
     "cont.form.opt_capilares": "Hair Treatments",
     "cont.form.opt_laser": "Laser Hair Removal",
     "cont.form.opt_especial": "Warts and Keloids",
-    "cont.form.opt_control_peso": "Weight Management",
+    "cont.form.opt_control_peso": "Weight Management & Wellness",
     "cont.form.opt_other": "Other / Not Sure",
     "cont.form.lbl_msg": "Message (optional)",
     "cont.form.ph_msg": "Do you have any questions?",
@@ -1826,7 +1854,7 @@ const I18N = {
     "alt.depilacion": "Laser Hair Removal",
     "alt.especializados": "Warts and Keloids",
     "alt.plasmapen": "Plasma Pen",
-    "alt.control_peso": "Weight Management",
+    "alt.control_peso": "Weight Management & Wellness",
     "alt.interior": "Inside D'ALMA Clinic",
     "alt.directora_hero": "Ana María, Director of D'ALMA CLINIC",
     "alt.directora_team": "Ana María, Director",
@@ -1912,12 +1940,25 @@ function setLang(lang) {
 
   function goToService(id) {
     showPg('servicios', document.querySelectorAll('.pb')[2]);
-    var allPill = document.querySelector('#pg-servicios .fp[data-cat="todos"]');
-    if (allPill && !allPill.classList.contains('on')) allPill.click();
+    var sel = document.getElementById('svc-filter-select');
+    if (sel && sel.value !== 'todos') {
+      sel.value = 'todos';
+      sel.dispatchEvent(new Event('change'));
+    }
     setTimeout(function() {
       var el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 80);
+  }
+
+  // WhatsApp number is not defined yet: instead of a dead link, this scrolls to and
+  // briefly highlights the info row that shows "[NÚMERO PENDIENTE]".
+  function focusWaInfo() {
+    var row = document.getElementById('ci-wa-row');
+    if (!row) return;
+    row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    row.classList.add('ci-row-focus');
+    setTimeout(function() { row.classList.remove('ci-row-focus'); }, 1600);
   }
 
   function toggleMenu(menuId, hamId) {
@@ -1967,12 +2008,11 @@ function setLang(lang) {
     });
   });
 
-  // Filter pills (Servicios) - actually filter the treatment grid by category
-  document.querySelectorAll('.fp').forEach(fp => {
-    fp.addEventListener('click', function() {
-      this.closest('.filter-bar').querySelectorAll('.fp').forEach(b => b.classList.remove('on'));
-      this.classList.add('on');
-      var cat = this.dataset.cat;
+  // Category filter (Servicios) - dropdown filters the treatment grid by category
+  var svcFilterSelect = document.getElementById('svc-filter-select');
+  if (svcFilterSelect) {
+    svcFilterSelect.addEventListener('change', function() {
+      var cat = this.value;
       document.querySelectorAll('#svc-grid [data-cat]').forEach(function(card) {
         card.style.display = (cat === 'todos' || card.dataset.cat === cat) ? '' : 'none';
       });
@@ -1980,7 +2020,7 @@ function setLang(lang) {
         setCardExpanded(openItem, false);
       });
     });
-  });
+  }
 
   // FAQ accordion (Contacto) - only one open at a time, keyboard-accessible via native button
   document.querySelectorAll('.fq-item').forEach(function(item) {
