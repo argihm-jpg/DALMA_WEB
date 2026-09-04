@@ -360,6 +360,18 @@
     .ci-val{font-size:.84rem;color:var(--taupe-700);line-height:1.5;}
     .ci-ph{color:var(--taupe-400)!important;}
     .ci-row-focus{outline:2px solid var(--taupe-400);outline-offset:8px;border-radius:6px;background:var(--bone-200);transition:background 200ms ease;}
+
+    /* Aviso de privacidad */
+    .priv-wrap{max-width:760px;margin:0 auto;padding:56px 20px 80px;}
+    .priv-h1{font-family:var(--fd);font-size:clamp(2rem,4vw,2.75rem);font-weight:300;color:var(--taupe-700);margin-bottom:24px;}
+    .priv-note{background:var(--bone-200);border-left:3px solid var(--taupe-400);padding:14px 18px;border-radius:6px;font-size:.78rem;color:var(--taupe-700);line-height:1.65;margin-bottom:36px;}
+    .priv-h2{font-family:var(--fd);font-size:1.4rem;font-weight:400;color:var(--taupe-700);margin:38px 0 14px;}
+    .priv-h2:first-of-type{margin-top:0;}
+    .priv-h3{font-family:var(--fb);font-size:.8rem;font-weight:700;letter-spacing:.03em;color:var(--taupe-700);margin:26px 0 8px;}
+    .priv-p{font-size:.86rem;color:var(--taupe-600);line-height:1.75;margin-bottom:12px;}
+    .priv-placeholder{color:var(--taupe-500);font-style:italic;}
+    html[lang="es"] .priv-en-only{display:none;}
+    .priv-en-banner{font-size:.78rem;color:var(--taupe-600);background:var(--bone-200);border-radius:6px;padding:10px 16px;margin-bottom:28px;}
     .ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
     .fq-item{border-bottom:1px solid var(--bone-400);}
     .fq-q{display:flex;justify-content:space-between;align-items:center;width:100%;padding:18px 0;background:none;border:none;font:inherit;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent;}
@@ -440,7 +452,7 @@
   <section class="sec">
     <div style="text-align:center;margin-bottom:48px;">
       <div class="ew" data-i18n="home.treat.eyebrow">Lo que ofrecemos</div>
-      <h2 class="st" data-i18n="home.treat.h2">Tratamientos destacados</h2>
+      <h2 class="st" data-i18n="home.treat.h2">Tratamientos</h2>
       <p class="bt" style="max-width:500px;margin:12px auto 0;" data-i18n="home.treat.p">No tienes que saber qué tratamiento necesitas. Cuéntanos qué te gustaría mejorar y te orientamos.</p>
     </div>
     <div class="g4">
@@ -528,22 +540,11 @@
     <p class="tco-note" data-i18n="home.testi.note">* Contenido de muestra: los testimonios finales serán definidos por la cliente.</p>
   </section>
 
-  <!-- QUOTE DARK -->
-  <section class="sec sec-dk" style="padding:88px 56px;text-align:center;">
-    <div class="ew ew-lt" style="margin-bottom:18px;">D'ALMA CLINIC</div>
-    <blockquote style="font-family:var(--fd);font-size:clamp(1.6rem,3.2vw,2.75rem);font-weight:300;color:var(--bone-200);line-height:1.35;letter-spacing:-.01em;font-style:italic;max-width:700px;margin:0 auto 24px;" data-i18n-html="home.quote.text">"No se trata de cambiar quién eres...<br>se trata de volver a sentirte tú."</blockquote>
-    <p class="bt bt-lt" style="max-width:460px;margin:0 auto 32px;" data-i18n="home.quote.p">Queremos que venir a D'ALMA se sienta distinto. Un espacio donde te sientas cómodo, seguro y bien contigo mismo.</p>
-    <div class="ctas" style="justify-content:center;margin-top:0;">
-      <button class="bp bp-lt" data-i18n="home.quote.cta1" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1])">Conoce nuestra historia</button>
-      <button class="bs bs-lt" data-i18n="home.quote.cta2" onclick="showPg('servicios',document.querySelectorAll('.pb')[2])">Ver servicios</button>
-    </div>
-  </section>
-
   <!-- FILOSOFÍA -->
   <section class="sec sec-alt" style="padding:88px 56px;">
     <div style="text-align:center;margin-bottom:52px;">
-      <div class="ew" data-i18n="home.phil.eyebrow">Nuestra filosofía</div>
-      <h2 class="st" data-i18n="home.phil.h2">¿Por qué D'ALMA?</h2>
+      <h2 class="ew" style="margin-top:0;" data-i18n="home.phil.h2">Nuestra filosofía</h2>
+      <p class="st" style="margin:0;" data-i18n="home.phil.statement">¿Por qué D'ALMA?</p>
       <p class="bt" style="max-width:500px;margin:12px auto 0;" data-i18n="home.phil.sub">Primero te escuchamos. Después vemos qué necesitas.</p>
     </div>
     <div class="g3">
@@ -604,7 +605,7 @@
   <footer class="footer">
     <div class="footer-grid">
       <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
-      <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
+      <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#aviso-de-privacidad" onclick="showPg('privacidad');history.replaceState(null,'','#aviso-de-privacidad');return false;" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
     </div>
@@ -757,7 +758,7 @@
   <footer class="footer">
     <div class="footer-grid">
       <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
-      <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
+      <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#aviso-de-privacidad" onclick="showPg('privacidad');history.replaceState(null,'','#aviso-de-privacidad');return false;" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
     </div>
@@ -1012,7 +1013,7 @@
   <footer class="footer">
     <div class="footer-grid">
       <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
-      <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
+      <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#aviso-de-privacidad" onclick="showPg('privacidad');history.replaceState(null,'','#aviso-de-privacidad');return false;" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
     </div>
@@ -1163,7 +1164,7 @@
   <footer class="footer">
     <div class="footer-grid">
       <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
-      <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
+      <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#aviso-de-privacidad" onclick="showPg('privacidad');history.replaceState(null,'','#aviso-de-privacidad');return false;" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
     </div>
@@ -1303,8 +1304,7 @@
   <!-- FAQ -->
   <section class="sec sec-alt">
     <div style="text-align:center;margin-bottom:48px;">
-      <div class="ew" data-i18n="cont.faq.eyebrow">Preguntas frecuentes</div>
-      <h2 class="st" data-i18n="cont.faq.h2">¿Tienes dudas?</h2>
+      <h2 class="st" data-i18n="cont.faq.h2">Preguntas frecuentes</h2>
     </div>
     <div style="max-width:720px;margin:0 auto;">
       <div class="fq-item">
@@ -1362,7 +1362,7 @@
   <footer class="footer">
     <div class="footer-grid">
       <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
-      <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
+      <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#aviso-de-privacidad" onclick="showPg('privacidad');history.replaceState(null,'','#aviso-de-privacidad');return false;" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
     </div>
@@ -1370,6 +1370,106 @@
     <div class="fbot"><div class="fcopy" data-i18n="footer.copyright">© 2026 D'ALMA CLINIC · Todos los derechos reservados</div></div>
   </footer>
 </div><!-- /contacto -->
+
+<div class="pg" id="pg-privacidad">
+
+  <nav class="nav">
+    <a href="#" class="nav-logo" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;">D'<em>ALMA</em></a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a></li>
+      <li><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a></li>
+      <li><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a></li>
+      <li><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a></li>
+      <li><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a></li>
+    </ul>
+    <div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button></div>
+    <button class="nav-cta" data-i18n="nav.book" onclick="showPg('contacto',document.querySelectorAll('.pb')[4])">Agenda tu valoración</button>
+    <button class="nav-ham" id="ham-privacidad" onclick="toggleMenu('mm-privacidad','ham-privacidad')" data-i18n-aria="nav.menu_aria" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="nav-mmenu" id="mm-privacidad">
+    <ul>
+      <li><a href="#" onclick="closeMenu('mm-privacidad','ham-privacidad');showPg('home',document.querySelectorAll('.pb')[0])" data-i18n="nav.home">Inicio</a></li>
+      <li><a href="#" onclick="closeMenu('mm-privacidad','ham-privacidad');showPg('servicios',document.querySelectorAll('.pb')[2])" data-i18n="nav.treatments">Servicios</a></li>
+      <li><a href="#" onclick="closeMenu('mm-privacidad','ham-privacidad');showPg('nosotros',document.querySelectorAll('.pb')[1])" data-i18n="nav.about">Nosotros</a></li>
+      <li><a href="#" onclick="closeMenu('mm-privacidad','ham-privacidad');showPg('testimonios',document.querySelectorAll('.pb')[3])" data-i18n="nav.testimonials">Testimonios</a></li>
+      <li><a href="#" onclick="closeMenu('mm-privacidad','ham-privacidad');showPg('contacto',document.querySelectorAll('.pb')[4])" data-i18n="nav.contact">Contacto</a></li>
+    </ul>
+    <div class="lang-switch lang-switch-mobile" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang('es')">Español</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button></div>
+    <button class="mm-cta" onclick="closeMenu('mm-privacidad','ham-privacidad');showPg('contacto',document.querySelectorAll('.pb')[4])"><span data-i18n="nav.book">Agenda tu valoración</span></button>
+  </div>
+
+  <!-- AVISO DE PRIVACIDAD -->
+  <section class="sec" style="padding-bottom:0;">
+    <div class="priv-wrap">
+      <h1 class="priv-h1" data-i18n="priv.h1">Aviso de privacidad</h1>
+
+      <div class="priv-note" data-i18n="priv.pending_note">Este aviso todavía tiene datos pendientes de completar por la clínica (marcados entre corchetes, por ejemplo [CORREO DE PRIVACIDAD]). No debe considerarse la versión final para publicación hasta que esos datos se completen.</div>
+
+      <div class="priv-en-banner priv-en-only">This legal notice is currently available in Spanish. An official English translation has not been prepared yet.</div>
+
+      <div class="priv-legal-body">
+        <h2 class="priv-h2">Aviso de privacidad simplificado</h2>
+        <p class="priv-p">D&rsquo;Alma Clinic es responsable del uso y protección de los datos personales que usted proporcione. Sus datos serán utilizados para atender su solicitud, brindarle información sobre nuestros servicios, agendar o confirmar citas y dar seguimiento a su atención. Consulte nuestro Aviso de Privacidad Integral.</p>
+        <p class="priv-p">Al enviar este formulario, usted reconoce haber leído y aceptado el tratamiento de sus datos conforme al Aviso de Privacidad Integral.</p>
+
+        <h2 class="priv-h2">Aviso de privacidad integral</h2>
+
+        <h3 class="priv-h3">Identidad y domicilio del responsable</h3>
+        <p class="priv-p"><span class="priv-placeholder">[NOMBRE LEGAL COMPLETO DE LA PERSONA FÍSICA O MORAL]</span>, que opera comercialmente como D&rsquo;Alma Clinic, con domicilio en <span class="priv-placeholder">[DOMICILIO COMPLETO]</span>, es responsable del tratamiento y protección de sus datos personales. Para asuntos relacionados con privacidad puede comunicarse al correo <span class="priv-placeholder">[CORREO DE PRIVACIDAD]</span> o al teléfono <span class="priv-placeholder">[TELÉFONO]</span>.</p>
+
+        <h3 class="priv-h3">Datos personales que se recaban</h3>
+        <p class="priv-p">Podremos recabar datos de identificación y contacto, como nombre, edad, teléfono, correo electrónico y datos necesarios para agendar y atender su solicitud. Cuando usted solicite una valoración o tratamiento, también podremos recabar datos relacionados con su salud, antecedentes médicos, alergias, medicamentos, tratamientos previos, fotografías clínicas y evolución. Estos últimos se consideran datos personales sensibles y serán protegidos con medidas reforzadas de seguridad.</p>
+
+        <h3 class="priv-h3">Finalidades principales</h3>
+        <p class="priv-p">Sus datos serán utilizados para atender solicitudes de información; agendar, confirmar, modificar o cancelar citas; realizar valoraciones; determinar si un tratamiento es adecuado; prestar servicios de medicina estética y cuidado de la piel; integrar y administrar su expediente; dar seguimiento a resultados; brindar indicaciones; gestionar consentimientos informados; realizar cobros y facturación; y cumplir obligaciones legales, sanitarias, fiscales y administrativas.</p>
+
+        <h3 class="priv-h3">Finalidades secundarias</h3>
+        <p class="priv-p">Con su autorización, podremos utilizar sus datos de contacto para enviar promociones, novedades, recordatorios, encuestas de satisfacción e información sobre servicios. Usted puede negarse a estas finalidades o solicitar dejar de recibir comunicaciones escribiendo a <span class="priv-placeholder">[CORREO DE PRIVACIDAD]</span>. La negativa no afectará la atención o los servicios contratados.</p>
+
+        <h3 class="priv-h3">Fotografías, videos y testimonios</h3>
+        <p class="priv-p">Las fotografías clínicas que formen parte de la valoración, expediente o seguimiento serán confidenciales. Su publicación en redes sociales, sitio web, publicidad o materiales promocionales requerirá una autorización expresa y separada. Negarse al uso publicitario de su imagen no afectará la atención recibida.</p>
+
+        <h3 class="priv-h3">Transferencias de datos</h3>
+        <p class="priv-p">Sus datos podrán compartirse, cuando sea necesario, con profesionales de la salud que participen en su atención, proveedores de agenda, almacenamiento, facturación, mensajería o procesamiento de pagos, asesores profesionales y autoridades competentes. Dichos terceros deberán usar la información únicamente para las finalidades autorizadas y mantener su confidencialidad. Cuando la ley requiera su consentimiento para una transferencia, éste será solicitado previamente.</p>
+
+        <h3 class="priv-h3">Derechos ARCO</h3>
+        <p class="priv-p">Usted puede solicitar el acceso, rectificación, cancelación u oposición al tratamiento de sus datos personales. Para ejercer estos derechos deberá enviar una solicitud a <span class="priv-placeholder">[CORREO DE PRIVACIDAD]</span>, indicando su nombre, medio para recibir respuesta, derecho que desea ejercer, descripción de los datos involucrados y documentos que acrediten su identidad. D&rsquo;Alma Clinic atenderá la solicitud conforme a los plazos legales aplicables.</p>
+
+        <h3 class="priv-h3">Revocación y limitación</h3>
+        <p class="priv-p">Usted puede revocar su consentimiento o limitar el uso y divulgación de sus datos, siempre que no exista una obligación legal, sanitaria, contractual o administrativa que requiera conservarlos. La solicitud deberá enviarse a <span class="priv-placeholder">[CORREO DE PRIVACIDAD]</span>. La revocación no tendrá efectos retroactivos.</p>
+
+        <h3 class="priv-h3">Seguridad y conservación</h3>
+        <p class="priv-p">D&rsquo;Alma Clinic aplicará medidas administrativas, técnicas y físicas razonables para proteger sus datos contra daño, pérdida, alteración, destrucción, uso o acceso no autorizado. Los datos serán conservados durante el tiempo necesario para cumplir las finalidades descritas y los plazos legales aplicables.</p>
+
+        <h3 class="priv-h3">Cookies y tecnologías de navegación</h3>
+        <p class="priv-p">El sitio podrá utilizar cookies, píxeles y herramientas de análisis para facilitar la navegación, medir visitas y evaluar campañas. El usuario puede administrar o desactivar las cookies desde su navegador, aunque algunas funciones podrían verse limitadas.</p>
+
+        <h3 class="priv-h3">Menores de edad</h3>
+        <p class="priv-p">La atención y el tratamiento de datos de menores de edad requerirán la participación y autorización del padre, madre o tutor legal, así como los consentimientos correspondientes.</p>
+
+        <h3 class="priv-h3">Cambios al aviso</h3>
+        <p class="priv-p">Este aviso puede modificarse por cambios legales, operativos o tecnológicos. Las actualizaciones estarán disponibles en <span class="priv-placeholder">[DIRECCIÓN DEL SITIO WEB]</span> o se comunicarán por los medios de contacto registrados cuando corresponda.</p>
+
+        <h3 class="priv-h3">Consentimiento</h3>
+        <p class="priv-p">Al proporcionar sus datos a través del sitio web, teléfono, WhatsApp o de manera presencial, usted reconoce haber leído este aviso. Cuando se traten datos sensibles, fotografías clínicas o uso publicitario de imagen, se solicitará el consentimiento expreso correspondiente.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
+      <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home',document.querySelectorAll('.pb')[0]);return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros',document.querySelectorAll('.pb')[1]);return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios',document.querySelectorAll('.pb')[2]);return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios',document.querySelectorAll('.pb')[3]);return false;" data-i18n="nav.testimonials">Testimonios</a><a href="#" onclick="showPg('contacto',document.querySelectorAll('.pb')[4]);return false;" data-i18n="nav.contact">Contacto</a><a href="#aviso-de-privacidad" onclick="showPg('privacidad');history.replaceState(null,'','#aviso-de-privacidad');return false;" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
+      <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
+      <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.78rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
+    </div>
+    <hr class="fhr">
+    <div class="fbot"><div class="fcopy" data-i18n="footer.copyright">© 2026 D'ALMA CLINIC · Todos los derechos reservados</div></div>
+  </footer>
+</div><!-- /privacidad -->
 
 </div><!-- /frame -->
 
@@ -1431,7 +1531,7 @@ const I18N = {
     "home.hero.cta2": "Conoce nuestros tratamientos",
     "home.hero.img_alt": "Mujer con piel luminosa",
     "home.treat.eyebrow": "Lo que ofrecemos",
-    "home.treat.h2": "Tratamientos destacados",
+    "home.treat.h2": "Tratamientos",
     "home.treat.p": "No tienes que saber qué tratamiento necesitas. Cuéntanos qué te gustaría mejorar y te orientamos.",
     "home.card.hydrafacial.txt": "Limpieza profunda, exfoliación e hidratación. Piel luminosa desde la primera sesión.",
     "home.card.botox.txt": "Suaviza líneas de expresión con resultados naturales y progresivos. Requiere valoración médica.",
@@ -1458,12 +1558,8 @@ const I18N = {
     "aria.anterior": "Anterior",
     "aria.siguiente": "Siguiente",
     "home.testi.note": "* Contenido de muestra: los testimonios finales serán definidos por la cliente.",
-    "home.quote.text": "\"No se trata de cambiar quién eres...<br>se trata de volver a sentirte tú.\"",
-    "home.quote.p": "Queremos que venir a D'ALMA se sienta distinto. Un espacio donde te sientas cómodo, seguro y bien contigo mismo.",
-    "home.quote.cta1": "Conoce nuestra historia",
-    "home.quote.cta2": "Ver servicios",
-    "home.phil.eyebrow": "Nuestra filosofía",
-    "home.phil.h2": "¿Por qué D'ALMA?",
+    "home.phil.h2": "Nuestra filosofía",
+    "home.phil.statement": "¿Por qué D'ALMA?",
     "home.phil.sub": "Primero te escuchamos. Después vemos qué necesitas.",
     "home.phil.f1.title": "Primero te escuchamos",
     "home.phil.f1.txt": "Antes de recomendarte cualquier tratamiento, queremos saber qué te preocupa y qué estás buscando.",
@@ -1582,8 +1678,9 @@ const I18N = {
     "cont.info.val_wa_pending": "[NÚMERO PENDIENTE]",
     "cont.info.lbl_ig": "Instagram",
     "cont.info.val_ig_pending": "[HANDLE PENDIENTE]",
-    "cont.faq.eyebrow": "Preguntas frecuentes",
-    "cont.faq.h2": "¿Tienes dudas?",
+    "cont.faq.h2": "Preguntas frecuentes",
+    "priv.h1": "Aviso de privacidad",
+    "priv.pending_note": "Este aviso todavía tiene datos pendientes de completar por la clínica (marcados entre corchetes, por ejemplo [CORREO DE PRIVACIDAD]). No debe considerarse la versión final para publicación hasta que esos datos se completen.",
     "faq.shared.h2": "Preguntas frecuentes",
     "faq.q1": "¿Cómo puedo saber qué tratamiento de medicina estética es el adecuado para mí?",
     "faq.a1": "Cada piel, rostro y cuerpo tienen necesidades diferentes. Por eso, antes de recomendar un procedimiento realizamos una valoración personalizada para conocer tus objetivos, antecedentes y necesidades, y así ofrecerte opciones adecuadas para ti.",
@@ -1671,7 +1768,7 @@ const I18N = {
     "home.hero.cta2": "Explore Our Treatments",
     "home.hero.img_alt": "Woman with radiant, glowing skin",
     "home.treat.eyebrow": "What We Offer",
-    "home.treat.h2": "Featured Treatments",
+    "home.treat.h2": "Treatments",
     "home.treat.p": "You don't have to know which treatment you need. Tell us what you'd like to improve, and we'll guide you.",
     "home.card.hydrafacial.txt": "Deep cleansing, exfoliation, and hydration for glowing skin from your very first session.",
     "home.card.botox.txt": "Softens expression lines with natural, gradual results. Requires a medical consultation.",
@@ -1698,12 +1795,8 @@ const I18N = {
     "aria.anterior": "Previous",
     "aria.siguiente": "Next",
     "home.testi.note": "* Sample content: final testimonials will be provided by the client.",
-    "home.quote.text": "\"It's not about changing who you are...<br>it's about feeling like yourself again.\"",
-    "home.quote.p": "We want visiting D'ALMA to feel different: a space where you feel comfortable, safe, and good in your own skin.",
-    "home.quote.cta1": "Our Story",
-    "home.quote.cta2": "View Treatments",
-    "home.phil.eyebrow": "Our Philosophy",
-    "home.phil.h2": "Why D'ALMA?",
+    "home.phil.h2": "Our philosophy",
+    "home.phil.statement": "Why D'ALMA?",
     "home.phil.sub": "We listen first. Then we see what you need.",
     "home.phil.f1.title": "We Listen First",
     "home.phil.f1.txt": "Before recommending any treatment, we want to understand what's on your mind and what you're looking for.",
@@ -1822,8 +1915,9 @@ const I18N = {
     "cont.info.val_wa_pending": "[NUMBER PENDING]",
     "cont.info.lbl_ig": "Instagram",
     "cont.info.val_ig_pending": "[HANDLE PENDING]",
-    "cont.faq.eyebrow": "Frequently Asked Questions",
-    "cont.faq.h2": "Have Questions?",
+    "cont.faq.h2": "Frequently asked questions",
+    "priv.h1": "Privacy Notice",
+    "priv.pending_note": "This notice still has data pending from the clinic (marked in brackets, e.g. [CORREO DE PRIVACIDAD]). It should not be considered the final version for publication until that data is completed.",
     "faq.shared.h2": "Frequently asked questions",
     "faq.q1": "How can I know which aesthetic medicine treatment is right for me?",
     "faq.a1": "Every skin, face, and body has different needs. That's why, before recommending any procedure, we carry out a personalized consultation to understand your goals, history, and needs, so we can offer you the options that are right for you.",
