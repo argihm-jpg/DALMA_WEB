@@ -146,6 +146,138 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-09-13 (sesión 5) — Cierre de publicación inicial
+**Estado: publicación inicial de D'ALMA en producción, cerrada y confirmada por Bruno.**
+
+**1. Fecha de publicación inicial en Hostinger:** 2026-09-13.
+
+**2. Dominio publicado:** [https://dalmaclinic.com.mx/](https://dalmaclinic.com.mx/)
+
+**3. Ubicación en Hostinger:** `public_html/`
+
+**4. Archivos finales publicados:**
+- `index.html` (copia de `mockup.html` en el momento de la publicación, con Testimonios ya oculto).
+- `imagenes-candidatas/` (solo las 20 imágenes locales referenciadas por el HTML).
+
+**5. Overlay "Próximamente":** activo por defecto para el público general — bloquea visualmente el sitio (ver sesión "2026-09-13" más abajo para el detalle de implementación). No se modificó en esta sesión.
+
+**6. Modo revisión:**
+- `https://dalmaclinic.com.mx/?preview=1` desactiva el overlay y guarda la preferencia en `localStorage` de ese navegador.
+- `https://dalmaclinic.com.mx/?preview=0` vuelve a activar el overlay.
+- Sin parámetro, se respeta lo guardado en `localStorage`; si no hay nada guardado, se muestra el overlay.
+
+**7. Pruebas reales confirmadas por Bruno en el dominio productivo (no solo en el entorno de pruebas local):**
+- El dominio normal (sin parámetro, navegación normal) muestra el overlay "Próximamente".
+- `?preview=1` muestra la web completa, sin overlay.
+- En modo incógnito (sin `localStorage` previo), el dominio normal sigue mostrando el overlay — confirma que el bloqueo es el comportamiento por defecto real para cualquier visitante nuevo.
+
+**8. Testimonios ocultos** (ver detalle completo en la sesión "2026-09-13 (sesión 4)"):
+- `ENABLE_TESTIMONIALS = false`.
+- Ocultos en el menú desktop (header).
+- Ocultos en el menú mobile (hamburguesa) de las 6 páginas.
+- Ocultos en el bloque de Home (entre Tratamientos y Filosofía).
+- Ocultos en el footer (columna Páginas) de las 6 páginas.
+- Página completa `pg-testimonios` (incluye "Antes y después") bloqueada: inalcanzable desde cualquier menú.
+- `showPg('testimonios')` redirige de forma segura a Home si se llama manualmente.
+- Confirmado en producción (`?preview=1`): no aparece en header, no aparece en Home, no aparece en footer, no aparece "Antes y después".
+
+**9. Motivo de ocultar Testimonios:** todavía no existen testimonios reales autorizados por Anita; los testimonios y el bloque "Antes y después" actuales son contenido demo/inventado (nombres ficticios, sin fotos ni autorizaciones reales) y no deben mostrarse públicamente ni en revisión con la cliente.
+
+**10. Estructura conservada:** todo el HTML de Testimonios (carrusel de Home, página completa, carrusel propio, bloque Antes/Después) sigue en el archivo — no se borró nada, solo se oculta mediante la bandera `ENABLE_TESTIMONIALS`.
+
+**11. Para reactivar Testimonios cuando Anita entregue contenido real:**
+1. Recibir testimonios reales autorizados de Anita (citas, nombres, tratamiento asociado).
+2. Reemplazar los textos demo actuales (Sofía Arriaga, Carlos Medina, Gabriela Rojas, Laura Villanueva, Patricia Elizondo, y las citas anónimas M.R./L.G./P.M./R.A./C.V. de la página Testimonios) por el contenido real.
+3. Validar permisos/autorizaciones firmadas antes de publicar fotos de "Antes y después".
+4. Cambiar `ENABLE_TESTIMONIALS` a `true`.
+5. Probar Home, header (desktop y mobile), footer y la página Testimonios completa.
+6. Regenerar `DALMA_PREVIEW/` y volver a publicar en Hostinger.
+
+**12. Pendientes antes del lanzamiento final (fase siguiente, no implementada — solo documentada):**
+- Aprobación final de Anita para retirar el overlay "Próximamente".
+- Retirar el bloque `<!-- PRELAUNCH OVERLAY -->` cuando Anita apruebe el lanzamiento público.
+- Completar los placeholders legales pendientes del Aviso de privacidad (nombre legal, domicilio, correo de privacidad, teléfono, URL del sitio).
+- Definir el número de WhatsApp definitivo (hoy sigue como placeholder).
+- Conectar el formulario de Contacto a un backend real (hoy sigue siendo mockup visual, sin `<form>` funcional).
+- Agregar CAPTCHA (ej. Cloudflare Turnstile) al formulario de contacto, con validación server-side.
+- Crear y configurar los correos institucionales (`@dalmaclinic.com.mx`) en Hostinger.
+- Crear y configurar Google Analytics 4 (GA4).
+- Crear y configurar Google Tag Manager (GTM).
+- Conectar Google Search Console.
+- Definir y preparar eventos de conversión (envío de formulario, clic a WhatsApp, etc.).
+- Preparar Meta Pixel y eventos hacia Meta Business Suite, una vez existan las redes sociales y el Business Manager de la clínica.
+
+Ninguno de estos pendientes fue implementado en esta sesión — quedan únicamente documentados para la siguiente fase, según instrucción explícita de Bruno.
+
+### 2026-09-13 (sesión 4)
+**Solicitud de Bruno:** ocultar Testimonios (Home, página completa, Antes/Después, menú y footer) antes de publicar, porque los testimonios actuales son demo/inventados y no hay todavía testimonios ni fotos reales autorizadas por Anita. No se puede mostrar ni siquiera en modo revisión (`?preview=1`) con Anita. La estructura debe conservarse para reactivarla fácilmente cuando existan testimonios reales.
+
+**Actividades:**
+- **Bandera de control agregada:** `const ENABLE_TESTIMONIALS = false;`, declarada al inicio del `<script>` principal, justo antes del diccionario `I18N`, con comentario explicando que `false` = testimonios ocultos por no haber contenido real autorizado, y `true` = reactivar solo cuando Anita entregue testimonios reales y se reemplacen los textos/nombres demo.
+- **Testimonios ocultos sin borrar HTML**, usando la bandera:
+  - Los 18 enlaces "Testimonios" (nav desktop + menú móvil + footer, repartidos en las 6 páginas) se marcaron con el atributo `data-testimonials-link`. Al cargar, si `ENABLE_TESTIMONIALS` es `false`, un script oculta el `<li>` contenedor (nav/menú móvil) o el propio `<a>` (footer, que no tiene `<li>`), evitando huecos en el menú.
+  - El bloque de Testimonios de Home se marcó con `data-testimonials-section` en su `<section>` y se oculta igual (`display:none`) cuando la bandera está en `false`. Home fluye directo de "Tratamientos" a "Nuestra filosofía".
+  - La página `pg-testimonios` (incluye su propio carrusel y el bloque "Antes y después") ya no es alcanzable desde ningún menú (sus enlaces están ocultos) y además `showPg()` redirige de forma segura: si alguien llama `showPg('testimonios')` con la bandera en `false`, se convierte internamente en `showPg('home')` antes de tocar el DOM o el `<title>`/meta — nunca se activa ni se deja visible el título "Testimonios".
+  - El carrusel de testimonios (`initCarousel`, usado tanto en Home como en la página Testimonios) ahora solo se inicializa cuando `ENABLE_TESTIMONIALS` es `true`, para no dejar temporizadores corriendo en segundo plano sobre secciones ocultas.
+- **No se borró ningún testimonio, nombre, cita ni el bloque Antes/Después** — todo el HTML sigue en el archivo, solo oculto por la bandera.
+- **Para reactivar cuando Anita envíe testimonios reales:**
+  1. Reemplazar los textos demo (citas y nombres: Sofía Arriaga, Carlos Medina, Gabriela Rojas, Laura Villanueva, Patricia Elizondo, M.R./L.G./P.M./R.A./C.V. en la página Testimonios) por testimonios reales autorizados.
+  2. Revisar permisos/autorizaciones de fotos para "Antes y después" antes de mostrarlas.
+  3. Cambiar `ENABLE_TESTIMONIALS` a `true`.
+  4. Probar Home, menú (desktop y mobile), footer y la página Testimonios completa.
+  5. Volver a publicar.
+- Verificado con `?preview=1` (simulado por la limitación conocida de `data:` URLs de este entorno de pruebas): sin "Testimonios" en nav desktop ni mobile, sin el bloque en Home, sin nombres inventados ni frases sensibles ("Resultados reales", "Fotos publicadas con autorización firmada") visibles en el render, footer sin Testimonios (Inicio/Nosotros/Servicios/Contacto/Aviso de privacidad intactos), `showPg('testimonios')` manual redirige a Home sin romper nada, overlay normal y `?preview=0` sin cambios (no se tocó ese bloque), sin overflow horizontal en 390/430/844/1024/1440px, sin `undefined` en ES/EN, sin errores de consola, 235/235 claves i18n y 104/104 IDs únicos.
+
+### 2026-09-13 (sesión 3)
+**Solicitud de Bruno:** quitar por completo la barra negra superior del mockup ("D'ALMA — Mockup del cliente" con los botones Home/Nosotros/Servicios/Testimonios/Contacto), ya que era solo una ayuda de navegación interna para desarrollo y el sitio está por publicarse. Debe quedar únicamente el menú blanco real como navegación oficial.
+
+**Actividades:**
+- **Barra negra (`.pbar`/`.pb`) eliminada por completo**, tanto del HTML (existía un único bloque, compartido por todas las páginas, justo antes del contenedor que envuelve las 6 páginas) como del CSS (`.pbar`, `.pbar-lbl`, `.pb`, `.pb:hover`, `.pb.on` y su override en el media query de mobile). El contenedor que envolvía todas las páginas (antes `<div class="frame">`, con `margin-top:44px` para dejar espacio a la barra) se dejó como `<div>` simple sin esa clase, ya que ese margen ya no aplica.
+- **Dependencias de `.pb` resueltas:** todas las llamadas `showPg('pagina', document.querySelectorAll('.pb')[N])` repartidas en nav, menú móvil, footer, hero y CTAs de las 6 páginas se simplificaron a `showPg('pagina')`. Dentro de `showPg()` se quitó la línea que limpiaba la clase activa de `.pb` (ya no existe). `goToService()` también se actualizó para llamar `showPg('servicios')` sin el segundo argumento. `showPg()` ya aceptaba `btn` como parámetro opcional, así que no falla sin él.
+- **Nav blanco reposicionado:** `.nav{top:44px}` → `top:0` (queda pegado arriba, sin espacio vacío). `.nav-mmenu{top:104px}` → `top:60px` (104px = 44px de la barra negra + 60px del nav compacto; al quitar la barra solo queda la altura del nav).
+- **Overlay "Próximamente" no se tocó** — se verificó que sigue funcionando igual: normal (`mockup.html`) sigue bloqueando con el overlay; en modo revisión (overlay oculto vía `?preview=1`/localStorage, simulado en pruebas por la limitación de `data:` URLs del navegador de este entorno) el sitio se ve completo, sin barra negra y con el nav blanco pegado arriba.
+- Verificado en navegador: 235/235 claves ES/EN sin huecos, 104/104 IDs únicos, sin `undefined`, sin errores de consola, sin overflow horizontal en 390/430/768/844/1024/1440px, nav sticky en `top:0` en todos los anchos, menú hamburguesa abre pegado debajo del nav (sin espacio de la barra negra) en mobile, las 6 páginas (Home/Servicios/Nosotros/Testimonios/Contacto/Aviso de privacidad) navegan correctamente con `showPg()`, `goToService()`, el botón flotante de WhatsApp y "Agenda tu valoración" siguen llevando a Contacto, y el enlace de Aviso de privacidad del footer sigue actualizando el hash (`#aviso-de-privacidad`).
+
+### 2026-09-13 (sesión 2)
+**Solicitud de Bruno:** que el overlay de "Próximamente" siga bloqueando al público general, pero que él pueda revisar la web completa sin que el overlay le aparezca cada vez que la abre.
+
+**Actividades:**
+- **Overlay convertido de bloqueo fijo a modo revisión por URL + localStorage.** Se quitó `class="launch-locked"` hardcodeada de `<html>` y `<body>` — ahora un script inline, colocado justo después del propio overlay (muy al inicio de `<body>`, antes de que el resto de la página se pinte, para que un visitante normal nunca vea un parpadeo del sitio real), decide en cada carga:
+  - `?preview=1` en la URL → oculta el overlay, quita el bloqueo de scroll, y guarda `localStorage.dalmaPreviewMode = 'true'`.
+  - `?preview=0` en la URL → borra ese valor de `localStorage` y vuelve a mostrar el overlay bloqueando.
+  - Sin parámetro → revisa `localStorage`: si dice `'true'`, el sitio se ve completo sin overlay; si no, se muestra el overlay igual que antes.
+  - Importante detalle de robustez: la decisión de *esta* carga se toma directamente del parámetro de la URL cuando está presente (no depende de releer `localStorage` después de escribir), para que funcione aunque el navegador bloquee el guardado en algún caso raro — `localStorage` solo se usa para *recordar* la próxima vez.
+  - Sigue sin haber botón de cerrar, sin contraseña, sin pedir correo, sin WhatsApp, sin formularios ni tracking nuevo — el público normal no tiene ninguna forma visible de quitar el overlay.
+- **Cómo usarlo:** Bruno abre una vez `mockup.html?preview=1` (o la URL publicada + `?preview=1`) → el overlay desaparece y el sitio queda navegable normalmente en ese navegador. Las siguientes veces puede entrar directo a `mockup.html` (sin el parámetro) y seguirá viendo el sitio completo, porque quedó guardado en `localStorage` de ese navegador/dispositivo. Para volver a activar el bloqueo (por ejemplo, en otro dispositivo, o si quiere volver a ver el overlay), abre `mockup.html?preview=0` una vez.
+- **Antes del lanzamiento final** hay que retirar todo el bloque marcado `<!-- PRELAUNCH OVERLAY -->` / `<!-- /PRELAUNCH OVERLAY -->` (el `<div>` del overlay + el `<script>` de decisión) y el bloque CSS marcado igual — ya no hay ninguna clase hardcodeada que quitar de `<html>`/`<body>` porque ahora todo lo controla ese script.
+- **Limitación del entorno de pruebas de esta sesión (no del sitio):** el navegador de previsualización sandboxed usado para verificar convierte la página en una URL `data:` al cargarla, y estas URLs `data:` tienen "origen opaco" en cualquier navegador — por diseño del navegador (no un bug), `localStorage` está deshabilitado ahí (mensaje exacto: *"Storage is disabled inside 'data:' URLs"*) y el query string (`?preview=1`) se pierde al convertir la página. Esto impidió probar el flujo real de principio a fin navegando con la URL tal cual. Se verificó en su lugar, con máximo rigor posible: (a) la función de decisión completa simulando `localStorage` con un objeto en memoria, confirmando los 5 escenarios A-E exactamente como se pidieron; (b) que mostrar/ocultar el overlay y bloquear/desbloquear el scroll funciona correctamente en ambas direcciones aplicando el estado directamente. Recomiendo a Bruno confirmar el flujo completo abriendo el archivo directamente en su navegador (doble clic, o subiendo `?preview=1` a la URL una vez publicado en Cloudflare) — ahí sí es un `file://` o `https://` normal, sin ninguna de estas restricciones.
+- Verificado en navegador: 235/235 claves ES/EN sin huecos, 104/104 IDs únicos, sin `undefined`, sin errores de consola, sin overflow horizontal en 390/430/844/1024/1440px, Home/Nosotros/Servicios/Testimonios/Contacto/Aviso de privacidad visibles con el overlay desactivado.
+
+### 2026-09-13
+**Solicitud de Anita:** la web ya está casi lista para publicarse, pero los usuarios normales todavía no deben poder navegarla — quiere un overlay de "Próximamente" que bloquee visualmente el sitio mientras se preparan los últimos detalles (número de WhatsApp, correos, contenido pendiente).
+
+**Actividades:**
+- **Overlay "Próximamente" agregado (bloqueante, sin cerrar).** Vive como un bloque único justo después de `<body>`, marcado con comentarios `<!-- PRELAUNCH OVERLAY -->` / `<!-- /PRELAUNCH OVERLAY -->`, más un bloque CSS marcado igual cerca del inicio del `<style>`. Cubre toda la pantalla (`position:fixed;inset:0;z-index:999999`, por encima incluso de la barra de mockup interna), bloquea clics hacia el contenido (verificado con clics reales que no navegan nada) y bloquea el scroll vía `class="launch-locked"` en `<html>` y `<body>` (`overflow:hidden`). No tiene botón de cerrar, no pide correo, no muestra WhatsApp ni número, no carga formularios ni tracking nuevo. Texto **bilingüe fijo** (ES arriba, EN abajo) en vez de depender del selector de idioma, porque el overlay lo bloquea — decisión explícita de Bruno para este caso. **Para retirarlo cuando se publique de verdad:** quitar `class="launch-locked"` de `<html>` y de `<body>`, borrar el `<div id="launch-overlay">` completo, y borrar el bloque CSS marcado "PRELAUNCH OVERLAY" (ninguna otra parte del sitio depende de esas clases).
+- **Nosotros — menos aire entre el hero y la primera foto:** el hero (`.sec-sm.sec-alt`) tenía un padding inline fijo de 72px arriba/abajo que ni siquiera respetaba el breakpoint mobile (por ser inline, ganaba sobre `.sec-sm{padding:36px 20px}`). Se reemplazó por dos clases nuevas y específicas de Nosotros: `.nos-hero` (40px/36px desktop, 28px/28px mobile) y `.nos-first-block` en la sección de Ana María (40px arriba desktop, 32px mobile, en vez de los 88px que trae `.sec` en todas las demás páginas). Total de aire entre hero y primera foto: 160px→76px en desktop, ~144px+→~60px en mobile. No se tocó `.sec`/`.sec-sm`/`.sec-alt` globales, así que Home/Servicios/Testimonios/Contacto quedan intactos.
+- **Legibilidad/tipografía — subida moderada, priorizando mobile y sin tocar el nav:** se aumentaron entre 0.02 y 0.06rem (≈0.3–1px) los tamaños de: descripciones de cards (Home destacados y Servicios), textos y CTA dentro de `.ftx` (bio Ana María), footer (tagline, links, columna de horario, copyright, títulos de columna), formulario e info de Contacto (labels, inputs, valores), respuestas de FAQ (`.fq-a`, con su `max-height` ampliado de 400px a 500px para que ninguna respuesta larga quede cortada — verificado que la más larga solo necesita 215px, hay margen de sobra), el Aviso de privacidad completo (nota de pendientes, párrafos, subtítulos H3, banner EN), botones (`.bp`,`.bs`,`.bwa`), el dropdown de categorías de Servicios, las notas de rol del equipo en Nosotros, y varios textos sueltos (botón del CTA final de Home, horario/mapa). **Deliberadamente no se tocó** `.nav-cta`, `.nav-links a`, `.lang-btn` ni nada del nav — subir esos tamaños podía reabrir el bug de overflow del rango 769–1030px corregido en la sesión del 2026-08-24, así que se dejaron igual; tampoco se tocó nada dentro de Testimonios/Antes-después (instrucción explícita de esta tarea). Verificado sin overflow en los 11 anchos probados y que ninguna card/botón quedó roto.
+- **Imagen del CTA final de Home cambiada** (ya no parece spa): antes usaba `home-footer-dalma-still-life-horizontal.png` (foto de still-life de spa: vela, gua sha, espejo). **Hallazgo importante:** ese archivo `.png` ya no existe en disco — en algún momento Bruno/Anita lo reemplazaron externamente por una versión `.jpg` con el mismo nombre base (fecha de modificación de hoy), lo cual dejaba **la imagen del hero de Contacto rota** (referencia a un archivo `.png` inexistente) desde antes de que empezara esta sesión. La nueva foto `.jpg` es una imagen de marca D'ALMA (con logo visible en productos y tablet) mostrando una consulta real en sala de tratamiento — exactamente el tipo de imagen "de clínica" que pedía esta tarea, y con proporción horizontal que encaja mucho mejor en la franja ancha del CTA que cualquier foto vertical disponible. Se actualizó la referencia en **ambos lugares** donde se usaba (`.png`→`.jpg`): el CTA final de Home (cambio pedido) y el hero de Contacto (arreglo del enlace roto, no pedido explícitamente pero necesario). `alt`/`data-i18n-alt` (`alt.interior`) actualizados en ES/EN para describir la nueva imagen. **Nota:** el `.png` sigue apareciendo como "deleted" en `git status` porque estaba trackeado en un commit anterior — no se hizo `git add`/`rm` en esta sesión, queda para que Bruno lo revise cuando haga commit.
+- **Control de Peso y bienestar — se mantiene la imagen actual.** Se revisaron las 6 imágenes candidatas sin usar en `imagenes-candidatas/` buscando una alternativa; ninguna es temáticamente relevante a control de peso (son todas de rostro/piel: crema, microneedling, evaluación facial). **Recomendación:** cuando haya oportunidad de tomar/conseguir una foto nueva para esta card, buscar algo que transmita acompañamiento médico y bienestar (ej. una consulta cálida entre médico y paciente) en vez de solo una cinta métrica alrededor de la cintura, para reforzar el reposicionamiento ya hecho de "Control de Peso" a "Control de Peso y bienestar". No es urgente — la imagen actual es válida y ya fue aprobada.
+- **Pendiente operativo — correos institucionales con Hostinger (no implementado, solo documentado):** Anita quiere correos con el dominio (`@dalmaclinic.com.mx`). Antes de poder crearlos, revisar en Hostinger/hPanel:
+  1. Confirmar que el dominio `dalmaclinic.com.mx` ya está registrado y activo.
+  2. Qué servicio de correo trae o se contrató (Hostinger Email, Titan Email, cPanel Email, Google Workspace u otro) y cuántos buzones permite el plan.
+  3. Crear inicialmente solo las cuentas necesarias, por ejemplo `contacto@`, `hola@`, `anita@` (dominio a confirmar — no se debe inventar).
+  4. Configurar/verificar registros MX, SPF, DKIM y DMARC.
+  5. Probar envío y recepción con Gmail, y revisar que no caiga en spam.
+  6. Configurar Webmail o cliente de correo si Anita lo pide.
+  No se guardan contraseñas ni accesos aquí — eso se gestiona directamente en Hostinger.
+- Verificado en navegador: 235/235 claves ES/EN sin huecos, 104/104 IDs únicos, sin `undefined`, sin errores de consola, sin overflow horizontal en 1440/1366/1280/1100/1024/844/800/768/430/390/360px, overlay probado con clics reales (no navega nada), menú hamburguesa y filtro de Servicios siguen funcionando con el overlay desactivado temporalmente para pruebas.
+
+**Qué falta antes de publicación real** (adicional a lo ya documentado en sesiones previas — testimonios/antes-después demo, datos del equipo, formulario real, Turnstile, WhatsApp/Instagram definitivos, aviso de privacidad con placeholders):
+- Quitar el overlay "Próximamente" (ver instrucciones arriba) cuando Anita confirme que se puede publicar de verdad.
+- Confirmar visualmente la nueva imagen del CTA de Home y del hero de Contacto abriendo el archivo localmente (el navegador de esta sesión no pudo renderizarla, limitación ya conocida de esa herramienta).
+- Decidir si vale la pena una foto nueva para Control de Peso y bienestar (no urgente).
+- Avanzar el pendiente operativo de correos institucionales en Hostinger.
+
 ### 2026-09-04
 **Actividades:**
 - **Aviso de privacidad — enlace muerto corregido.** Fuente usada: `Docs Word/Preguntas y aviso de privacidad .docx` (única encontrada; incluye también las FAQ ya integradas antes, sin relación con este cambio). El documento trae dos versiones del aviso ("simplificado" e "integral"); se integraron **ambas, completas y sin resumir**, en una nueva página `pg-privacidad` dentro de `mockup.html`. El footer de las 5 páginas (Home, Nosotros, Servicios, Testimonios, Contacto) y el de la nueva página ahora usan `<a href="#aviso-de-privacidad" onclick="showPg('privacidad');history.replaceState(null,'','#aviso-de-privacidad');return false;">`. Se agregó `history.replaceState` (no estaba en el ejemplo original del prompt) porque con solo `showPg(...);return false;` el hash de la URL nunca cambiaba — necesario para cumplir el requisito de que la URL sí refleje `#aviso-de-privacidad`.
