@@ -357,6 +357,9 @@
     .ct-label{display:block;font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--taupe-600);margin-bottom:6px;}
     .ct-input,.ct-select,.ct-ta{width:100%;font-family:var(--fb);font-size:.88rem;color:var(--taupe-700);background:var(--bone-200);border:1.5px solid var(--bone-400);border-radius:4px;padding:11px 14px;outline:none;transition:border-color 150ms;}
     .ct-ta{resize:vertical;min-height:100px;line-height:1.6;}
+    .ct-input:focus-visible,.ct-select:focus-visible,.ct-ta:focus-visible{border-color:var(--taupe-500);box-shadow:0 0 0 2px rgba(139,129,123,.25);}
+    .ct-form-notice{margin-top:14px;font-size:.8rem;color:var(--taupe-700);}
+    .ct-form-notice:empty{display:none;margin-top:0;}
     .ct-fg{margin-bottom:18px;}
     .ct-map{background:var(--bone-300);border-radius:8px;height:220px;display:flex;align-items:center;justify-content:center;color:var(--taupe-400);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--bone-400);flex-direction:column;gap:8px;}
     .ci-row{display:flex;gap:14px;margin-bottom:16px;align-items:flex-start;}
@@ -484,7 +487,7 @@
       </div>
     </div>
     <div class="hero-img">
-      <img src="imagenes-candidatas/imagen-para-hero-home-horizontal.png" alt="Mujer con piel luminosa" data-i18n-alt="home.hero.img_alt" loading="eager">
+      <img src="imagenes-candidatas/imagen-para-hero-home-horizontal.webp" alt="Mujer con piel luminosa" data-i18n-alt="home.hero.img_alt" loading="eager">
     </div>
   </section>
 
@@ -505,7 +508,7 @@
         <div class="svc-card-body"><span class="bdg" data-i18n="badge.inyectables">Inyectables</span><div class="svc-card-title">Botox</div><div class="svc-card-txt" data-i18n="home.card.botox.txt">Suaviza líneas de expresión con resultados naturales y progresivos. Requiere valoración médica.</div><a class="svc-card-lnk" href="#" onclick="goToService('svc-botox');return false;" data-i18n="home.treat.cta_view">Ver tratamiento →</a></div>
       </div>
       <div class="svc-card">
-        <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80" alt="Fillers" loading="lazy">
+        <img src="imagenes-candidatas/servicios-fillers.webp" alt="Fillers" loading="lazy">
         <div class="svc-card-body"><span class="bdg" data-i18n="badge.inyectables">Inyectables</span><div class="svc-card-title" data-i18n="home.card.fillers.title">Fillers y Armonización</div><div class="svc-card-txt" data-i18n="home.card.fillers.txt">Hidratación, soporte y armonía facial. Enfoque en equilibrio natural, no en exageración.</div><a class="svc-card-lnk" href="#" onclick="goToService('svc-fillers');return false;" data-i18n="home.treat.cta_view">Ver tratamiento →</a></div>
       </div>
       <div class="svc-card">
@@ -617,7 +620,7 @@
 
   <!-- CTA + MAPA -->
   <div class="clinic-strip" style="height:460px;">
-    <img src="imagenes-candidatas/home-footer-dalma-still-life-horizontal.jpg" alt="Valoración en D'ALMA Clinic" data-i18n-alt="alt.interior" loading="lazy">
+    <img src="imagenes-candidatas/home-footer-dalma-still-life-horizontal.webp" alt="Valoración en D'ALMA Clinic" data-i18n-alt="alt.interior" loading="lazy">
     <div class="cs-inner">
       <!-- IZQUIERDA: título + CTA -->
       <div>
@@ -840,7 +843,7 @@
 
   <!-- PAGE HERO -->
   <div class="pg-hero">
-    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1600&q=85" alt="Servicios D'ALMA" data-i18n-alt="svc.hero.img_alt" loading="eager">
+    <img src="imagenes-candidatas/home-footer-dalma-still-life-horizontal.webp" alt="Servicios D'ALMA" data-i18n-alt="svc.hero.img_alt" loading="eager">
     <div class="pg-hero-ov"></div>
     <div class="pg-hero-c">
       <div class="ew ew-lt" style="margin-bottom:14px;" data-i18n="svc.hero.eyebrow">Lo que hacemos</div>
@@ -1246,7 +1249,7 @@
 
   <!-- PAGE HERO -->
   <div class="pg-hero">
-    <img src="imagenes-candidatas/home-footer-dalma-still-life-horizontal.jpg" alt="D'ALMA Contacto" data-i18n-alt="cont.hero.img_alt" loading="eager">
+    <img src="imagenes-candidatas/home-footer-dalma-still-life-horizontal.webp" alt="D'ALMA Contacto" data-i18n-alt="cont.hero.img_alt" loading="eager">
     <div class="pg-hero-ov"></div>
     <div class="pg-hero-c">
       <div class="ew ew-lt" style="margin-bottom:14px;" data-i18n="cont.hero.eyebrow">Estamos aquí para ti</div>
@@ -1262,17 +1265,18 @@
       <!-- IZQUIERDA: FORMULARIO -->
       <div>
         <h2 style="font-family:var(--fd);font-size:1.875rem;font-weight:300;color:var(--taupe-700);line-height:1.3;margin-bottom:28px;" data-i18n="cont.form.h2">¿Tienes alguna duda? Escríbenos. Estamos para orientarte.</h2>
+        <form id="contact-form">
         <div class="ct-fg">
-          <label class="ct-label" data-i18n="cont.form.lbl_name">Nombre completo</label>
-          <input class="ct-input" type="text" placeholder="Tu nombre" data-i18n-ph="cont.form.ph_name">
+          <label class="ct-label" for="contact-name" data-i18n="cont.form.lbl_name">Nombre completo</label>
+          <input class="ct-input" id="contact-name" name="name" type="text" autocomplete="name" required placeholder="Tu nombre" data-i18n-ph="cont.form.ph_name">
         </div>
         <div class="ct-fg">
-          <label class="ct-label" data-i18n="cont.form.lbl_phone">Teléfono / WhatsApp</label>
-          <input class="ct-input" type="tel" placeholder="+52 624 000 0000">
+          <label class="ct-label" for="contact-phone" data-i18n="cont.form.lbl_phone">Teléfono / WhatsApp</label>
+          <input class="ct-input" id="contact-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+52 624 000 0000">
         </div>
         <div class="ct-fg">
-          <label class="ct-label" data-i18n="cont.form.lbl_service">Tratamiento de interés</label>
-          <select class="ct-select">
+          <label class="ct-label" for="contact-treatment" data-i18n="cont.form.lbl_service">Tratamiento de interés</label>
+          <select class="ct-select" id="contact-treatment" name="treatment" required>
             <option value="" disabled selected data-i18n="cont.form.opt_placeholder">Selecciona un tratamiento</option>
             <option>Botox</option>
             <option data-i18n="cont.form.opt_fillers">Fillers / Armonización Facial</option>
@@ -1288,10 +1292,12 @@
           </select>
         </div>
         <div class="ct-fg">
-          <label class="ct-label" data-i18n="cont.form.lbl_msg">Mensaje (opcional)</label>
-          <textarea class="ct-ta" placeholder="¿Tienes alguna pregunta?" data-i18n-ph="cont.form.ph_msg"></textarea>
+          <label class="ct-label" for="contact-message" data-i18n="cont.form.lbl_msg">Mensaje (opcional)</label>
+          <textarea class="ct-ta" id="contact-message" name="message" placeholder="¿Tienes alguna pregunta?" data-i18n-ph="cont.form.ph_msg"></textarea>
         </div>
-        <button class="bp" style="width:100%;text-align:center;display:block;" data-i18n="cont.form.submit">Enviar mensaje</button>
+        <button class="bp" type="submit" style="width:100%;text-align:center;display:block;" data-i18n="cont.form.submit">Enviar mensaje</button>
+        <p id="contact-form-notice" class="ct-form-notice" aria-live="polite"></p>
+        </form>
       </div>
 
       <!-- DERECHA: INFO + MAPA -->
@@ -1736,6 +1742,7 @@ const I18N = {
     "cont.form.lbl_msg": "Mensaje (opcional)",
     "cont.form.ph_msg": "¿Tienes alguna pregunta?",
     "cont.form.submit": "Enviar mensaje",
+    "cont.form.pending": "El envío del formulario estará disponible próximamente.",
     "cont.info.eyebrow": "Información",
     "cont.info.h2": "Encuéntranos",
     "cont.info.lbl_dir": "Dirección",
@@ -1973,6 +1980,7 @@ const I18N = {
     "cont.form.lbl_msg": "Message (optional)",
     "cont.form.ph_msg": "Do you have any questions?",
     "cont.form.submit": "Send Message",
+    "cont.form.pending": "Form submission will be available soon.",
     "cont.info.eyebrow": "Information",
     "cont.info.h2": "Find Us",
     "cont.info.lbl_dir": "Address",
@@ -2172,6 +2180,22 @@ function setLang(lang) {
       setCardExpanded(item, willOpen);
     });
   });
+
+  // Contacto - formulario todavia sin backend real. La validacion nativa
+  // (required/email) corre antes de que el navegador dispare 'submit', asi
+  // que preventDefault() aqui adentro no la interfiere: solo se ejecuta si
+  // el formulario ya paso esa validacion. No se guarda ni se envia nada.
+  var contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var notice = document.getElementById('contact-form-notice');
+      if (!notice) return;
+      var lang = document.documentElement.lang || 'es';
+      var dict = I18N[lang] || I18N.es;
+      notice.textContent = dict['cont.form.pending'] || I18N.es['cont.form.pending'];
+    });
+  }
 
   // Category filter (Servicios) - dropdown filters the treatment grid by category
   var svcFilterSelect = document.getElementById('svc-filter-select');
