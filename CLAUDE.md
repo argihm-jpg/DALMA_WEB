@@ -146,6 +146,77 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-09-21 — Arquitectura multipágina bilingüe, auditoría técnica y cierre de jornada
+**Estado: arquitectura ES/EN funcional en local, verificada y commiteada. Producción sin cambios — sigue con la publicación inicial de la sesión 2026-09-13.**
+
+**1. Commit funcional de la jornada:** `c554398` — "Optimiza imagenes y prepara formulario de contacto" (incluye también, sobre el mismo `mockup.html`, todo el trabajo de arquitectura bilingüe del commit previo `de143f8` — "Implementa arquitectura multipagina bilingue Dalma").
+
+**2. Arquitectura de rutas actual (generada por `scripts/build-site.py` a partir de `mockup.html`):**
+- **ES:** `/`, `/nosotros/`, `/servicios/`, `/contacto/`, `/aviso-de-privacidad/`
+- **EN:** `/en/`, `/en/about/`, `/en/services/`, `/en/contact/`
+- Cada ruta es un archivo físico real (`index.html` en su carpeta), sin `showPg()` ni JS de por medio para la navegación cross-page — los enlaces son `href` reales.
+
+**3. Estado de flags (en `mockup.html`):**
+- `PUBLIC_LAUNCH = false`
+- `ENABLE_TESTIMONIALS = false`
+
+**4. Estado del build:**
+- `scripts/build-site.py` genera `DALMA_BUILD/` a partir de `mockup.html` (fuente única).
+- `DALMA_BUILD/` está en `.gitignore` — no se versiona, se regenera localmente cuando hace falta revisar el resultado.
+- Sin `sitemap.xml` mientras `PUBLIC_LAUNCH=false` (se genera automáticamente al activar el flag, con las rutas ES+EN activas).
+- `/testimonios/` y `/en/testimonials/` **no se generan** mientras `ENABLE_TESTIMONIALS=false` — ambas rutas devuelven 404 real (verificado), no un redirect ni un archivo vacío.
+
+**5. SEO bilingüe:**
+- Cada página EN trae el HTML ya en inglés desde el primer byte (verificado con `curl`, sin ejecutar JS) — nada de "carga en español y JS traduce después".
+- `canonical` autocanónico por ruta (nunca cruza de idioma).
+- `hreflang` recíproco ES↔EN en los 4 pares (Home, Nosotros/About, Servicios/Services, Contacto/Contact), con `x-default` apuntando siempre a la versión ES.
+- Aviso de privacidad sigue siendo **una sola URL**: `/aviso-de-privacidad/` (decisión de proyecto). No existe ni se creará `/en/privacy-policy/` — cuando Anita entregue el documento definitivo, esa misma página incluirá el texto completo en ES + EN. Desde las páginas EN, "Privacy Notice" enlaza a esa misma URL española.
+
+**6. Imágenes optimizadas (WebP, reemplazando PNG/JPG pesados y las 2 imágenes de Unsplash detectadas en la auditoría):**
+- Hero de Home: `imagenes-candidatas/imagen-para-hero-home-horizontal.webp` (antes `.png`, ~6.7 MB → ~119 KB).
+- Sección final de Home, hero de Servicios/Services y hero de Contacto/Contact: `imagenes-candidatas/home-footer-dalma-still-life-horizontal.webp` (antes `.jpg`, ~2.6 MB → ~182 KB; mismo archivo reutilizado en las 3 secciones, sin duplicar).
+- Card "Fillers" de Home: `imagenes-candidatas/servicios-fillers.webp` (antes imagen externa de Unsplash).
+- **0 referencias a Unsplash** en `mockup.html`, `scripts/build-site.py` y `DALMA_BUILD/` (verificado).
+- Los originales pesados (`.png`/`.jpg`) se conservan intactos en `imagenes-candidatas/` como fuente — la web solo usa las versiones `.webp`.
+
+**7. Formulario de Contacto:**
+- Ahora es un `<form id="contact-form">` real (antes no existía la etiqueta `<form>`).
+- Los 4 campos (nombre, teléfono, tratamiento, mensaje) tienen `id`/`name`/`label for` asociados correctamente; nombre/teléfono/tratamiento son `required`, mensaje queda opcional (su propio label ya lo indica).
+- `autocomplete="name"` y `autocomplete="tel"` donde aplica.
+- Validación HTML nativa conservada (sin `novalidate`).
+- Corregido además un `outline:none` sin alternativa en los campos del formulario — ahora tienen `:focus-visible` visible.
+- **Envío bloqueado temporalmente a propósito**: un listener de `submit` hace `preventDefault()` solo cuando el formulario ya pasó la validación nativa, y muestra un mensaje `aria-live="polite"` ("El envío del formulario estará disponible próximamente." / "Form submission will be available soon.") en vez de enviar algo.
+- **No existe backend, no hay `fetch`/`XHR`, no hay CAPTCHA, no hay `generate_lead`** — nada de esto se conectó todavía.
+
+**8. Producción:** no se hizo deploy en esta jornada. Hostinger y Cloudflare no fueron tocados. El sitio publicado sigue siendo la versión de la sesión 2026-09-13 (overlay "Próximamente" activo, arquitectura de un solo archivo). Todo lo documentado aquí existe solo en `DALMA_BUILD/` local y en el repositorio (`main`), pendiente de subirse a Hostinger.
+
+**9. Pendientes técnicos para la próxima sesión** (todos resueltos sin depender de Anita):
+- Favicon (ya existe `DALMA_Favicon.ico` en `D'ALMA_LOGOS/`, solo falta enlazarlo).
+- Open Graph / Twitter Cards.
+- `width`/`height` explícitos en las imágenes (riesgo de CLS).
+- `aria-label="WhatsApp"` en el botón flotante (pierde su texto visible en mobile).
+- `:focus-visible` en el filtro de categorías de Servicios/Services (`.svc-filter-select`, distinto del ya corregido en el formulario de Contacto).
+- Página 404 personalizada.
+- Datos estructurados (schema.org `LocalBusiness`/`FAQPage`) con los datos ya seguros (nombre, dirección, horario, FAQ reales).
+- Revisión de redirect `www` → `non-www` (Cloudflare).
+- Configurar Search Console, GA4 y GTM.
+- Definir tracking de `click_whatsapp` / `click_phone` / `generate_lead`.
+- Checklist y plan de rollback para el día del deploy real.
+
+**10. Bloqueados por Anita** (no son fallas técnicas, son información pendiente):
+- Número de WhatsApp / teléfono real.
+- Handles reales de redes sociales (Instagram/Facebook).
+- Datos legales completos del Aviso de privacidad (nombre legal, domicilio, correo de privacidad, teléfono, URL del sitio).
+- Nombres/credenciales faltantes del equipo (Doctora, Cosmetóloga — siguen como "———").
+- Testimonios reales y autorizados (ES + EN) para activar `ENABLE_TESTIMONIALS`.
+- Backend/destino final del formulario de Contacto, en la medida en que dependa de a dónde debe llegar (correo/WhatsApp de la clínica).
+
+**11. Estado Git:**
+- Commit funcional real de hoy: `c554398` — "Optimiza imagenes y prepara formulario de contacto".
+- Commit previo de la misma jornada: `de143f8` — "Implementa arquitectura multipagina bilingue Dalma".
+- `DALMA_BUILD/` y `DALMA_PREVIEW/` permanecen fuera de Git (el primero vía `.gitignore`, el segundo nunca se ha agregado).
+- Sin secretos ni archivos locales auxiliares incluidos en ningún commit de la jornada.
+
 ### 2026-09-13 (sesión 5) — Cierre de publicación inicial
 **Estado: publicación inicial de D'ALMA en producción, cerrada y confirmada por Bruno.**
 
