@@ -107,7 +107,7 @@
 
     .svc-card{background:var(--bone-100);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);transition:box-shadow 380ms ease-in-out,transform 380ms ease-in-out;cursor:pointer;}
     .svc-card:hover{box-shadow:0 10px 30px rgba(95,86,81,.14);transform:translateY(-3px) scale(1.015);}
-    .svc-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;}
+    .svc-card img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;display:block;}
     .svc-card-body{padding:20px;}
     .svc-card-title{font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);margin:8px 0 6px;line-height:1.3;}
     .svc-card-txt{font-size:.82rem;color:var(--taupe-500);line-height:1.7;margin-bottom:14px;}
@@ -174,6 +174,7 @@
     .filter-select-wrap{display:flex;justify-content:center;margin:14px 0 20px;padding:0 20px;}
     .svc-filter-select{appearance:none;-webkit-appearance:none;-moz-appearance:none;font-family:var(--fb);font-size:.76rem;font-weight:600;letter-spacing:.05em;color:var(--taupe-700);background:var(--bone-100) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%238B817B'/></svg>") no-repeat right 20px center;border:1.5px solid var(--bone-400);border-radius:9999px;padding:12px 44px 12px 22px;cursor:pointer;max-width:460px;width:100%;text-align:center;text-align-last:center;transition:border-color 150ms;}
     .svc-filter-select:hover,.svc-filter-select:focus{border-color:var(--taupe-500);outline:none;}
+    .svc-filter-select:focus-visible{outline:2px solid var(--taupe-500);outline-offset:2px;}
 
     .reveal{opacity:0;transform:translateY(28px);transition:opacity 650ms cubic-bezier(.16,1,.3,1),transform 650ms cubic-bezier(.16,1,.3,1);}
     .reveal.in{opacity:1;transform:translateY(0);}
@@ -195,7 +196,7 @@
 
     .std-card{background:var(--bone-100);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);transition:box-shadow 380ms ease-in-out,transform 380ms ease-in-out;cursor:pointer;}
     .std-card:hover{box-shadow:0 10px 30px rgba(95,86,81,.14);transform:translateY(-3px) scale(1.015);}
-    .std-card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;}
+    .std-card img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;display:block;}
     .std-card-body{padding:22px;}
     .std-card-title{font-family:var(--fd);font-size:1.2rem;font-weight:400;color:var(--taupe-700);margin:9px 0 7px;}
     .std-card-txt{font-size:.82rem;color:var(--taupe-600);line-height:1.7;margin-bottom:14px;}
@@ -487,7 +488,7 @@
       </div>
     </div>
     <div class="hero-img">
-      <img src="imagenes-candidatas/imagen-para-hero-home-horizontal.webp" alt="Mujer con piel luminosa" data-i18n-alt="home.hero.img_alt" loading="eager">
+      <img src="imagenes-candidatas/imagen-para-hero-home-horizontal.webp" width="2816" height="1536" alt="Mujer con piel luminosa" data-i18n-alt="home.hero.img_alt" loading="eager">
     </div>
   </section>
 
@@ -500,19 +501,19 @@
     </div>
     <div class="g4">
       <div class="svc-card">
-        <img src="imagenes-candidatas/HYDRAFACIAL.jpg" alt="Hydrafacial" loading="lazy">
+        <img src="imagenes-candidatas/HYDRAFACIAL.jpg" width="1450" height="1560" alt="Hydrafacial" loading="lazy">
         <div class="svc-card-body"><span class="bdg" data-i18n="badge.faciales">Faciales</span><div class="svc-card-title">Hydrafacial</div><div class="svc-card-txt" data-i18n="home.card.hydrafacial.txt">Limpieza profunda, exfoliación e hidratación. Piel luminosa desde la primera sesión.</div><a class="svc-card-lnk" href="#" onclick="goToService('svc-hydrafacial');return false;" data-i18n="home.treat.cta_view">Ver tratamiento →</a></div>
       </div>
       <div class="svc-card">
-        <img src="imagenes-candidatas/inyeccion-facial-desde-arriba-vertical.jpg" alt="Botox" loading="lazy" style="object-position:center 30%;">
+        <img src="imagenes-candidatas/inyeccion-facial-desde-arriba-vertical.jpg" width="640" height="1138" alt="Botox" loading="lazy" style="object-position:center 30%;">
         <div class="svc-card-body"><span class="bdg" data-i18n="badge.inyectables">Inyectables</span><div class="svc-card-title">Botox</div><div class="svc-card-txt" data-i18n="home.card.botox.txt">Suaviza líneas de expresión con resultados naturales y progresivos. Requiere valoración médica.</div><a class="svc-card-lnk" href="#" onclick="goToService('svc-botox');return false;" data-i18n="home.treat.cta_view">Ver tratamiento →</a></div>
       </div>
       <div class="svc-card">
-        <img src="imagenes-candidatas/servicios-fillers.webp" alt="Fillers" loading="lazy">
+        <img src="imagenes-candidatas/servicios-fillers.webp" width="2560" height="1437" alt="Fillers" loading="lazy">
         <div class="svc-card-body"><span class="bdg" data-i18n="badge.inyectables">Inyectables</span><div class="svc-card-title" data-i18n="home.card.fillers.title">Fillers y Armonización</div><div class="svc-card-txt" data-i18n="home.card.fillers.txt">Hidratación, soporte y armonía facial. Enfoque en equilibrio natural, no en exageración.</div><a class="svc-card-lnk" href="#" onclick="goToService('svc-fillers');return false;" data-i18n="home.treat.cta_view">Ver tratamiento →</a></div>
       </div>
       <div class="svc-card">
-        <img src="imagenes-candidatas/rostro-microneedling-frente-vertical.jpg" alt="PDRN" loading="lazy" style="object-position:center top;">
+        <img src="imagenes-candidatas/rostro-microneedling-frente-vertical.jpg" width="1280" height="1920" alt="PDRN" loading="lazy" style="object-position:center top;">
         <div class="svc-card-body"><span class="bdg" data-i18n="badge.regeneracion">Regeneración</span><div class="svc-card-title" data-i18n="home.card.pdrn.title">PDRN & Exosomas</div><div class="svc-card-txt" data-i18n="home.card.pdrn.txt">Revitalización celular para mejorar textura, luminosidad e hidratación desde adentro.</div><a class="svc-card-lnk" href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="home.treat.cta_view">Ver tratamiento →</a></div>
       </div>
     </div>
@@ -620,7 +621,7 @@
 
   <!-- CTA + MAPA -->
   <div class="clinic-strip" style="height:460px;">
-    <img src="imagenes-candidatas/home-footer-dalma-still-life-horizontal.webp" alt="Valoración en D'ALMA Clinic" data-i18n-alt="alt.interior" loading="lazy">
+    <img src="imagenes-candidatas/home-footer-dalma-still-life-horizontal.webp" width="2752" height="1536" alt="Valoración en D'ALMA Clinic" data-i18n-alt="alt.interior" loading="lazy">
     <div class="cs-inner">
       <!-- IZQUIERDA: título + CTA -->
       <div>
@@ -699,7 +700,7 @@
   <section class="sec nos-first-block">
     <div class="ftx" style="margin-bottom:0;">
       <div class="ftx-img">
-        <img src="imagenes-candidatas/directora-perfil-vertical.png" alt="Ana María, Directora de D'ALMA CLINIC" data-i18n-alt="alt.directora_hero" loading="eager" style="object-position:center 8%;">
+        <img src="imagenes-candidatas/directora-perfil-vertical.png" width="933" height="1400" alt="Ana María, Directora de D'ALMA CLINIC" data-i18n-alt="alt.directora_hero" loading="eager" style="object-position:center 8%;">
       </div>
       <div class="ftx-body">
         <div class="ew" style="margin-bottom:14px;" data-i18n="nos.ana.eyebrow">Directora</div>
@@ -720,14 +721,14 @@
     </div>
     <div class="g4" id="nos-team-grid">
       <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);background:var(--bone-100);">
-        <img src="imagenes-candidatas/directora-equipo-vertical.jpg" alt="Ana María, Directora" data-i18n-alt="alt.directora_team" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 12%;display:block;">
+        <img src="imagenes-candidatas/directora-equipo-vertical.jpg" width="666" height="1000" alt="Ana María, Directora" data-i18n-alt="alt.directora_team" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 12%;display:block;">
         <div style="padding:16px 18px;text-align:center;">
           <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">Ana María</div>
           <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.directora">Directora</div>
         </div>
       </div>
       <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);background:var(--bone-100);">
-        <img src="imagenes-candidatas/doctora.jpg" alt="Médico Estético D'ALMA" data-i18n-alt="alt.medico" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
+        <img src="imagenes-candidatas/doctora.jpg" width="640" height="960" alt="Médico Estético D'ALMA" data-i18n-alt="alt.medico" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
         <div style="padding:16px 18px;text-align:center;">
           <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">Dra. ———</div>
           <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.medico">Médico Estético</div>
@@ -735,7 +736,7 @@
         </div>
       </div>
       <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);background:var(--bone-100);">
-        <img src="imagenes-candidatas/doctora.jpg" alt="Médico Estético D'ALMA" data-i18n-alt="alt.medico" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
+        <img src="imagenes-candidatas/doctora.jpg" width="640" height="960" alt="Médico Estético D'ALMA" data-i18n-alt="alt.medico" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
         <div style="padding:16px 18px;text-align:center;">
           <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">Dra. ———</div>
           <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.medico">Médico Estético</div>
@@ -743,7 +744,7 @@
         </div>
       </div>
       <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);background:var(--bone-100);">
-        <img src="imagenes-candidatas/cosmetologa.webp" alt="Cosmetóloga D'ALMA" data-i18n-alt="alt.cosmetologa" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
+        <img src="imagenes-candidatas/cosmetologa.webp" width="3566" height="5579" alt="Cosmetóloga D'ALMA" data-i18n-alt="alt.cosmetologa" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
         <div style="padding:16px 18px;text-align:center;">
           <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">———</div>
           <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.cosmetologa">Cosmetóloga</div>
@@ -751,7 +752,7 @@
         </div>
       </div>
       <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);background:var(--bone-100);">
-        <img src="imagenes-candidatas/recepcion.jpg" alt="María José, Atención y Recepción" data-i18n-alt="alt.recepcion" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
+        <img src="imagenes-candidatas/recepcion.jpg" width="640" height="905" alt="María José, Atención y Recepción" data-i18n-alt="alt.recepcion" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
         <div style="padding:16px 18px;text-align:center;">
           <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">María José</div>
           <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.recepcion">Atención y Recepción</div>
@@ -843,7 +844,7 @@
 
   <!-- PAGE HERO -->
   <div class="pg-hero">
-    <img src="imagenes-candidatas/home-footer-dalma-still-life-horizontal.webp" alt="Servicios D'ALMA" data-i18n-alt="svc.hero.img_alt" loading="eager">
+    <img src="imagenes-candidatas/home-footer-dalma-still-life-horizontal.webp" width="2752" height="1536" alt="Servicios D'ALMA" data-i18n-alt="svc.hero.img_alt" loading="eager">
     <div class="pg-hero-ov"></div>
     <div class="pg-hero-c">
       <div class="ew ew-lt" style="margin-bottom:14px;" data-i18n="svc.hero.eyebrow">Lo que hacemos</div>
@@ -879,7 +880,7 @@
     <div class="g3" id="svc-grid">
 
       <div id="svc-botox" class="std-card" data-cat="inyectables">
-        <img src="imagenes-candidatas/servicios-botox.jpg" alt="Botox" style="object-position:center 35%;">
+        <img src="imagenes-candidatas/servicios-botox.jpg" width="800" height="533" alt="Botox" style="object-position:center 35%;">
         <div class="std-card-body">
           <div class="std-card-title">Botox</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.botox.quote">"Suavizar sin dejar de ser tú."</p>
@@ -892,7 +893,7 @@
       </div>
 
       <div id="svc-fillers" class="std-card" data-cat="inyectables">
-        <img src="imagenes-candidatas/servicios-fillers.webp" alt="Fillers" style="object-position:25% 25%;">
+        <img src="imagenes-candidatas/servicios-fillers.webp" width="2560" height="1437" alt="Fillers" style="object-position:25% 25%;">
         <div class="std-card-body">
           <div class="std-card-title" data-i18n="svc.fillers.title">Fillers y Armonización Facial</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.fillers.quote">"Equilibrar, no transformar."</p>
@@ -905,7 +906,7 @@
       </div>
 
       <div id="svc-hydrafacial" class="std-card" data-cat="faciales">
-        <img src="imagenes-candidatas/servicios-hydrafacial.jpg" alt="Hydrafacial" style="object-position:center 40%;">
+        <img src="imagenes-candidatas/servicios-hydrafacial.jpg" width="1231" height="1327" alt="Hydrafacial" style="object-position:center 40%;">
         <div class="std-card-body">
           <div class="std-card-title">Hydrafacial</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.hydrafacial.quote">"Una piel limpia, hidratada y luminosa también se siente diferente."</p>
@@ -918,7 +919,7 @@
       </div>
 
       <div id="svc-microneedling" class="std-card" data-cat="faciales">
-        <img src="imagenes-candidatas/servicios-microneedling.jpg" alt="Microneedling" style="object-position:center 25%;">
+        <img src="imagenes-candidatas/servicios-microneedling.jpg" width="800" height="800" alt="Microneedling" style="object-position:center 25%;">
         <div class="std-card-body">
           <div class="std-card-title" data-i18n="svc.micro.title">Microneedling / Dermapen / Manchas</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.micro.quote">"Ayudar a tu piel a renovarse desde adentro."</p>
@@ -931,7 +932,7 @@
       </div>
 
       <div id="svc-pdrn-exosomas" class="std-card" data-cat="regeneracion">
-        <img src="imagenes-candidatas/servicios-pdrn-exosomas.jpeg" alt="PDRN y Exosomas" data-i18n-alt="alt.pdrn_exosomas" style="object-position:center 40%;">
+        <img src="imagenes-candidatas/servicios-pdrn-exosomas.jpeg" width="649" height="473" alt="PDRN y Exosomas" data-i18n-alt="alt.pdrn_exosomas" style="object-position:center 40%;">
         <div class="std-card-body">
           <div class="std-card-title">PDRN &amp; Exosomas</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.pdrn.quote">"Cuando tu piel necesita algo más que hidratación."</p>
@@ -944,7 +945,7 @@
       </div>
 
       <div id="svc-capilares" class="std-card" data-cat="capilares">
-        <img src="imagenes-candidatas/servicios-capilares.jpeg" alt="Tratamientos Capilares" data-i18n-alt="alt.capilares" style="object-position:70% 40%;">
+        <img src="imagenes-candidatas/servicios-capilares.jpeg" width="2560" height="1707" alt="Tratamientos Capilares" data-i18n-alt="alt.capilares" style="object-position:70% 40%;">
         <div class="std-card-body">
           <div class="std-card-title" data-i18n="svc.capilares.title">Tratamientos Capilares</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.capilares.quote">"Cuidar tu cabello también es cuidar cómo te sientes."</p>
@@ -957,7 +958,7 @@
       </div>
 
       <div id="svc-depilacion" class="std-card" data-cat="depilacion">
-        <img src="imagenes-candidatas/servicios-card-depilacion-laser-horizontal.png" alt="Depilación láser" data-i18n-alt="alt.depilacion">
+        <img src="imagenes-candidatas/servicios-card-depilacion-laser-horizontal.png" width="2752" height="1536" alt="Depilación láser" data-i18n-alt="alt.depilacion">
         <div class="std-card-body">
           <div class="std-card-title" data-i18n="svc.depilacion.title">Depilación Láser</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.depilacion.quote">"Menos pendiente del vello. Más libertad para sentirte bien en tu piel."</p>
@@ -970,7 +971,7 @@
       </div>
 
       <div id="svc-especializados" class="std-card" data-cat="especializados">
-        <img src="imagenes-candidatas/servicios-card-plasmapen-especializados-horizontal.png" alt="Verrugas y Queloides" data-i18n-alt="alt.especializados">
+        <img src="imagenes-candidatas/servicios-card-plasmapen-especializados-horizontal.png" width="2752" height="1536" alt="Verrugas y Queloides" data-i18n-alt="alt.especializados">
         <div class="std-card-body">
           <div class="std-card-title" data-i18n="svc.especial.title">Verrugas y Queloides</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.especial.quote">"Hay pequeños detalles en la piel que también merecen atención."</p>
@@ -983,7 +984,7 @@
       </div>
 
       <div id="svc-plasmapen" class="std-card" data-cat="especializados">
-        <img src="imagenes-candidatas/plasma-pen.webp" alt="Plasma Pen" data-i18n-alt="alt.plasmapen">
+        <img src="imagenes-candidatas/plasma-pen.webp" width="1280" height="720" alt="Plasma Pen" data-i18n-alt="alt.plasmapen">
         <div class="std-card-body">
           <div class="std-card-title">Plasma Pen</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.plasmapen.quote">"Cuando un pequeño detalle puede hacer una gran diferencia."</p>
@@ -996,7 +997,7 @@
       </div>
 
       <div id="svc-control-peso" class="std-card" data-cat="control-peso">
-        <img src="imagenes-candidatas/control-de-peso.webp" alt="Control de Peso y bienestar" data-i18n-alt="alt.control_peso">
+        <img src="imagenes-candidatas/control-de-peso.webp" width="1312" height="816" alt="Control de Peso y bienestar" data-i18n-alt="alt.control_peso">
         <div class="std-card-body">
           <div class="std-card-title" data-i18n="svc.controlpeso.title">Control de Peso y bienestar</div>
           <p class="bt" style="font-style:italic;color:var(--taupe-600);margin:6px 0 8px;font-size:.78rem;" data-i18n="svc.controlpeso.quote">"Un programa pensado para ayudarte a bajar de peso con acompañamiento médico y seguimiento durante todo el proceso."</p>
@@ -1249,7 +1250,7 @@
 
   <!-- PAGE HERO -->
   <div class="pg-hero">
-    <img src="imagenes-candidatas/home-footer-dalma-still-life-horizontal.webp" alt="D'ALMA Contacto" data-i18n-alt="cont.hero.img_alt" loading="eager">
+    <img src="imagenes-candidatas/home-footer-dalma-still-life-horizontal.webp" width="2752" height="1536" alt="D'ALMA Contacto" data-i18n-alt="cont.hero.img_alt" loading="eager">
     <div class="pg-hero-ov"></div>
     <div class="pg-hero-c">
       <div class="ew ew-lt" style="margin-bottom:14px;" data-i18n="cont.hero.eyebrow">Estamos aquí para ti</div>
@@ -1521,8 +1522,8 @@
 
 <svg style="display:none"><symbol id="ico-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol></svg>
 
-<a class="wafloat" href="#" onclick="showPg('contacto');return false;">
-  <svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>
+<a class="wafloat" href="#" onclick="showPg('contacto');return false;" aria-label="WhatsApp">
+  <svg class="wico" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>
   <span class="wa-txt">WhatsApp</span>
 </a>
 

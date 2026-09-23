@@ -16,6 +16,8 @@ vez de inventar contenido.
 Uso:
     python scripts/build-site.py
 """
+import glob
+import json
 import os
 import re
 import shutil
@@ -25,6 +27,23 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SOURCE = os.path.join(ROOT, "mockup.html")
 OUT_DIR = os.path.join(ROOT, "DALMA_BUILD")
 DOMAIN = "https://dalmaclinic.com.mx"
+
+# La carpeta de logos usa un apostrofe tipografico (') en su nombre, dificil
+# de teclear de forma fiable entre editores/terminales; se localiza por glob
+# en vez de hardcodear el caracter exacto.
+_logos_dirs = glob.glob(os.path.join(ROOT, "*ALMA_LOGOS"))
+FAVICON_SRC = os.path.join(_logos_dirs[0], "DALMA_Favicon.ico") if _logos_dirs else None
+
+# Datos de negocio confirmados para schema.org (JSON-LD). Solo lo verificado
+# con Bruno; NO incluir telefono/horario/redes hasta que Anita los confirme.
+BUSINESS_NAME = "D'ALMA CLINIC"
+BUSINESS_ADDRESS = {
+    "@type": "PostalAddress",
+    "streetAddress": "Plaza Patio, De Las Brisas 2404, Brisas del Pacífico",
+    "addressLocality": "Cabo San Lucas",
+    "addressRegion": "Baja California Sur",
+    "addressCountry": "MX",
+}
 
 PAGE_ORDER = ["home", "nosotros", "servicios", "testimonios", "contacto", "privacidad"]
 
@@ -416,11 +435,31 @@ def build_hreflang_block(name):
     ) % (es_url, en_url, es_url)
 
 
+def build_business_schema(meta, lang):
+    """JSON-LD MedicalClinic. Mismo @id en ES/EN (misma entidad real, sin
+    duplicarla); solo name/description se muestran en el idioma de la pagina.
+    No incluye telephone/openingHours/logo/sameAs: sin dato real confirmado
+    todavia para esos campos.
+    """
+    data = {
+        "@context": "https://schema.org",
+        "@type": "MedicalClinic",
+        "@id": DOMAIN + "/#business",
+        "name": BUSINESS_NAME,
+        "url": DOMAIN + "/",
+        "description": meta[lang]["home"]["desc"],
+        "address": BUSINESS_ADDRESS,
+    }
+    json_text = json.dumps(data, ensure_ascii=False, indent=2).replace("</", "<\\/")
+    return '  <script type="application/ld+json">\n%s\n  </script>\n' % json_text
+
+
 def build_head(style_block, fonts_block, meta, name, lang, public_launch, canonical):
     title = meta[lang][name]["title"]
     desc = meta[lang][name]["desc"]
     robots = "index, follow" if public_launch else "noindex, nofollow"
     hreflang_block = build_hreflang_block(name)
+    schema_block = build_business_schema(meta, lang)
     return """<!DOCTYPE html>
 <html lang="%s">
 <head>
@@ -430,7 +469,16 @@ def build_head(style_block, fonts_block, meta, name, lang, public_launch, canoni
   <meta name="description" content="%s">
   <meta name="robots" content="%s">
   <link rel="canonical" href="%s">
-%s%s
+%s  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta property="og:title" content="%s">
+  <meta property="og:description" content="%s">
+  <meta property="og:url" content="%s">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="%s">
+  <meta name="twitter:description" content="%s">
+%s
+%s
   <style>
 %s
   </style>
@@ -442,7 +490,13 @@ def build_head(style_block, fonts_block, meta, name, lang, public_launch, canoni
         robots,
         canonical,
         hreflang_block,
+        title,
+        desc,
+        canonical,
+        title,
+        desc,
         fonts_block,
+        schema_block,
         style_block,
     )
 
@@ -731,6 +785,12 @@ def main():
         "Copiadas %d/%d imagenes referenciadas a imagenes-candidatas/ (%d sin usar, no copiadas)"
         % (len(used_images), total_source, total_source - len(used_images))
     )
+
+    # ---- favicon -----------------------------------------------------------
+    if not FAVICON_SRC or not os.path.isfile(FAVICON_SRC):
+        fail("No se encontro DALMA_Favicon.ico en la carpeta de logos (*ALMA_LOGOS/DALMA_Favicon.ico)")
+    shutil.copy2(FAVICON_SRC, os.path.join(OUT_DIR, "favicon.ico"))
+    print("Copiado favicon.ico a la raiz de DALMA_BUILD")
 
     # ---- robots.txt ------------------------------------------------------------
     robots_lines = ["User-agent: *", "Allow: /"]
