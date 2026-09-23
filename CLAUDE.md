@@ -1,5 +1,12 @@
 # DALMA_WEB — Contexto del Proyecto
 
+## ⚠️ RESTRICCIÓN PERMANENTE DE CUENTA GOOGLE (leer antes de cualquier tarea de Google) ⚠️
+Para **cualquier** tarea de D'ALMA en Google Search Console, Google Analytics/GA4, Google Tag Manager, Google Ads, Google Business Profile, o cualquier otro servicio de Google, usar **ÚNICAMENTE**:
+
+**`clinic.dalma@gmail.com`**
+
+En Chrome existen otras cuentas de Google con sesión iniciada. Antes de **crear, editar, vincular, configurar o verificar** cualquier propiedad/cuenta/contenedor de Google, Claude debe **verificar visualmente** que la cuenta activa sea `clinic.dalma@gmail.com`. Si no lo es: **DETENERSE** y pedir a Bruno que cambie de cuenta. No usar ninguna otra cuenta de Google para D'ALMA bajo ninguna circunstancia.
+
 ## Descripción
 Sitio web para **D'ALMA CLINIC**, clínica estética ubicada en Cabo San Lucas, BCS.
 El proyecto lo elabora **Bruno Sandoval**. La directora del negocio es **Ana María**.
@@ -8,7 +15,7 @@ El proyecto lo elabora **Bruno Sandoval**. La directora del negocio es **Ana Mar
 - **Nombre comercial:** D'ALMA CLINIC
 - **Dominio:** `dalmaclinic.com.mx`
 - **Dirección:** Plaza Patio, De Las Brisas 2404, Brisas del Pacífico, Cabo San Lucas, Baja California Sur
-- **Horario:** Lunes a domingo, 10:00 am – 8:00 pm
+- **Horario:** "Lunes a domingo, 10:00 am – 8:00 pm" aparece como texto provisional en el sitio, pero Bruno confirmó (2026-09-22) que **no es un dato real, Anita aún no lo ha definido** — no usar como fuente de verdad (p. ej. no incluir en schema.org hasta confirmación real)
 - **WhatsApp:** Pendiente de definir
 - **Instagram:** Pendiente
 
@@ -95,6 +102,37 @@ WhatsApp, Instagram, mapa, horario, preguntas frecuentes
 - [ ] WhatsApp oficial
 - [ ] Número(s) de teléfono de contacto
 
+## Pendientes Bloqueados por Anita
+*(actualizado 2026-09-22 — consolida y reemplaza los listados sueltos de sesiones anteriores)*
+
+### Contacto
+- Número de teléfono / WhatsApp definitivo.
+- Instagram y otras redes oficiales.
+- Correo receptor/formulario, si corresponde.
+
+### Aviso de privacidad
+- Nombre legal completo.
+- Domicilio legal completo.
+- Correo de privacidad.
+- Teléfono.
+- Texto legal definitivo ES/EN.
+
+### Equipo
+- Nombre y credenciales definitivas de Doctora.
+- Nombre y credenciales definitivas de Cosmetóloga.
+
+### Testimonios
+- Testimonios reales autorizados.
+- Nombres/autorizaciones.
+- Fotografías de antes/después autorizadas.
+- Traducción EN cuando corresponda.
+
+### Datos estructurados / SEO local
+- Teléfono para schema.
+- URLs oficiales de redes (`sameAs`).
+- Cualquier dato de negocio que no esté confirmado todavía.
+- Completar/actualizar LocalBusiness/MedicalClinic cuando se reciban esos datos.
+
 ## Assets Disponibles
 Carpeta `D'ALMA_LOGOS/`:
 - `DALMA_Logo.svg` — Logo vectorizado
@@ -145,6 +183,47 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 ---
 
 ## Historial de Sesiones
+
+### 2026-09-22 — SEO técnico, accesibilidad, favicon, schema.org y redirect Cloudflare
+**Estado: mejoras técnicas commiteadas y pusheadas a `main`. La nueva versión multipágina AÚN NO se ha desplegado a Hostinger — sigue publicada la versión de la sesión 2026-09-13.**
+
+**1. Último commit funcional:** `28054ce` — "Mejora SEO tecnico y accesibilidad Dalma" (`mockup.html` + `scripts/build-site.py`).
+
+**2. Favicon:**
+- `DALMA_Favicon.ico` (de `D'ALMA_LOGOS/`) se copia de forma reproducible a `DALMA_BUILD/favicon.ico` en cada build (`scripts/build-site.py`), no es una copia manual.
+- Ruta pública: `/favicon.ico`, referenciada con `<link rel="icon">` en las 9 páginas.
+- `apple-touch-icon` sigue pendiente y es opcional — no existe todavía un asset cuadrado adecuado.
+- **No se modificó ni adaptó ningún logo** — Bruno no tiene autorización para tocar el logotipo.
+
+**3. Open Graph / Twitter Cards:** implementados en las 9 páginas — `og:title`, `og:description`, `og:url`, `og:type`, `twitter:card`, `twitter:title`, `twitter:description`. **Sin `og:image` ni `twitter:image`**: Bruno no tiene autorización para modificar/adaptar el logotipo y no existe todavía un asset social aprobado para ese propósito.
+
+**4. Imágenes / CLS:** las 24 etiquetas `<img>` del sitio (20 archivos únicos) tienen `width`/`height` intrínsecos reales (leídos del archivo, no estimados). Se agregó `height:auto` únicamente donde era necesario para conservar el `aspect-ratio` existente (`.svc-card img`, `.std-card img`, y 5 fotos de equipo en Nosotros) — sin ese ajuste, los atributos width/height rompían el recorte cuadrado/16:10/3:4 en todo navegador real (hallazgo verificado con una reproducción aislada, no un artefacto de la herramienta de pruebas). Diseño visual verificado sin cambios en desktop y mobile 390px.
+
+**5. Accesibilidad:**
+- Botón flotante de WhatsApp (`.wafloat`): `aria-label="WhatsApp"` agregado — tiene nombre accesible aunque el texto visual (`.wa-txt`) se oculte en mobile.
+- El SVG decorativo dentro del botón lleva `aria-hidden="true"` para evitar que un lector de pantalla lo procese como contenido adicional (el nombre accesible ya lo da el `aria-label` del enlace).
+- Filtro de categorías de Servicios (`.svc-filter-select`): agregado `:focus-visible{outline:2px solid var(--taupe-500);outline-offset:2px;}`, reutilizando el mismo criterio visual que `.svc-toggle:focus-visible`/`.fq-q:focus-visible`. El comportamiento con mouse/click no cambió.
+
+**6. Schema.org (JSON-LD):**
+- `@type: MedicalClinic`, mismo `@id: https://dalmaclinic.com.mx/#business` en las 9 páginas (ES y EN) — una sola entidad real, nunca duplicada.
+- Incluye únicamente datos confirmados: `@context`, `@type`, `@id`, `name`, `url`, `description` (traducida ES/EN, reutilizando la meta description real de Home), `address` (PostalAddress con la dirección confirmada por Bruno).
+- **NO incluye:** horario (`openingHours`), teléfono, email, `sameAs`, reviews/ratings, ni `logo` (no hay un logo servido públicamente en el build todavía).
+- Generado desde `scripts/build-site.py` (`build_business_schema()`), no está hardcodeado por página.
+
+**7. Datos pendientes de Anita:** ver sección **"Pendientes Bloqueados por Anita"** más arriba en este documento (Contacto, Aviso de privacidad, Equipo, Testimonios, Datos estructurados/SEO local). **El horario que aparece visualmente en el sitio NO debe tratarse como dato confirmado** (ver nota en "Datos del Negocio").
+
+**8. Cloudflare — Redirect Rule desplegada:**
+- Zona: `dalmaclinic.com.mx`.
+- Regla activa: **"Redirect www a dominio raiz (301)"**.
+- Comportamiento: `https://www.dalmaclinic.com.mx/*` → `https://dalmaclinic.com.mx/${path}`, status `301`, con `Preserve query string` activado.
+- Verificado en producción: `https://www.dalmaclinic.com.mx/servicios/?foo=bar` → `301` → `https://dalmaclinic.com.mx/servicios/?foo=bar` (path y query string preservados).
+- **DNS y SSL/TLS no se modificaron** en esta tarea — solo se agregó la Redirect Rule.
+
+**9. Pendiente técnico de auditoría que sigue abierto (no resuelto):** verificar en Hostinger, después del deploy multipágina, el comportamiento de rutas sin slash final (`/nosotros` → `/nosotros/`, `/servicios` → `/servicios/`, etc.). No probado todavía porque la arquitectura multipágina no está desplegada.
+
+**10. Producción:** la nueva versión multipágina **todavía NO se ha desplegado** a Hostinger — sigue publicada la versión de la sesión 2026-09-13. Cloudflare solo recibió la nueva Redirect Rule de www→apex (punto 8). `PUBLIC_LAUNCH` sigue `false` en la fuente (`mockup.html`).
+
+**11. Estado Git:** commit funcional `28054ce` — "Mejora SEO tecnico y accesibilidad Dalma" (pusheado a `origin/main`). Commit de documentación de esta misma jornada aplicado por separado sobre `CLAUDE.md`.
 
 ### 2026-09-21 — Arquitectura multipágina bilingüe, auditoría técnica y cierre de jornada
 **Estado: arquitectura ES/EN funcional en local, verificada y commiteada. Producción sin cambios — sigue con la publicación inicial de la sesión 2026-09-13.**
