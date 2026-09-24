@@ -7,6 +7,12 @@ Para **cualquier** tarea de D'ALMA en Google Search Console, Google Analytics/GA
 
 En Chrome existen otras cuentas de Google con sesión iniciada. Antes de **crear, editar, vincular, configurar o verificar** cualquier propiedad/cuenta/contenedor de Google, Claude debe **verificar visualmente** que la cuenta activa sea `clinic.dalma@gmail.com`. Si no lo es: **DETENERSE** y pedir a Bruno que cambie de cuenta. No usar ninguna otra cuenta de Google para D'ALMA bajo ninguna circunstancia.
 
+## Estado Actual de Producción y Punto de Reanudación (actualizado 2026-09-23)
+- **Arquitectura multipágina bilingüe YA DESPLEGADA en Hostinger** (`public_html/`). Producción: ES `/`, `/nosotros/`, `/servicios/`, `/contacto/`, `/aviso-de-privacidad/`; EN `/en/`, `/en/about/`, `/en/services/`, `/en/contact/`.
+- **El sitio NO está públicamente lanzado (pre-lanzamiento):** `PUBLIC_LAUNCH=false` → overlay "Próximamente / Coming soon" activo por defecto, `?preview=1` permite revisar el sitio completo, `noindex, nofollow` en las 9 páginas, sin `sitemap.xml`, Testimonios desactivado (`/testimonios/` y `/en/testimonials/` → 404).
+- **Próxima etapa (NO iniciada):** Google Search Console, GA4, Google Tag Manager, Google Ads, eventos `click_whatsapp` / `click_phone` / `generate_lead`, y CAPTCHA/backend del formulario cuando corresponda. La arquitectura/deploy ya no es el siguiente paso. Recordar la restricción de cuenta Google de arriba.
+- **Validar en producción sin barridos rápidos con curl** (ver incidente 429 en la entrada 2026-09-23).
+
 ## Descripción
 Sitio web para **D'ALMA CLINIC**, clínica estética ubicada en Cabo San Lucas, BCS.
 El proyecto lo elabora **Bruno Sandoval**. La directora del negocio es **Ana María**.
@@ -184,8 +190,46 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-09-23 — Deploy multipágina bilingüe a Hostinger (pre-lanzamiento)
+**Estado: arquitectura multipágina desplegada y validada en producción. El sitio sigue en pre-lanzamiento (no público).**
+
+**1. Deploy multipágina.** La nueva arquitectura bilingüe está en Hostinger. Producción: ES `/`, `/nosotros/`, `/servicios/`, `/contacto/`, `/aviso-de-privacidad/`; EN `/en/`, `/en/about/`, `/en/services/`, `/en/contact/`. Se hizo en dos fases: primero todo salvo el `index.html` raíz (con validación intermedia de las rutas nuevas), después el reemplazo del `index.html` raíz.
+
+**2. Estado pre-lanzamiento.** `PUBLIC_LAUNCH=false`: overlay "Próximamente / Coming soon" activo por defecto; `?preview=1` permite revisar el sitio completo; `noindex, nofollow` en las 9 páginas; **no existe `sitemap.xml`**; Testimonios desactivado (`ENABLE_TESTIMONIALS=false`), `/testimonios/` y `/en/testimonials/` devuelven 404. **El sitio no está públicamente lanzado.**
+
+**3. Backup / rollback.** Backup manual previo al deploy: `C:\Users\bruno\Downloads\_public_html.zip`, 24,696,825 bytes, con el `index.html` anterior y las 20 imágenes de la versión anterior (descargado directo desde el gestor de archivos; no se dejó ningún ZIP en el servidor). Backup automático adicional de Hostinger: 2026-09-21 11:32 (el backup manual desde hPanel está bloqueado por el plan). **El rollback no fue necesario.** Rollback rápido autorizado si hiciera falta: restaurar solo el `index.html` viejo desde el ZIP (las carpetas y assets nuevos pueden quedarse).
+
+**4. Archivos desplegados.** 8 rutas nuevas con su `index.html`; nuevo `index.html` raíz; `favicon.ico`; `robots.txt`; `imagenes-candidatas/imagen-para-hero-home-horizontal.webp` y `imagenes-candidatas/home-footer-dalma-still-life-horizontal.webp`. Las otras 18 imágenes ya existentes eran idénticas por MD5 al build y no se sobrescribieron. Se conservaron `imagen-para-hero-home-horizontal.png` y `home-footer-dalma-still-life-horizontal.jpg`: ya no están referenciadas por la web nueva pero permanecen en el servidor (~9 MiB, se pueden limpiar más adelante con autorización).
+
+**5. robots.txt.** Ahora existe físicamente `public_html/robots.txt`. Respuesta pública: HTTP 200, `User-agent: *` / `Allow: /` (25 B); ya no aparece el bloque de Content Signals de Cloudflare que se servía antes cuando no había archivo físico. Mientras `PUBLIC_LAUNCH=false`, la protección contra indexación depende del meta robots `noindex, nofollow` de cada HTML, no de `robots.txt`.
+
+**6. Trailing slash — RESUELTO.** Verificado en producción (sin `.htaccess`; Hostinger lo gestiona automáticamente):
+- `/nosotros` → 301 → `/nosotros/`
+- `/servicios` → 301 → `/servicios/`
+- `/contacto` → 301 → `/contacto/`
+- `/aviso-de-privacidad` → 301 → `/aviso-de-privacidad/`
+- `/en` → 301 → `/en/`
+- `/en/about` → 301 → `/en/about/`
+- `/en/services` → 301 → `/en/services/`
+- `/en/contact` → 301 → `/en/contact/`
+Todos terminan en HTTP 200.
+
+**7. Cloudflare.** Sigue activa la Redirect Rule www → apex (301). Verificado después del deploy: `https://www.dalmaclinic.com.mx/?preview=1` → 301 → `https://dalmaclinic.com.mx/?preview=1` (query string preservado) → carga la Home nueva. No fue necesaria ninguna purga de caché. DNS y SSL/TLS no se tocaron.
+
+**8. Validaciones del deploy (todas OK):** las 9 páginas; rutas ES/EN reales; navegación multipágina (URLs cambian de verdad, sin `showPg`); selector ES/EN con rutas reales; favicon; canonical; hreflang; Open Graph/Twitter; JSON-LD `MedicalClinic`; imágenes (0 rotas); `noindex, nofollow`; overlay activo sin `?preview=1`; modo preview; Testimonios 404; ausencia de `sitemap.xml`; consola sin errores; sin overflow; hero WebP nueva. El `index.html` publicado coincide byte a byte (MD5 `7e8632f271e3395bdeda8a86e863703f`, 99,148 B) con `DALMA_BUILD/index.html`.
+
+**9. `public_html/` actual.** Antes del deploy: `index.html` e `imagenes-candidatas/`. Después se añadieron `nosotros/`, `servicios/`, `contacto/`, `aviso-de-privacidad/`, `en/`, `favicon.ico` y `robots.txt`. **No existe `.htaccess`.** En la raíz superior del hosting existe `DO_NOT_UPLOAD_HERE` (marcador de Hostinger): no subir nada ahí ni tocarlo.
+
+**10. Incidente 429.** Durante las validaciones automatizadas hubo un HTTP 429 temporal por exceso de peticiones al borde de Hostinger (barridos rápidos con curl desde la misma IP; un bucle de sondeo en segundo plano no se detuvo a tiempo y siguió consultando). Se resolvió solo al reducir el ritmo. Sin impacto permanente ni cambios necesarios. **Para futuras validaciones en producción: evitar barridos rápidos/repetitivos con curl; una petición a la vez y con pausas.**
+
+**11. Pendientes de Anita:** sin cambios, siguen abiertos (ver sección "Pendientes Bloqueados por Anita"): teléfono/WhatsApp, redes, datos legales, horario, nombres/credenciales faltantes, testimonios, datos adicionales para schema y backend final del formulario.
+
+**12. Google:** mantener la restricción de arriba — usar EXCLUSIVAMENTE `clinic.dalma@gmail.com` para Search Console, GA4, GTM, Google Ads, Google Business Profile y cualquier servicio de Google de D'ALMA.
+
+**13. Siguiente etapa (no iniciada):** Google Search Console, GA4, GTM, Google Ads, eventos `click_whatsapp` / `click_phone` / `generate_lead`, y CAPTCHA/backend del formulario cuando corresponda.
+
 ### 2026-09-22 — SEO técnico, accesibilidad, favicon, schema.org y redirect Cloudflare
-**Estado: mejoras técnicas commiteadas y pusheadas a `main`. La nueva versión multipágina AÚN NO se ha desplegado a Hostinger — sigue publicada la versión de la sesión 2026-09-13.**
+**Estado al cierre de esa sesión: mejoras técnicas commiteadas y pusheadas a `main`. (Actualización: la versión multipágina fue desplegada a Hostinger el 2026-09-23 — ver la entrada de esa fecha más arriba.)**
 
 **1. Último commit funcional:** `28054ce` — "Mejora SEO tecnico y accesibilidad Dalma" (`mockup.html` + `scripts/build-site.py`).
 
@@ -219,9 +263,9 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 - Verificado en producción: `https://www.dalmaclinic.com.mx/servicios/?foo=bar` → `301` → `https://dalmaclinic.com.mx/servicios/?foo=bar` (path y query string preservados).
 - **DNS y SSL/TLS no se modificaron** en esta tarea — solo se agregó la Redirect Rule.
 
-**9. Pendiente técnico de auditoría que sigue abierto (no resuelto):** verificar en Hostinger, después del deploy multipágina, el comportamiento de rutas sin slash final (`/nosotros` → `/nosotros/`, `/servicios` → `/servicios/`, etc.). No probado todavía porque la arquitectura multipágina no está desplegada.
+**9. Pendiente técnico de auditoría — RESUELTO el 2026-09-23:** el comportamiento de rutas sin slash final (`/nosotros` → `/nosotros/`, etc.) quedó verificado en producción tras el deploy multipágina (ver entrada 2026-09-23).
 
-**10. Producción:** la nueva versión multipágina **todavía NO se ha desplegado** a Hostinger — sigue publicada la versión de la sesión 2026-09-13. Cloudflare solo recibió la nueva Redirect Rule de www→apex (punto 8). `PUBLIC_LAUNCH` sigue `false` en la fuente (`mockup.html`).
+**10. Producción (al cierre de esa sesión):** la versión multipágina aún no estaba desplegada; se desplegó el 2026-09-23. Cloudflare solo había recibido la Redirect Rule www→apex (punto 8). `PUBLIC_LAUNCH` sigue `false` en la fuente (`mockup.html`).
 
 **11. Estado Git:** commit funcional `28054ce` — "Mejora SEO tecnico y accesibilidad Dalma" (pusheado a `origin/main`). Commit de documentación de esta misma jornada aplicado por separado sobre `CLAUDE.md`.
 
