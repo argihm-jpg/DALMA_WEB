@@ -12,6 +12,7 @@ En Chrome existen otras cuentas de Google con sesión iniciada. Antes de **crear
 - **El sitio NO está públicamente lanzado (pre-lanzamiento):** `PUBLIC_LAUNCH=false` → overlay "Próximamente / Coming soon" activo por defecto, `?preview=1` permite revisar el sitio completo, `noindex, nofollow` en las 9 páginas, sin `sitemap.xml`, Testimonios desactivado (`/testimonios/` y `/en/testimonials/` → 404).
 - **Próxima etapa (NO iniciada):** Google Search Console, GA4, Google Tag Manager, Google Ads, eventos `click_whatsapp` / `click_phone` / `generate_lead`, y CAPTCHA/backend del formulario cuando corresponda. La arquitectura/deploy ya no es el siguiente paso. Recordar la restricción de cuenta Google de arriba.
 - **Validar en producción sin barridos rápidos con curl** (ver incidente 429 en la entrada 2026-09-23).
+- **Ajustes finales de contenido/ubicación (2026-09-26): commiteados en `main` pero NO desplegados** — producción sigue con el deploy del 2026-09-23. Ver entrada 2026-09-26 más abajo. Hacer deploy solo con autorización explícita de Bruno.
 
 ## Descripción
 Sitio web para **D'ALMA CLINIC**, clínica estética ubicada en Cabo San Lucas, BCS.
@@ -20,7 +21,7 @@ El proyecto lo elabora **Bruno Sandoval**. La directora del negocio es **Ana Mar
 ## Datos del Negocio
 - **Nombre comercial:** D'ALMA CLINIC
 - **Dominio:** `dalmaclinic.com.mx`
-- **Dirección:** Plaza Patio, De Las Brisas 2404, Brisas del Pacífico, Cabo San Lucas, Baja California Sur
+- **Dirección (CONFIRMADA, verificada externamente 2026-09-26):** Plaza Patio, De Las Brisas 2404, Brisas del Pacífico, Cabo San Lucas, Baja California Sur, C.P. 23473. **Aún sin número de local/suite** dentro de la plaza (pendiente; no inventarlo). Punto de Plaza Patio: 22.9045296, -109.9333945
 - **Horario:** "Lunes a domingo, 10:00 am – 8:00 pm" aparece como texto provisional en el sitio, pero Bruno confirmó (2026-09-22) que **no es un dato real, Anita aún no lo ha definido** — no usar como fuente de verdad (p. ej. no incluir en schema.org hasta confirmación real)
 - **WhatsApp:** Pendiente de definir
 - **Instagram:** Pendiente
@@ -112,6 +113,9 @@ WhatsApp, Instagram, mapa, horario, preguntas frecuentes
 *(actualizado 2026-09-22 — consolida y reemplaza los listados sueltos de sesiones anteriores)*
 
 ### Contacto
+- Número de local/suite dentro de Plaza Patio.
+- Perfil real de Google Maps / Google Business Profile (hoy el mapa enlaza a una búsqueda de Maps; sustituir el `href` de `.map-frame-lnk` en Home y Contacto cuando exista; usar SOLO `clinic.dalma@gmail.com`).
+- Horario real de atención (el que se muestra en el sitio sigue siendo PROVISIONAL).
 - Número de teléfono / WhatsApp definitivo.
 - Instagram y otras redes oficiales.
 - Correo receptor/formulario, si corresponde.
@@ -124,6 +128,7 @@ WhatsApp, Instagram, mapa, horario, preguntas frecuentes
 - Texto legal definitivo ES/EN.
 
 ### Equipo
+- Copy definitivo de las frases bajo cada integrante (hoy son PLACEHOLDERS neutrales, comentario `PENDIENTE ANITA` en `mockup.html`).
 - Nombre y credenciales definitivas de Doctora.
 - Nombre y credenciales definitivas de Cosmetóloga.
 
@@ -189,6 +194,20 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 ---
 
 ## Historial de Sesiones
+
+### 2026-09-26 — Ajustes finales de Anita y ubicación con mapa estático (local, NO desplegado)
+**Estado: cambios commiteados en `main`; producción sin cambios (sigue el deploy del 2026-09-23). Sin deploy, sin Hostinger/Cloudflare/Google. `PUBLIC_LAUNCH` sigue `false`.**
+
+- **Ubicación confirmada:** Plaza Patio, De Las Brisas 2404, Brisas del Pacífico, Cabo San Lucas, BCS, C.P. 23473 (schema.org ya coincidía; sin cambios). Pin del mapa = "Plaza Patio" (no "D'ALMA": el local/suite exacto sigue desconocido).
+- **Mapa estático local (OpenStreetMap):** asset `imagenes-candidatas/mapa-plaza-patio.webp` (1200×600, ~55 KB), generado por `scripts/make-map.py` (100% local, SIN peticiones HTTP; requiere Pillow) desde el source `map-sources/osm-export-plaza-patio.png` (exportación oficial openstreetmap.org > Compartir > Imagen, una sola vez; `map-sources/` no se despliega). Coordenadas 22.9045296, -109.9333945. **No se descargan teselas** (la política de OSM prohíbe el prefetch/offline de `tile.openstreetmap.org`). Sin requests a mapas en runtime. Atribución visible "© OpenStreetMap contributors" (enlace independiente a openstreetmap.org/copyright, superpuesto en HTML). El mapa es el enlace a Google Maps (búsqueda por dirección, `target="_blank" rel="noopener noreferrer"`); **futuro: sustituir el `href` por el perfil real de Google Business Profile.** Alt ES/EN en la clave i18n `alt.map`.
+- **Home:** tarjeta de ubicación corregida (`.clinic-strip` ahora crece con su contenido: antes altura fija + `overflow:hidden` recortaba la dirección); fondo de la tarjeta ~93% opaco y textos `#5F5651` (contraste AA); frase "Tu piel también cuenta tu historia." más grande (`clamp(1.85rem,3vw,2.7rem)`) y CTA "Agenda tu valoración" algo mayor.
+- **Contacto:** dirección visible una sola vez; el mapa completo es clicable (chip "Abrir en Google Maps ↗"); atribución OSM enlace independiente; se eliminó el bloque duplicado bajo el mapa.
+- **Nosotros:** espacio hero → primer bloque compactado en desktop (la foto 2:3 dictaba una fila de ~895 px); foto de Ana María se muestra COMPLETA (columna 400 px, sin recorte); móvil preservado.
+- **Equipo:** María José eliminada; **Estefanía Serrano añadida como Cosmetóloga** (sobre la tarjeta que ya existía, con su foto). Las frases bajo cada integrante son **PLACEHOLDERS neutrales pendientes de copy definitivo de Anita** (Doctoras siguen "Dra. ———").
+- **Foto:** retirada la segunda foto de Ana María con Sculptra (Anita no manejará esa marca); reutilización TEMPORAL de la foto principal en la tarjeta del equipo. **Pendiente sustituirla tras la nueva sesión fotográfica.**
+- **Legibilidad/contraste:** nuevo token `--text-body:#5F5651` para párrafos de lectura (`.bt`, `.hero-sub`, `.svc-card-txt`; antes `taupe-500` ~3.5:1, ahora ~6.4–6.8:1); `.ftx-detail` a `taupe-600`; `.bt-lt` (texto sobre fondo oscuro) a `bone-300`; etiqueta "Filtrar por categoría" a `taupe-600`. Servicios revisado para WCAG AA en los textos tratados. Sin cambio de tamaños ni negritas. Sigue sin cumplir AA: texto blanco sobre el verde de WhatsApp (~2:1, color de marca) y los eyebrows decorativos `.ew` (~2.6:1); no tocados.
+- **Sigue PROVISIONAL / pendiente (NO resuelto):** horario real (el visible es provisional), teléfono/WhatsApp, Instagram/redes, local/suite, datos legales restantes del aviso de privacidad, backend real del formulario, CAPTCHA, frases definitivas del equipo, nombres/credenciales de doctoras, testimonios reales, perfil real de Google Maps/Business Profile.
+- **Recordatorio:** para cualquier servicio Google de D'ALMA usar EXCLUSIVAMENTE `clinic.dalma@gmail.com`.
 
 ### 2026-09-23 — Deploy multipágina bilingüe a Hostinger (pre-lanzamiento)
 **Estado: arquitectura multipágina desplegada y validada en producción. El sitio sigue en pre-lanzamiento (no público).**

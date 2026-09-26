@@ -14,6 +14,7 @@
       --bone-400:#D8CBBE;--bone-500:#C4B4A3;
       --taupe-400:#A89992;--taupe-500:#8B817B;--taupe-600:#736A64;
       --taupe-700:#5F5651;--taupe-800:#4A4340;--taupe-900:#352F2D;
+      --text-body:#5F5651; /* copy de lectura: ~6.4-6.8:1 sobre bone (antes taupe-500 ~3.4-3.6:1). Decoracion/lineas siguen con taupe-400/500 */
       --white:#FFFFFF;
       --fd:'Cormorant Garamond',Georgia,serif;
       --fb:'Montserrat',system-ui,sans-serif;
@@ -65,8 +66,8 @@
     .ew{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe-400);margin-bottom:12px;}
     .ew-lt{color:rgba(216,203,190,.45);}
     .st{font-family:var(--fd);font-size:2.375rem;font-weight:300;color:var(--taupe-700);line-height:1.25;letter-spacing:-.01em;}
-    .bt{font-size:.875rem;color:var(--taupe-500);line-height:1.75;}
-    .bt-lt{color:var(--taupe-400);}
+    .bt{font-size:.875rem;color:var(--text-body);line-height:1.75;}
+    .bt-lt{color:var(--bone-300);}
     .sec{padding:88px 56px;background:var(--bone-100);}
     .sec-sm{padding:52px 56px;background:var(--bone-100);}
     .sec-alt{background:var(--bone-200)!important;}
@@ -74,11 +75,18 @@
     /* NOSOTROS: less air between hero and first photo block (Anita's feedback) */
     .nos-hero{padding-top:40px;padding-bottom:36px;}
     .nos-first-block{padding-top:40px;}
+    /* Desktop/tablet: la foto vertical 2:3 se muestra COMPLETA (sin recorte). Columna de foto limitada a 400px => ~600px de alto, asi la fila no se dispara (~895px antes) y el texto queda junto a la foto. */
+    @media(min-width:769px){
+      .nos-first-block .ftx{grid-template-columns:min(400px,42%) 1fr;}
+      .nos-first-block .ftx-img img{height:auto;aspect-ratio:2/3;}
+    }
     .sec-dk{background:var(--taupe-700)!important;}
     .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
     .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-    .team-role-note{font-size:.76rem;color:var(--taupe-500);line-height:1.55;margin-top:6px;}
-    #nos-team-grid > :last-child:nth-child(5){grid-column:1 / -1;justify-self:center;width:calc(25% - 15px);}
+    #nos-team-grid{align-items:stretch;}
+    .team-card{border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);background:var(--bone-100);display:flex;flex-direction:column;}
+    .team-card-body{padding:16px 18px 20px;text-align:center;flex:1;}
+    .team-role-note{font-family:var(--fd);font-style:italic;font-size:.98rem;color:var(--taupe-600);line-height:1.45;margin-top:10px;}
     .ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:28px;}
     .bp{display:inline-block;padding:14px 32px;border-radius:9999px;background:var(--taupe-700);color:var(--white);font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:background 150ms;}
     .bp:hover{background:var(--taupe-800);}
@@ -100,7 +108,7 @@
     .hero-content{position:relative;z-index:1;grid-column:1/-1;grid-row:1/-1;align-self:center;justify-self:start;display:flex;flex-direction:column;justify-content:center;width:min(46%,540px);margin-left:56px;padding:40px 44px;background:rgba(250,249,247,.62);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);border:1px solid rgba(255,255,255,.4);border-radius:16px;box-shadow:0 20px 50px rgba(53,47,45,.14);}
     .hero-business-h1{margin-top:0;margin-bottom:12px;}
     .hero-statement{font-family:var(--fd);font-size:clamp(1.8rem,2.85vw,2.85rem);font-weight:300;color:var(--taupe-700);line-height:1.14;letter-spacing:-.02em;margin-bottom:20px;}
-    .hero-sub{font-size:.925rem;color:var(--taupe-500);line-height:1.75;max-width:420px;}
+    .hero-sub{font-size:.925rem;color:var(--text-body);line-height:1.75;max-width:420px;}
     .hero-img{grid-column:1/-1;grid-row:1/-1;position:relative;overflow:hidden;min-height:420px;}
     .hero-img img{width:100%;height:100%;object-fit:cover;object-position:70% 22%;display:block;}
     .hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,rgba(28,25,23,.14) 0%,rgba(28,25,23,0) 40%);}
@@ -110,15 +118,15 @@
     .svc-card img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;display:block;}
     .svc-card-body{padding:20px;}
     .svc-card-title{font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);margin:8px 0 6px;line-height:1.3;}
-    .svc-card-txt{font-size:.82rem;color:var(--taupe-500);line-height:1.7;margin-bottom:14px;}
+    .svc-card-txt{font-size:.82rem;color:var(--text-body);line-height:1.7;margin-bottom:14px;}
     .svc-card-lnk{font-size:.75rem;font-weight:600;color:var(--taupe-600);text-decoration:none;}
 
     .feat-item{padding:32px;border-top:1px solid var(--bone-400);}
     .feat-ico{font-size:1.25rem;margin-bottom:14px;display:block;}
     .feat-title{font-family:var(--fd);font-size:1.15rem;font-weight:400;color:var(--taupe-700);margin-bottom:8px;}
 
-    .clinic-strip{position:relative;height:420px;overflow:hidden;}
-    .clinic-strip img{width:100%;height:100%;object-fit:cover;object-position:center 35%;}
+    .clinic-strip{position:relative;min-height:420px;overflow:hidden;}
+    .clinic-strip img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;}
     .clinic-strip::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(53,47,45,.6) 0%,rgba(53,47,45,.2) 55%,transparent 100%);}
 
     /* ═══ TESTIMONIOS ═══ */
@@ -140,9 +148,12 @@
     @media(prefers-reduced-motion:reduce){.tco-track{transition:none;}}
 
     /* ═══ CTA + MAPA (sobre imagen clinic strip) ═══ */
-    .cs-inner{position:absolute;inset:0;padding:52px 56px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;color:var(--bone-100);z-index:1;}
-    .cs-map-card{background:rgba(250,249,247,.1);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(216,203,190,.18);border-radius:12px;padding:24px;}
-    .cs-map-ph{background:rgba(255,255,255,.05);border:1px solid rgba(216,203,190,.14);border-radius:8px;height:180px;display:flex;align-items:center;justify-content:center;margin:12px 0;}
+    .cs-inner{position:relative;min-height:inherit;box-sizing:border-box;padding:52px 56px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;color:var(--bone-100);z-index:1;}
+    .cs-map-card{background:rgba(250,249,247,.93);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(216,203,190,.6);border-radius:12px;padding:24px;box-shadow:0 8px 28px rgba(53,47,45,.18);}
+    .cs-map-a{font-size:.8rem;margin-top:10px;line-height:1.6;color:var(--taupe-700);}
+    .cs-map-cta{display:inline-block;margin-top:8px;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:var(--taupe-700);border-bottom:1px solid var(--taupe-500);}
+    .cs-map-ph{display:block;margin:12px 0;}
+    .cs-loc .map-frame{border:1px solid var(--bone-400);}
 
     /* ═══ FOOTER ═══ */
     .footer{background:var(--taupe-900);padding:56px 56px 36px;}
@@ -191,7 +202,7 @@
     .ftx.rev .ftx-img{order:2;}
     .ftx.rev .ftx-body{order:1;}
     .ftx-title{font-family:var(--fd);font-size:1.875rem;font-weight:300;color:var(--taupe-700);margin:10px 0 14px;line-height:1.2;}
-    .ftx-detail{font-size:.8rem;color:var(--taupe-400);margin-bottom:20px;line-height:1.7;}
+    .ftx-detail{font-size:.8rem;color:var(--taupe-600);margin-bottom:20px;line-height:1.7;}
     .ftx-cta{display:inline-flex;align-items:center;font-size:.78rem;font-weight:600;color:var(--taupe-600);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:none;background:none;cursor:pointer;}
 
     .std-card{background:var(--bone-100);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);transition:box-shadow 380ms ease-in-out,transform 380ms ease-in-out;cursor:pointer;}
@@ -288,7 +299,6 @@
       .g3{grid-template-columns:1fr;}
       #svc-grid{grid-template-columns:1fr;}
       .g4{grid-template-columns:1fr 1fr;gap:14px;}
-      #nos-team-grid > :last-child:nth-child(5){width:calc(50% - 7px);}
       .st{font-size:1.875rem;}
 
       /* Feature treatment cards (alternating) */
@@ -302,7 +312,7 @@
       .svc-content{padding:32px 20px 56px!important;}
 
       /* Clinic strip */
-      .clinic-strip{height:280px;}
+      .clinic-strip{min-height:280px;}
 
       /* Footer */
       .footer{padding:44px 20px 28px;}
@@ -332,7 +342,7 @@
       .clinic-strip{height:auto!important;min-height:500px;}
       .cs-inner{grid-template-columns:1fr;padding:44px 20px;gap:24px;align-content:center;}
       .cs-map-card{padding:18px;}
-      .cs-map-ph{height:150px;}
+      .map-frame{aspect-ratio:4/3;}
     }
 
     @media(max-width:480px){
@@ -341,7 +351,7 @@
       .ctas{flex-direction:column;align-items:stretch;}
       .ctas .bp,.ctas .bs,.ctas .bwa{width:100%;justify-content:center;}
       .hero-img{height:72vw;}
-      .clinic-strip{height:220px;}
+      .clinic-strip{min-height:220px;}
       .nav-mmenu li a{font-size:1.75rem;}
       .cs-inner{padding:36px 20px;}
     }
@@ -362,7 +372,16 @@
     .ct-form-notice{margin-top:14px;font-size:.8rem;color:var(--taupe-700);}
     .ct-form-notice:empty{display:none;margin-top:0;}
     .ct-fg{margin-bottom:18px;}
-    .ct-map{background:var(--bone-300);border-radius:8px;height:220px;display:flex;align-items:center;justify-content:center;color:var(--taupe-400);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--bone-400);flex-direction:column;gap:8px;}
+    .map-frame-lnk:focus-visible,.cs-map-cta:focus-visible,.map-attr:focus-visible{outline:2px solid var(--taupe-500);outline-offset:2px;}
+    .ct-loc .map-frame{border:1px solid var(--bone-400);}
+    .map-frame{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:2/1;background:var(--bone-300);}
+    .map-frame-lnk,.map-frame img{display:block;width:100%;height:100%;}
+    .map-frame img{object-fit:cover;object-position:center;}
+    .map-frame-lnk{cursor:pointer;}
+    .map-open{position:absolute;left:10px;top:10px;padding:6px 12px;border-radius:9999px;background:rgba(250,249,247,.94);color:var(--taupe-800);font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;line-height:1.3;box-shadow:0 1px 4px rgba(53,47,45,.18);transition:background 150ms;}
+    .map-frame-lnk:hover .map-open{background:#fff;text-decoration:underline;}
+    .map-attr{position:absolute;right:0;bottom:0;padding:2px 7px;font-size:.7rem;line-height:1.5;color:var(--taupe-800);background:rgba(250,249,247,.88);text-decoration:none;border-top-left-radius:6px;}
+    .map-attr:hover{text-decoration:underline;}
     .ci-row{display:flex;gap:14px;margin-bottom:16px;align-items:flex-start;}
     .ci-icon{font-size:1rem;width:20px;flex-shrink:0;padding-top:2px;}
     .ci-lbl{font-size:.64rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--taupe-400);margin-bottom:3px;}
@@ -620,26 +639,29 @@
   </section>
 
   <!-- CTA + MAPA -->
-  <div class="clinic-strip" style="height:460px;">
+  <div class="clinic-strip" style="min-height:460px;">
     <img src="imagenes-candidatas/home-footer-dalma-still-life-horizontal.webp" width="2752" height="1536" alt="Valoración en D'ALMA Clinic" data-i18n-alt="alt.interior" loading="lazy">
     <div class="cs-inner">
       <!-- IZQUIERDA: título + CTA -->
       <div>
-        <div style="font-family:var(--fd);font-size:clamp(1.6rem,2.4vw,2.25rem);font-weight:300;color:var(--bone-200);line-height:1.3;margin-bottom:26px;" data-i18n-html="home.map.quote">"Tu piel también cuenta<br>tu historia."</div>
-        <button class="bp bp-lt" data-i18n="btn.book_consult" onclick="showPg('contacto')" style="font-size:.76rem;">Agenda tu valoración</button>
+        <div style="font-family:var(--fd);font-size:clamp(1.85rem,3vw,2.7rem);font-weight:300;color:var(--bone-200);line-height:1.22;margin-bottom:30px;" data-i18n-html="home.map.quote">"Tu piel también cuenta<br>tu historia."</div>
+        <button class="bp bp-lt" data-i18n="btn.book_consult" onclick="showPg('contacto')" style="font-size:.86rem;padding:17px 40px;">Agenda tu valoración</button>
       </div>
       <!-- DERECHA: eyebrow + placeholder mapa -->
       <div>
         <div class="cs-map-card">
-          <div class="ew" style="color:rgba(216,203,190,.55);margin-bottom:14px;">Cabo San Lucas, BCS</div>
+          <div class="ew" style="color:var(--taupe-700);margin-bottom:14px;">Cabo San Lucas, BCS</div>
           <div class="cs-map-ph">
-            <div style="text-align:center;color:rgba(216,203,190,.65);letter-spacing:.06em;text-transform:uppercase;line-height:1.75;">
-              <div style="font-size:1.5rem;margin-bottom:8px;">📍</div>
-              <div style="font-size:.78rem;">Google Maps</div>
-              <div style="font-size:.72rem;opacity:.8;margin-top:4px;">Plaza Patio · Cabo San Lucas, BCS</div>
+            <div class="cs-loc">
+          <div class="map-frame">
+          <a class="map-frame-lnk" href="https://www.google.com/maps/search/?api=1&amp;query=Plaza+Patio,+De+Las+Brisas+2404,+Brisas+del+Pac%C3%ADfico,+Cabo+San+Lucas,+BCS" target="_blank" rel="noopener noreferrer"><img src="imagenes-candidatas/mapa-plaza-patio.webp" width="1200" height="600" loading="lazy" alt="Ubicación de D’ALMA Clinic en Plaza Patio, Cabo San Lucas" data-i18n-alt="alt.map"></a>
+          <a class="map-attr" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a>
+        </div>
+              <div class="cs-map-a">Plaza Patio · De Las Brisas 2404<br>Brisas del Pacífico, Cabo San Lucas, BCS</div>
+              <a class="cs-map-cta" href="https://www.google.com/maps/search/?api=1&amp;query=Plaza+Patio,+De+Las+Brisas+2404,+Brisas+del+Pac%C3%ADfico,+Cabo+San+Lucas,+BCS" target="_blank" rel="noopener noreferrer"><span data-i18n="loc.cta">Abrir en Google Maps</span> ↗</a>
             </div>
           </div>
-          <div style="font-size:.76rem;color:rgba(216,203,190,.45);line-height:1.6;" data-i18n="home.map.hours">Lunes a domingo · 10:00 am – 8:00 pm</div>
+          <div style="font-size:.76rem;color:var(--taupe-700);line-height:1.6;" data-i18n="home.map.hours">Lunes a domingo · 10:00 am – 8:00 pm</div>
         </div>
       </div>
     </div>
@@ -719,44 +741,39 @@
       <div class="ew" data-i18n="nos.team.eyebrow">Las personas detrás de D'ALMA</div>
       <h2 class="st" data-i18n="nos.team.h2">Nuestro equipo</h2>
     </div>
+    <!-- PENDIENTE ANITA: las frases bajo cada integrante (.team-role-note) son PLACEHOLDERS neutrales; Anita enviara el copy definitivo. -->
     <div class="g4" id="nos-team-grid">
-      <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);background:var(--bone-100);">
-        <img src="imagenes-candidatas/directora-equipo-vertical.jpg" width="666" height="1000" alt="Ana María, Directora" data-i18n-alt="alt.directora_team" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 12%;display:block;">
-        <div style="padding:16px 18px;text-align:center;">
+      <div class="team-card">
+        <!-- TEMPORAL: reutiliza la foto principal de Ana Maria (la foto anterior se retiro a peticion de Anita). Se reemplazara tras la sesion de fotos. -->
+        <img src="imagenes-candidatas/directora-perfil-vertical.png" width="933" height="1400" alt="Ana María, Directora" data-i18n-alt="alt.directora_team" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 8%;display:block;">
+        <div class="team-card-body">
           <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">Ana María</div>
           <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.directora">Directora</div>
+          <p class="team-role-note" data-i18n="nos.team.note.directora">Un acompañamiento profesional centrado en cada persona.</p>
         </div>
       </div>
-      <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);background:var(--bone-100);">
+      <div class="team-card">
         <img src="imagenes-candidatas/doctora.jpg" width="640" height="960" alt="Médico Estético D'ALMA" data-i18n-alt="alt.medico" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
-        <div style="padding:16px 18px;text-align:center;">
+        <div class="team-card-body">
           <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">Dra. ———</div>
           <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.medico">Médico Estético</div>
-          <p class="team-role-note" data-i18n="nos.team.note.medico">Valoración y tratamientos personalizados con enfoque en resultados naturales.</p>
+          <p class="team-role-note" data-i18n="nos.team.note.medico1">Cuidado y atención cercana en cada detalle.</p>
         </div>
       </div>
-      <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);background:var(--bone-100);">
+      <div class="team-card">
         <img src="imagenes-candidatas/doctora.jpg" width="640" height="960" alt="Médico Estético D'ALMA" data-i18n-alt="alt.medico" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
-        <div style="padding:16px 18px;text-align:center;">
+        <div class="team-card-body">
           <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">Dra. ———</div>
           <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.medico">Médico Estético</div>
-          <p class="team-role-note" data-i18n="nos.team.note.medico">Valoración y tratamientos personalizados con enfoque en resultados naturales.</p>
+          <p class="team-role-note" data-i18n="nos.team.note.medico2">Una atención cálida, cuidadosa y personalizada.</p>
         </div>
       </div>
-      <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);background:var(--bone-100);">
-        <img src="imagenes-candidatas/cosmetologa.webp" width="3566" height="5579" alt="Cosmetóloga D'ALMA" data-i18n-alt="alt.cosmetologa" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
-        <div style="padding:16px 18px;text-align:center;">
-          <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">———</div>
+      <div class="team-card">
+        <img src="imagenes-candidatas/cosmetologa.webp" width="3566" height="5579" alt="Estefanía Serrano, Cosmetóloga" data-i18n-alt="alt.cosmetologa" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
+        <div class="team-card-body">
+          <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">Estefanía Serrano</div>
           <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.cosmetologa">Cosmetóloga</div>
-          <p class="team-role-note" data-i18n="nos.team.note.cosmetologa">Cuidado facial y acompañamiento personalizado para cada tipo de piel.</p>
-        </div>
-      </div>
-      <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);background:var(--bone-100);">
-        <img src="imagenes-candidatas/recepcion.jpg" width="640" height="905" alt="María José, Atención y Recepción" data-i18n-alt="alt.recepcion" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
-        <div style="padding:16px 18px;text-align:center;">
-          <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">María José</div>
-          <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.recepcion">Atención y Recepción</div>
-          <p class="team-role-note" data-i18n="nos.team.note.recepcion">La persona que te acompaña desde tu primer mensaje hasta tu visita a D'ALMA.</p>
+          <p class="team-role-note" data-i18n="nos.team.note.cosmetologa">Cuidado, bienestar y atención personalizada en cada detalle.</p>
         </div>
       </div>
     </div>
@@ -859,7 +876,7 @@
       <h2 class="svc-intro-h2" data-i18n="svc.intro.h2">¿Qué te gustaría mejorar?</h2>
       <p class="bt" style="max-width:480px;margin:8px auto 0;" data-i18n="svc.intro.p">Cuéntanos qué te preocupa y te ayudamos a encontrar la mejor opción para ti.</p>
     </div>
-    <div class="ew" style="text-align:center;" data-i18n="svc.filter.label">Filtrar por categoría</div>
+    <div class="ew" style="text-align:center;color:var(--taupe-600);" data-i18n="svc.filter.label">Filtrar por categoría</div>
     <div class="filter-select-wrap">
       <select id="svc-filter-select" class="svc-filter-select" aria-label="Filtrar por categoría">
         <option value="todos" data-i18n="filter.all">Todos</option>
@@ -1337,12 +1354,13 @@
           <svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>
           <span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span>
         </a>
-        <div class="ct-map">
-          <div style="font-size:1.5rem;">📍</div>
-          <div style="text-align:center;line-height:1.75;">
-            <div style="font-size:.78rem;">Google Maps</div>
-            <div style="font-size:.72rem;opacity:.8;margin-top:3px;">Plaza Patio · Cabo San Lucas, BCS</div>
-          </div>
+        <!-- UBICACION: el href de .map-frame-lnk (Home y Contacto) es una URL de busqueda de Maps; sustituir por el perfil real de D'ALMA en Google Business Profile cuando exista. Mapa estatico LOCAL (OSM, scripts/make-map.py), sin API/iframe/requests en runtime. Pin = Plaza Patio (22.9045296, -109.9333945); local/suite aun no confirmado. -->
+        <div class="ct-loc">
+          <div class="map-frame">
+          <a class="map-frame-lnk" href="https://www.google.com/maps/search/?api=1&amp;query=Plaza+Patio,+De+Las+Brisas+2404,+Brisas+del+Pac%C3%ADfico,+Cabo+San+Lucas,+BCS" target="_blank" rel="noopener noreferrer"><img src="imagenes-candidatas/mapa-plaza-patio.webp" width="1200" height="600" loading="lazy" alt="Ubicación de D’ALMA Clinic en Plaza Patio, Cabo San Lucas" data-i18n-alt="alt.map"><span class="map-open"><span data-i18n="loc.cta">Abrir en Google Maps</span> ↗</span></a>
+          <a class="map-attr" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a>
+        </div>
+
         </div>
       </div>
     </div>
@@ -1655,11 +1673,11 @@ const I18N = {
     "nos.team.h2": "Nuestro equipo",
     "nos.team.role.directora": "Directora",
     "nos.team.role.medico": "Médico Estético",
-    "nos.team.note.medico": "Valoración y tratamientos personalizados con enfoque en resultados naturales.",
+    "nos.team.note.directora": "Un acompañamiento profesional centrado en cada persona.",
+    "nos.team.note.medico1": "Cuidado y atención cercana en cada detalle.",
+    "nos.team.note.medico2": "Una atención cálida, cuidadosa y personalizada.",
     "nos.team.role.cosmetologa": "Cosmetóloga",
-    "nos.team.note.cosmetologa": "Cuidado facial y acompañamiento personalizado para cada tipo de piel.",
-    "nos.team.role.recepcion": "Atención y Recepción",
-    "nos.team.note.recepcion": "La persona que te acompaña desde tu primer mensaje hasta tu visita a D'ALMA.",
+    "nos.team.note.cosmetologa": "Cuidado, bienestar y atención personalizada en cada detalle.",
     "nos.work.eyebrow": "Lo que nos mueve",
     "nos.work.h2": "Nuestra forma de trabajar",
     "nos.work.f1.title": "Valoración antes que todo",
@@ -1746,6 +1764,8 @@ const I18N = {
     "cont.form.pending": "El envío del formulario estará disponible próximamente.",
     "cont.info.eyebrow": "Información",
     "cont.info.h2": "Encuéntranos",
+    "loc.title": "Ubicación",
+    "loc.cta": "Abrir en Google Maps",
     "cont.info.lbl_dir": "Dirección",
     "cont.info.lbl_horario": "Horario",
     "cont.info.lbl_wa": "WhatsApp",
@@ -1790,8 +1810,8 @@ const I18N = {
     "alt.directora_hero": "Ana María, Directora de D'ALMA CLINIC",
     "alt.directora_team": "Ana María, Directora",
     "alt.medico": "Médico Estético D'ALMA",
-    "alt.recepcion": "María José, Atención y Recepción",
-    "alt.cosmetologa": "Cosmetóloga D'ALMA"
+    "alt.map": "Ubicación de D’ALMA Clinic en Plaza Patio, Cabo San Lucas",
+    "alt.cosmetologa": "Estefanía Serrano, Cosmetóloga"
   },
   "en": {
     "nav.home": "Home",
@@ -1893,11 +1913,11 @@ const I18N = {
     "nos.team.h2": "Our Team",
     "nos.team.role.directora": "Director",
     "nos.team.role.medico": "Aesthetic Physician",
-    "nos.team.note.medico": "Personalized consultations and treatments focused on natural results.",
+    "nos.team.note.directora": "Professional support centered on each person.",
+    "nos.team.note.medico1": "Close, attentive care in every detail.",
+    "nos.team.note.medico2": "Warm, careful, personalized care.",
     "nos.team.role.cosmetologa": "Aesthetician",
-    "nos.team.note.cosmetologa": "Facial care and personalized guidance for every skin type.",
-    "nos.team.role.recepcion": "Front Desk & Guest Care",
-    "nos.team.note.recepcion": "The person with you from your very first message to your visit at D'ALMA.",
+    "nos.team.note.cosmetologa": "Care, well-being and personalized attention in every detail.",
     "nos.work.eyebrow": "What Drives Us",
     "nos.work.h2": "How We Work",
     "nos.work.f1.title": "A Consultation Comes First",
@@ -1984,6 +2004,8 @@ const I18N = {
     "cont.form.pending": "Form submission will be available soon.",
     "cont.info.eyebrow": "Information",
     "cont.info.h2": "Find Us",
+    "loc.title": "Location",
+    "loc.cta": "Open in Google Maps",
     "cont.info.lbl_dir": "Address",
     "cont.info.lbl_horario": "Hours",
     "cont.info.lbl_wa": "WhatsApp",
@@ -2028,8 +2050,8 @@ const I18N = {
     "alt.directora_hero": "Ana María, Director of D'ALMA CLINIC",
     "alt.directora_team": "Ana María, Director",
     "alt.medico": "D'ALMA Aesthetic Physician",
-    "alt.recepcion": "María José, Front Desk & Guest Care",
-    "alt.cosmetologa": "D'ALMA Aesthetician"
+    "alt.map": "Location of D’ALMA Clinic at Plaza Patio, Cabo San Lucas",
+    "alt.cosmetologa": "Estefanía Serrano, Aesthetician"
   }
 };
 
