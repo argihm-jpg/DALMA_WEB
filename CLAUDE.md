@@ -7,12 +7,12 @@ Para **cualquier** tarea de D'ALMA en Google Search Console, Google Analytics/GA
 
 En Chrome existen otras cuentas de Google con sesión iniciada. Antes de **crear, editar, vincular, configurar o verificar** cualquier propiedad/cuenta/contenedor de Google, Claude debe **verificar visualmente** que la cuenta activa sea `clinic.dalma@gmail.com`. Si no lo es: **DETENERSE** y pedir a Bruno que cambie de cuenta. No usar ninguna otra cuenta de Google para D'ALMA bajo ninguna circunstancia.
 
-## Estado Actual de Producción y Punto de Reanudación (actualizado 2026-09-23)
+## Estado Actual de Producción y Punto de Reanudación (actualizado 2026-09-26)
 - **Arquitectura multipágina bilingüe YA DESPLEGADA en Hostinger** (`public_html/`). Producción: ES `/`, `/nosotros/`, `/servicios/`, `/contacto/`, `/aviso-de-privacidad/`; EN `/en/`, `/en/about/`, `/en/services/`, `/en/contact/`.
 - **El sitio NO está públicamente lanzado (pre-lanzamiento):** `PUBLIC_LAUNCH=false` → overlay "Próximamente / Coming soon" activo por defecto, `?preview=1` permite revisar el sitio completo, `noindex, nofollow` en las 9 páginas, sin `sitemap.xml`, Testimonios desactivado (`/testimonios/` y `/en/testimonials/` → 404).
-- **Próxima etapa (NO iniciada):** Google Search Console, GA4, Google Tag Manager, Google Ads, eventos `click_whatsapp` / `click_phone` / `generate_lead`, y CAPTCHA/backend del formulario cuando corresponda. La arquitectura/deploy ya no es el siguiente paso. Recordar la restricción de cuenta Google de arriba.
+- **SIGUIENTE PASO: Google Search Console** (usar EXCLUSIVAMENTE `clinic.dalma@gmail.com`; NO iniciado). Después (NO iniciada): GA4, Google Tag Manager, Google Ads, eventos `click_whatsapp` / `click_phone` / `generate_lead`, y CAPTCHA/backend del formulario cuando corresponda. La arquitectura/deploy ya no es el siguiente paso. Recordar la restricción de cuenta Google de arriba.
 - **Validar en producción sin barridos rápidos con curl** (ver incidente 429 en la entrada 2026-09-23).
-- **Ajustes finales de contenido/ubicación (2026-09-26): commiteados en `main` pero NO desplegados** — producción sigue con el deploy del 2026-09-23. Ver entrada 2026-09-26 más abajo. Hacer deploy solo con autorización explícita de Bruno.
+- **Último deploy: `ab8862a` (2026-09-26) DESPLEGADO en Hostinger** (ajustes finales de Anita + ubicación con mapa estático OSM). Ver entrada 2026-09-26. Producción = `ab8862a`; el sitio sigue en pre-lanzamiento. Backup previo: `C:\Users\bruno\Downloads\public_html_pre_ab8862a.zip` (25,799,923 bytes); más antiguo: `C:\Users\bruno\Downloads\_public_html.zip`.
 
 ## Descripción
 Sitio web para **D'ALMA CLINIC**, clínica estética ubicada en Cabo San Lucas, BCS.
@@ -195,8 +195,13 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
-### 2026-09-26 — Ajustes finales de Anita y ubicación con mapa estático (local, NO desplegado)
-**Estado: cambios commiteados en `main`; producción sin cambios (sigue el deploy del 2026-09-23). Sin deploy, sin Hostinger/Cloudflare/Google. `PUBLIC_LAUNCH` sigue `false`.**
+### 2026-09-26 — Ajustes finales de Anita y ubicación con mapa estático (DESPLEGADO, pre-lanzamiento)
+**Estado: commit `ab8862a` en `main` Y desplegado en producción (Hostinger). El sitio sigue en PRE-LANZAMIENTO: `PUBLIC_LAUNCH=false`, overlay "Próximamente", `noindex, nofollow`, sin `sitemap.xml`. Cloudflare, DNS, SSL y Google no se tocaron.**
+
+**DEPLOY de `ab8862a`:** 9 HTML (ES: `/`, `/nosotros/`, `/servicios/`, `/contacto/`, `/aviso-de-privacidad/`; EN: `/en/`, `/en/about/`, `/en/services/`, `/en/contact/`) + `imagenes-candidatas/mapa-plaza-patio.webp` subidos al `public_html/` (sin borrar nada; `favicon.ico` y `robots.txt` sin cambios). Los 9 HTML y el WebP publicados coinciden por SHA-256 con `DALMA_BUILD`. No fue necesaria purga de Cloudflare ni rollback. **Backup previo:** `C:\Users\bruno\Downloads\public_html_pre_ab8862a.zip` (25,799,923 bytes) = estado multipágina estable inmediatamente anterior; se conserva también `C:\Users\bruno\Downloads\_public_html.zip` (backup más antiguo, 24,696,825 bytes). Incidente menor: el gestor de archivos dio 403 a mitad del proceso; se reabrió sesión desde hPanel (nueva URL de sesión) y los archivos ya subidos quedaron intactos.
+**Validación en producción:** Home (jerarquía, CTA, mapa y contraste OK), Nosotros (foto completa, María José eliminada, Estefanía Serrano añadida), Servicios (contraste y filtros OK), Contacto (dirección única y mapa clicable), EN desplegado OK; mapa local sin requests cartográficos en runtime; overlay y `noindex` activos; sitemap ausente; `/testimonios/` y `/en/testimonials/` → 404. Sin errores de consola/imágenes rotas/overflow en lo revisado.
+**SIGUIENTE PASO: Google Search Console** (cuenta EXCLUSIVAMENTE `clinic.dalma@gmail.com`).
+
 
 - **Ubicación confirmada:** Plaza Patio, De Las Brisas 2404, Brisas del Pacífico, Cabo San Lucas, BCS, C.P. 23473 (schema.org ya coincidía; sin cambios). Pin del mapa = "Plaza Patio" (no "D'ALMA": el local/suite exacto sigue desconocido).
 - **Mapa estático local (OpenStreetMap):** asset `imagenes-candidatas/mapa-plaza-patio.webp` (1200×600, ~55 KB), generado por `scripts/make-map.py` (100% local, SIN peticiones HTTP; requiere Pillow) desde el source `map-sources/osm-export-plaza-patio.png` (exportación oficial openstreetmap.org > Compartir > Imagen, una sola vez; `map-sources/` no se despliega). Coordenadas 22.9045296, -109.9333945. **No se descargan teselas** (la política de OSM prohíbe el prefetch/offline de `tile.openstreetmap.org`). Sin requests a mapas en runtime. Atribución visible "© OpenStreetMap contributors" (enlace independiente a openstreetmap.org/copyright, superpuesto en HTML). El mapa es el enlace a Google Maps (búsqueda por dirección, `target="_blank" rel="noopener noreferrer"`); **futuro: sustituir el `href` por el perfil real de Google Business Profile.** Alt ES/EN en la clave i18n `alt.map`.
