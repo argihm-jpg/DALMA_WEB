@@ -65,6 +65,8 @@
     /* SHARED */
     .ew{font-size:.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe-400);margin-bottom:12px;}
     .ew-lt{color:rgba(216,203,190,.45);}
+    /* Servicios/Contacto hero: foto con zonas de brillo variable (feedback de Anita) -> texto solido + sombra muy sutil en vez de bloque/blur */
+    .pg-hero-c .ew-lt{color:var(--bone-100);text-shadow:0 1px 3px rgba(53,47,45,.5);}
     .st{font-family:var(--fd);font-size:2.375rem;font-weight:300;color:var(--taupe-700);line-height:1.25;letter-spacing:-.01em;}
     .bt{font-size:.875rem;color:var(--text-body);line-height:1.75;}
     .bt-lt{color:var(--bone-300);}
@@ -171,7 +173,7 @@
     /* ═══ SERVICIOS ═══ */
     .pg-hero{position:relative;height:52vh;min-height:380px;overflow:hidden;}
     .pg-hero img{width:100%;height:100%;object-fit:cover;object-position:center 38%;display:block;}
-    .pg-hero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(53,47,45,.4) 0%,rgba(53,47,45,.72) 100%);}
+    .pg-hero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(53,47,45,.48) 0%,rgba(53,47,45,.8) 100%);}
     .pg-hero-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 40px;}
 
     .filter-wrap{padding:28px 56px 0;background:var(--bone-100);border-bottom:1px solid var(--bone-300);}
@@ -745,7 +747,7 @@
     <div class="g4" id="nos-team-grid">
       <div class="team-card">
         <!-- TEMPORAL: reutiliza la foto principal de Ana Maria (la foto anterior se retiro a peticion de Anita). Se reemplazara tras la sesion de fotos. -->
-        <img src="imagenes-candidatas/directora-perfil-vertical.png" width="933" height="1400" alt="Ana María, Directora" data-i18n-alt="alt.directora_team" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 8%;display:block;">
+        <img src="imagenes-candidatas/anita-2.webp" width="1320" height="2041" alt="Ana María, Directora" data-i18n-alt="alt.directora_team" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 15%;display:block;">
         <div class="team-card-body">
           <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">Ana María</div>
           <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.directora">Directora</div>
@@ -866,7 +868,7 @@
     <div class="pg-hero-c">
       <div class="ew ew-lt" style="margin-bottom:14px;" data-i18n="svc.hero.eyebrow">Lo que hacemos</div>
       <h1 style="font-family:var(--fd);font-size:clamp(2.2rem,4.5vw,3.75rem);font-weight:300;color:var(--bone-100);line-height:1.2;letter-spacing:-.02em;margin-bottom:16px;" data-i18n="svc.hero.h1">Servicios</h1>
-      <p style="font-size:.9rem;color:rgba(216,203,190,.8);max-width:480px;line-height:1.7;" data-i18n="svc.hero.p">Cada tratamiento está pensado para ayudarte a sentirte bien contigo, de forma natural, cercana y personalizada.</p>
+      <p style="font-size:.9rem;color:var(--bone-100);text-shadow:0 1px 3px rgba(53,47,45,.5);max-width:480px;line-height:1.7;" data-i18n="svc.hero.p">Cada tratamiento está pensado para ayudarte a sentirte bien contigo, de forma natural, cercana y personalizada.</p>
     </div>
   </div>
 
@@ -1272,7 +1274,7 @@
     <div class="pg-hero-c">
       <div class="ew ew-lt" style="margin-bottom:14px;" data-i18n="cont.hero.eyebrow">Estamos aquí para ti</div>
       <h1 style="font-family:var(--fd);font-size:clamp(2.2rem,4.5vw,3.75rem);font-weight:300;color:var(--bone-100);line-height:1.2;letter-spacing:-.02em;margin-bottom:16px;" data-i18n="nav.contact">Contacto</h1>
-      <p style="font-size:.9rem;color:rgba(216,203,190,.8);max-width:420px;line-height:1.7;" data-i18n="cont.hero.p">La forma más rápida de agendar es por WhatsApp. También puedes escribirnos y te respondemos pronto.</p>
+      <p style="font-size:.9rem;color:var(--bone-100);text-shadow:0 1px 3px rgba(53,47,45,.5);max-width:420px;line-height:1.7;" data-i18n="cont.hero.p">La forma más rápida de agendar es por WhatsApp. También puedes escribirnos y te respondemos pronto.</p>
     </div>
   </div>
 
