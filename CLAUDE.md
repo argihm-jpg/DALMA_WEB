@@ -7,13 +7,13 @@ Para **cualquier** tarea de D'ALMA en Google Search Console, Google Analytics/GA
 
 En Chrome existen otras cuentas de Google con sesión iniciada. Antes de **crear, editar, vincular, configurar o verificar** cualquier propiedad/cuenta/contenedor de Google, Claude debe **verificar visualmente** que la cuenta activa sea `clinic.dalma@gmail.com`. Si no lo es: **DETENERSE** y pedir a Bruno que cambie de cuenta. No usar ninguna otra cuenta de Google para D'ALMA bajo ninguna circunstancia.
 
-## Estado Actual de Producción y Punto de Reanudación (actualizado 2026-09-26)
+## Estado Actual de Producción y Punto de Reanudación (actualizado 2026-09-30)
 - **Arquitectura multipágina bilingüe YA DESPLEGADA en Hostinger** (`public_html/`). Producción: ES `/`, `/nosotros/`, `/servicios/`, `/contacto/`, `/aviso-de-privacidad/`; EN `/en/`, `/en/about/`, `/en/services/`, `/en/contact/`.
 - **El sitio NO está públicamente lanzado (pre-lanzamiento):** `PUBLIC_LAUNCH=false` → overlay "Próximamente / Coming soon" activo por defecto, `?preview=1` permite revisar el sitio completo, `noindex, nofollow` en las 9 páginas, sin `sitemap.xml`, Testimonios desactivado (`/testimonios/` y `/en/testimonials/` → 404).
 - **Google Search Console: CONFIGURADO Y VERIFICADO (2026-09-26)** — propiedad de tipo Dominio `dalmaclinic.com.mx` bajo `clinic.dalma@gmail.com`, verificada por registro DNS TXT. **El registro TXT de Google en Cloudflare (dominio raíz) DEBE CONSERVARSE** para mantener la verificación; no borrarlo. Es solo verificación: NO se envió sitemap ni se solicitó indexación (el sitio sigue en pre-lanzamiento). Ver entrada 2026-09-26.
 - **PENDIENTE para más adelante (todo con `clinic.dalma@gmail.com`):** generar/enviar sitemap al lanzamiento; solicitar/validar indexación cuando corresponda; GA4, Google Tag Manager, Google Ads, eventos `click_whatsapp` / `click_phone` / `generate_lead`, y CAPTCHA/backend del formulario cuando corresponda. La arquitectura/deploy ya no es el siguiente paso. Recordar la restricción de cuenta Google de arriba.
 - **Validar en producción sin barridos rápidos con curl** (ver incidente 429 en la entrada 2026-09-23).
-- **Último deploy: `ab8862a` (2026-09-26) DESPLEGADO en Hostinger** (ajustes finales de Anita + ubicación con mapa estático OSM). Ver entrada 2026-09-26. Producción = `ab8862a`; el sitio sigue en pre-lanzamiento. Backup previo: `C:\Users\bruno\Downloads\public_html_pre_ab8862a.zip` (25,799,923 bytes); más antiguo: `C:\Users\bruno\Downloads\_public_html.zip`.
+- **Último deploy: `134d181` (2026-09-30) DESPLEGADO en Hostinger** (segunda tanda de ajustes de Anita: contraste de heros en Servicios/Contacto + foto `anita-2.webp` en Nosotros). Ver entrada 2026-09-30. Producción = `134d181`; el sitio sigue en pre-lanzamiento. Backup previo: `C:\Users\bruno\Downloads\public_html_pre_134d181.zip` (25,875,312 bytes, 43 entradas, integridad OK, representa el estado inmediatamente anterior = `ab8862a`). Backups más antiguos conservados: `C:\Users\bruno\Downloads\public_html_pre_ab8862a.zip` (25,799,923 bytes) y `C:\Users\bruno\Downloads\_public_html.zip` (el más antiguo).
 
 ## Descripción
 Sitio web para **D'ALMA CLINIC**, clínica estética ubicada en Cabo San Lucas, BCS.
@@ -195,6 +195,17 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 ---
 
 ## Historial de Sesiones
+
+### 2026-09-30 — Segunda tanda de ajustes de Anita: contraste de heros + foto anita-2 (DESPLEGADO, pre-lanzamiento)
+**Estado: commit `134d181` en `main` Y desplegado en producción (Hostinger). El sitio sigue en PRE-LANZAMIENTO: `PUBLIC_LAUNCH=false`, overlay "Próximamente", `noindex, nofollow`, sin `sitemap.xml`. Cloudflare, DNS, SSL y Google no se tocaron.**
+
+**Cambios de `134d181`:**
+- **Servicios y Contacto (hero sobre foto):** eyebrow y párrafo pasan a `var(--bone-100)` (bone claro) con un `text-shadow` muy sutil (`0 1px 3px rgba(53,47,45,.5)`), y el degradado oscuro `.pg-hero-ov` se intensificó ligeramente de `rgba(53,47,45,.4→.72)` a `rgba(53,47,45,.48→.8)` para que el párrafo alcance ≥4.5:1 (WCAG AA) también en el píxel más claro muestreado de la foto, sin bloques/blur. H1 no se tocó (ya cumplía).
+- **Nosotros:** la segunda foto temporal de Ana María (que reutilizaba `directora-perfil-vertical.png` en la tarjeta de equipo) se sustituyó por `imagenes-candidatas/anita-2.webp` (1320×2041, foto nueva enviada por Anita), con `object-position:center 15%`. La foto principal de Ana María al inicio de Nosotros sigue siendo `directora-perfil-vertical.png`, sin cambios.
+
+**DEPLOY de `134d181` (2026-09-30):** 9 HTML (ES: `/`, `/nosotros/`, `/servicios/`, `/contacto/`, `/aviso-de-privacidad/`; EN: `/en/`, `/en/about/`, `/en/services/`, `/en/contact/`) + `imagenes-candidatas/anita-2.webp` subidos a `public_html/` (sin borrar nada). Los 10 archivos publicados coinciden por SHA-256 con `DALMA_BUILD`. No fue necesaria purga de Cloudflare ni rollback. No se modificaron DNS, SSL/TLS, Cloudflare ni Google. **Backup previo:** `C:\Users\bruno\Downloads\public_html_pre_134d181.zip` (25,875,312 bytes, 43 entradas, integridad correcta) = estado inmediatamente anterior (`ab8862a`); se conservan también `public_html_pre_ab8862a.zip` y `_public_html.zip`.
+**Validación en producción:** Servicios y Contacto con el nuevo contraste (bone claro + sombra sutil + degradado `.48→.8`), foto limpia, sin overflow, sin imágenes rotas, sin errores de consola. Nosotros con la foto principal intacta y `anita-2.webp` en la tarjeta de equipo (`object-position:50% 15%`), sin deformación. EN (`/en/services/`, `/en/contact/`, `/en/about/`) funcionando sin regresiones.
+**Pendientes sin cambios:** horario real, teléfono/WhatsApp, redes, local/suite, datos legales del aviso de privacidad, backend del formulario, CAPTCHA, textos definitivos del equipo, doctoras, testimonios, Google Business Profile/Maps.
 
 ### 2026-09-26 — Ajustes finales de Anita y ubicación con mapa estático (DESPLEGADO, pre-lanzamiento)
 **Estado: commit `ab8862a` en `main` Y desplegado en producción (Hostinger). El sitio sigue en PRE-LANZAMIENTO: `PUBLIC_LAUNCH=false`, overlay "Próximamente", `noindex, nofollow`, sin `sitemap.xml`. Cloudflare, DNS, SSL y Google no se tocaron.**
