@@ -88,7 +88,8 @@
     #nos-team-grid{align-items:stretch;}
     .team-card{border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);background:var(--bone-100);display:flex;flex-direction:column;}
     .team-card-body{padding:16px 18px 20px;text-align:center;flex:1;}
-    .team-role-note{font-family:var(--fd);font-style:italic;font-size:.98rem;color:var(--taupe-600);line-height:1.45;margin-top:10px;}
+    .team-card--text{justify-content:center;}
+    .team-card--text .team-card-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:34px 20px;}
     .ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:28px;}
     .bp{display:inline-block;padding:14px 32px;border-radius:9999px;background:var(--taupe-700);color:var(--white);font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:background 150ms;}
     .bp:hover{background:var(--taupe-800);}
@@ -724,15 +725,14 @@
   <section class="sec nos-first-block">
     <div class="ftx" style="margin-bottom:0;">
       <div class="ftx-img">
-        <img src="imagenes-candidatas/directora-perfil-vertical.png" width="933" height="1400" alt="Ana María, Directora de D'ALMA CLINIC" data-i18n-alt="alt.directora_hero" loading="eager" style="object-position:center 8%;">
+        <img src="imagenes-candidatas/anita-2.webp" width="1320" height="2041" alt="Ana María, Directora de D'ALMA CLINIC" data-i18n-alt="alt.directora_hero" loading="eager" style="object-position:center 12%;">
       </div>
       <div class="ftx-body">
         <div class="ew" style="margin-bottom:14px;" data-i18n="nos.ana.eyebrow">Directora</div>
         <h2 style="font-family:var(--fd);font-size:clamp(1.75rem,2.8vw,2.25rem);font-weight:300;color:var(--taupe-700);line-height:1.2;margin-bottom:22px;" data-i18n="nos.ana.h2">Hola, soy Ana María.</h2>
         <p class="bt" style="margin-bottom:14px;" data-i18n="nos.ana.p1">D'ALMA nació de querer crear el tipo de clínica al que yo misma quisiera llegar: un lugar donde te escuchen, te expliquen y te orienten sin hacerte sentir que tienes que cambiarlo todo. Queremos que cada persona se sienta cómoda, segura y acompañada desde el primer momento.</p>
         <p class="bt" style="margin-bottom:14px;" data-i18n="nos.ana.p2">Soy comunicóloga y periodista de formación, y desde hace años he estado vinculada al desarrollo y operación de clínicas estéticas.</p>
-        <p class="bt" style="margin-bottom:30px;" data-i18n="nos.ana.p3">Cuando una persona comienza a cuidarse, muchas veces no cambia solamente por fuera. También cambia la forma en que se mira, la seguridad con la que se siente y la manera en que se relaciona consigo misma.</p>
-        <button class="bp" data-i18n="nos.ana.cta" onclick="showPg('servicios')">Conoce nuestros servicios</button>
+        <p class="bt" style="margin-bottom:0;" data-i18n="nos.ana.p3">Cuando una persona comienza a cuidarse, muchas veces no cambia solamente por fuera. También cambia la forma en que se mira, la seguridad con la que se siente y la manera en que se relaciona consigo misma.</p>
       </div>
     </div>
   </section>
@@ -743,39 +743,29 @@
       <div class="ew" data-i18n="nos.team.eyebrow">Las personas detrás de D'ALMA</div>
       <h2 class="st" data-i18n="nos.team.h2">Nuestro equipo</h2>
     </div>
-    <!-- PENDIENTE ANITA: las frases bajo cada integrante (.team-role-note) son PLACEHOLDERS neutrales; Anita enviara el copy definitivo. -->
     <div class="g4" id="nos-team-grid">
-      <div class="team-card">
-        <!-- TEMPORAL: reutiliza la foto principal de Ana Maria (la foto anterior se retiro a peticion de Anita). Se reemplazara tras la sesion de fotos. -->
-        <img src="imagenes-candidatas/anita-2.webp" width="1320" height="2041" alt="Ana María, Directora" data-i18n-alt="alt.directora_team" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 15%;display:block;">
+      <div class="team-card team-card--text">
         <div class="team-card-body">
-          <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">Ana María</div>
-          <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.directora">Directora</div>
-          <p class="team-role-note" data-i18n="nos.team.note.directora">Un acompañamiento profesional centrado en cada persona.</p>
+          <div style="font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);line-height:1.25;">Stefania Serrano</div>
+          <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:8px;" data-i18n="nos.team.role.cosmetologa">Cosmetóloga</div>
         </div>
       </div>
-      <div class="team-card">
-        <img src="imagenes-candidatas/doctora.jpg" width="640" height="960" alt="Médico Estético D'ALMA" data-i18n-alt="alt.medico" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
+      <div class="team-card team-card--text">
         <div class="team-card-body">
-          <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">Dra. ———</div>
-          <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.medico">Médico Estético</div>
-          <p class="team-role-note" data-i18n="nos.team.note.medico1">Cuidado y atención cercana en cada detalle.</p>
+          <div style="font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);line-height:1.25;">Lic. Laura Elena Pérez</div>
+          <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:8px;" data-i18n="nos.team.role.recepcionista">Recepcionista</div>
         </div>
       </div>
-      <div class="team-card">
-        <img src="imagenes-candidatas/doctora.jpg" width="640" height="960" alt="Médico Estético D'ALMA" data-i18n-alt="alt.medico" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
+      <div class="team-card team-card--text">
         <div class="team-card-body">
-          <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">Dra. ———</div>
-          <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.medico">Médico Estético</div>
-          <p class="team-role-note" data-i18n="nos.team.note.medico2">Una atención cálida, cuidadosa y personalizada.</p>
+          <div style="font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);line-height:1.25;">Dra. Ana Patricia Romera</div>
+          <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:8px;" data-i18n="nos.team.role.medico">Médica Estética</div>
         </div>
       </div>
-      <div class="team-card">
-        <img src="imagenes-candidatas/cosmetologa.webp" width="3566" height="5579" alt="Estefanía Serrano, Cosmetóloga" data-i18n-alt="alt.cosmetologa" loading="lazy" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;">
+      <div class="team-card team-card--text">
         <div class="team-card-body">
-          <div style="font-family:var(--fd);font-size:1.1rem;font-weight:400;color:var(--taupe-700);">Estefanía Serrano</div>
-          <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;" data-i18n="nos.team.role.cosmetologa">Cosmetóloga</div>
-          <p class="team-role-note" data-i18n="nos.team.note.cosmetologa">Cuidado, bienestar y atención personalizada en cada detalle.</p>
+          <div style="font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);line-height:1.25;">Dra. Grecia Atenea</div>
+          <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:8px;" data-i18n="nos.team.role.medico">Médica Estética</div>
         </div>
       </div>
     </div>
@@ -1670,16 +1660,11 @@ const I18N = {
     "nos.ana.p1": "D'ALMA nació de querer crear el tipo de clínica al que yo misma quisiera llegar: un lugar donde te escuchen, te expliquen y te orienten sin hacerte sentir que tienes que cambiarlo todo. Queremos que cada persona se sienta cómoda, segura y acompañada desde el primer momento.",
     "nos.ana.p2": "Soy comunicóloga y periodista de formación, y desde hace años he estado vinculada al desarrollo y operación de clínicas estéticas.",
     "nos.ana.p3": "Cuando una persona comienza a cuidarse, muchas veces no cambia solamente por fuera. También cambia la forma en que se mira, la seguridad con la que se siente y la manera en que se relaciona consigo misma.",
-    "nos.ana.cta": "Conoce nuestros servicios",
     "nos.team.eyebrow": "Las personas detrás de D'ALMA",
     "nos.team.h2": "Nuestro equipo",
-    "nos.team.role.directora": "Directora",
-    "nos.team.role.medico": "Médico Estético",
-    "nos.team.note.directora": "Un acompañamiento profesional centrado en cada persona.",
-    "nos.team.note.medico1": "Cuidado y atención cercana en cada detalle.",
-    "nos.team.note.medico2": "Una atención cálida, cuidadosa y personalizada.",
+    "nos.team.role.medico": "Médica Estética",
+    "nos.team.role.recepcionista": "Recepcionista",
     "nos.team.role.cosmetologa": "Cosmetóloga",
-    "nos.team.note.cosmetologa": "Cuidado, bienestar y atención personalizada en cada detalle.",
     "nos.work.eyebrow": "Lo que nos mueve",
     "nos.work.h2": "Nuestra forma de trabajar",
     "nos.work.f1.title": "Valoración antes que todo",
@@ -1810,10 +1795,7 @@ const I18N = {
     "alt.control_peso": "Control de Peso y bienestar",
     "alt.interior": "Valoración en D'ALMA Clinic",
     "alt.directora_hero": "Ana María, Directora de D'ALMA CLINIC",
-    "alt.directora_team": "Ana María, Directora",
-    "alt.medico": "Médico Estético D'ALMA",
     "alt.map": "Ubicación de D’ALMA Clinic en Plaza Patio, Cabo San Lucas",
-    "alt.cosmetologa": "Estefanía Serrano, Cosmetóloga"
   },
   "en": {
     "nav.home": "Home",
@@ -1910,16 +1892,11 @@ const I18N = {
     "nos.ana.p1": "D'ALMA was born from wanting to create the kind of clinic I myself would want to walk into: a place where you're listened to, where things are explained clearly, and where you're guided without ever feeling like you have to change everything about yourself. We want every person to feel comfortable, safe, and supported from the very first moment.",
     "nos.ana.p2": "I'm a communications professional and journalist by training, and for years I've been involved in the development and operation of aesthetic clinics.",
     "nos.ana.p3": "When someone starts taking care of themselves, they often don't just change on the outside. The way they see themselves, the confidence they feel, and how they relate to themselves change too.",
-    "nos.ana.cta": "Explore Our Treatments",
     "nos.team.eyebrow": "The People Behind D'ALMA",
     "nos.team.h2": "Our Team",
-    "nos.team.role.directora": "Director",
     "nos.team.role.medico": "Aesthetic Physician",
-    "nos.team.note.directora": "Professional support centered on each person.",
-    "nos.team.note.medico1": "Close, attentive care in every detail.",
-    "nos.team.note.medico2": "Warm, careful, personalized care.",
+    "nos.team.role.recepcionista": "Receptionist",
     "nos.team.role.cosmetologa": "Aesthetician",
-    "nos.team.note.cosmetologa": "Care, well-being and personalized attention in every detail.",
     "nos.work.eyebrow": "What Drives Us",
     "nos.work.h2": "How We Work",
     "nos.work.f1.title": "A Consultation Comes First",
@@ -2050,10 +2027,7 @@ const I18N = {
     "alt.control_peso": "Weight Management & Wellness",
     "alt.interior": "Consultation at D'ALMA Clinic",
     "alt.directora_hero": "Ana María, Director of D'ALMA CLINIC",
-    "alt.directora_team": "Ana María, Director",
-    "alt.medico": "D'ALMA Aesthetic Physician",
     "alt.map": "Location of D’ALMA Clinic at Plaza Patio, Cabo San Lucas",
-    "alt.cosmetologa": "Estefanía Serrano, Aesthetician"
   }
 };
 
