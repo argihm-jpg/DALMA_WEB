@@ -7,13 +7,13 @@ Para **cualquier** tarea de D'ALMA en Google Search Console, Google Analytics/GA
 
 En Chrome existen otras cuentas de Google con sesión iniciada. Antes de **crear, editar, vincular, configurar o verificar** cualquier propiedad/cuenta/contenedor de Google, Claude debe **verificar visualmente** que la cuenta activa sea `clinic.dalma@gmail.com`. Si no lo es: **DETENERSE** y pedir a Bruno que cambie de cuenta. No usar ninguna otra cuenta de Google para D'ALMA bajo ninguna circunstancia.
 
-## Estado Actual de Producción y Punto de Reanudación (actualizado 2026-09-30)
+## Estado Actual de Producción y Punto de Reanudación (actualizado 2026-10-05)
 - **Arquitectura multipágina bilingüe YA DESPLEGADA en Hostinger** (`public_html/`). Producción: ES `/`, `/nosotros/`, `/servicios/`, `/contacto/`, `/aviso-de-privacidad/`; EN `/en/`, `/en/about/`, `/en/services/`, `/en/contact/`.
 - **El sitio NO está públicamente lanzado (pre-lanzamiento):** `PUBLIC_LAUNCH=false` → overlay "Próximamente / Coming soon" activo por defecto, `?preview=1` permite revisar el sitio completo, `noindex, nofollow` en las 9 páginas, sin `sitemap.xml`, Testimonios desactivado (`/testimonios/` y `/en/testimonials/` → 404).
 - **Google Search Console: CONFIGURADO Y VERIFICADO (2026-09-26)** — propiedad de tipo Dominio `dalmaclinic.com.mx` bajo `clinic.dalma@gmail.com`, verificada por registro DNS TXT. **El registro TXT de Google en Cloudflare (dominio raíz) DEBE CONSERVARSE** para mantener la verificación; no borrarlo. Es solo verificación: NO se envió sitemap ni se solicitó indexación (el sitio sigue en pre-lanzamiento). Ver entrada 2026-09-26.
 - **PENDIENTE para más adelante (todo con `clinic.dalma@gmail.com`):** generar/enviar sitemap al lanzamiento; solicitar/validar indexación cuando corresponda; GA4, Google Tag Manager, Google Ads, eventos `click_whatsapp` / `click_phone` / `generate_lead`, y CAPTCHA/backend del formulario cuando corresponda. La arquitectura/deploy ya no es el siguiente paso. Recordar la restricción de cuenta Google de arriba.
 - **Validar en producción sin barridos rápidos con curl** (ver incidente 429 en la entrada 2026-09-23).
-- **Último deploy: `134d181` (2026-09-30) DESPLEGADO en Hostinger** (segunda tanda de ajustes de Anita: contraste de heros en Servicios/Contacto + foto `anita-2.webp` en Nosotros). Ver entrada 2026-09-30. Producción = `134d181`; el sitio sigue en pre-lanzamiento. Backup previo: `C:\Users\bruno\Downloads\public_html_pre_134d181.zip` (25,875,312 bytes, 43 entradas, integridad OK, representa el estado inmediatamente anterior = `ab8862a`). Backups más antiguos conservados: `C:\Users\bruno\Downloads\public_html_pre_ab8862a.zip` (25,799,923 bytes) y `C:\Users\bruno\Downloads\_public_html.zip` (el más antiguo).
+- **Último deploy: `b807ee8` (2026-10-05) DESPLEGADO en Hostinger** (equipo de Nosotros: `anita-2.webp` como foto principal, 4 cards de equipo sin foto con nombre + cargo). Ver entrada 2026-10-05. Producción = `b807ee8`; el sitio sigue en pre-lanzamiento. Backup previo: `C:\Users\bruno\Downloads\public_html_pre_b807ee8.zip` (25,944,812 bytes, 44 entradas, integridad OK, estado inmediatamente anterior = `134d181`). Backups más antiguos conservados en `C:\Users\bruno\Downloads\`: `public_html_pre_134d181.zip` (25,875,312 bytes), `public_html_pre_ab8862a.zip` (25,799,923 bytes) y `_public_html.zip` (el más antiguo).
 
 ## Descripción
 Sitio web para **D'ALMA CLINIC**, clínica estética ubicada en Cabo San Lucas, BCS.
@@ -195,6 +195,21 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 ---
 
 ## Historial de Sesiones
+
+### 2026-10-05 — Equipo de Nosotros y foto principal de Anita (DESPLEGADO, pre-lanzamiento)
+**Estado: commit `b807ee8` ("Actualiza equipo y foto principal de Nosotros") en `main` Y desplegado en producción (Hostinger) el 2026-10-05. El sitio sigue en PRE-LANZAMIENTO: `PUBLIC_LAUNCH=false`, overlay "Próximamente / Coming soon", `noindex, nofollow`, sin `sitemap.xml`, sin `testimonios/` ni `en/testimonials/` (404).**
+
+**Cambios desplegados (Nosotros / About):**
+- `imagenes-candidatas/anita-2.webp` es ahora la foto principal del bloque "Hola, soy Ana María". Anita aparece una sola vez en la página; se eliminó su card inferior del equipo. Se quitó también el botón "Conoce nuestros servicios" de su introducción.
+- Se eliminaron las fotos placeholder del equipo (`doctora.jpg`, `cosmetologa.webp`, la foto de Anita en card). Las cards muestran solo nombre + cargo (clase `.team-card--text`); se retiraron las frases provisionales y su CSS/i18n. Los archivos de imagen siguen en disco, sin referenciar desde las cards.
+- Equipo actual: Stefania Serrano (Cosmetóloga), Lic. Laura Elena Pérez (Recepcionista), Dra. Ana Patricia Romera (Médica Estética), Dra. Grecia Atenea (Médica Estética). EN: Aesthetician, Receptionist, Aesthetic Physician (nombres y prefijos "Lic."/"Dra." sin traducir).
+
+**DEPLOY de `b807ee8` (2026-10-05):** se subieron los 9 `index.html` (`/`, `nosotros/`, `servicios/`, `contacto/`, `aviso-de-privacidad/`, `en/`, `en/about/`, `en/services/`, `en/contact/`) a `public_html/` sin borrar nada. Los 9 coinciden por SHA-256 con `DALMA_BUILD`. `anita-2.webp` ya estaba en producción desde el deploy `134d181`, no se volvió a subir. **Backup previo:** `C:\Users\bruno\Downloads\public_html_pre_b807ee8.zip` (25,944,812 bytes, 44 entradas, `testzip` limpio, fuera de `public_html`).
+**Validación en producción:** Nosotros ES y About EN a 1440 y 390 (4 personas, sin fotos ni huecos, Anita una sola vez, sin placeholders); resto de páginas revisado. Sin imágenes rotas, sin overflow, sin errores de consola relevantes. Pre-lanzamiento verificado (overlay, `noindex, nofollow`, sitemap y testimonios en 404).
+**Incidencia 429:** durante una validación automatizada con múltiples iframes se produjo temporalmente un HTTP 429 por exceso de solicitudes. Se dejó enfriar y las páginas se revisaron de nuevo una a una. Sin impacto permanente; no requirió cambios en servidor ni Cloudflare. Recordatorio: validar producción con peticiones secuenciales y pausas, sin barridos con iframes/curl en paralelo.
+**Nota operativa del deploy:** en el gestor de archivos de Hostinger el clic de confirmación "Replace all files" a veces no se registra; verificar siempre por hash tras subir (en este deploy 6 de 9 archivos hubo que reconfirmarlos).
+**Infraestructura:** no fue necesaria purga de Cloudflare ni rollback. No se modificaron Google, DNS, SSL/TLS, Cloudflare ni correo.
+**Pendientes sin cambios:** horario real, teléfono/WhatsApp, redes, local/suite, datos legales del aviso de privacidad, backend del formulario, CAPTCHA, frases y fotos definitivas del equipo, testimonios, Google Business Profile/Maps; GA4/GTM/Ads/eventos. Regla permanente: servicios Google solo con `clinic.dalma@gmail.com`.
 
 ### 2026-09-30 — Segunda tanda de ajustes de Anita: contraste de heros + foto anita-2 (DESPLEGADO, pre-lanzamiento)
 **Estado: commit `134d181` en `main` Y desplegado en producción (Hostinger). El sitio sigue en PRE-LANZAMIENTO: `PUBLIC_LAUNCH=false`, overlay "Próximamente", `noindex, nofollow`, sin `sitemap.xml`. Cloudflare, DNS, SSL y Google no se tocaron.**
