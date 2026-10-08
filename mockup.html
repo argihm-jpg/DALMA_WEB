@@ -390,7 +390,6 @@
     .ci-lbl{font-size:.64rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--taupe-400);margin-bottom:3px;}
     .ci-val{font-size:.88rem;color:var(--taupe-700);line-height:1.55;}
     .ci-ph{color:var(--taupe-400)!important;}
-    .ci-row-focus{outline:2px solid var(--taupe-400);outline-offset:8px;border-radius:6px;background:var(--bone-200);transition:background 200ms ease;}
 
     /* Aviso de privacidad */
     .priv-wrap{max-width:760px;margin:0 auto;padding:56px 20px 80px;}
@@ -673,7 +672,7 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto');return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" target="_blank" rel="noopener noreferrer" data-track-whatsapp data-whatsapp-placement="footer" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
       <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home');return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros');return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios');return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios');return false;" data-i18n="nav.testimonials" data-testimonials-link>Testimonios</a><a href="#" onclick="showPg('contacto');return false;" data-i18n="nav.contact">Contacto</a><a href="#aviso-de-privacidad" onclick="showPg('privacidad');history.replaceState(null,'','#aviso-de-privacidad');return false;" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.82rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
@@ -800,7 +799,7 @@
     <p class="bt bt-lt" style="max-width:400px;margin:0 auto 32px;" data-i18n="nos.cta.p">Agenda una valoración y cuéntanos qué necesitas.</p>
     <div class="ctas" style="justify-content:center;margin-top:0;">
       <button class="bp bp-lt" data-i18n="home.hero.cta1" onclick="showPg('contacto')">Agenda tu valoración</button>
-      <a class="bwa" href="#" onclick="showPg('contacto');return false;">
+      <a class="bwa" href="#" target="_blank" rel="noopener noreferrer" data-track-whatsapp data-whatsapp-placement="about_cta">
         <svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>
         <span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span>
       </a>
@@ -810,7 +809,7 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto');return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" target="_blank" rel="noopener noreferrer" data-track-whatsapp data-whatsapp-placement="footer" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
       <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home');return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros');return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios');return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios');return false;" data-i18n="nav.testimonials" data-testimonials-link>Testimonios</a><a href="#" onclick="showPg('contacto');return false;" data-i18n="nav.contact">Contacto</a><a href="#aviso-de-privacidad" onclick="showPg('privacidad');history.replaceState(null,'','#aviso-de-privacidad');return false;" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.82rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
@@ -1058,14 +1057,14 @@
     <p class="bt bt-lt" style="max-width:440px;margin:0 auto 32px;" data-i18n="svc.bottom.p">Te explicamos qué tratamiento es más adecuado para ti según tu piel, tus objetivos y tu presupuesto.</p>
     <div class="ctas" style="justify-content:center;margin-top:0;">
       <button class="bp bp-lt" data-i18n="btn.book_consult" onclick="showPg('contacto')">Agenda tu valoración</button>
-      <a class="bwa" href="#" onclick="showPg('contacto');return false;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a>
+      <a class="bwa" href="#" target="_blank" rel="noopener noreferrer" data-track-whatsapp data-whatsapp-placement="services_cta"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a>
     </div>
   </div>
 
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto');return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" target="_blank" rel="noopener noreferrer" data-track-whatsapp data-whatsapp-placement="footer" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
       <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home');return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros');return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios');return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios');return false;" data-i18n="nav.testimonials" data-testimonials-link>Testimonios</a><a href="#" onclick="showPg('contacto');return false;" data-i18n="nav.contact">Contacto</a><a href="#aviso-de-privacidad" onclick="showPg('privacidad');history.replaceState(null,'','#aviso-de-privacidad');return false;" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.82rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
@@ -1206,7 +1205,7 @@
     <h2 style="font-family:var(--fd);font-size:clamp(1.75rem,3.5vw,2.25rem);font-weight:300;color:var(--bone-200);line-height:1.3;margin-bottom:16px;" data-i18n="test.cta.h2">Queremos que venir a D'ALMA se sienta distinto.</h2>
     <div class="ctas" style="justify-content:center;margin-top:0;">
       <button class="bp bp-lt" data-i18n="home.hero.cta1" onclick="showPg('contacto')">Agenda tu valoración</button>
-      <a class="bwa" href="#" onclick="showPg('contacto');return false;">
+      <a class="bwa" href="#" target="_blank" rel="noopener noreferrer" data-track-whatsapp data-whatsapp-placement="testimonials_cta">
         <svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>
         <span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span>
       </a>
@@ -1216,7 +1215,7 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto');return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" target="_blank" rel="noopener noreferrer" data-track-whatsapp data-whatsapp-placement="footer" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
       <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home');return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros');return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios');return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios');return false;" data-i18n="nav.testimonials" data-testimonials-link>Testimonios</a><a href="#" onclick="showPg('contacto');return false;" data-i18n="nav.contact">Contacto</a><a href="#aviso-de-privacidad" onclick="showPg('privacidad');history.replaceState(null,'','#aviso-de-privacidad');return false;" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.82rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
@@ -1328,13 +1327,6 @@
             <div class="ci-val" data-i18n="home.map.hours">Lunes a domingo · 10:00 am – 8:00 pm</div>
           </div>
         </div>
-        <div class="ci-row" id="ci-wa-row">
-          <div class="ci-icon">💬</div>
-          <div>
-            <div class="ci-lbl" data-i18n="cont.info.lbl_wa">WhatsApp</div>
-            <div class="ci-val ci-ph" data-i18n="cont.info.val_wa_pending">[NÚMERO PENDIENTE]</div>
-          </div>
-        </div>
         <div class="ci-row" style="margin-bottom:26px;">
           <div class="ci-icon">📸</div>
           <div>
@@ -1342,7 +1334,7 @@
             <div class="ci-val ci-ph" data-i18n="cont.info.val_ig_pending">[HANDLE PENDIENTE]</div>
           </div>
         </div>
-        <a class="bwa" href="#ci-wa-row" onclick="focusWaInfo();return false;" style="margin-bottom:26px;display:inline-flex;">
+        <a class="bwa" href="#" target="_blank" rel="noopener noreferrer" data-track-whatsapp data-whatsapp-placement="contact" style="margin-bottom:26px;display:inline-flex;">
           <svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg>
           <span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span>
         </a>
@@ -1418,7 +1410,7 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto');return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" target="_blank" rel="noopener noreferrer" data-track-whatsapp data-whatsapp-placement="footer" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
       <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home');return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros');return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios');return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios');return false;" data-i18n="nav.testimonials" data-testimonials-link>Testimonios</a><a href="#" onclick="showPg('contacto');return false;" data-i18n="nav.contact">Contacto</a><a href="#aviso-de-privacidad" onclick="showPg('privacidad');history.replaceState(null,'','#aviso-de-privacidad');return false;" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.82rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
@@ -1518,7 +1510,7 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
-      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" onclick="showPg('contacto');return false;" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
+      <div><div class="fbrand">D'ALMA CLINIC</div><p class="ftagline" data-i18n="footer.tagline">Un espacio cálido, moderno y humano para hombres y mujeres que quieren sentirse bien.</p><div style="margin-top:20px;"><a class="bwa" href="#" target="_blank" rel="noopener noreferrer" data-track-whatsapp data-whatsapp-placement="footer" style="font-size:.7rem;"><svg class="wico" fill="currentColor"><use href="#ico-wa"/></svg><span data-i18n="cta.enviar_wa">Escríbenos por WhatsApp</span></a></div><div class="lang-switch" role="group" aria-label="Language / Idioma"><button class="lang-btn" data-lang="es" onclick="setLang(&#39;es&#39;)">Espa&ntilde;ol</button><span class="lang-sep">&middot;</span><button class="lang-btn" data-lang="en" onclick="setLang(&#39;en&#39;)">English</button></div></div>
       <div><div class="fcol-t" data-i18n="footer.pages_title">Páginas</div><div class="flinks"><a href="#" onclick="showPg('home');return false;" data-i18n="nav.home">Inicio</a><a href="#" onclick="showPg('nosotros');return false;" data-i18n="nav.about">Nosotros</a><a href="#" onclick="showPg('servicios');return false;" data-i18n="nav.treatments">Servicios</a><a href="#" onclick="showPg('testimonios');return false;" data-i18n="nav.testimonials" data-testimonials-link>Testimonios</a><a href="#" onclick="showPg('contacto');return false;" data-i18n="nav.contact">Contacto</a><a href="#aviso-de-privacidad" onclick="showPg('privacidad');history.replaceState(null,'','#aviso-de-privacidad');return false;" data-i18n="footer.privacy">Aviso de privacidad</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.services_title">Servicios</div><div class="flinks"><a href="#" onclick="goToService('svc-botox');return false;">Botox</a><a href="#" onclick="goToService('svc-fillers');return false;" data-i18n="footer.svc.fillers">Fillers / Armonización Facial</a><a href="#" onclick="goToService('svc-hydrafacial');return false;">Hydrafacial</a><a href="#" onclick="goToService('svc-microneedling');return false;" data-i18n="footer.svc.micro">Microneedling / Dermapen / Manchas</a><a href="#" onclick="goToService('svc-pdrn-exosomas');return false;" data-i18n="footer.svc.pdrn">PDRN / Exosomas</a><a href="#" onclick="goToService('svc-capilares');return false;" data-i18n="footer.svc.capilares">Tratamientos Capilares</a><a href="#" onclick="goToService('svc-depilacion');return false;" data-i18n="svc.laser_title">Depilación láser</a><a href="#" onclick="goToService('svc-especializados');return false;" data-i18n="footer.svc.especial">Verrugas y Queloides</a><a href="#" onclick="goToService('svc-plasmapen');return false;">Plasma Pen</a><a href="#" onclick="goToService('svc-control-peso');return false;" data-i18n="footer.svc.control_peso">Control de Peso y bienestar</a></div></div>
       <div><div class="fcol-t" data-i18n="footer.contact_title">Contacto</div><div style="font-size:.82rem;color:var(--taupe-400);line-height:1.8;" data-i18n-html="footer.hours_block">Lunes a domingo<br>10:00 am – 8:00 pm<br><br>Plaza Patio<br>Cabo San Lucas, BCS</div></div>
@@ -1532,7 +1524,7 @@
 
 <svg style="display:none"><symbol id="ico-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></symbol></svg>
 
-<a class="wafloat" href="#" onclick="showPg('contacto');return false;" aria-label="WhatsApp">
+<a class="wafloat" href="#" target="_blank" rel="noopener noreferrer" data-track-whatsapp data-whatsapp-placement="floating" aria-label="WhatsApp">
   <svg class="wico" fill="currentColor" aria-hidden="true"><use href="#ico-wa"/></svg>
   <span class="wa-txt">WhatsApp</span>
 </a>
@@ -1755,8 +1747,6 @@ const I18N = {
     "loc.cta": "Abrir en Google Maps",
     "cont.info.lbl_dir": "Dirección",
     "cont.info.lbl_horario": "Horario",
-    "cont.info.lbl_wa": "WhatsApp",
-    "cont.info.val_wa_pending": "[NÚMERO PENDIENTE]",
     "cont.info.lbl_ig": "Instagram",
     "cont.info.val_ig_pending": "[HANDLE PENDIENTE]",
     "cont.faq.h2": "Preguntas frecuentes",
@@ -1987,8 +1977,6 @@ const I18N = {
     "loc.cta": "Open in Google Maps",
     "cont.info.lbl_dir": "Address",
     "cont.info.lbl_horario": "Hours",
-    "cont.info.lbl_wa": "WhatsApp",
-    "cont.info.val_wa_pending": "[NUMBER PENDING]",
     "cont.info.lbl_ig": "Instagram",
     "cont.info.val_ig_pending": "[HANDLE PENDING]",
     "cont.faq.h2": "Frequently asked questions",
@@ -2123,15 +2111,6 @@ function setLang(lang) {
     }, 80);
   }
 
-  // WhatsApp number is not defined yet: instead of a dead link, this scrolls to and
-  // briefly highlights the info row that shows "[NÚMERO PENDIENTE]".
-  function focusWaInfo() {
-    var row = document.getElementById('ci-wa-row');
-    if (!row) return;
-    row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    row.classList.add('ci-row-focus');
-    setTimeout(function() { row.classList.remove('ci-row-focus'); }, 1600);
-  }
 
   function toggleMenu(menuId, hamId) {
     const menu = document.getElementById(menuId);
@@ -2333,6 +2312,38 @@ function setLang(lang) {
     }, { threshold: 0.15 });
     targets.forEach(function(el){ io.observe(el); });
   })();
+
+  // WHATSAPP — configuración central (única fuente de verdad del número y del mensaje) +
+  // tracking. Los <a data-track-whatsapp data-whatsapp-placement="..."> no llevan el número en
+  // su href: aquí se construye https://wa.me/<numero>?text=<mensaje> y se asigna al cargar.
+  // Un único listener delegado empuja UN evento a dataLayer (sin PII) y NO bloquea la
+  // navegación; si por algo el href aún fuera "#", se construye justo antes de seguir el enlace.
+  var DALMA_WHATSAPP = {
+    number: '5216241453968',
+    message: 'Hola, vengo desde su sitio web. Me interesan sus servicios y quisiera más información'
+  };
+  function dalmaWhatsappUrl() {
+    return 'https://wa.me/' + DALMA_WHATSAPP.number + '?text=' + encodeURIComponent(DALMA_WHATSAPP.message);
+  }
+  function dalmaInitWhatsappLinks() {
+    var url = dalmaWhatsappUrl();
+    document.querySelectorAll('a[data-track-whatsapp]').forEach(function(a){ a.setAttribute('href', url); });
+  }
+  dalmaInitWhatsappLinks();
+  if (!window.__dalmaWaTracking) {
+    window.__dalmaWaTracking = true;
+    document.addEventListener('click', function(e){
+      var a = e.target && e.target.closest ? e.target.closest('a[data-track-whatsapp]') : null;
+      if (!a) return;
+      if (a.getAttribute('href') === '#') a.setAttribute('href', dalmaWhatsappUrl());
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'click_whatsapp',
+        link_type: 'whatsapp',
+        placement: a.getAttribute('data-whatsapp-placement') || 'unknown'
+      });
+    });
+  }
 
   // LANGUAGE INIT
   (function(){
