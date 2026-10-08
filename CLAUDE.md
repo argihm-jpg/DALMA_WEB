@@ -7,13 +7,13 @@ Para **cualquier** tarea de D'ALMA en Google Search Console, Google Analytics/GA
 
 En Chrome existen otras cuentas de Google con sesión iniciada. Antes de **crear, editar, vincular, configurar o verificar** cualquier propiedad/cuenta/contenedor de Google, Claude debe **verificar visualmente** que la cuenta activa sea `clinic.dalma@gmail.com`. Si no lo es: **DETENERSE** y pedir a Bruno que cambie de cuenta. No usar ninguna otra cuenta de Google para D'ALMA bajo ninguna circunstancia.
 
-## Estado Actual de Producción y Punto de Reanudación (actualizado 2026-10-06)
+## Estado Actual de Producción y Punto de Reanudación (actualizado 2026-10-07)
 - **Arquitectura multipágina bilingüe YA DESPLEGADA en Hostinger** (`public_html/`). Producción: ES `/`, `/nosotros/`, `/servicios/`, `/contacto/`, `/aviso-de-privacidad/`; EN `/en/`, `/en/about/`, `/en/services/`, `/en/contact/`.
 - **El sitio NO está públicamente lanzado (pre-lanzamiento):** `PUBLIC_LAUNCH=false` → overlay "Próximamente / Coming soon" activo por defecto, `?preview=1` permite revisar el sitio completo, `noindex, nofollow` en las 9 páginas, sin `sitemap.xml`, Testimonios desactivado (`/testimonios/` y `/en/testimonials/` → 404).
 - **Google Search Console: CONFIGURADO Y VERIFICADO (2026-09-26)** — propiedad de tipo Dominio `dalmaclinic.com.mx` bajo `clinic.dalma@gmail.com`, verificada por registro DNS TXT. **El registro TXT de Google en Cloudflare (dominio raíz) DEBE CONSERVARSE** para mantener la verificación; no borrarlo. Es solo verificación: NO se envió sitemap ni se solicitó indexación (el sitio sigue en pre-lanzamiento). Ver entrada 2026-09-26.
 - **PENDIENTE para más adelante (todo con `clinic.dalma@gmail.com`):** generar/enviar sitemap al lanzamiento; solicitar/validar indexación cuando corresponda; GA4, Google Tag Manager, Google Ads, eventos `click_whatsapp` / `click_phone` / `generate_lead`, y CAPTCHA/backend del formulario cuando corresponda. La arquitectura/deploy ya no es el siguiente paso. Recordar la restricción de cuenta Google de arriba.
 - **Validar en producción sin barridos rápidos con curl** (ver incidente 429 en la entrada 2026-09-23).
-- **Último deploy: `9f25f28` (2026-10-06) DESPLEGADO en Hostinger** (corrección mínima de apellido: "Dra. Ana Patricia Romero" en Nosotros/About; antes de esto el último deploy era `b807ee8`, equipo de Nosotros con `anita-2.webp` y 4 cards sin foto). Ver entradas 2026-10-06 y 2026-10-05. Producción = `9f25f28`; el sitio sigue en pre-lanzamiento. Backup previo: `C:\Users\bruno\Downloads\public_html_pre_romero_fix.zip` (25,931,894 bytes, 44 entradas, `testzip` limpio, estado inmediatamente anterior = `b807ee8`). Backups más antiguos conservados en `C:\Users\bruno\Downloads\`: `public_html_pre_b807ee8.zip` (25,944,812 bytes), `public_html_pre_134d181.zip` (25,875,312 bytes), `public_html_pre_ab8862a.zip` (25,799,923 bytes) y `_public_html.zip` (el más antiguo).
+- **Último deploy: `81363c8` (2026-10-07) DESPLEGADO en Hostinger** (FASE 1 de medición: botones de WhatsApp reales con mensaje precargado, configuración central en JS y evento `click_whatsapp` en `dataLayer`; antes de esto el último deploy era `9f25f28`, apellido "Romero"). Ver entrada 2026-10-07. Producción = `81363c8`; el sitio sigue en pre-lanzamiento. Backup previo: `C:\Users\bruno\Downloads\public_html_pre_whatsapp_tracking.zip` (25,931,894 bytes, 44 entradas, `testzip` limpio, estado inmediatamente anterior = `9f25f28`). Backups más antiguos conservados en `C:\Users\bruno\Downloads\`: `public_html_pre_romero_fix.zip` (25,931,894 bytes), `public_html_pre_b807ee8.zip` (25,944,812 bytes), `public_html_pre_134d181.zip` (25,875,312 bytes), `public_html_pre_ab8862a.zip` (25,799,923 bytes) y `_public_html.zip` (el más antiguo).
 
 ## Descripción
 Sitio web para **D'ALMA CLINIC**, clínica estética ubicada en Cabo San Lucas, BCS.
@@ -24,7 +24,7 @@ El proyecto lo elabora **Bruno Sandoval**. La directora del negocio es **Ana Mar
 - **Dominio:** `dalmaclinic.com.mx`
 - **Dirección (CONFIRMADA, verificada externamente 2026-09-26):** Plaza Patio, De Las Brisas 2404, Brisas del Pacífico, Cabo San Lucas, Baja California Sur, C.P. 23473. **Aún sin número de local/suite** dentro de la plaza (pendiente; no inventarlo). Punto de Plaza Patio: 22.9045296, -109.9333945
 - **Horario:** "Lunes a domingo, 10:00 am – 8:00 pm" aparece como texto provisional en el sitio, pero Bruno confirmó (2026-09-22) que **no es un dato real, Anita aún no lo ha definido** — no usar como fuente de verdad (p. ej. no incluir en schema.org hasta confirmación real)
-- **WhatsApp:** Pendiente de definir
+- **WhatsApp:** Definido por Anita/Bruno (2026-10-07). El número NO se muestra en el sitio ni se documenta aquí: vive únicamente en la constante `DALMA_WHATSAPP` del script compartido de `mockup.html`.
 - **Instagram:** Pendiente
 
 ## Identidad Visual
@@ -107,7 +107,7 @@ WhatsApp, Instagram, mapa, horario, preguntas frecuentes
 - [ ] Fotografías profesionales del equipo
 - [ ] Fotografías del local (interior y exterior; se realizarán al terminar la obra)
 - [ ] Before/after de pacientes (con autorización)
-- [ ] WhatsApp oficial
+- [x] WhatsApp oficial (configurado en `DALMA_WHATSAPP`, 2026-10-07)
 - [ ] Número(s) de teléfono de contacto
 
 ## Pendientes Bloqueados por Anita
@@ -195,6 +195,20 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 ---
 
 ## Historial de Sesiones
+
+### 2026-10-07 — FASE 1 de medición de contactos: WhatsApp + `click_whatsapp` (DESPLEGADO, pre-lanzamiento)
+**Estado: commit `81363c8` ("Configura WhatsApp y tracking de clics") en `main` Y desplegado en producción (Hostinger) el 2026-10-07. Sitio en PRE-LANZAMIENTO: `PUBLIC_LAUNCH=false`, overlay "Próximamente / Coming soon", `noindex, nofollow` en las 9 páginas, sin `sitemap.xml`, `testimonios/` y `en/testimonials/` → 404.**
+- **Implementación:** los 11 enlaces de WhatsApp de la fuente (flotante, footer en las páginas, CTA de Nosotros, CTA de Servicios, CTA de Testimonios —no se genera mientras `ENABLE_TESTIMONIALS=false`— y botón de Contacto) ya abren WhatsApp real con mensaje precargado, con `target="_blank" rel="noopener noreferrer"`. Antes eran `href="#"` que llevaban a Contacto.
+- **Configuración centralizada:** una sola constante `DALMA_WHATSAPP = { number, message }` en el script compartido de `mockup.html`. `dalmaWhatsappUrl()` arma `https://wa.me/<numero>?text=` + `encodeURIComponent(mensaje)` y `dalmaInitWhatsappLinks()` la asigna a todo `a[data-track-whatsapp]` al cargar. Los `href` del HTML quedan en `#`; si por algo siguiera en `#`, el listener construye la URL justo antes de seguir el enlace. Mensaje (ES, también en EN): "Hola, vengo desde su sitio web. Me interesan sus servicios y quisiera más información". Para cambiar número o mensaje, editar solo esa constante.
+- **Evento:** un único listener delegado en `document` (protegido por `window.__dalmaWaTracking`) empuja a `dataLayer` exactamente `{event:"click_whatsapp", link_type:"whatsapp", placement:"<valor>"}` y NO bloquea ni retrasa la navegación. Representa INTENCIÓN de contacto, no un lead confirmado. Un clic = un evento.
+- **Placements en uso:** `floating` (botón flotante, 9 páginas), `footer` (9 páginas), `about_cta` (Nosotros/About), `services_cta` (Servicios/Services), `contact` (Contacto/Contact). `testimonials_cta` existe en la fuente pero no sale en el build mientras Testimonios esté desactivado. Mismos valores en ES y EN.
+- **Privacidad:** sin PII en `dataLayer` (ni teléfono, URL, mensaje, correo o nombre). El número NO es visible en ninguna página (se eliminó la fila de WhatsApp de Contacto y el placeholder "[NÚMERO PENDIENTE]"), NO está en JSON-LD/schema, meta tags, Open Graph, `aria-label`, `title` ni comentarios. Aparece una sola vez en la fuente (la constante) y una sola vez por página generada (el script compartido), no en cada enlace. Es una reducción superficial: sigue siendo visible al inspeccionar el código.
+- **Limpieza asociada:** eliminadas la función `focusWaInfo`, el CSS `.ci-row-focus` y las claves i18n `cont.info.lbl_wa` / `cont.info.val_wa_pending` (ES y EN). El formulario de Contacto no se tocó.
+- **Deploy:** 9 `index.html` subidos a `public_html/` sin borrar nada; los 9 coinciden por SHA-256 con `DALMA_BUILD`. **Backup previo:** `C:\Users\bruno\Downloads\public_html_pre_whatsapp_tracking.zip` (25,931,894 bytes, 44 entradas, `testzip` limpio; contiene "Romero" y ningún `wa.me`, es decir el estado `9f25f28`). Sin purga de Cloudflare ni rollback.
+- **Validación en producción (`?preview=1`):** Home, Servicios y Contacto en ES y EN a 1440 y 390 px: href `https://wa.me/<numero>?text=…` con el mensaje exacto, un `click_whatsapp` por clic con la forma `{event, link_type, placement}`, placements correctos, sin PII, número no visible, sin overflow, sin imágenes rotas, consola sin errores. Prueba real: el botón de Contacto abrió `api.whatsapp.com` (perfil "D'Alma Clinic") con el mensaje precargado, sin enviar nada; 1 evento `contact`.
+- **Incidencia 429:** al validar, un barrido por iframes que superó los 45 s de la herramienta siguió corriendo mientras lanzaba otro, y producción devolvió HTTP 429 unos minutos. Se esperó sin peticiones y se revisó el resto página a página. Sin impacto permanente. Recordatorio: validar producción de forma secuencial y con tandas cortas.
+- **NO configurado todavía:** Google Tag Manager, GA4, Google Ads, Meta Pixel/Business, ni el formulario (sigue sin backend, CAPTCHA ni `generate_lead`). La implementación deja el `dataLayer` listo para que GTM escuche `click_whatsapp`. Cuando se haga: usar SOLO `clinic.dalma@gmail.com`. No se tocaron DNS, Cloudflare ni Google.
+- **Pendiente de Instagram:** la fila de Instagram en Contacto sigue con "[HANDLE PENDIENTE]". El correo corporativo sigue solo cotizado (incluida la cotización anual: 12.99 MX$ por buzón al mes, 311.76 MX$ por 2 buzones, renovación 27.99 MX$ por buzón al mes; el de 48 meses está en la entrada 2026-10-06); no se contrató nada.
 
 ### 2026-10-06 — Corrección de apellido en Nosotros: "Romera" → "Romero" (DESPLEGADO, pre-lanzamiento)
 **Estado: commit `9f25f28` ("Corrige apellido de Ana Patricia Romero") en `main` Y desplegado en producción (Hostinger) el 2026-10-06. Sitio en PRE-LANZAMIENTO: `PUBLIC_LAUNCH=false`, overlay "Próximamente / Coming soon", `noindex, nofollow`, sin `sitemap.xml`, `testimonios/` y `en/testimonials/` → 404.**
