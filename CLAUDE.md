@@ -203,6 +203,7 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 - Sin `<noscript>` de respaldo (no cuenta visitas sin JS). Si se quiere, agregarlo al `<body>` desde `build-site.py`.
 - **Aviso de privacidad:** nuevo párrafo en "Cookies y tecnologías de navegación" que nombra el Píxel de Meta, qué datos técnicos registra, su finalidad publicitaria, enlace a la política de Meta y cómo limitarlo. Solo ES (el aviso aún no tiene versión EN).
 - **Pendiente:** deploy (Bruno); validar en Administrador de eventos → "Probar eventos" con `?preview=1` (`PageView` + `Contact`); si se agrega GTM más adelante, mover el Pixel ahí para no duplicar `PageView`.
+- **Formulario → evento `Lead`: NO configurado a propósito.** El formulario de Contacto aún no envía nada (el `submit` solo muestra "El envío del formulario estará disponible próximamente."); disparar `Lead` hoy contaría leads que la clínica nunca recibe. Cuando Bruno conecte el backend (Formspree, PHP en Hostinger u otro), agregar `if (window.fbq) fbq('track','Lead')` **solo al confirmar el envío exitoso**, no al presionar el botón.
 
 ### 2026-10-07 — FASE 1 de medición de contactos: WhatsApp + `click_whatsapp` (DESPLEGADO, pre-lanzamiento)
 **Estado: commit `81363c8` ("Configura WhatsApp y tracking de clics") en `main` Y desplegado en producción (Hostinger) el 2026-10-07. Sitio en PRE-LANZAMIENTO: `PUBLIC_LAUNCH=false`, overlay "Próximamente / Coming soon", `noindex, nofollow` en las 9 páginas, sin `sitemap.xml`, `testimonios/` y `en/testimonials/` → 404.**
