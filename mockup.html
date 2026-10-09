@@ -1494,6 +1494,7 @@
 
         <h3 class="priv-h3">Cookies y tecnologías de navegación</h3>
         <p class="priv-p">El sitio podrá utilizar cookies, píxeles y herramientas de análisis para facilitar la navegación, medir visitas y evaluar campañas. El usuario puede administrar o desactivar las cookies desde su navegador, aunque algunas funciones podrían verse limitadas.</p>
+        <p class="priv-p">En particular, este sitio utiliza el Píxel de Meta (Meta Platforms, Inc., empresa propietaria de Facebook e Instagram). Esta herramienta registra datos técnicos de navegación, como las páginas visitadas, los clics en los botones de WhatsApp, el tipo de navegador y la dirección IP, para medir la efectividad de nuestros anuncios y mostrar publicidad relevante en Facebook e Instagram. El Píxel no recaba su nombre, teléfono ni el contenido de sus mensajes. Meta trata esta información conforme a su propia Política de Privacidad, disponible en <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">facebook.com/privacy/policy</a>. Usted puede administrar el uso de esta información para publicidad desde la configuración de anuncios de su cuenta de Facebook o Instagram, o bloquear las cookies desde su navegador.</p>
 
         <h3 class="priv-h3">Menores de edad</h3>
         <p class="priv-p">La atención y el tratamiento de datos de menores de edad requerirán la participación y autorización del padre, madre o tutor legal, así como los consentimientos correspondientes.</p>
@@ -2313,6 +2314,21 @@ function setLang(lang) {
     targets.forEach(function(el){ io.observe(el); });
   })();
 
+  // META PIXEL — código oficial de Meta (Administrador de eventos). Vive en el script compartido
+  // porque build-site.py regenera el <head> y no copia el de mockup.html; así sale en las 9 páginas.
+  // PageView al cargar + 'Contact' en cada clic a WhatsApp (ver listener de abajo).
+  // ponytail: sin <noscript> de respaldo; agregarlo al <body> en build-site.py si se quiere contar visitas sin JS.
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1762473058207277');
+  fbq('track', 'PageView');
+
   // WHATSAPP — configuración central (única fuente de verdad del número y del mensaje) +
   // tracking. Los <a data-track-whatsapp data-whatsapp-placement="..."> no llevan el número en
   // su href: aquí se construye https://wa.me/<numero>?text=<mensaje> y se asigna al cargar.
@@ -2342,6 +2358,7 @@ function setLang(lang) {
         link_type: 'whatsapp',
         placement: a.getAttribute('data-whatsapp-placement') || 'unknown'
       });
+      if (window.fbq) fbq('track', 'Contact');
     });
   }
 

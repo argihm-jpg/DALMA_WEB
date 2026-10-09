@@ -196,6 +196,14 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-10-08 — Meta Pixel + aviso de privacidad (en `main`, PENDIENTE DE DEPLOY)
+**Estado: commit en `main`, NO desplegado todavía en Hostinger. Lo hizo Gio (CM/Meta Ads de la clínica). Producción sigue en `81363c8` hasta que Bruno despliegue.**
+- **Meta Pixel `1762473058207277`** (código oficial de Administrador de eventos) agregado al script compartido de `mockup.html`, justo antes del bloque WHATSAPP. No va en el `<head>` porque `build-site.py` regenera el head y no copia el de `mockup.html`; desde el script compartido sale en las 9 páginas (verificado en el build: 1 `fbq('init')` por página, JS válido).
+- **Eventos:** `PageView` al cargar cada página; `Contact` en cada clic a WhatsApp, disparado desde el mismo listener delegado de `click_whatsapp` (`if (window.fbq) fbq('track','Contact')`). Sin PII. `Contact` es la conversión a usar en las campañas de Meta Ads.
+- Sin `<noscript>` de respaldo (no cuenta visitas sin JS). Si se quiere, agregarlo al `<body>` desde `build-site.py`.
+- **Aviso de privacidad:** nuevo párrafo en "Cookies y tecnologías de navegación" que nombra el Píxel de Meta, qué datos técnicos registra, su finalidad publicitaria, enlace a la política de Meta y cómo limitarlo. Solo ES (el aviso aún no tiene versión EN).
+- **Pendiente:** deploy (Bruno); validar en Administrador de eventos → "Probar eventos" con `?preview=1` (`PageView` + `Contact`); si se agrega GTM más adelante, mover el Pixel ahí para no duplicar `PageView`.
+
 ### 2026-10-07 — FASE 1 de medición de contactos: WhatsApp + `click_whatsapp` (DESPLEGADO, pre-lanzamiento)
 **Estado: commit `81363c8` ("Configura WhatsApp y tracking de clics") en `main` Y desplegado en producción (Hostinger) el 2026-10-07. Sitio en PRE-LANZAMIENTO: `PUBLIC_LAUNCH=false`, overlay "Próximamente / Coming soon", `noindex, nofollow` en las 9 páginas, sin `sitemap.xml`, `testimonios/` y `en/testimonials/` → 404.**
 - **Implementación:** los 11 enlaces de WhatsApp de la fuente (flotante, footer en las páginas, CTA de Nosotros, CTA de Servicios, CTA de Testimonios —no se genera mientras `ENABLE_TESTIMONIALS=false`— y botón de Contacto) ya abren WhatsApp real con mensaje precargado, con `target="_blank" rel="noopener noreferrer"`. Antes eran `href="#"` que llevaban a Contacto.
