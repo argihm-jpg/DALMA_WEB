@@ -7,57 +7,50 @@ Para **cualquier** tarea de D'ALMA en Google Search Console, Google Analytics/GA
 
 En Chrome existen otras cuentas de Google con sesión iniciada. Antes de **crear, editar, vincular, configurar o verificar** cualquier propiedad/cuenta/contenedor de Google, Claude debe **verificar visualmente** que la cuenta activa sea `clinic.dalma@gmail.com`. Si no lo es: **DETENERSE** y pedir a Bruno que cambie de cuenta. No usar ninguna otra cuenta de Google para D'ALMA bajo ninguna circunstancia.
 
-## Estado Actual de Producción y Punto de Reanudación (actualizado 2026-10-10)
+## Estado Actual de Producción y Punto de Reanudación (actualizado 2026-10-10, tras el deploy conjunto)
 
 ### Matriz de estado (2026-10-10) — leer primero
-**Regla de lectura:** solo la sección A está en producción. Lo de B existe únicamente en `main` (commits) o en el árbol de trabajo local; **no** está desplegado. Detalle en la entrada 2026-10-10 del Historial.
+**Regla de lectura:** la sección A es lo que está EN PRODUCCIÓN. Lo de B es lo que sigue pendiente (no está en producción o está con una incidencia). Detalle del deploy en la entrada 2026-10-10 (DEPLOY) del Historial.
 
-**A. DESPLEGADO en producción (Hostinger) = build de `81363c8` (2026-10-07):**
-- Arquitectura multipágina bilingüe ES/EN (9 páginas), pre-lanzamiento (overlay, `noindex, nofollow`, sin sitemap, Testimonios 404).
-- Botones de WhatsApp reales con mensaje precargado y evento `click_whatsapp` en `dataLayer` (sin PII).
-- Equipo de Nosotros (4 personas, sin fotos), foto principal de Anita, apellido "Romero".
-- Formulario de contacto en su versión ANTERIOR: sin backend, el envío solo muestra "disponible próximamente". Aviso de privacidad en su versión anterior (con placeholders).
-- Search Console verificado (DNS TXT en Cloudflare, conservar).
-- Producción NO tiene `contact-submit.php` (404), ni el Meta Pixel, ni el formulario real, ni el aviso de privacidad actualizado, ni el recorte de la foto de Anita.
+**A. DESPLEGADO en producción (Hostinger) = código del commit `13a21f0` (2026-10-10):**
+- **Formulario de contacto funcional ES/EN:** envío JSON a `/contact-submit.php` (correo OPCIONAL, casilla OPCIONAL de comunicaciones promocionales, honeypot, Cloudflare Turnstile obligatorio). `generate_lead` solo tras `{"ok":true}`, sin PII en `dataLayer`.
+- **Endpoint `contact-submit.php`** (raíz de `public_html`; SHA-256 verificado contra el build): fail-closed (503 genérico si falta/es inválida la config), Turnstile siempre verificado, cURL solo HTTPS con TLS verificado, rate limiting 3 envíos / 8 intentos / 15 min por origen (estado en `dalma_private/rate-limit/`).
+- **Google Tag Manager `GTM-MJGTQRV7`** en las 9 páginas (un script en `<head>` y un `<noscript>` tras `<body>`). Contenedor SIN etiquetas ni versión publicada.
+- **Meta Pixel `1762473058207277`** (de Gio): `PageView` y `Contact` en clic a WhatsApp, 1 `fbq('init')` por página.
+- **Aviso de privacidad** actualizado (sección del formulario, seguridad, cookies, Meta y Google Tag Manager). Propuesta técnica, NO validación jurídica; los placeholders legales siguen.
+- **Foto de Anita:** el archivo corregido (`anita-2.webp`, 1320×2031, 86,798 B) está en el servidor, pero ver incidencia en B.
+- WhatsApp real con `click_whatsapp`; equipo de Nosotros; Search Console verificado (DNS TXT en Cloudflare, conservar).
+- **Pre-lanzamiento INTACTO:** `PUBLIC_LAUNCH=false`, overlay "Próximamente / Coming soon" para visitas normales, `?preview=1` funcional, `noindex, nofollow`, sin `sitemap.xml`, `/testimonios/` y `/en/testimonials/` → 404.
 
-**B. IMPLEMENTADO Y PROBADO, PENDIENTE DE DEPLOY (nada de esto está en producción):**
-- *Ya en `main`, sin desplegar:* Meta Pixel `1762473058207277` (`PageView` + `Contact` en clic a WhatsApp) y párrafo de Meta en el Aviso (`6eaa3e2`; nota de `Lead` pendiente en `aeb1d77`).
-- *Solo en el árbol de trabajo local, SIN commit* (`git status`: `M mockup.html`, `M scripts/build-site.py`, `M imagenes-candidatas/anita-2.webp`, `?? server/`):
-  - `mockup.html`: formulario de contacto real (envío JSON a `/contact-submit.php`; nombre, teléfono, correo OPCIONAL, tratamiento, mensaje, casilla OPCIONAL de comunicaciones promocionales, honeypot y widget Turnstile); `generate_lead` solo tras `{"ok":true}`; Aviso de privacidad ampliado (ver entrada 2026-10-10).
-  - `server/contact-submit.php` (endpoint PHP, **untracked**) y `server/contact-config.example.php` (plantilla sin valores).
-  - `scripts/build-site.py`: copia `server/contact-submit.php` a `DALMA_BUILD/` (el build FALLA si el archivo no existe → `server/` debe agregarse a git antes de construir en otro equipo).
-  - `imagenes-candidatas/anita-2.webp`: recorte de la franja negra superior (1320×2031, 86,798 B; original respaldado fuera del repo).
-- *Pruebas:* endpoint endurecido 43/43 en local (PHP 8.2 + proxy/TLS simulado, sin tráfico real); Turnstile real y rate limiter probados desde producción con endpoints temporales ya eliminados; Apps Script v4 probado (validación + 1 correo real controlado); auditoría integral 2026-10-10: paquete técnicamente listo.
-- *Deploy previsto (cuando Bruno lo autorice):* respaldo de `public_html/`; subir `contact-submit.php` (raíz) y verificar GET → 405; luego `anita-2.webp`; luego los 9 HTML (aviso antes que contacto); verificar por SHA-256; confirmar que `dalma_private/contact-config.php` conserva las 3 claves; validar de forma secuencial con `?preview=1` y UNA prueba real controlada.
+**B. PENDIENTE / INCIDENCIAS (post-deploy 2026-10-10):**
+- **Foto de Anita sirviendo la versión anterior por caché del borde de Cloudflare.** El origen (Hostinger) ya tiene el archivo nuevo (verificado por SHA-256 con parámetro anti-caché), pero la URL normal devolvía el archivo anterior (67,110 B, con la franja negra): `cf-cache-status: HIT`, `Cache-Control: max-age=604800` (7 días; los navegadores que ya lo tienen también lo conservan). Solución pendiente de autorización de Bruno: purgar SOLO esa URL en la caché de Cloudflare (cuenta `clinic.dalma@gmail.com`; no es un cambio de DNS/configuración), o versionar la URL en un nuevo deploy. Sin purga caduca ~2026-10-17.
+- **Verificación móvil (≤768 px) en producción NO repetida en este deploy** (el diseño no cambió; se verificó en local durante el desarrollo).
+- Etiquetas/medición (GA4, Google Ads) y conversión de Meta (`Lead`): ver D/E/F.
 
-**C. Configuraciones externas YA REALIZADAS (no requieren deploy del sitio):**
-- **Google Apps Script — versión 4** (cuenta `clinic.dalma@gmail.com`, Web App con la misma URL `/exec`): valida el payload, exige secreto compartido, envía el correo por `MailApp` a `clinic.dalma@gmail.com`; incluye "Autorización promocional" y fecha/hora generada en servidor (America/Mazatlan); acepta payload anterior y nuevo. La URL y el secreto NO se documentan aquí.
-- **Cloudflare Turnstile:** widget "D'ALMA Contact Form" (cuenta `clinic.dalma@gmail.com`), modo Managed, hostnames `dalmaclinic.com.mx` y `www.dalmaclinic.com.mx` (localhost NO permitido: las pruebas con el widget real se hacen desde el origen de producción). La Site Key (pública) vive en `mockup.html`; la Secret Key solo en la configuración privada del servidor.
-- **Hostinger:** `dalma_private/contact-config.php` (fuera de `public_html`, permisos 600) con `apps_script_url`, `shared_secret` y `turnstile_secret`; `dalma_private/rate-limit/` se crea solo (0700). El endpoint rechaza (503 genérico) si falta o es inválida cualquiera de las tres claves. **Ningún secreto va al repo, a `mockup.html`, al JS ni a este archivo.**
+**C. Configuraciones externas YA REALIZADAS:**
+- **Google Apps Script — versión 4** (cuenta `clinic.dalma@gmail.com`, Web App con la misma URL `/exec`): valida el payload, exige secreto compartido, envía el correo por `MailApp` a `clinic.dalma@gmail.com`; incluye "Autorización promocional" y fecha/hora generada en servidor (America/Mazatlan). La URL y el secreto NO se documentan aquí.
+- **Cloudflare Turnstile:** widget "D'ALMA Contact Form" (cuenta `clinic.dalma@gmail.com`), modo Managed, hostnames `dalmaclinic.com.mx` y `www.dalmaclinic.com.mx` (localhost NO permitido). La Site Key (pública) vive en `mockup.html`; la Secret Key solo en la configuración privada.
+- **Hostinger:** `dalma_private/contact-config.php` (443 B, fuera de `public_html`, permisos 600; carpeta 700) con `apps_script_url`, `shared_secret` y `turnstile_secret`. **Ningún secreto va al repo, a `mockup.html`, al JS ni a este archivo.**
+- **Google Tag Manager:** cuenta "D'ALMA Clinic" y contenedor Web `dalmaclinic.com.mx` (`GTM-MJGTQRV7`) en `clinic.dalma@gmail.com`; 2 activadores de tipo Evento personalizado en BORRADOR (`CE - click_whatsapp`, `CE - generate_lead`); sin etiquetas, sin variables, sin versión publicada.
 
 **D. Pendientes LEGALES de Anita (el Aviso es una propuesta técnica, NO validación jurídica):**
-- Nombre legal completo del responsable, domicilio legal, correo de privacidad, teléfono y URL del sitio (hoy placeholders visibles en el Aviso).
+- Nombre legal completo del responsable, domicilio legal, correo de privacidad, teléfono y URL del sitio (placeholders visibles en el Aviso).
 - Plazos de conservación de los datos, fecha de vigencia/última actualización y versión EN del Aviso.
 - Consentimiento expreso para datos personales sensibles (salud/tratamientos), su redacción y dónde se recaba.
+- Decidir si se requiere banner de cookies/consentimiento (hoy el Pixel de Meta y GTM cargan sin consentimiento previo).
 - Revisión/validación jurídica del texto completo antes del lanzamiento público.
 
-**E. Pendientes de META con Gio (auditoría 2026-10-10 fue parcial: configuración pública, sin login en Meta):**
+**E. Pendientes de META con Gio (la auditoría fue parcial: configuración pública, sin login en Meta):**
 - Confirmar en el Administrador de eventos: coincidencia avanzada (AAM), eventos automáticos/inferidos, nivel de uso compartido de datos, cookies propias y API de conversiones.
 - Audiencias/retargeting y su reflejo en el Aviso.
-- Plan para el evento `Lead`: NO está implementado; solo se disparará tras `{"ok":true}` del backend y sin PII.
-- Validar `PageView` + `Contact` con "Probar eventos" (`?preview=1`) cuando se despliegue.
+- Plan para el evento `Lead`: NO está implementado; solo se disparará tras `{"ok":true}` y sin PII.
+- Decidir dónde vive el Pixel: dejarlo en el código y usar GTM solo para Google, o migrarlo a GTM y retirarlo del código en el mismo deploy (nunca dos instalaciones: doble `PageView`/`Contact`).
+- Validar `PageView` + `Contact` con "Probar eventos" (`?preview=1`) ya que el Pixel está en producción.
 
-**F. GOOGLE TAG MANAGER — FASE 1 HECHA EN LOCAL (2026-10-10), SIN COMMIT NI DEPLOY.** Contenedor web `dalmaclinic.com.mx` (ID público `GTM-MJGTQRV7`) en la cuenta GTM "D'ALMA Clinic" de `clinic.dalma@gmail.com` (verificada visualmente; Bruno autorizó aceptar los Términos del Servicio de GTM, sin los de tratamiento de datos RGPD). Instalado en el GENERADOR: `scripts/build-site.py` (`GTM_ID`, `GTM_HEAD`, `GTM_NOSCRIPT`) inyecta un único script en `<head>` (justo tras `<meta viewport>`) y un único `<noscript>` inmediatamente tras `<body>` en las 9 páginas; el build aborta si hay GTM duplicado o ausente. NO está en `mockup.html` (su `<head>` no se copia al build). **No está desplegado**: producción no tiene GTM.
-- *Estado del contenedor:* espacio de trabajo por defecto con 2 activadores de tipo "Evento personalizado" en BORRADOR (`CE - click_whatsapp` → `click_whatsapp`; `CE - generate_lead` → `generate_lead`). **Sin etiquetas, sin variables, sin versión publicada, sin "Enviar".** No hay conexión con GA4, Google Ads ni Meta.
-- *Meta Pixel:* sigue en el código del sitio (de Gio, intacto). NO instalar otro Pixel por GTM mientras esté en el código (doble `PageView`/`Contact`). Decisión pendiente con Gio (lunes): dejarlo en el código y usar GTM solo para Google, o migrarlo a GTM y retirarlo del código en el mismo deploy.
-- *`dataLayer`:* GTM solo hace `window.dataLayer = window.dataLayer || []`; `click_whatsapp` y `generate_lead` no cambian. GTM agrega la propiedad interna `gtm.uniqueEventId` a los objetos que procesa (normal; no es dato nuestro). El formulario y WhatsApp no dependen de que GTM cargue (probado con GTM bloqueado).
-- *Pruebas locales (127.0.0.1, `fetch` simulado, sin correos ni datos personales):* contenedor carga; 1 script y 1 noscript por página; cada clic a WhatsApp = 1 evento con forma `{event, link_type, placement}` y placements `contact`/`footer`/`floating`; `generate_lead` = 1 evento por envío con `{"event":"generate_lead","form_name":"contact"}` solo si el backend responde ok, 0 si falla; sin PII en `dataLayer`. Tag Assistant/Vista previa y el flujo real con Turnstile NO se probaron: reservados para cuando GTM esté en Hostinger.
-- **Requisitos de CONSENTIMIENTO/PRIVACIDAD pendientes antes de activar etiquetas:**
-  1. El Aviso de privacidad (local) todavía NO menciona Google Tag Manager; hay que añadirlo antes del deploy (GTM se carga desde servidores de Google y transmite IP/datos técnicos del navegador). Cuando se active GA4/Ads, nombrarlos también.
-  2. Definir con Anita/asesoría legal si se requiere banner de cookies/consentimiento y configurar Google Consent Mode (estado por defecto `denied` para `ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`) ANTES de publicar cualquier etiqueta de GA4, Google Ads o remarketing. Hoy el Meta Pixel carga sin consentimiento previo.
-  3. Ninguna etiqueta puede recibir nombre, teléfono, correo, tratamiento, mensaje, autorización promocional ni token de Turnstile. No activar medición automática de formularios, ni variables de "Formulario" ni datos de usuario/Coincidencia avanzada de Google. `generate_lead` ya viaja sin esos datos y debe seguir así.
-  4. Mantener `generate_lead` como única señal de lead (solo tras `{"ok":true}`); no marcar conversiones hasta definir plan con Gio/Anita.
-- *Siguiente (no iniciado):* decidir consentimiento y Pixel (arriba); crear en GTM las etiquetas (GA4 con ID de medición propio de `clinic.dalma@gmail.com`, luego Ads/Meta si procede) usando los dos activadores; probar con Vista previa en producción con `?preview=1`; publicar el contenedor solo con autorización. Toda la fase GTM entra en el siguiente deploy conjunto de los 9 HTML. Recordar: Google solo con `clinic.dalma@gmail.com`.
+**F. Pendientes de medición Google (todo con `clinic.dalma@gmail.com`; NO iniciado):**
+- **GA4 y Google Ads TODAVÍA PENDIENTES.** Crear las etiquetas en GTM usando los dos activadores existentes, probar con Vista previa en producción con `?preview=1` y publicar el contenedor solo con autorización de Bruno.
+- Requisitos de consentimiento/privacidad antes de activar etiquetas: definir consentimiento y Google Consent Mode (`denied` por defecto para `ad_storage`, `ad_user_data`, `ad_personalization`, `analytics_storage`) ANTES de publicar GA4/Ads/remarketing; ninguna etiqueta puede recibir nombre, teléfono, correo, tratamiento, mensaje, autorización promocional ni token de Turnstile; no activar medición automática de formularios ni datos de usuario/Coincidencia avanzada de Google; `generate_lead` es la única señal de lead (solo tras `{"ok":true}`); no marcar conversiones hasta definir plan con Gio/Anita; el Aviso debe nombrar GA4/Ads cuando se activen.
+- Tag Assistant/Vista previa sobre producción: aún no probados.
 
 ### Estado histórico de producción (actualizado 2026-10-07; conservar)
 - **Arquitectura multipágina bilingüe YA DESPLEGADA en Hostinger** (`public_html/`). Producción: ES `/`, `/nosotros/`, `/servicios/`, `/contacto/`, `/aviso-de-privacidad/`; EN `/en/`, `/en/about/`, `/en/services/`, `/en/contact/`.
@@ -66,7 +59,7 @@ En Chrome existen otras cuentas de Google con sesión iniciada. Antes de **crear
 - **PENDIENTE para más adelante (todo con `clinic.dalma@gmail.com`):** generar/enviar sitemap al lanzamiento; solicitar/validar indexación cuando corresponda; GA4, Google Tag Manager, Google Ads, eventos `click_whatsapp` / `click_phone` / `generate_lead`, y CAPTCHA/backend del formulario cuando corresponda *(actualización 2026-10-10: el backend + Turnstile del formulario ya están implementados y probados en local, pero SIN desplegar; ver matriz de estado arriba)*. La arquitectura/deploy ya no es el siguiente paso. Recordar la restricción de cuenta Google de arriba.
 - **Validar en producción sin barridos rápidos con curl** (ver incidente 429 en la entrada 2026-09-23).
 - **Último deploy: `81363c8` (2026-10-07) DESPLEGADO en Hostinger** (FASE 1 de medición: botones de WhatsApp reales con mensaje precargado, configuración central en JS y evento `click_whatsapp` en `dataLayer`; antes de esto el último deploy era `9f25f28`, apellido "Romero"). Ver entrada 2026-10-07. Producción = `81363c8`; el sitio sigue en pre-lanzamiento. Backup previo: `C:\Users\bruno\Downloads\public_html_pre_whatsapp_tracking.zip` (25,931,894 bytes, 44 entradas, `testzip` limpio, estado inmediatamente anterior = `9f25f28`). Backups más antiguos conservados en `C:\Users\bruno\Downloads\`: `public_html_pre_romero_fix.zip` (25,931,894 bytes), `public_html_pre_b807ee8.zip` (25,944,812 bytes), `public_html_pre_134d181.zip` (25,875,312 bytes), `public_html_pre_ab8862a.zip` (25,799,923 bytes) y `_public_html.zip` (el más antiguo).
-- **Nota 2026-10-10:** `main` tiene commits posteriores a `81363c8` (`6eaa3e2` Meta Pixel + aviso, y commits solo de documentación) y hay cambios locales sin commit. **Ninguno está desplegado**; producción sigue siendo el build de `81363c8`.
+- **Nota 2026-10-10 (actualizada tras el deploy):** este bloque describe el estado anterior. Desde el deploy conjunto del 2026-10-10 producción = código del commit `13a21f0` (formulario, GTM, Meta Pixel, Aviso). Ver la matriz de estado arriba.
 
 ## Descripción
 Sitio web para **D'ALMA CLINIC**, clínica estética ubicada en Cabo San Lucas, BCS.
@@ -251,8 +244,24 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 
 ## Historial de Sesiones
 
+### 2026-10-10 — DEPLOY CONJUNTO: formulario + endpoint PHP + GTM + Meta Pixel + Aviso + foto de Anita (DESPLEGADO, pre-lanzamiento intacto)
+**Estado: commit `13a21f0` ("Agrega formulario de contacto funcional, GTM y endpoint PHP endurecido") en `main` (push a `origin/main`) y DESPLEGADO en Hostinger el 2026-10-10. Sitio en PRE-LANZAMIENTO: `PUBLIC_LAUNCH=false`, overlay, `noindex, nofollow`, sin sitemap, testimonios 404. Incidencia abierta: caché de la foto de Anita (ver abajo).**
+- **Antes del build:** nuevo párrafo en el Aviso de privacidad (apartado de cookies) que nombra Google Tag Manager como herramienta para administrar etiquetas de medición, sin afirmar que GA4/Ads/otras etiquetas estén activas ni inventar declaraciones de consentimiento. Placeholders legales y Pixel sin cambios.
+- **Verificación previa (script local, todo OK):** `main` = `origin/main` (`aeb1d77`) antes del commit; GTM x1 por página; `noindex`, overlay y sin sitemap/testimonios; Pixel (init + `PageView` + `Contact`) idéntico a `HEAD`; `generate_lead` intacto; `contact-submit.php` del build = `server/` con las correcciones fail-closed y sin secretos; ejemplo de config con valores vacíos; foto 1320×2031.
+- **Git:** staging solo de 6 archivos (`CLAUDE.md`, `mockup.html`, `scripts/build-site.py`, `imagenes-candidatas/anita-2.webp`, `server/contact-submit.php`, `server/contact-config.example.php`). Nada privado, ni backups, ni untracked históricos. `server/` ya está versionado.
+- **Backup previo:** `C:\Users\bruno\Downloads\public_html_pre_form_gtm_deploy.zip` (25,940,548 bytes, 44 entradas = 35 archivos + 9 carpetas, `testzip` limpio; contiene `wa.me`, sin Pixel/GTM/PHP = estado `81363c8`). Fuera de `public_html`; no quedó ningún ZIP en el servidor.
+- **Config privada (sin abrirla):** `dalma_private/contact-config.php` 443 B, permisos 600, carpeta 700, fuera de `public_html`. Tras subir el PHP, un POST con payload válido y token inválido devolvió 200 `{"ok":false}` (no 503): config completa y válida, limitador con almacenamiento operativo y Turnstile rechazando; GET → 405.
+- **Subido (orden):** `contact-submit.php` (raíz) → `imagenes-candidatas/anita-2.webp` → 9 HTML (aviso antes que contacto). No se borró nada ni se tocaron DNS/Cloudflare. **SHA-256 verificado** contra `DALMA_BUILD`: los 9 HTML y `contact-submit.php` idénticos. `anita-2.webp` idéntico en el ORIGEN (probado con parámetro anti-caché).
+- **Incidencia (foto de Anita):** el borde de Cloudflare sigue sirviendo la versión anterior (`cf-cache-status: HIT`, `max-age=604800`). Pendiente de autorización: purga de esa URL o versionado (ver matriz B).
+- **Validación en producción con `?preview=1` (secuencial, con pausas; sin 429):** Home, Nosotros, Servicios y Contacto en ES y EN, y Aviso. Sin errores de consola, sin imágenes rotas (las lazy en pestaña oculta cargaron al forzarlas), sin overflow, 1 script GTM y 1 `fbq('init')` por página, contenedor GTM cargando desde producción, WhatsApp con `https://wa.me/...` en `_blank` con `rel` seguro, Turnstile en "¡Operación exitosa!", número de WhatsApp no visible en el texto.
+- **Prueba de humo del formulario (UNA, datos ficticios):** Turnstile válido, un solo `fetch` a `/contact-submit.php`, HTTP 200 con `ok:true`, UN `generate_lead` exactamente `{"event":"generate_lead","form_name":"contact"}`; `dataLayer` solo con claves `event`/`form_name` (sin PII ni token); UN correo recibido en `clinic.dalma@gmail.com` (cuenta verificada visualmente) con los campos ficticios y "No autorizó comunicaciones promocionales".
+- **WhatsApp:** 1 `click_whatsapp` por clic (`contact`/`footer`/`floating`) y `fbq('track','Contact')` una vez por clic (en la prueba `fbq` se sustituyó por un registrador para no generar un `Contact` falso en Meta).
+- **Pre-lanzamiento:** `?preview=0` → overlay "Próximamente / Coming soon" visible, cubriendo el viewport, scroll bloqueado, `noindex, nofollow`; `sitemap.xml`, `/testimonios/` y `/en/testimonials/` → 404; `robots.txt` sin cambios.
+- **Efectos colaterales a tener en cuenta:** las visitas de validación enviaron `PageView` reales al Pixel de Meta (aparecerán en el Administrador de eventos con `?preview=1`); no se disparó ningún `Contact` ni `Lead` de prueba. El correo de prueba ficticio ("Prueba Tecnica GTM") queda en la bandeja de la clínica y puede borrarse. `dalma_private/rate-limit/` fue creado automáticamente por el limitador.
+- **Reglas que siguen vigentes:** GTM sin etiquetas ni publicación; sin GA4/Ads; Google solo con `clinic.dalma@gmail.com`; validar producción sin barridos rápidos.
+
 ### 2026-10-09/10 — Formulario de contacto real: Turnstile + Apps Script v4 + endpoint PHP endurecido (IMPLEMENTADO Y PROBADO, PENDIENTE DE DEPLOY)
-**Estado: TODO en el árbol de trabajo local, SIN commit, SIN push, SIN deploy. Producción sigue en `81363c8` (formulario sin backend). No registrar nada de esta entrada como desplegado hasta que Bruno despliegue.**
+**Estado al momento de escribir esta entrada: TODO en el árbol de trabajo local, SIN commit, SIN push, SIN deploy. ACTUALIZACIÓN: commit `13a21f0` y DESPLEGADO el 2026-10-10 (ver la entrada "2026-10-10 — DEPLOY CONJUNTO" abajo).**
 - **Flujo:** navegador → `fetch` JSON → `/contact-submit.php` (PHP 8.3 en Hostinger) → verificación Cloudflare Turnstile (`siteverify`) → Google Apps Script (Web App v4) → correo por `MailApp` a `clinic.dalma@gmail.com` → `{"ok":true}`.
 - **Formulario (`mockup.html`):** `contact-form` con nombre, teléfono, correo OPCIONAL, tratamiento (valores estables), mensaje, casilla OPCIONAL de comunicaciones promocionales (desmarcada de origen; si se marca, el correo pasa a ser obligatorio), honeypot `website` y widget Turnstile (Managed, tema claro). Mensajes de éxito/error con `aria-live`; botón deshabilitado mientras envía.
 - **Medición:** `generate_lead` se empuja a `dataLayer` SOLO cuando el backend responde `{"ok":true}`, exactamente `{event:'generate_lead', form_name:'contact'}`, sin PII (ni nombre, teléfono, correo ni mensaje). El Meta Pixel NO se tocó (es de Gio) y no hay `Lead` de Meta.
@@ -269,7 +278,7 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 - **Siguiente:** instalación de GTM (ver matriz F) — *actualización 2026-10-10: fase 1 hecha en local, ver matriz F y la entrada 2026-10-10 GTM abajo*. Restricción permanente: Google solo con `clinic.dalma@gmail.com`.
 
 ### 2026-10-10 (GTM) — Google Tag Manager fase 1: contenedor + instalación en el generador (LOCAL, SIN COMMIT NI DEPLOY)
-**Estado: contenedor creado en Google y código instalado en el generador/build local. NADA desplegado; producción no tiene GTM.**
+**Estado al momento de escribir esta entrada: contenedor creado en Google y código instalado en el generador/build local, sin desplegar. ACTUALIZACIÓN: incluido en el commit `13a21f0` y DESPLEGADO el 2026-10-10 (ver la entrada "2026-10-10 — DEPLOY CONJUNTO").**
 - **Cuenta:** `clinic.dalma@gmail.com` verificada visualmente (el navegador abría por defecto otra cuenta; se cambió con `authuser=2` y se confirmó en el menú de cuenta y en el tooltip). No existía ninguna cuenta/contenedor de GTM: se creó cuenta "D'ALMA Clinic" (México, sin compartir datos con Google) y contenedor Web `dalmaclinic.com.mx` = `GTM-MJGTQRV7`. Bruno autorizó en chat aceptar los Términos del Servicio de GTM; NO se aceptaron los términos de tratamiento de datos RGPD (casilla opcional).
 - **Instalación:** `scripts/build-site.py` (constantes `GTM_ID`/`GTM_HEAD`/`GTM_NOSCRIPT`, `build_head()` y armado del documento). Se hizo en el generador porque reconstruye el `<head>`; `mockup.html` NO se modificó en esta tarea. Los snippets coinciden exactamente con el código oficial de Google. El build verifica y aborta si una página tiene el script o el noscript duplicados/ausentes.
 - **Build (9/9):** un `gtm.js` y un `ns.html` por página, ID correcto, script antes de `<title>`, noscript primero en `<body>`; salvo el bloque GTM las 9 páginas son idénticas al build anterior; `PUBLIC_LAUNCH=false`, `noindex, nofollow`, overlay, sin sitemap y sin testimonios intactos; `contact-submit.php` y `robots.txt` idénticos.
