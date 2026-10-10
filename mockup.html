@@ -374,7 +374,17 @@
     .ct-input:focus-visible,.ct-select:focus-visible,.ct-ta:focus-visible{border-color:var(--taupe-500);box-shadow:0 0 0 2px rgba(139,129,123,.25);}
     .ct-form-notice{margin-top:14px;font-size:.8rem;color:var(--taupe-700);}
     .ct-form-notice:empty{display:none;margin-top:0;}
+    .ct-form-notice.is-ok{color:var(--taupe-700);}
+    .ct-form-notice.is-error{color:#8E3B33;}
+    .ct-hp{position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;}
+    .ct-turnstile:empty{display:none;}
+    .ct-turnstile{margin-bottom:16px;}
+    .bp:disabled{opacity:.65;cursor:not-allowed;}
     .ct-fg{margin-bottom:18px;}
+    .ct-check{display:flex;align-items:flex-start;gap:10px;}
+    .ct-checkbox{flex:0 0 auto;width:18px;height:18px;margin:2px 0 0;accent-color:var(--taupe-600);cursor:pointer;}
+    .ct-checkbox:focus-visible{outline:2px solid var(--taupe-500);outline-offset:2px;}
+    .ct-check label{font-size:.82rem;line-height:1.55;color:var(--taupe-700);cursor:pointer;}
     .map-frame-lnk:focus-visible,.cs-map-cta:focus-visible,.map-attr:focus-visible{outline:2px solid var(--taupe-500);outline-offset:2px;}
     .ct-loc .map-frame{border:1px solid var(--bone-400);}
     .map-frame{position:relative;border-radius:8px;overflow:hidden;aspect-ratio:2/1;background:var(--bone-300);}
@@ -724,7 +734,7 @@
   <section class="sec nos-first-block">
     <div class="ftx" style="margin-bottom:0;">
       <div class="ftx-img">
-        <img src="imagenes-candidatas/anita-2.webp" width="1320" height="2041" alt="Ana María, Directora de D'ALMA CLINIC" data-i18n-alt="alt.directora_hero" loading="eager" style="object-position:center 12%;">
+        <img src="imagenes-candidatas/anita-2.webp" width="1320" height="2031" alt="Ana María, Directora de D'ALMA CLINIC" data-i18n-alt="alt.directora_hero" loading="eager" style="object-position:center 12%;">
       </div>
       <div class="ftx-body">
         <div class="ew" style="margin-bottom:14px;" data-i18n="nos.ana.eyebrow">Directora</div>
@@ -1274,36 +1284,52 @@
       <!-- IZQUIERDA: FORMULARIO -->
       <div>
         <h2 style="font-family:var(--fd);font-size:1.875rem;font-weight:300;color:var(--taupe-700);line-height:1.3;margin-bottom:28px;" data-i18n="cont.form.h2">¿Tienes alguna duda? Escríbenos. Estamos para orientarte.</h2>
-        <form id="contact-form">
+        <form id="contact-form" method="post" action="/contact-submit.php">
         <div class="ct-fg">
           <label class="ct-label" for="contact-name" data-i18n="cont.form.lbl_name">Nombre completo</label>
-          <input class="ct-input" id="contact-name" name="name" type="text" autocomplete="name" required placeholder="Tu nombre" data-i18n-ph="cont.form.ph_name">
+          <input class="ct-input" id="contact-name" name="name" type="text" autocomplete="name" maxlength="120" required placeholder="Tu nombre" data-i18n-ph="cont.form.ph_name">
         </div>
         <div class="ct-fg">
           <label class="ct-label" for="contact-phone" data-i18n="cont.form.lbl_phone">Teléfono / WhatsApp</label>
-          <input class="ct-input" id="contact-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+52 624 000 0000">
+          <input class="ct-input" id="contact-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" required placeholder="+52 624 000 0000">
+        </div>
+        <div class="ct-fg">
+          <label class="ct-label" for="contact-email" data-i18n="cont.form.lbl_email">Correo electrónico (opcional)</label>
+          <input class="ct-input" id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" pattern="[^\s@,;&lt;&gt;\(\)\[\]]{1,64}@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}" placeholder="tu@correo.com" data-i18n-ph="cont.form.ph_email">
         </div>
         <div class="ct-fg">
           <label class="ct-label" for="contact-treatment" data-i18n="cont.form.lbl_service">Tratamiento de interés</label>
           <select class="ct-select" id="contact-treatment" name="treatment" required>
             <option value="" disabled selected data-i18n="cont.form.opt_placeholder">Selecciona un tratamiento</option>
-            <option>Botox</option>
-            <option data-i18n="cont.form.opt_fillers">Fillers / Armonización Facial</option>
-            <option>Hydrafacial</option>
-            <option data-i18n="cont.form.opt_micro">Microneedling / Dermapen / Manchas</option>
-            <option data-i18n="cont.form.opt_pdrn">PDRN / Exosomas</option>
-            <option data-i18n="cont.form.opt_capilares">Tratamientos Capilares</option>
-            <option data-i18n="cont.form.opt_laser">Depilación Láser</option>
-            <option data-i18n="cont.form.opt_especial">Verrugas y Queloides</option>
-            <option>Plasma Pen</option>
-            <option data-i18n="cont.form.opt_control_peso">Control de Peso y bienestar</option>
-            <option data-i18n="cont.form.opt_other">Otro / No estoy seguro</option>
+            <option value="botox">Botox</option>
+            <option value="fillers" data-i18n="cont.form.opt_fillers">Fillers / Armonización Facial</option>
+            <option value="hydrafacial">Hydrafacial</option>
+            <option value="microneedling" data-i18n="cont.form.opt_micro">Microneedling / Dermapen / Manchas</option>
+            <option value="pdrn_exosomes" data-i18n="cont.form.opt_pdrn">PDRN / Exosomas</option>
+            <option value="hair" data-i18n="cont.form.opt_capilares">Tratamientos Capilares</option>
+            <option value="laser_hair_removal" data-i18n="cont.form.opt_laser">Depilación Láser</option>
+            <option value="warts_keloids" data-i18n="cont.form.opt_especial">Verrugas y Queloides</option>
+            <option value="plasma_pen">Plasma Pen</option>
+            <option value="weight_control" data-i18n="cont.form.opt_control_peso">Control de Peso y bienestar</option>
+            <option value="other" data-i18n="cont.form.opt_other">Otro / No estoy seguro</option>
           </select>
         </div>
         <div class="ct-fg">
           <label class="ct-label" for="contact-message" data-i18n="cont.form.lbl_msg">Mensaje (opcional)</label>
-          <textarea class="ct-ta" id="contact-message" name="message" placeholder="¿Tienes alguna pregunta?" data-i18n-ph="cont.form.ph_msg"></textarea>
+          <textarea class="ct-ta" id="contact-message" name="message" maxlength="2000" placeholder="¿Tienes alguna pregunta?" data-i18n-ph="cont.form.ph_msg"></textarea>
         </div>
+        <!-- Casilla OPCIONAL de comunicaciones comerciales: desmarcada por defecto, no requerida, sin enlace al aviso (decision de proyecto: el aviso vive solo en el footer). -->
+        <div class="ct-fg ct-check">
+          <input class="ct-checkbox" type="checkbox" id="contact-marketing" name="marketing_consent" value="1" autocomplete="off">
+          <label for="contact-marketing" data-i18n="cont.form.marketing">Deseo recibir novedades, promociones y comunicaciones comerciales de D’ALMA Clinic por correo electrónico.</label>
+        </div>
+        <!-- Honeypot: oculto de forma accesible (fuera de pantalla, aria-hidden, sin tabindex). Un bot que lo llena es rechazado en contact-submit.php. -->
+        <div class="ct-hp" aria-hidden="true">
+          <label for="contact-website">Website (leave this field empty)</label>
+          <input type="text" id="contact-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <!-- Cloudflare Turnstile: se renderiza solo si DALMA_TURNSTILE_SITE_KEY (script) tiene valor. -->
+        <div id="contact-turnstile" class="ct-turnstile"></div>
         <button class="bp" type="submit" style="width:100%;text-align:center;display:block;" data-i18n="cont.form.submit">Enviar mensaje</button>
         <p id="contact-form-notice" class="ct-form-notice" aria-live="polite"></p>
         </form>
@@ -1461,7 +1487,7 @@
       <div class="priv-legal-body">
         <h2 class="priv-h2">Aviso de privacidad simplificado</h2>
         <p class="priv-p">D&rsquo;Alma Clinic es responsable del uso y protección de los datos personales que usted proporcione. Sus datos serán utilizados para atender su solicitud, brindarle información sobre nuestros servicios, agendar o confirmar citas y dar seguimiento a su atención. Consulte nuestro Aviso de Privacidad Integral.</p>
-        <p class="priv-p">Al enviar este formulario, usted reconoce haber leído y aceptado el tratamiento de sus datos conforme al Aviso de Privacidad Integral.</p>
+        <p class="priv-p">Los datos que envíe mediante el formulario de contacto de este sitio serán tratados conforme al Aviso de Privacidad Integral.</p>
 
         <h2 class="priv-h2">Aviso de privacidad integral</h2>
 
@@ -1471,11 +1497,17 @@
         <h3 class="priv-h3">Datos personales que se recaban</h3>
         <p class="priv-p">Podremos recabar datos de identificación y contacto, como nombre, edad, teléfono, correo electrónico y datos necesarios para agendar y atender su solicitud. Cuando usted solicite una valoración o tratamiento, también podremos recabar datos relacionados con su salud, antecedentes médicos, alergias, medicamentos, tratamientos previos, fotografías clínicas y evolución. Estos últimos se consideran datos personales sensibles y serán protegidos con medidas reforzadas de seguridad.</p>
 
+        <h3 class="priv-h3">Formulario de contacto del sitio web</h3>
+        <p class="priv-p">Cuando usted utiliza el formulario de contacto de este sitio, recabamos su nombre completo, su teléfono o WhatsApp, el tratamiento de interés que seleccione y, de manera opcional, su correo electrónico y el mensaje que escriba. Usamos su nombre, teléfono y, en su caso, su correo electrónico para recibir su solicitud, responder sus consultas y contactarlo respecto del servicio solicitado. El tratamiento de interés y el mensaje pueden revelar información relacionada con servicios de salud o de medicina estética; le recomendamos no incluir en el mensaje antecedentes médicos ni otra información sensible que no sea necesaria para contactarlo.</p>
+        <p class="priv-p">El formulario incluye además una casilla opcional, desmarcada de forma predeterminada, para autorizar que D&rsquo;Alma Clinic le envíe novedades, promociones y comunicaciones comerciales por correo electrónico. Marcarla es voluntario, requiere indicar un correo electrónico válido y no es necesario para enviar su solicitud ni para recibir atención. Si no la marca, el correo que proporcione se usará únicamente para responder su solicitud. Si la marca, la autorización se registra, junto con la fecha y hora en que se recibió, en el correo que recibe la clínica como referencia administrativa. Esta autorización se refiere únicamente a comunicaciones comerciales por correo electrónico y no equivale a un consentimiento para tratamientos médicos; usted puede retirarla escribiendo a <span class="priv-placeholder">[CORREO DE PRIVACIDAD]</span>.</p>
+        <p class="priv-p">El formulario envía estos datos a nuestro servidor de alojamiento web (Hostinger), que los transmite a un servicio de Google (Google Apps Script) para generar un mensaje de correo electrónico dirigido a la cuenta de correo (Gmail) de la clínica. D&rsquo;Alma Clinic no almacena de forma deliberada estas solicitudes en una base de datos propia ni en hojas de cálculo; la solicitud se conserva en el correo de la clínica. Los proveedores que intervienen (alojamiento, red y correo) pueden mantener sus propios registros técnicos conforme a sus políticas.</p>
+        <p class="priv-p">Para prevenir envíos automatizados, el formulario utiliza Cloudflare Turnstile, un servicio de Cloudflare, Inc. Al enviar el formulario, nuestro servidor transmite a Cloudflare únicamente el código de validación generado por Turnstile y una clave privada del sitio, para confirmar que la verificación es válida; no le envía su nombre, teléfono, correo electrónico, tratamiento ni mensaje. Además, el widget se carga desde servidores de Cloudflare, por lo que Cloudflare puede procesar directamente información técnica de su navegador y de su conexión (por ejemplo, dirección IP, datos del dispositivo e identificadores técnicos) conforme a su política de privacidad, disponible en <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">cloudflare.com/privacypolicy</a>. El sitio también se entrega mediante servicios de red y seguridad de Cloudflare.</p>
+
         <h3 class="priv-h3">Finalidades principales</h3>
         <p class="priv-p">Sus datos serán utilizados para atender solicitudes de información; agendar, confirmar, modificar o cancelar citas; realizar valoraciones; determinar si un tratamiento es adecuado; prestar servicios de medicina estética y cuidado de la piel; integrar y administrar su expediente; dar seguimiento a resultados; brindar indicaciones; gestionar consentimientos informados; realizar cobros y facturación; y cumplir obligaciones legales, sanitarias, fiscales y administrativas.</p>
 
         <h3 class="priv-h3">Finalidades secundarias</h3>
-        <p class="priv-p">Con su autorización, podremos utilizar sus datos de contacto para enviar promociones, novedades, recordatorios, encuestas de satisfacción e información sobre servicios. Usted puede negarse a estas finalidades o solicitar dejar de recibir comunicaciones escribiendo a <span class="priv-placeholder">[CORREO DE PRIVACIDAD]</span>. La negativa no afectará la atención o los servicios contratados.</p>
+        <p class="priv-p">Con su autorización, podremos utilizar sus datos de contacto para enviar promociones, novedades, recordatorios, encuestas de satisfacción e información sobre servicios. Usted puede negarse a estas finalidades o solicitar dejar de recibir comunicaciones escribiendo a <span class="priv-placeholder">[CORREO DE PRIVACIDAD]</span>. La negativa no afectará la atención o los servicios contratados. En el formulario de contacto del sitio web, esta autorización se otorga de forma voluntaria mediante una casilla opcional, como se describe en la sección «Formulario de contacto del sitio web».</p>
 
         <h3 class="priv-h3">Fotografías, videos y testimonios</h3>
         <p class="priv-p">Las fotografías clínicas que formen parte de la valoración, expediente o seguimiento serán confidenciales. Su publicación en redes sociales, sitio web, publicidad o materiales promocionales requerirá una autorización expresa y separada. Negarse al uso publicitario de su imagen no afectará la atención recibida.</p>
@@ -1491,10 +1523,13 @@
 
         <h3 class="priv-h3">Seguridad y conservación</h3>
         <p class="priv-p">D&rsquo;Alma Clinic aplicará medidas administrativas, técnicas y físicas razonables para proteger sus datos contra daño, pérdida, alteración, destrucción, uso o acceso no autorizado. Los datos serán conservados durante el tiempo necesario para cumplir las finalidades descritas y los plazos legales aplicables.</p>
+        <p class="priv-p">Para proteger el formulario de contacto se utilizan, entre otras medidas, validación de los datos en el servidor, verificación anti-automatización (Cloudflare Turnstile), un campo señuelo para detectar envíos automatizados y una limitación de intentos repetidos desde un mismo origen. Para esta limitación se genera de forma temporal una representación codificada derivada de la dirección IP (en este mecanismo no se guarda la dirección IP en sí), que se usa solo para limitar abusos y no se incluye en el correo que recibe la clínica. Ninguna medida técnica garantiza seguridad absoluta.</p>
 
         <h3 class="priv-h3">Cookies y tecnologías de navegación</h3>
-        <p class="priv-p">El sitio podrá utilizar cookies, píxeles y herramientas de análisis para facilitar la navegación, medir visitas y evaluar campañas. El usuario puede administrar o desactivar las cookies desde su navegador, aunque algunas funciones podrían verse limitadas.</p>
-        <p class="priv-p">En particular, este sitio utiliza el Píxel de Meta (Meta Platforms, Inc., empresa propietaria de Facebook e Instagram). Esta herramienta registra datos técnicos de navegación, como las páginas visitadas, los clics en los botones de WhatsApp, el tipo de navegador y la dirección IP, para medir la efectividad de nuestros anuncios y mostrar publicidad relevante en Facebook e Instagram. El Píxel no recaba su nombre, teléfono ni el contenido de sus mensajes. Meta trata esta información conforme a su propia Política de Privacidad, disponible en <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">facebook.com/privacy/policy</a>. Usted puede administrar el uso de esta información para publicidad desde la configuración de anuncios de su cuenta de Facebook o Instagram, o bloquear las cookies desde su navegador.</p>
+        <p class="priv-p">El sitio utiliza cookies, almacenamiento local del navegador y tecnologías similares para recordar su preferencia de idioma, proteger el formulario de contacto y medir campañas publicitarias, como se describe a continuación. El usuario puede administrar o desactivar las cookies desde su navegador, aunque algunas funciones podrían verse limitadas. Si en el futuro se incorporan otras herramientas de análisis o medición, este aviso se actualizará.</p>
+        <p class="priv-p">En particular, este sitio utiliza el Píxel de Meta (Meta Platforms, Inc., empresa propietaria de Facebook e Instagram). Esta herramienta puede recopilar y enviar a Meta información técnica sobre su visita y su interacción con el sitio, como las páginas visitadas, la dirección IP, datos del navegador y del dispositivo, identificadores asociados a cookies de Meta y las interacciones con botones del sitio, incluidos los clics en los botones de WhatsApp. Esta información se utiliza para medir la efectividad de nuestros anuncios y, en su caso, mostrar publicidad en Facebook e Instagram. El sitio no envía a Meta de forma deliberada el nombre, teléfono, correo electrónico, tratamiento de interés, mensaje ni autorización promocional que usted capture en el formulario; sin embargo, según su configuración, las herramientas de medición de Meta pueden detectar de manera automática ciertas interacciones con botones y formularios del sitio.</p>
+        <p class="priv-p">Adicionalmente, el sitio utiliza Google Tag Manager (Google LLC), una herramienta que permite administrar las etiquetas de medición del sitio. Al cargarse esta herramienta, Google puede recibir información técnica de su navegador, como la dirección IP. Si en el futuro se activan etiquetas de medición o de publicidad a través de Google Tag Manager, este aviso se actualizará para describirlas.</p>
+        <p class="priv-p">Si usted decide escribirnos por WhatsApp, esa comunicación se realiza a través de WhatsApp (Meta) y se rige por sus propios términos y política de privacidad. Meta trata la información que recibe conforme a su propia Política de Privacidad, disponible en <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">facebook.com/privacy/policy</a>. Usted puede administrar el uso de esta información para publicidad desde la configuración de anuncios de su cuenta de Facebook o Instagram, o bloquear las cookies desde su navegador.</p>
 
         <h3 class="priv-h3">Menores de edad</h3>
         <p class="priv-p">La atención y el tratamiento de datos de menores de edad requerirán la participación y autorización del padre, madre o tutor legal, así como los consentimientos correspondientes.</p>
@@ -1503,7 +1538,7 @@
         <p class="priv-p">Este aviso puede modificarse por cambios legales, operativos o tecnológicos. Las actualizaciones estarán disponibles en <span class="priv-placeholder">[DIRECCIÓN DEL SITIO WEB]</span> o se comunicarán por los medios de contacto registrados cuando corresponda.</p>
 
         <h3 class="priv-h3">Consentimiento</h3>
-        <p class="priv-p">Al proporcionar sus datos a través del sitio web, teléfono, WhatsApp o de manera presencial, usted reconoce haber leído este aviso. Cuando se traten datos sensibles, fotografías clínicas o uso publicitario de imagen, se solicitará el consentimiento expreso correspondiente.</p>
+        <p class="priv-p">Este aviso se pone a su disposición para que conozca cómo se tratan sus datos personales. Los datos que usted proporcione a través del sitio web, teléfono, WhatsApp o de manera presencial serán tratados conforme a este aviso. Cuando se traten datos sensibles, fotografías clínicas o uso publicitario de imagen, se solicitará el consentimiento expreso correspondiente.</p>
       </div>
     </div>
   </section>
@@ -1728,6 +1763,9 @@ const I18N = {
     "cont.form.lbl_name": "Nombre completo",
     "cont.form.ph_name": "Tu nombre",
     "cont.form.lbl_phone": "Teléfono / WhatsApp",
+    "cont.form.lbl_email": "Correo electrónico (opcional)",
+    "cont.form.ph_email": "tu@correo.com",
+    "cont.form.marketing": "Deseo recibir novedades, promociones y comunicaciones comerciales de D’ALMA Clinic por correo electrónico.",
     "cont.form.lbl_service": "Tratamiento de interés",
     "cont.form.opt_placeholder": "Selecciona un tratamiento",
     "cont.form.opt_fillers": "Fillers / Armonización Facial",
@@ -1741,7 +1779,9 @@ const I18N = {
     "cont.form.lbl_msg": "Mensaje (opcional)",
     "cont.form.ph_msg": "¿Tienes alguna pregunta?",
     "cont.form.submit": "Enviar mensaje",
-    "cont.form.pending": "El envío del formulario estará disponible próximamente.",
+    "cont.form.sending": "Enviando…",
+    "cont.form.success": "Gracias por escribirnos. Recibimos tu mensaje correctamente y nos pondremos en contacto contigo pronto.",
+    "cont.form.error": "No pudimos enviar tu mensaje. Por favor inténtalo nuevamente o escríbenos por WhatsApp.",
     "cont.info.eyebrow": "Información",
     "cont.info.h2": "Encuéntranos",
     "loc.title": "Ubicación",
@@ -1958,6 +1998,9 @@ const I18N = {
     "cont.form.lbl_name": "Full Name",
     "cont.form.ph_name": "Your name",
     "cont.form.lbl_phone": "Phone / WhatsApp",
+    "cont.form.lbl_email": "Email address (optional)",
+    "cont.form.ph_email": "you@example.com",
+    "cont.form.marketing": "I would like to receive news, promotions, and marketing emails from D’ALMA Clinic.",
     "cont.form.lbl_service": "Treatment of Interest",
     "cont.form.opt_placeholder": "Select a treatment",
     "cont.form.opt_fillers": "Fillers / Facial Contouring",
@@ -1971,7 +2014,9 @@ const I18N = {
     "cont.form.lbl_msg": "Message (optional)",
     "cont.form.ph_msg": "Do you have any questions?",
     "cont.form.submit": "Send Message",
-    "cont.form.pending": "Form submission will be available soon.",
+    "cont.form.sending": "Sending…",
+    "cont.form.success": "Thank you for contacting us. We received your message successfully and will get back to you soon.",
+    "cont.form.error": "We couldn\'t send your message. Please try again or contact us via WhatsApp.",
     "cont.info.eyebrow": "Information",
     "cont.info.h2": "Find Us",
     "loc.title": "Location",
@@ -2160,19 +2205,102 @@ function setLang(lang) {
     });
   });
 
-  // Contacto - formulario todavia sin backend real. La validacion nativa
-  // (required/email) corre antes de que el navegador dispare 'submit', asi
-  // que preventDefault() aqui adentro no la interfiere: solo se ejecuta si
-  // el formulario ya paso esa validacion. No se guarda ni se envia nada.
+  // Contacto - envio real: fetch JSON -> /contact-submit.php (PHP en Hostinger) -> Apps Script -> correo
+  // a la clinica. generate_lead se dispara SOLO cuando el backend responde {"ok":true}, una vez por envio
+  // exitoso. Ningun dato del visitante se escribe en dataLayer, URL, storage ni consola. Sin llamadas fbq.
+  // PUNTO DE CONFIGURACION: Site Key (PUBLICO) de Cloudflare Turnstile. Vacio = widget desactivado.
+  // El Secret Key va en dalma_private/contact-config.php (fuera de public_html), nunca aqui.
+  var DALMA_TURNSTILE_SITE_KEY = '0x4AAAAAAFS0YYEZ7QkSniWG';
   var contactForm = document.getElementById('contact-form');
   if (contactForm) {
+    var cfBtn = contactForm.querySelector('button[type="submit"]');
+    var cfNotice = document.getElementById('contact-form-notice');
+    var cfBusy = false;
+    var cfToken = '';
+    var cfWidgetId = null;
+    // Correo opcional; solo es obligatorio mientras la casilla promocional este marcada. La casilla NUNCA se
+    // marca por script ni se conserva entre sesiones (autocomplete=off + desmarcado en pageshow/reset).
+    var cfEmail = document.getElementById('contact-email');
+    var cfMkt = document.getElementById('contact-marketing');
+    var cfSyncEmail = function() { if (cfEmail && cfMkt) cfEmail.required = cfMkt.checked; };
+    if (cfMkt) {
+      cfMkt.addEventListener('change', cfSyncEmail);
+      contactForm.addEventListener('reset', function() { setTimeout(cfSyncEmail, 0); });
+      window.addEventListener('pageshow', function() { cfMkt.checked = false; cfSyncEmail(); });
+      cfSyncEmail();
+    }
+    var cfLang = function() { return document.documentElement.lang === 'en' ? 'en' : 'es'; };
+    var cfText = function(key) { var d = I18N[cfLang()] || I18N.es; return d[key] || I18N.es[key] || ''; };
+    var cfShow = function(key, kind) {
+      if (!cfNotice) return;
+      cfNotice.textContent = key ? cfText(key) : '';
+      cfNotice.className = 'ct-form-notice' + (kind ? ' is-' + kind : '');
+    };
+    var cfResetWidget = function() {
+      cfToken = '';
+      if (cfWidgetId !== null && window.turnstile) { try { window.turnstile.reset(cfWidgetId); } catch (err) {} }
+    };
+    if (DALMA_TURNSTILE_SITE_KEY) {
+      var cfScript = document.createElement('script');
+      cfScript.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      cfScript.async = true;
+      cfScript.defer = true;
+      cfScript.onload = function() {
+        if (!window.turnstile) return;
+        cfWidgetId = window.turnstile.render('#contact-turnstile', {
+          sitekey: DALMA_TURNSTILE_SITE_KEY,
+          language: cfLang(),
+          theme: 'light',
+          callback: function(t) { cfToken = t; },
+          'expired-callback': function() { cfToken = ''; },
+          'error-callback': function() { cfToken = ''; }
+        });
+      };
+      document.head.appendChild(cfScript);
+    }
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
-      var notice = document.getElementById('contact-form-notice');
-      if (!notice) return;
-      var lang = document.documentElement.lang || 'es';
-      var dict = I18N[lang] || I18N.es;
-      notice.textContent = dict['cont.form.pending'] || I18N.es['cont.form.pending'];
+      if (cfBusy) return;
+      if (!contactForm.checkValidity()) return;
+      cfBusy = true;
+      if (cfBtn) { cfBtn.disabled = true; cfBtn.setAttribute('aria-busy', 'true'); cfBtn.textContent = cfText('cont.form.sending'); }
+      cfShow('', '');
+      var f = contactForm.elements;
+      var payload = {
+        name: f['name'].value,
+        phone: f['phone'].value,
+        email: f['email'] ? f['email'].value.trim() : '',
+        marketing_consent: f['marketing_consent'] ? f['marketing_consent'].checked === true : false,
+        treatment: f['treatment'].value,
+        message: f['message'].value,
+        lang: cfLang(),
+        website: f['website'] ? f['website'].value : ''
+      };
+      if (DALMA_TURNSTILE_SITE_KEY) payload.tt = cfToken;
+      fetch('/contact-submit.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        credentials: 'same-origin',
+        cache: 'no-store'
+      })
+        .then(function(r) {
+          return r.json().then(function(j) { return !!(r.ok && j && j.ok === true); }, function() { return false; });
+        })
+        .catch(function() { return false; })
+        .then(function(ok) {
+          cfBusy = false;
+          if (cfBtn) { cfBtn.disabled = false; cfBtn.removeAttribute('aria-busy'); cfBtn.textContent = cfText('cont.form.submit'); }
+          if (ok) {
+            contactForm.reset();
+            cfShow('cont.form.success', 'ok');
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'generate_lead', form_name: 'contact' });
+          } else {
+            cfShow('cont.form.error', 'error');
+          }
+          cfResetWidget();
+        });
     });
   }
 

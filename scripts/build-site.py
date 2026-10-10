@@ -28,6 +28,29 @@ SOURCE = os.path.join(ROOT, "mockup.html")
 OUT_DIR = os.path.join(ROOT, "DALMA_BUILD")
 DOMAIN = "https://dalmaclinic.com.mx"
 
+# Google Tag Manager (contenedor web "dalmaclinic.com.mx", cuenta clinic.dalma@gmail.com).
+# El ID de contenedor es publico (no es una credencial). Se inyecta aqui, en el generador, porque
+# build_head() reconstruye el <head> y NO copia el de mockup.html: un snippet puesto solo en la
+# fuente se perderia. Un unico script en <head> y un unico <noscript> justo tras <body> por pagina.
+# El script de GTM solo hace window.dataLayer = window.dataLayer || [], asi que convive con los
+# push() del sitio (click_whatsapp / generate_lead) y con el Meta Pixel existente sin tocarlos.
+GTM_ID = "GTM-MJGTQRV7"
+GTM_HEAD = (
+    "  <!-- Google Tag Manager -->\n"
+    "  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\n"
+    "  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\n"
+    "  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\n"
+    "  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\n"
+    "  })(window,document,'script','dataLayer','" + GTM_ID + "');</script>\n"
+    "  <!-- End Google Tag Manager -->\n"
+)
+GTM_NOSCRIPT = (
+    "<!-- Google Tag Manager (noscript) -->\n"
+    '<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=' + GTM_ID + '"\n'
+    'height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>\n'
+    "<!-- End Google Tag Manager (noscript) -->\n"
+)
+
 # La carpeta de logos usa un apostrofe tipografico (') en su nombre, dificil
 # de teclear de forma fiable entre editores/terminales; se localiza por glob
 # en vez de hardcodear el caracter exacto.
@@ -465,7 +488,7 @@ def build_head(style_block, fonts_block, meta, name, lang, public_launch, canoni
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>%s</title>
+%s  <title>%s</title>
   <meta name="description" content="%s">
   <meta name="robots" content="%s">
   <link rel="canonical" href="%s">
@@ -485,6 +508,7 @@ def build_head(style_block, fonts_block, meta, name, lang, public_launch, canoni
 </head>
 """ % (
         HTML_LANG_ATTR[lang],
+        GTM_HEAD,
         title,
         desc,
         robots,
@@ -736,7 +760,15 @@ def main():
             body_parts.append(wafloat_by_lang[lang] + "\n")
             body_parts.append("<script>\n%s\n</script>\n" % page_script)
 
-            doc = head + "<body>\n" + "\n".join(body_parts) + "</body>\n</html>\n"
+            # GTM: <noscript> inmediatamente despues de abrir <body> (antes del overlay).
+            doc = head + "<body>\n" + GTM_NOSCRIPT + "\n".join(body_parts) + "</body>\n</html>\n"
+
+            # Integridad: exactamente un script y un noscript de GTM, con el ID correcto.
+            if (doc.count("googletagmanager.com/gtm.js?id=") != 1
+                    or doc.count("googletagmanager.com/ns.html?id=") != 1
+                    or doc.count(GTM_ID) != 2):
+                print("ERROR: GTM duplicado o ausente en %s/%s" % (name, lang))
+                sys.exit(1)
 
             out_path = os.path.join(OUT_DIR, OUT_PATH[lang][name])
             os.makedirs(os.path.dirname(out_path), exist_ok=True)
@@ -801,6 +833,13 @@ def main():
     with open(os.path.join(OUT_DIR, "robots.txt"), "w", encoding="utf-8") as f:
         f.write(robots_txt)
     print("Generado: robots.txt")
+
+    # ---- contact-submit.php (endpoint del formulario; la config privada NO va aqui) --
+    contact_php = os.path.join(ROOT, "server", "contact-submit.php")
+    if not os.path.isfile(contact_php):
+        fail("No se encontro server/contact-submit.php")
+    shutil.copy2(contact_php, os.path.join(OUT_DIR, "contact-submit.php"))
+    print("Copiado contact-submit.php a la raiz de DALMA_BUILD")
 
     # ---- sitemap.xml (solo si PUBLIC_LAUNCH) -----------------------------------
     if public_launch:
