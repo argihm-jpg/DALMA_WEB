@@ -35,13 +35,25 @@ DOMAIN = "https://dalmaclinic.com.mx"
 # El script de GTM solo hace window.dataLayer = window.dataLayer || [], asi que convive con los
 # push() del sitio (click_whatsapp / generate_lead) y con el Meta Pixel existente sin tocarlos.
 GTM_ID = "GTM-MJGTQRV7"
-GTM_HEAD = (
+GA_MEASUREMENT_ID = "G-CQ7R0YH9J1"  # publico; solo se usa para la bandera 'ga-disable-<ID>' de la desactivacion
+# Preferencia "Desactivar medicion y publicidad" (Aviso de privacidad). Se evalua ANTES de GTM y del Meta Pixel:
+# si el visitante la activo (localStorage 'dalma_tracking_optout' = '1'), no se carga GTM/Google Analytics y
+# window.fbq queda como una funcion vacia, por lo que el snippet del Pixel (que sale si window.fbq existe) tampoco
+# carga fbevents.js. El codigo del Pixel NO se modifica. Sin la preferencia (o con el almacenamiento bloqueado) todo
+# funciona como siempre.
+TRACKING_OPTOUT_GUARD = (
+    "  <!-- D'ALMA: preferencia de desactivar medicion y publicidad (ver Aviso de privacidad) -->\n"
+    "  <script>(function(){try{if(window.localStorage.getItem('dalma_tracking_optout')==='1')"
+    "{window.__dalmaTrackingOptOut=true;window['ga-disable-" + GA_MEASUREMENT_ID + "']=true;"
+    "window.fbq=function(){};}}catch(e){}})();</script>\n"
+)
+GTM_HEAD = TRACKING_OPTOUT_GUARD + (
     "  <!-- Google Tag Manager -->\n"
-    "  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\n"
+    "  <script>if(!window.__dalmaTrackingOptOut){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\n"
     "  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\n"
     "  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\n"
     "  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\n"
-    "  })(window,document,'script','dataLayer','" + GTM_ID + "');</script>\n"
+    "  })(window,document,'script','dataLayer','" + GTM_ID + "');}</script>\n"
     "  <!-- End Google Tag Manager -->\n"
 )
 GTM_NOSCRIPT = (
