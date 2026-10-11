@@ -14,8 +14,8 @@
 |---|---|
 | Pixel `1762473058207277` | Instalado **directamente en el código** del sitio (el que dejó Gio, sin modificar). En producción. |
 | Eventos que envía nuestro código | `PageView` al cargar cada página y `Contact` en cada clic a un botón de WhatsApp. **No existe `Lead`.** |
-| Google Tag Manager `GTM-MJGTQRV7` | Instalado en las 9 páginas, **sin etiquetas publicadas** (versión publicada = "Empty Container"). No gestiona el Pixel. |
-| GA4 `G-CQ7R0YH9J1` | Configurado y probado en GTM, **SIN PUBLICAR** (borrador; la publicación quedó pendiente de un clic manual de Bruno). Todavía no hay medición GA4 real. |
+| Google Tag Manager `GTM-MJGTQRV7` | Instalado en las 9 páginas con la **versión 2 publicada** (2026-10-10 15:36): 3 etiquetas GA4, 2 activadores y 3 variables. **Sin etiquetas de Meta.** No gestiona el Pixel. |
+| GA4 `G-CQ7R0YH9J1` | **Publicado y recibiendo eventos de producción** (validado el 2026-10-11): `page_view`, `click_whatsapp` y `generate_lead`; `generate_lead` es evento clave. |
 | Eventos de `dataLayer` existentes | `click_whatsapp` y `generate_lead` (ver sección 3). |
 | Mecanismo de desactivación del seguimiento | **EN PRODUCCIÓN desde el deploy `c446e04` (2026-10-10)**; probado con la red real en producción. |
 | Aviso de cookies / Aviso de privacidad nuevo | **EN PRODUCCIÓN** (`c446e04`). El aviso de cookies solo se ve con `?preview=1` mientras el overlay esté activo. |
@@ -24,9 +24,9 @@
 
 ### Qué está en producción
 
-- **En producción (commit de código `c446e04`, 2026-10-10):** Pixel de Gio sin modificar (`PageView` + `Contact`), GTM vacío (sin etiquetas publicadas), formulario con Turnstile y **sin** casilla de promociones, aviso de cookies («Entendido»), control para desactivar/reactivar la medición y Aviso de privacidad = texto original de Anita + un párrafo mínimo de cookies.
+- **En producción (commit de código `c446e04`, 2026-10-10):** Pixel de Gio sin modificar (`PageView` + `Contact`), GTM v2 publicado (solo etiquetas de Google/GA4; sin etiquetas de Meta), formulario con Turnstile y **sin** casilla de promociones, aviso de cookies («Entendido»), control para desactivar/reactivar la medición y Aviso de privacidad = texto original de Anita + un párrafo mínimo de cookies.
 - **Ojo:** el párrafo del Píxel de Meta que escribió Gio (commit `6eaa3e2`) fue sustituido por el párrafo mínimo ("Este sitio utiliza Google Analytics … y el Píxel de Meta, para medir y evaluar nuestras campañas publicitarias…"). Gio puede proponer ajustes a esa redacción, pero el texto legal lo valida Anita/asesoría.
-- **Aún NO está en producción:** ninguna etiqueta de Google (GTM sin publicar), `Lead` de Meta, ni ningún cambio al Pixel.
+- **Aún NO está en producción:** `Lead` de Meta ni ningún cambio al Pixel (no hay etiquetas de Meta en GTM).
 
 ---
 
@@ -62,6 +62,7 @@ Estas pruebas se hicieron en un servidor local de revisión (127.0.0.1) con la l
 4. **La oposición al seguimiento (control en el Aviso de privacidad) funciona:** tras desactivar, 0 envíos a Meta, `_fbp` borrada y no recreada; con la preferencia activa al cargar otra página, `fbevents.js` ni siquiera se descarga; al reactivar, el sitio recarga y el Pixel vuelve a enviar `PageView`. Se probó en las 9 páginas (ES/EN) en local y, tras el deploy, **en producción con la lista de red real del navegador**: con el seguimiento activo hubo 1 `facebook.com/tr` (`PageView`); tras desactivar, 0 peticiones nuevas a Meta (ni `Contact` ni `SubscribedButtonClick`). Detalle en la sección 4.7.
 5. **El formulario y WhatsApp siguen funcionando** con el seguimiento desactivado (verificado en producción: 1 envío ficticio con 1 correo y 1 `generate_lead`).
 5b. **Cada clic a un enlace de WhatsApp genera, además de `Contact`, una llamada automática interna del Pixel** (clic en enlace/botón detectado por los eventos automáticos). Observado en producción el 2026-10-10 con `fbq` sustituido por un registrador: por clic, 1 llamada `fire` (automática) + 1 `track('Contact')` (nuestra). Hay que ver en «Probar eventos» cómo la registra Meta y si debe desactivarse (4.1/4.3).
+5c. **Con GTM v2 publicado (2026-10-11):** GA4 recibe 1 `page_view` por carga, 1 `click_whatsapp` por clic y 1 `generate_lead` por envío exitoso, sin duplicados ni datos personales; con la oposición activa no se envía nada a GA4 ni a Meta.
 6. **Nuestro código no envía datos del formulario a Meta:** el código del formulario no llama a `fbq`; `generate_lead` solo lleva `form_name`.
 7. **Configuración pública del Pixel (auditoría parcial, 2026-10-09)**, leída del endpoint público `connect.facebook.net/signals/config/<ID>` sin iniciar sesión: Advanced Matching automático **no** activado; eventos automáticos/inferidos (botones y formularios) **sí** activos; cookies propias `_fbp`/`_fbc` activas; sin plugin de microdata. *Es lectura de la configuración pública; hay que confirmarla en el Administrador de eventos.*
 
@@ -100,7 +101,7 @@ Estas pruebas se hicieron en un servidor local de revisión (127.0.0.1) con la l
 
 ### 4.5 ¿El Pixel permanece en el código o se administra desde GTM?
 
-- **Hoy:** en el código (directo). GTM solo se usa para Google (GA4, sin publicar).
+- **Hoy:** en el código (directo). GTM solo se usa para Google (GA4, publicado en GTM v2).
 - **Regla:** **nunca dos instalaciones** (duplicaría `PageView`, `Contact` y `Lead`).
 - **Opción 1 — dejarlo en el código (menor cambio):** GTM solo para Google. `Lead` se añadiría en código (4.4-A).
 - **Opción 2 — migrarlo a GTM:** crear las etiquetas de Meta en GTM (PageView base, `Contact` con `CE - click_whatsapp`, `Lead` con `CE - generate_lead`) y **retirar en el MISMO deploy** el snippet y la línea `fbq('track','Contact')` del código. Ventajas: un solo punto de control; desventajas: más superficie en GTM, plantillas de comunidad/seguridad y volver a probar la oposición.
@@ -154,7 +155,7 @@ Checklist (nada de esto ha sido comprobado desde Meta; no tuvimos acceso):
 - **Modelo de consentimiento (Anita / asesoría legal):** hoy GA4 (cuando se publique) y el Pixel cargan **sin consentimiento previo**, con oposición posterior (opt-out). El botón «Entendido» **no** es consentimiento expreso. Si se decide opt-in, habría que añadir un banner con aceptar/rechazar y Consent Mode; eso cambia el diseño aprobado y requiere autorización.
 - **Overlay de pre-lanzamiento:** mientras esté activo, el visitante normal **no ve** el aviso de cookies ni el Aviso de privacidad, pero el Pixel sí carga para él. Decidir si se acepta o se evita cargar medición durante el overlay.
 - **Datos legales pendientes de Anita:** nombre legal, domicilio, correo de privacidad, teléfono, URL, plazos de conservación, vigencia, versión EN, consentimiento para datos sensibles. El correo de privacidad sigue como placeholder (`[CORREO DE PRIVACIDAD]`); no inventarlo.
-- **Publicación de GA4/GTM:** el contenedor sigue SIN publicar. Bruno eligió el modelo "aviso informativo + oposición" (no es validación jurídica) y la publicación quedó pendiente de un clic manual. **No publicar ni modificar el contenedor GTM** sin coordinarlo con Bruno; las etiquetas de Meta, si llegan, se acuerdan con él (4.5).
+- **GTM/GA4:** GTM v2 está publicado (solo etiquetas de Google/GA4). Bruno eligió el modelo "aviso informativo + oposición" (no es validación jurídica; la validación con Anita sigue pendiente). **No publicar ni modificar el contenedor GTM** sin coordinarlo con Bruno; las etiquetas de Meta, si llegan, se acuerdan con él (4.5).
 
 ## 7. Reglas de trabajo
 
