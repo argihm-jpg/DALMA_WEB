@@ -79,6 +79,12 @@ BUSINESS_ADDRESS = {
     "addressRegion": "Baja California Sur",
     "addressCountry": "MX",
 }
+# Perfiles oficiales confirmados (2026-10-19). NO incluye Google Maps: la ficha de
+# Maps no es un perfil social y no se anade a sameAs.
+SOCIAL_PROFILES = [
+    "https://www.instagram.com/dalma_clinic",
+    "https://www.facebook.com/people/Dalma-Clinic/61594824966339/",
+]
 
 PAGE_ORDER = ["home", "nosotros", "servicios", "testimonios", "contacto", "privacidad"]
 
@@ -473,8 +479,9 @@ def build_hreflang_block(name):
 def build_business_schema(meta, lang):
     """JSON-LD MedicalClinic. Mismo @id en ES/EN (misma entidad real, sin
     duplicarla); solo name/description se muestran en el idioma de la pagina.
-    No incluye telephone/openingHours/logo/sameAs: sin dato real confirmado
-    todavia para esos campos.
+    sameAs = perfiles oficiales de Instagram y Facebook (SOCIAL_PROFILES).
+    No incluye telephone/openingHours/logo: sin dato real confirmado todavia
+    para esos campos.
     """
     data = {
         "@context": "https://schema.org",
@@ -484,6 +491,7 @@ def build_business_schema(meta, lang):
         "url": DOMAIN + "/",
         "description": meta[lang]["home"]["desc"],
         "address": BUSINESS_ADDRESS,
+        "sameAs": list(SOCIAL_PROFILES),
     }
     json_text = json.dumps(data, ensure_ascii=False, indent=2).replace("</", "<\\/")
     return '  <script type="application/ld+json">\n%s\n  </script>\n' % json_text
