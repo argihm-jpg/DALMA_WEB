@@ -80,6 +80,8 @@ Estas pruebas se hicieron en un servidor local de revisión (127.0.0.1) con la l
 
 ### 4.2 Advanced Matching (AAM) y su adecuación para una clínica
 
+> **2026-10-19 (Gio, verificado en el Administrador de eventos > Configuración):** "Coincidencias automáticas del sitio web" = **Desactivado**; "Eventos automáticos" (IA de Meta que agrega eventos) = **Desactivado**. Además se creó la **lista de autorizados** en Permisos de tráfico con `dalmaclinic.com.mx` (incluye subdominios); `localhost`, `127.0.0.1` e `invalid.invalid` (pruebas antiguas) quedan fuera.
+
 - **Lo que sabemos:** la configuración pública indica AAM automático **apagado**. Nuestro código no envía correo ni teléfono al Pixel.
 - **A confirmar en Meta:** estado real de "Coincidencia avanzada automática" y de la coincidencia avanzada manual (si hubiera). En el formulario de contacto el sitio recoge nombre, teléfono, correo y tratamiento; con AAM encendido, la librería podría intentar leer esos campos y enviarlos con hash.
 - **Recomendación a evaluar:** mantener AAM **apagado** por tratarse de una clínica (datos de salud/estética). Cualquier activación debe revisarse con asesoría legal y reflejarse en el Aviso.
