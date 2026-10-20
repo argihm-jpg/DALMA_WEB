@@ -2267,7 +2267,8 @@ function setLang(lang) {
 
   // Contacto - envio real: fetch JSON -> /contact-submit.php (PHP en Hostinger) -> Apps Script -> correo
   // a la clinica. generate_lead se dispara SOLO cuando el backend responde {"ok":true}, una vez por envio
-  // exitoso. Ningun dato del visitante se escribe en dataLayer, URL, storage ni consola. Sin llamadas fbq.
+  // exitoso. Ningun dato del visitante se escribe en dataLayer, URL, storage ni consola. En el mismo punto,
+  // fbq('track','Lead') SIN parametros (ni tratamiento ni datos personales: sector salud).
   // PUNTO DE CONFIGURACION: Site Key (PUBLICO) de Cloudflare Turnstile. Vacio = widget desactivado.
   // El Secret Key va en dalma_private/contact-config.php (fuera de public_html), nunca aqui.
   var DALMA_TURNSTILE_SITE_KEY = '0x4AAAAAAFS0YYEZ7QkSniWG';
@@ -2345,6 +2346,7 @@ function setLang(lang) {
             cfShow('cont.form.success', 'ok');
             window.dataLayer = window.dataLayer || [];
             window.dataLayer.push({ event: 'generate_lead', form_name: 'contact' });
+            if (window.fbq) fbq('track', 'Lead');
           } else {
             cfShow('cont.form.error', 'error');
           }
@@ -2620,7 +2622,8 @@ function setLang(lang) {
 
   // META PIXEL — código oficial de Meta (Administrador de eventos). Vive en el script compartido
   // porque build-site.py regenera el <head> y no copia el de mockup.html; así sale en las 9 páginas.
-  // PageView al cargar + 'Contact' en cada clic a WhatsApp (ver listener de abajo).
+  // PageView al cargar + 'Contact' en cada clic a WhatsApp (ver listener de abajo) + 'Lead' tras envio exitoso
+  // del formulario. autoConfig false (antes de init) apaga los eventos automaticos (SubscribedButtonClick).
   // ponytail: sin <noscript> de respaldo; agregarlo al <body> en build-site.py si se quiere contar visitas sin JS.
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -2630,6 +2633,7 @@ function setLang(lang) {
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('set', 'autoConfig', false, '1762473058207277');
   fbq('init', '1762473058207277');
   fbq('track', 'PageView');
 

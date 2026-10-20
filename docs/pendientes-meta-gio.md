@@ -70,6 +70,8 @@ Estas pruebas se hicieron en un servidor local de revisión (127.0.0.1) con la l
 
 ### 4.1 Revisar los eventos automáticos de Meta (`SubscribedButtonClick` y similares) — **PRIORIDAD ALTA**
 
+> **2026-10-19 (Gio):** opción (b) preparada en la rama `meta-lead-autoconfig` (`fbq('set','autoConfig',false,…)` antes de `init`). **Sin desplegar**; pendiente revisión y deploy de Bruno.
+
 - **Situación:** los eventos automáticos están activos en la configuración del Pixel. Un clic en cualquier botón (incluido «Entendido») genera `SubscribedButtonClick`. Según la configuración pública, los eventos inferidos pueden incluir el **texto del botón**, la URL y el título de la página y, en formularios, los **nombres/placeholders de campos** (no los valores mientras Advanced Matching siga apagado). *Esto último es inferido de la configuración y de la documentación de Meta; no se inspeccionó el contenido completo de cada petición: Gio debe confirmarlo en "Probar eventos".*
 - **Por qué importa:** la clínica es del sector salud; «Entendido» no debe generar eventos analíticos y no es consentimiento. Además `Contact` podría duplicarse con el evento automático equivalente en los botones de WhatsApp (los enlaces `<a>` también podrían detectarse).
 - **Verificar en Meta (Gio):** Administrador de eventos → Configuración del Pixel → eventos automáticos / detección de clics en botones y eventos inferidos. Decidir si se **desactivan**.
@@ -90,6 +92,8 @@ Estas pruebas se hicieron en un servidor local de revisión (127.0.0.1) con la l
 - **Nota:** `Contact` hoy representa intención de contacto, no un lead confirmado. Sirve como señal de campañas hacia WhatsApp.
 
 ### 4.4 Evento estándar `Lead` a partir de `generate_lead`
+
+> **2026-10-19 (Gio):** elegida la opción A (Pixel sigue en el código). `if (window.fbq) fbq('track','Lead')` sin parámetros, junto al `generate_lead`, en la rama `meta-lead-autoconfig`. **Sin desplegar**; pendiente revisión y deploy de Bruno.
 
 - **Estado:** NO implementado, a propósito. `generate_lead` ya existe en `dataLayer` y solo se emite tras `{"ok":true}`.
 - **Regla acordada:** `Lead` solo después de un formulario enviado con éxito; **sin parámetros personales** (ni nombre, teléfono, correo, tratamiento ni mensaje); idealmente sin parámetros.
