@@ -1,6 +1,6 @@
 # Pendientes de Meta (Pixel) para Gio — D'ALMA Clinic
 
-**Última actualización:** 2026-10-10, tras el deploy `c446e04` (preparado para el retorno de Gio el lunes 2026-10-12).
+**Última actualización:** 2026-10-21, tras el deploy `895d084` (commits de Gio `6e4bd8a` y `b7fd354` integrados en `main` y desplegados). Lo marcado como verificado se comprobó desde el navegador (local con solicitudes interceptadas y producción con la red real); **la recepción de los eventos en Meta NO está confirmada por nosotros**.
 **Responsable del tema:** Gio (CM / Meta Ads de la clínica). **Coordinación técnica y deploys:** Bruno Sandoval.
 **Alcance de este documento:** explicar el estado actual del Meta Pixel en el sitio y lo que falta verificar o decidir. No contiene credenciales, tokens ni datos de la clínica.
 
@@ -12,8 +12,8 @@
 
 | Tema | Estado |
 |---|---|
-| Pixel `1762473058207277` | Instalado **directamente en el código** del sitio (el que dejó Gio, sin modificar). En producción. |
-| Eventos que envía nuestro código | `PageView` al cargar cada página y `Contact` en cada clic a un botón de WhatsApp. **No existe `Lead`.** |
+| Pixel `1762473058207277` | Instalado **directamente en el código** del sitio. En producción desde el deploy `895d084` (2026-10-21) con `Lead` tras envío exitoso y `autoConfig=false` (cambios de Gio). |
+| Eventos que envía nuestro código | `PageView` al cargar cada página, `Contact` en cada clic a un botón de WhatsApp y **`Lead` tras un envío exitoso del formulario** (`ok:true`), sin parámetros. Eventos automáticos desactivados en el código (`fbq('set','autoConfig',false,…)` antes de `init`). **Desde el navegador los eventos salen; que Meta los reciba y los atribuya debe confirmarlo Gio en «Probar eventos».** |
 | Google Tag Manager `GTM-MJGTQRV7` | Instalado en las 9 páginas con la **versión 2 publicada** (2026-10-10 15:36): 3 etiquetas GA4, 2 activadores y 3 variables. **Sin etiquetas de Meta.** No gestiona el Pixel. |
 | GA4 `G-CQ7R0YH9J1` | **Publicado y recibiendo eventos de producción** (validado el 2026-10-11): `page_view`, `click_whatsapp` y `generate_lead`. **Eventos clave: exactamente `generate_lead` y `click_whatsapp`** (`qualify_lead` y `close_convert_lead` no están marcados). |
 | Eventos de `dataLayer` existentes | `click_whatsapp` y `generate_lead` (ver sección 3). |
@@ -24,9 +24,9 @@
 
 ### Qué está en producción
 
-- **En producción (commit de código `c446e04`, 2026-10-10):** Pixel de Gio sin modificar (`PageView` + `Contact`), GTM v2 publicado (solo etiquetas de Google/GA4; sin etiquetas de Meta), formulario con Turnstile y **sin** casilla de promociones, aviso de cookies («Entendido»), control para desactivar/reactivar la medición y Aviso de privacidad = texto original de Anita + un párrafo mínimo de cookies.
+- **En producción (commit de código `c446e04`, 2026-10-10):** Pixel de Gio sin modificar (`PageView` + `Contact`), GTM v2 publicado (solo etiquetas de Google/GA4; sin etiquetas de Meta), formulario con Turnstile y **sin** casilla de promociones, aviso de cookies («Entendido»), control para desactivar/reactivar la medición y Aviso de privacidad = texto original de Anita + un párrafo mínimo de cookies. **Desde 2026-10-21 (`895d084`):** además `Lead` tras `ok:true` y `autoConfig=false` (commits de Gio), tarjetas del equipo, iconos de Instagram/Facebook, ficha de Maps y `sameAs` en el JSON-LD.
 - **Ojo:** el párrafo del Píxel de Meta que escribió Gio (commit `6eaa3e2`) fue sustituido por el párrafo mínimo ("Este sitio utiliza Google Analytics … y el Píxel de Meta, para medir y evaluar nuestras campañas publicitarias…"). Gio puede proponer ajustes a esa redacción, pero el texto legal lo valida Anita/asesoría.
-- **Aún NO está en producción:** `Lead` de Meta ni ningún cambio al Pixel (no hay etiquetas de Meta en GTM).
+- **Pendiente (no es de código):** no hay etiquetas de Meta en GTM; la recepción de `PageView`, `Contact` y `Lead` en Meta y la ausencia de `SubscribedButtonClick` allí **no están confirmadas** (solo comprobadas desde el navegador).
 
 ---
 
@@ -70,7 +70,7 @@ Estas pruebas se hicieron en un servidor local de revisión (127.0.0.1) con la l
 
 ### 4.1 Revisar los eventos automáticos de Meta (`SubscribedButtonClick` y similares) — **PRIORIDAD ALTA**
 
-> **2026-10-19 (Gio):** opción (b) preparada en la rama `meta-lead-autoconfig` (`fbq('set','autoConfig',false,…)` antes de `init`). **Sin desplegar**; pendiente revisión y deploy de Bruno.
+> **2026-10-19 (Gio):** opción (b) preparada en la rama `meta-lead-autoconfig` (`fbq('set','autoConfig',false,…)` antes de `init`). **2026-10-21: desplegado (`895d084`).** Verificado por nosotros desde el navegador: con la librería real y la configuración pública de producción (solicitudes interceptadas) y en producción con la red real, un clic en «Entendido» y en la hamburguesa envía solo `PageView`, sin `SubscribedButtonClick` (una build sin `autoConfig` sí lo enviaba). **Pendiente de verificación externa:** confirmar en «Probar eventos» de Meta que no llegan eventos automáticos.
 
 - **Situación:** los eventos automáticos están activos en la configuración del Pixel. Un clic en cualquier botón (incluido «Entendido») genera `SubscribedButtonClick`. Según la configuración pública, los eventos inferidos pueden incluir el **texto del botón**, la URL y el título de la página y, en formularios, los **nombres/placeholders de campos** (no los valores mientras Advanced Matching siga apagado). *Esto último es inferido de la configuración y de la documentación de Meta; no se inspeccionó el contenido completo de cada petición: Gio debe confirmarlo en "Probar eventos".*
 - **Por qué importa:** la clínica es del sector salud; «Entendido» no debe generar eventos analíticos y no es consentimiento. Además `Contact` podría duplicarse con el evento automático equivalente en los botones de WhatsApp (los enlaces `<a>` también podrían detectarse).
@@ -80,7 +80,7 @@ Estas pruebas se hicieron en un servidor local de revisión (127.0.0.1) con la l
 
 ### 4.2 Advanced Matching (AAM) y su adecuación para una clínica
 
-> **2026-10-19 (Gio, verificado en el Administrador de eventos > Configuración):** "Coincidencias automáticas del sitio web" = **Desactivado**; "Eventos automáticos" (IA de Meta que agrega eventos) = **Desactivado**. Además se creó la **lista de autorizados** en Permisos de tráfico con `dalmaclinic.com.mx` (incluye subdominios); `localhost`, `127.0.0.1` e `invalid.invalid` (pruebas antiguas) quedan fuera.
+> **2026-10-19 (Gio, verificado en el Administrador de eventos > Configuración):** "Coincidencias automáticas del sitio web" = **Desactivado**; "Eventos automáticos" (IA de Meta que agrega eventos) = **Desactivado**. Además se creó la **lista de autorizados** en Permisos de tráfico con `dalmaclinic.com.mx` (incluye subdominios); `localhost`, `127.0.0.1` e `invalid.invalid` (pruebas antiguas) quedan fuera. *2026-10-21: esos valores son los que reportó Gio; no los confirmamos desde Meta. Indicios independientes: la configuración pública del Pixel para `dalmaclinic.com.mx` no define `automaticMatching` y ninguna petición interceptada lleva `ud[...]` (sin datos de usuario). Meta sirve una configuración reducida a dominios fuera de la lista (p. ej. `127.0.0.1`), por lo que las pruebas locales del Pixel exigen simular la configuración de producción.*
 
 - **Lo que sabemos:** la configuración pública indica AAM automático **apagado**. Nuestro código no envía correo ni teléfono al Pixel.
 - **A confirmar en Meta:** estado real de "Coincidencia avanzada automática" y de la coincidencia avanzada manual (si hubiera). En el formulario de contacto el sitio recoge nombre, teléfono, correo y tratamiento; con AAM encendido, la librería podría intentar leer esos campos y enviarlos con hash.
@@ -89,15 +89,15 @@ Estas pruebas se hicieron en un servidor local de revisión (127.0.0.1) con la l
 
 ### 4.3 Confirmar que `Contact` se registra una sola vez por clic a WhatsApp
 
-- **Confirmado en pruebas:** 1 llamada `fbq('track','Contact')` por clic (listener delegado único, protegido contra duplicados) y 1 `click_whatsapp`.
+- **Confirmado en pruebas:** 1 llamada `fbq('track','Contact')` por clic (listener delegado único, protegido contra duplicados) y 1 `click_whatsapp`. *(2026-10-21: re-verificado en local con solicitudes interceptadas sobre el build integrado: 1 `Contact` por clic y sin eventos automáticos adicionales; recepción en Meta por confirmar.)*
 - **Por verificar en Meta:** que en "Probar eventos" llegue **un solo** `Contact` por clic (sin sumar un evento automático equivalente o uno de GTM) y con **cada uno de los 5 puntos de WhatsApp** (flotante, footer, contacto, Nosotros, Servicios). Comprobar además la deduplicación si más adelante entra CAPI.
 - **Nota:** `Contact` hoy representa intención de contacto, no un lead confirmado. Sirve como señal de campañas hacia WhatsApp.
 
 ### 4.4 Evento estándar `Lead` a partir de `generate_lead`
 
-> **2026-10-19 (Gio):** elegida la opción A (Pixel sigue en el código). `if (window.fbq) fbq('track','Lead')` sin parámetros, junto al `generate_lead`, en la rama `meta-lead-autoconfig`. **Sin desplegar**; pendiente revisión y deploy de Bruno.
+> **2026-10-19 (Gio):** elegida la opción A (Pixel sigue en el código). `if (window.fbq) fbq('track','Lead')` sin parámetros, junto al `generate_lead`. **2026-10-21: desplegado (`895d084`).** Verificado en local con solicitudes interceptadas: 1 `Lead` por envío exitoso; 0 si el backend responde `ok:false` o HTTP 502, si la validación del formulario falla o ante un doble envío; sin datos personales ni `cd[]`/`ud[]` en la petición. **No se hizo ningún envío real del formulario ni se generó un `Lead` real.** **Pendiente:** decidir si `Lead` es la conversión de campañas y si reemplaza o complementa a `Contact`; confirmar su recepción en Meta.
 
-- **Estado:** NO implementado, a propósito. `generate_lead` ya existe en `dataLayer` y solo se emite tras `{"ok":true}`.
+- **Estado:** implementado en el código (opción A) y desplegado el 2026-10-21; `generate_lead` sigue emitiéndose solo tras `{"ok":true}` y `Lead` en el mismo punto.
 - **Regla acordada:** `Lead` solo después de un formulario enviado con éxito; **sin parámetros personales** (ni nombre, teléfono, correo, tratamiento ni mensaje); idealmente sin parámetros.
 - **Opciones (decidir junto con 4.5):**
   - **A. En código:** añadir `if (window.fbq) fbq('track','Lead')` justo donde se hace el `dataLayer.push({event:'generate_lead',…})` (rama de éxito del formulario en `mockup.html`).
@@ -127,7 +127,7 @@ Estas pruebas se hicieron en un servidor local de revisión (127.0.0.1) con la l
   1. Preferencia en `localStorage` clave `dalma_tracking_optout='1'`.
   2. Un guard en el `<head>` (`TRACKING_OPTOUT_GUARD` en `scripts/build-site.py`) corre **antes** de GTM y del Pixel: si la preferencia está activa, define `window.__dalmaTrackingOptOut`, `window['ga-disable-G-CQ7R0YH9J1']=true` y `window.fbq=function(){}`. El snippet de Gio sale solo (`if(f.fbq)return;`); su código no se modificó. GTM tampoco se carga.
   3. Al pulsar «Desactivar medición y publicidad» en la página: se llama `fbq('consent','revoke')` **antes** de neutralizar `fbq`, se activa `ga-disable`, y se borran las cookies `_ga*`, `_gid`, `_gat`, `_gcl_*`, `_fbp`, `_fbc`.
-- **Confirmado en pruebas locales y en producción (red real):** ver sección 3, punto 4. Hubo una fuga que se corrigió (tras desactivar, la librería seguía enviando `SubscribedButtonClick` y recreaba `_fbp`; se resolvió con `consent revoke` y escuchando el clic en captura).
+- **Confirmado en pruebas locales y en producción (red real):** ver sección 3, punto 4. Hubo una fuga que se corrigió (tras desactivar, la librería seguía enviando `SubscribedButtonClick` y recreaba `_fbp`; se resolvió con `consent revoke` y escuchando el clic en captura). *2026-10-21: re-verificado con `Lead` y `autoConfig` integrados: con la oposición activa al cargar no se descarga `fbevents.js` ni GTM y no hay solicitudes; al desactivarla desde el Aviso no sale ninguna petición nueva (tampoco con un clic en WhatsApp ni un `Lead` simulado); `generate_lead` y `click_whatsapp` siguen en `dataLayer`; al reactivar, la página recarga y vuelve `PageView`. Por confirmar en «Probar eventos».*
 - **Límites (no afirmar más):** la oposición solo detiene el seguimiento **posterior**; no retira eventos ya enviados. Es por navegador/dispositivo y se pierde si se borran los datos del sitio. No cubre cookies de terceros ni honra Global Privacy Control.
 - **Pendiente de Gio:** ya desplegado; en "Probar eventos" comprobar que con la oposición activa **no llega ningún evento** (ni `PageView`, ni `Contact`, ni automáticos) y que al reactivar vuelven. Revisar también que no se estén enviando eventos desde otras fuentes (CAPI, integraciones).
 
@@ -166,7 +166,7 @@ Checklist (nada de esto ha sido comprobado desde Meta; no tuvimos acceso):
 ## 7. Reglas de trabajo
 
 - No modificar el bloque del Pixel ni el listener de WhatsApp sin acuerdo con Bruno; si cambia, **re-probar la oposición con red real**.
-- No añadir `Lead`, parámetros ni datos personales sin autorización.
+- `Lead` ya existe (sin parámetros, solo tras `ok:true`). No añadir parámetros, datos personales ni otro disparador de `Lead` (GTM o CAPI sin deduplicar) sin autorización.
 - No dos instalaciones del Pixel (código + GTM).
 - Los secretos (tokens de CAPI, etc.) **nunca** en el repositorio, `mockup.html`, JS ni documentación; solo en `dalma_private/` (fuera de `public_html`).
 - Cualquier servicio de Google de D'ALMA solo con `clinic.dalma@gmail.com`.
