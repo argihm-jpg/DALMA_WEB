@@ -108,8 +108,9 @@
     #nos-team-grid{align-items:stretch;}
     .team-card{border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(95,86,81,.06);background:var(--bone-100);display:flex;flex-direction:column;}
     .team-card-body{padding:16px 18px 20px;text-align:center;flex:1;}
-    .team-card--text{justify-content:center;}
-    .team-card--text .team-card-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:34px 20px;}
+    .team-card img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 0%;}
+    .team-quote{font-family:var(--fd);font-style:italic;font-size:1.06rem;line-height:1.5;color:var(--text-body);margin:14px 0 0;}
+    @media(min-width:769px) and (max-width:1180px){.team-card h3{min-height:2.5em;display:flex;align-items:center;justify-content:center;}}
     .ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:28px;}
     .bp{display:inline-block;padding:14px 32px;border-radius:9999px;background:var(--taupe-700);color:var(--white);font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:background 150ms;}
     .bp:hover{background:var(--taupe-800);}
@@ -797,28 +798,36 @@
       <h2 class="st" data-i18n="nos.team.h2">Nuestro equipo</h2>
     </div>
     <div class="g4" id="nos-team-grid">
-      <div class="team-card team-card--text">
+      <div class="team-card">
+        <img src="imagenes-candidatas/equipo-stefania-serrano.webp" width="800" height="1120" loading="lazy" alt="Retrato de Stefania Serrano, cosmiatra de D’ALMA Clinic" data-i18n-alt="alt.team.stefania">
         <div class="team-card-body">
-          <div style="font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);line-height:1.25;">Stefania Serrano</div>
-          <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:8px;" data-i18n="nos.team.role.cosmetologa">Cosmetóloga</div>
+          <h3 style="font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);line-height:1.25;margin:0;">Stefania Serrano</h3>
+          <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:8px;" data-i18n="nos.team.role.cosmiatra">Cosmiatra</div>
+          <blockquote class="team-quote" data-i18n="nos.team.q.stefania">“Ser cosmiatra no es solo cuidar de tu piel, sino darle el cuidado que se merece para realzar la belleza natural que nos hace únicas.”</blockquote>
         </div>
       </div>
-      <div class="team-card team-card--text">
+      <div class="team-card">
+        <img src="imagenes-candidatas/equipo-laura-elena-perez.webp" width="800" height="1120" loading="lazy" alt="Retrato de la Lic. Laura Elena Pérez, del área de recepción de D’ALMA Clinic" data-i18n-alt="alt.team.laura">
         <div class="team-card-body">
-          <div style="font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);line-height:1.25;">Lic. Laura Elena Pérez</div>
-          <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:8px;" data-i18n="nos.team.role.recepcionista">Recepcionista</div>
+          <h3 style="font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);line-height:1.25;margin:0;">Lic. Laura Elena Pérez</h3>
+          <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:8px;" data-i18n="nos.team.role.recepcion">Recepción</div>
+          <blockquote class="team-quote" data-i18n="nos.team.q.laura">“El bienestar y la salud no son un lujo, sino un derecho que todos merecemos disfrutar en nuestra propia piel.”</blockquote>
         </div>
       </div>
-      <div class="team-card team-card--text">
+      <div class="team-card">
+        <img src="imagenes-candidatas/equipo-ana-patricia-romero.webp" width="800" height="1120" loading="lazy" alt="Retrato de la Dra. Ana Patricia Romero, médica estética de D’ALMA Clinic" data-i18n-alt="alt.team.patricia">
         <div class="team-card-body">
-          <div style="font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);line-height:1.25;">Dra. Ana Patricia Romero</div>
+          <h3 style="font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);line-height:1.25;margin:0;">Dra. Ana Patricia Romero</h3>
           <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:8px;" data-i18n="nos.team.role.medico">Médica Estética</div>
+          <blockquote class="team-quote" data-i18n="nos.team.q.patricia">“Un buen tratamiento no transforma quién eres; realza lo que te hace único.”</blockquote>
         </div>
       </div>
-      <div class="team-card team-card--text">
+      <div class="team-card">
+        <img src="imagenes-candidatas/equipo-grecia-atenea.webp" width="800" height="1120" loading="lazy" alt="Retrato de la Dra. Grecia Atenea, médica estética de D’ALMA Clinic" data-i18n-alt="alt.team.grecia">
         <div class="team-card-body">
-          <div style="font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);line-height:1.25;">Dra. Grecia Atenea</div>
+          <h3 style="font-family:var(--fd);font-size:1.25rem;font-weight:400;color:var(--taupe-700);line-height:1.25;margin:0;">Dra. Grecia Atenea</h3>
           <div style="font-size:.72rem;color:var(--taupe-500);letter-spacing:.08em;text-transform:uppercase;margin-top:8px;" data-i18n="nos.team.role.medico">Médica Estética</div>
+          <blockquote class="team-quote" data-i18n="nos.team.q.grecia">“Cada rostro tiene una esencia única; mi propósito es realzar su belleza, armonizar sus facciones y revelar su mejor versión sin perder aquello que lo hace auténtico.”</blockquote>
         </div>
       </div>
     </div>
@@ -1741,8 +1750,16 @@ const I18N = {
     "nos.team.eyebrow": "Las personas detrás de D'ALMA",
     "nos.team.h2": "Nuestro equipo",
     "nos.team.role.medico": "Médica Estética",
-    "nos.team.role.recepcionista": "Recepcionista",
-    "nos.team.role.cosmetologa": "Cosmetóloga",
+    "nos.team.role.recepcion": "Recepción",
+    "nos.team.role.cosmiatra": "Cosmiatra",
+    "alt.team.stefania": "Retrato de Stefania Serrano, cosmiatra de D’ALMA Clinic",
+    "alt.team.laura": "Retrato de la Lic. Laura Elena Pérez, del área de recepción de D’ALMA Clinic",
+    "alt.team.patricia": "Retrato de la Dra. Ana Patricia Romero, médica estética de D’ALMA Clinic",
+    "alt.team.grecia": "Retrato de la Dra. Grecia Atenea, médica estética de D’ALMA Clinic",
+    "nos.team.q.stefania": "“Ser cosmiatra no es solo cuidar de tu piel, sino darle el cuidado que se merece para realzar la belleza natural que nos hace únicas.”",
+    "nos.team.q.laura": "“El bienestar y la salud no son un lujo, sino un derecho que todos merecemos disfrutar en nuestra propia piel.”",
+    "nos.team.q.patricia": "“Un buen tratamiento no transforma quién eres; realza lo que te hace único.”",
+    "nos.team.q.grecia": "“Cada rostro tiene una esencia única; mi propósito es realzar su belleza, armonizar sus facciones y revelar su mejor versión sin perder aquello que lo hace auténtico.”",
     "nos.work.eyebrow": "Lo que nos mueve",
     "nos.work.h2": "Nuestra forma de trabajar",
     "nos.work.f1.title": "Valoración antes que todo",
@@ -1981,8 +1998,16 @@ const I18N = {
     "nos.team.eyebrow": "The People Behind D'ALMA",
     "nos.team.h2": "Our Team",
     "nos.team.role.medico": "Aesthetic Physician",
-    "nos.team.role.recepcionista": "Receptionist",
-    "nos.team.role.cosmetologa": "Aesthetician",
+    "nos.team.role.recepcion": "Reception",
+    "nos.team.role.cosmiatra": "Aesthetician",
+    "alt.team.stefania": "Portrait of Stefania Serrano, aesthetician at D’ALMA Clinic",
+    "alt.team.laura": "Portrait of Laura Elena Pérez, from the reception team at D’ALMA Clinic",
+    "alt.team.patricia": "Portrait of Dr. Ana Patricia Romero, aesthetic physician at D’ALMA Clinic",
+    "alt.team.grecia": "Portrait of Dr. Grecia Atenea, aesthetic physician at D’ALMA Clinic",
+    "nos.team.q.stefania": "“Being an aesthetician is not just about caring for your skin, but about giving it the care it deserves to enhance the natural beauty that makes us unique.”",
+    "nos.team.q.laura": "“Wellness and health are not a luxury, but a right that we all deserve to enjoy in our own skin.”",
+    "nos.team.q.patricia": "“A good treatment doesn’t change who you are; it enhances what makes you unique.”",
+    "nos.team.q.grecia": "“Every face has a unique essence; my purpose is to enhance its beauty, harmonize its features and reveal its best version without losing what makes it authentic.”",
     "nos.work.eyebrow": "What Drives Us",
     "nos.work.h2": "How We Work",
     "nos.work.f1.title": "A Consultation Comes First",
