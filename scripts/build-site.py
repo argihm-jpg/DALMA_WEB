@@ -74,7 +74,7 @@ FAVICON_SRC = os.path.join(_logos_dirs[0], "DALMA_Favicon.ico") if _logos_dirs e
 BUSINESS_NAME = "D'ALMA CLINIC"
 BUSINESS_ADDRESS = {
     "@type": "PostalAddress",
-    "streetAddress": "Plaza Patio, De Las Brisas 2404, Brisas del Pacífico",
+    "streetAddress": "Plaza Patio, local 05E, De Las Brisas 2404, Brisas del Pacífico",
     "addressLocality": "Cabo San Lucas",
     "addressRegion": "Baja California Sur",
     "addressCountry": "MX",
@@ -133,6 +133,9 @@ OUT_PATH = {
 # Paginas que SI tienen (o tendran) version EN real. privacidad queda fuera:
 # el aviso legal completo solo existe en espanol.
 PAGES_WITH_EN = ["home", "nosotros", "servicios", "contacto", "testimonios"]
+
+# Paginas indexables que NO se listan en sitemap.xml.
+SITEMAP_EXCLUDE = {"privacidad"}
 
 HTML_LANG_ATTR = {"es": "es", "en": "en"}
 
@@ -845,7 +848,7 @@ def main():
     print("Copiado favicon.ico a la raiz de DALMA_BUILD")
 
     # ---- robots.txt ------------------------------------------------------------
-    robots_lines = ["User-agent: *", "Allow: /"]
+    robots_lines = ["User-agent: *", "Allow: /", "Disallow: /contact-submit.php"]
     if public_launch:
         robots_lines.append("")
         robots_lines.append("Sitemap: %s/sitemap.xml" % DOMAIN)
@@ -863,8 +866,11 @@ def main():
 
     # ---- sitemap.xml (solo si PUBLIC_LAUNCH) -----------------------------------
     if public_launch:
+        # El Aviso de privacidad se omite del sitemap (poco valor de busqueda y texto legal aun en
+        # validacion); sigue siendo indexable y rastreable por los enlaces del footer.
+        sitemap_entries = [(n, l) for n, l in generated if n not in SITEMAP_EXCLUDE]
         urls = "\n".join(
-            '  <url><loc>%s%s</loc></url>' % (DOMAIN, ROUTES[lang][name]) for name, lang in generated
+            '  <url><loc>%s%s</loc></url>' % (DOMAIN, ROUTES[lang][name]) for name, lang in sitemap_entries
         )
         sitemap = (
             '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -874,7 +880,7 @@ def main():
         )
         with open(os.path.join(OUT_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
             f.write(sitemap)
-        print("Generado: sitemap.xml (%d rutas)" % len(generated))
+        print("Generado: sitemap.xml (%d rutas)" % len(sitemap_entries))
     else:
         sitemap_path = os.path.join(OUT_DIR, "sitemap.xml")
         if os.path.exists(sitemap_path):
