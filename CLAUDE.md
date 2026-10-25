@@ -7,11 +7,30 @@ Para **cualquier** tarea de D'ALMA en Google Search Console, Google Analytics/GA
 
 En Chrome existen otras cuentas de Google con sesión iniciada. Antes de **crear, editar, vincular, configurar o verificar** cualquier propiedad/cuenta/contenedor de Google, Claude debe **verificar visualmente** que la cuenta activa sea `clinic.dalma@gmail.com`. Si no lo es: **DETENERSE** y pedir a Bruno que cambie de cuenta. No usar ninguna otra cuenta de Google para D'ALMA bajo ninguna circunstancia.
 
-## Estado Actual de Producción y Punto de Reanudación (actualizado 2026-10-21: frontend `895d084` con equipo, `Lead`/`autoConfig` del Pixel, redes sociales, Maps y `sameAs` + GTM v2 publicado y GA4 validado en producción)
+## Estado Actual de Producción y Punto de Reanudación (actualizado 2026-10-24: **SITIO LANZADO PÚBLICAMENTE** — commit `4f88b07`, overlay retirado, indexación habilitada, sitemap enviado a Search Console)
 
 > **Pendientes de Meta/Pixel (Gio):** ver `docs/pendientes-meta-gio.md` (documento autosuficiente; no modificar el Pixel ni desplegar sin coordinar con Bruno).
 
-### Matriz de estado (2026-10-10) — leer primero
+
+### ✅ LANZAMIENTO PÚBLICO OFICIAL — 2026-10-24 18:00:59 (America/Mexico_City, UTC-6)
+**Esta sección PREVALECE sobre la matriz histórica de abajo (que describe el estado pre-lanzamiento hasta `895d084`) en todo lo que se contradiga: `PUBLIC_LAUNCH=true`, sin overlay, `index, follow`, `sitemap.xml` y `robots.txt` publicados, Aviso sin notas internas.**
+- **Referencia de inicio para reportes comerciales/SEO/GA4:** 2026-10-24 18:00:59 (America/Mexico_City). Hora tomada del `last-modified` del origen de la Home ES (00:00:59 GMT del 25/10). `sitemap.xml` publicado a las 17:55:58 y `robots.txt` a las 18:01:33. Los datos previos de GA4 se conservan (incluyen tráfico de pruebas y de `127.0.0.1`; separar con esta fecha).
+- **Código desplegado:** `4f88b07` (`feat(launch): enable public site and search indexing`; `mockup.html` y `scripts/build-site.py`); sin cambios en `contact-submit.php` (`e21791dc…`), Apps Script v5, GTM v2, GA4, Pixel, Turnstile del servidor ni Cloudflare (solo purga de la URL de `robots.txt`).
+- **Razón social del responsable:** SERVICIO JAIEST, S. DE R.L. DE C.V., nombre comercial D'ALMA Clinic. **Domicilio:** Plaza Patio, local 05E, De Las Brisas 2404, Brisas del Pacífico, Cabo San Lucas, Los Cabos, BCS, C.P. 23473 (local 05E unificado en Contacto, footer, Home, Aviso y JSON-LD).
+- **Horario CONFIRMADO:** «Lunes a domingo, de 10:00 a. m. a 8:00 p. m.». Confirmado por Bruno el 2026-10-24; fuente: `Docs Word/D'Alma cuestionario 2.docx`, elaborado y proporcionado por Anita (subido en el commit inicial `7ecd317`, 2026-06-02). **Reemplaza** la nota anterior (2026-09-22) que lo consideraba provisional. Aún no está en el JSON-LD (no se añadió `openingHours`; posible mejora).
+- **Formulario (ES/EN):** advertencia bajo el campo de mensaje («Por tu seguridad, evita compartir diagnósticos, medicamentos u otra información médica sensible en este formulario. Si necesitas atención especializada, nuestro equipo te orientará.») y enlace discreto «Aviso de privacidad» / «Privacy Notice» bajo el botón (destino `/aviso-de-privacidad/`). Sin casillas ni campos nuevos. Turnstile en tamaño compacto SOLO cuando el formulario mide menos de 300 px (elimina el desbordamiento a 320 px; verificado en producción: 280x144 px, sin overflow).
+- **Aviso de privacidad publicado:** texto original de Anita con razón social, domicilio, ARCO vía página de Contacto (`https://dalmaclinic.com.mx/contacto/`, tono «usted»), cookies/herramientas de medición (GTM, GA4, Píxel de Meta, antispam, control de desactivación y sus límites) y URL del sitio. Sin marcadores ni notas internas. **No está certificado jurídicamente.**
+- **SEO:** `robots.txt` = `Allow: /`, `Disallow: /contact-submit.php`, `Sitemap: https://dalmaclinic.com.mx/sitemap.xml` (verificado: Cloudflare con Bot Preference Sync NO lo modificó). `sitemap.xml` con 8 URLs (`/`, `/nosotros/`, `/servicios/`, `/contacto/`, `/en/`, `/en/about/`, `/en/services/`, `/en/contact/`); el Aviso queda fuera del sitemap pero indexable (`SITEMAP_EXCLUDE` en `scripts/build-site.py`). Las 9 páginas: 200, `index, follow`, canonical propio, hreflang es-MX/en/x-default recíproco (Aviso sin hreflang), 1 H1, JSON-LD `MedicalClinic`, GTM x1 y `fbq('init')` x1. Los 9 HTML publicados coinciden por SHA-256 con el build (tras retirar el script de Web Analytics que inyecta Cloudflare).
+- **Search Console** (cuenta `clinic.dalma@gmail.com` verificada visualmente): sitemap enviado el 24/10/2026, estado «Correcto», 8 páginas descubiertas (no equivale a indexadas). Prueba en tiempo real de la Home: «La URL está disponible para Google / se puede indexar». Indexación solicitada para `/`, `/servicios/` y `/contacto/`. Los datos indexados que Google aún muestra («Excluida por noindex») son históricos y se actualizarán al reprocesar.
+- **Backup previo al deploy:** `C:\Users\bruno\Downloads\public_html_pre_public_launch_2026-10-24.zip` (26,292,530 bytes; 49 entradas; `testzip` limpio; contiene las 9 páginas con overlay y `noindex`, `robots.txt` de 25 B, `contact-submit.php` `e21791dc…`; sin `sitemap.xml`). Rollback: restaurar los 9 `index.html` y `robots.txt` desde ese ZIP y purgar la URL de `robots.txt`.
+- **Pruebas:** local (54 combinaciones: 9 páginas x 1440/1024/768/390/360/320, sin overflow ni overlay) y producción (Home y Contacto a 1440; 9 páginas a 390; contacto, Home y EN a 320; sin overflow, sin overlay, 1 H1). Formulario probado SOLO en local con backend simulado (1 `generate_lead`, sin PII); en producción NO se enviaron formularios ni se pulsó WhatsApp, y la carga se hizo con el seguimiento desactivado (sin eventos reales). La recepción de `PageView`/`Contact`/`Lead` en Meta sigue pendiente de Gio.
+- **Cloudflare:** configuración sin cambios (Managed Free Rules; Bot Fight Mode OFF; sin reglas WAF ni rate limiting nuevos; AI Crawl Control/Bot Preference Sync intactos; FTP/DNS intactos). Única acción: purga selectiva de `https://dalmaclinic.com.mx/robots.txt`.
+- **Seguridad revisada (sin aplicar):** recomendaciones separadas para después del lanzamiento: TLS mínimo 1.2, cabeceras de seguridad (`X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options`), protección adicional del endpoint del formulario, registro FTP (expone la IP de origen `82.29.80.141`), SPF/DKIM/DMARC (hoy sin registros de correo) y HSTS tras evaluarlo. La alerta de acceso de la cuenta Google fue aclarada por Bruno (acceso de Anita desde Los Cabos); no se verificó el cierre técnico de la alerta en la cuenta.
+- **Pendientes jurídicos (internos, NO en el Aviso público; sin certificación):** canal ARCO específico (la página de Contacto no menciona ARCO ni un área responsable, y un formulario no recibe documentos de identidad), plazos ARCO (el texto solo dice «plazos legales aplicables»; verificar con asesor el marco vigente, incluida la ley de 2025), consentimiento expreso para datos sensibles (la advertencia reduce el riesgo, no lo elimina), modelo de cookies (GA4/Píxel cargan con aviso informativo y oposición; validar si basta o se requiere opt-in/Consent Mode), versión EN del Aviso, y el Aviso simplificado dentro del punto de captura (solo hay enlace).
+- **Pendientes posteriores al lanzamiento (no bloqueantes):** `og:image`/`twitter:image`; convertir a WebP los PNG pesados de Servicios (4.06 MB y 3.44 MB); `openingHours` y teléfono en JSON-LD; filtro de tráfico interno en GA4; Google Ads; verificación de eventos en Meta por Gio; seguimiento de indexación en Search Console (estado real de las 8 URLs en los próximos días/semanas).
+- **Recordatorio operativo:** validar producción con peticiones secuenciales y pausas de varios segundos (el 24/10 una tanda de ~20 cargas seguidas devolvió respuestas sin contenido por limitación temporal, sin impacto permanente).
+
+### Matriz de estado (2026-10-10; HISTÓRICA hasta `895d084`, ver sección de lanzamiento arriba) — leer primero
 **Regla de lectura:** la sección A es lo que está EN PRODUCCIÓN. Lo de B es lo que sigue pendiente (no está en producción o está con una incidencia). Detalle del deploy en la entrada 2026-10-10 (DEPLOY) del Historial.
 
 **A. DESPLEGADO en producción (Hostinger) = código del commit `895d084` (2026-10-21, frontend; incluye `b10723e`, `c446e04` y los commits de Gio `6e4bd8a`/`b7fd354`); `contact-submit.php` y la foto de Anita = los de `13a21f0`:**
@@ -26,7 +45,7 @@ En Chrome existen otras cuentas de Google con sesión iniciada. Antes de **crear
 - WhatsApp real con `click_whatsapp`; equipo de Nosotros; Search Console verificado (DNS TXT en Cloudflare, conservar).
 - **Equipo en Nosotros/About (DESPLEGADO 2026-10-21, `895d084`):** 4 tarjetas con foto WebP optimizada (800x1120), cargo y frase de Anita, ES/EN: Stefania Serrano (Cosmiatra / Aesthetician), Lic. Laura Elena Pérez (Recepción / Reception), Dra. Ana Patricia Romero y Dra. Grecia Atenea (Médica Estética / Aesthetic Physician). Detalle en la entrada 2026-10-21.
 - **Redes sociales, ficha de Maps y datos estructurados (DESPLEGADO 2026-10-19, `b10723e`):** iconos de Instagram y Facebook en el header (escritorio), en el menú móvil/tablet, en Contacto (filas con `D'ALMA CLINIC`) y en el footer bajo el CTA de WhatsApp; los 3 enlaces de mapa (CTA y mapa de Home, mapa de Contacto) apuntan a la ficha oficial de Google Maps; el JSON-LD `MedicalClinic` lleva `sameAs` con Instagram y Facebook. Enlaces en Datos del Negocio; detalle en la entrada 2026-10-19. Sin eventos nuevos.
-- **Pre-lanzamiento INTACTO:** `PUBLIC_LAUNCH=false`, overlay "Próximamente / Coming soon" para visitas normales, `?preview=1` funcional, `noindex, nofollow`, sin `sitemap.xml`, `/testimonios/` y `/en/testimonials/` → 404.
+- **(HISTÓRICO, SUPERADO el 2026-10-24 por el lanzamiento público)** Pre-lanzamiento: `PUBLIC_LAUNCH=false`, overlay "Próximamente / Coming soon" para visitas normales, `?preview=1` funcional, `noindex, nofollow`, sin `sitemap.xml`, `/testimonios/` y `/en/testimonials/` → 404.
 
 **B. PENDIENTE / INCIDENCIAS (post-deploy 2026-10-10):**
 - ~~Foto de Anita sirviendo la versión anterior por caché del borde de Cloudflare~~ **RESUELTA 2026-10-10:** Bruno autorizó purgar SOLO esa URL (Caching > Configuration > Custom Purge > URL, cuenta `clinic.dalma@gmail.com`; sin Purge Everything ni cambios de reglas/DNS/SSL). La URL normal entrega ahora el archivo corregido (86,798 B, 1320×2031, SHA-256 idéntico al build, `cf-cache-status: MISS` tras la purga). Nota: los navegadores que ya tenían la imagen anterior pueden conservarla hasta 7 días (`max-age=604800`) o hasta una recarga forzada.
@@ -80,7 +99,7 @@ El proyecto lo elabora **Bruno Sandoval**. La directora del negocio es **Ana Mar
 - **Nombre comercial:** D'ALMA CLINIC
 - **Dominio:** `dalmaclinic.com.mx`
 - **Dirección (CONFIRMADA, verificada externamente 2026-09-26):** Plaza Patio, De Las Brisas 2404, Brisas del Pacífico, Cabo San Lucas, Baja California Sur, C.P. 23473. **Aún sin número de local/suite** dentro de la plaza (pendiente; no inventarlo). Punto de Plaza Patio: 22.9045296, -109.9333945
-- **Horario:** "Lunes a domingo, 10:00 am – 8:00 pm" aparece como texto provisional en el sitio, pero Bruno confirmó (2026-09-22) que **no es un dato real, Anita aún no lo ha definido** — no usar como fuente de verdad (p. ej. no incluir en schema.org hasta confirmación real)
+- **Horario (CONFIRMADO 2026-10-24):** «Lunes a domingo, de 10:00 a. m. a 8:00 p. m.». Confirmado por Bruno el 24 de octubre de 2026; fuente: `Docs Word/D'Alma cuestionario 2.docx`, documento elaborado y proporcionado por Anita. Sustituye la nota del 2026-09-22 que lo trataba como provisional. Pendiente opcional: añadirlo al JSON-LD (`openingHours`).
 - **WhatsApp:** Definido por Anita/Bruno (2026-10-07). El número NO se muestra en el sitio ni se documenta aquí: vive únicamente en la constante `DALMA_WHATSAPP` del script compartido de `mockup.html`.
 - **Redes y ficha de Maps (oficiales, recibidos 2026-10-19):** Instagram `https://www.instagram.com/dalma_clinic`; Facebook `https://www.facebook.com/people/Dalma-Clinic/61594824966339/`; Google Maps `https://maps.app.goo.gl/DxGvuPSCg4n6WsdYA` (ficha comercial "D'ALMA CLINIC"). DESPLEGADOS en producción el 2026-10-19 (`b10723e`); ver la entrada 2026-10-19 del Historial.
 
@@ -171,16 +190,16 @@ WhatsApp, Instagram, mapa, horario, preguntas frecuentes
 *(actualizado 2026-09-22 — consolida y reemplaza los listados sueltos de sesiones anteriores)*
 
 ### Contacto
-- Número de local/suite dentro de Plaza Patio.
+- ~~Número de local/suite dentro de Plaza Patio~~ **Confirmado: local 05E** (publicado el 2026-10-24).
 - ~~Perfil real de Google Maps / Google Business Profile~~ **Enlace oficial recibido 2026-10-19** (`https://maps.app.goo.gl/DxGvuPSCg4n6WsdYA`), ya integrado y desplegado en Home y Contacto. Cualquier gestión de la ficha se hace SOLO con `clinic.dalma@gmail.com`.
-- Horario real de atención (el que se muestra en el sitio sigue siendo PROVISIONAL).
+- ~~Horario real de atención~~ **Confirmado 2026-10-24** (documento de Anita; ver Datos del Negocio).
 - Número de teléfono / WhatsApp definitivo.
 - ~~Instagram y otras redes oficiales~~ **Recibidos 2026-10-19** (Instagram y Facebook; integrados y desplegados). Siguen pendientes otras redes si las hubiera.
 - Correo receptor/formulario, si corresponde. *(2026-10-10: hoy el formulario entrega a `clinic.dalma@gmail.com` vía Apps Script; si Anita quiere otro destinatario o un correo corporativo, solo cambia el destino en el Apps Script.)*
 
 ### Aviso de privacidad
-- Nombre legal completo.
-- Domicilio legal completo.
+- ~~Nombre legal completo~~ **SERVICIO JAIEST, S. DE R.L. DE C.V.** (publicado 2026-10-24).
+- ~~Domicilio legal completo~~ **Domicilio comercial de la clínica con local 05E** (publicado 2026-10-24).
 - Correo de privacidad.
 - Teléfono.
 - Texto legal definitivo ES/EN.
@@ -254,6 +273,15 @@ Al terminar cada sesión de trabajo, agrega una entrada en la sección **Histori
 ---
 
 ## Historial de Sesiones
+
+### 2026-10-24 — LANZAMIENTO PÚBLICO OFICIAL (`4f88b07`; overlay retirado; indexación habilitada; Search Console)
+**Resumen completo en la sección «LANZAMIENTO PÚBLICO OFICIAL» al inicio de este archivo.**
+- **Antes del deploy (local):** auditoría de lanzamiento (Git, Cloudflare en solo lectura, Search Console, `contact-submit.php`, SEO de las 9 páginas, rendimiento) y cierre de pendientes: razón social y local 05E, Aviso sin notas internas con ARCO vía Contacto, advertencia y enlace al Aviso en el formulario, Turnstile compacto para 320 px, `robots.txt` y sitemap de 8 URLs. Origen del horario investigado (documento de Anita en `7ecd317`) y confirmado después por Bruno.
+- **Commit y push:** `6c87130..4f88b07` a `origin/main` sin forzar; solo `mockup.html` y `scripts/build-site.py`.
+- **Deploy (Hostinger, File Browser):** `sitemap.xml` (17:55), 4 páginas internas (Nosotros, Servicios, About, Services), Contacto ES/EN, Aviso, Home EN, Home ES (18:00:59) y `robots.txt` (18:01:33), con «Replace all files» por carpeta. No se tocaron `contact-submit.php`, `dalma_private/`, imágenes ni Apps Script. Purga selectiva de la URL de `robots.txt` en Cloudflare.
+- **Verificación en producción:** 9 HTML = build por SHA-256 (tras retirar el script de Cloudflare Web Analytics); sin overlay; `index, follow`; sin `X-Robots-Tag`; `robots.txt` y `sitemap.xml` idénticos al build; Turnstile compacto a 320 px; sin errores de consola del sitio.
+- **Search Console:** sitemap enviado (Correcto, 8 descubiertas); prueba en tiempo real de la Home OK; indexación solicitada para `/`, `/servicios/` y `/contacto/`.
+- **Pendientes de seguimiento:** ver la sección de lanzamiento (jurídicos internos, Meta/Gio, mejoras posteriores).
 
 ### 2026-10-21 — Integración de la rama de Gio (`Lead` + `autoConfig`) y tarjetas del equipo (DESPLEGADO; pre-lanzamiento intacto)
 **Estado: `main` = `origin/main` = `895d084`, DESPLEGADO en Hostinger el 2026-10-21 (4 imágenes + los 9 HTML). Sin cambios en PHP, Apps Script, Cloudflare, GTM ni GA4. Sitio en PRE-LANZAMIENTO (`PUBLIC_LAUNCH=false`, overlay, `noindex, nofollow`, sin sitemap, testimonios 404).**
