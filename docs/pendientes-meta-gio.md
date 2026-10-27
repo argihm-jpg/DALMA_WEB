@@ -1,6 +1,7 @@
 # Pendientes de Meta (Pixel) para Gio — D'ALMA Clinic
 
 **Última actualización:** 2026-10-21, tras el deploy `895d084` (commits de Gio `6e4bd8a` y `b7fd354` integrados en `main` y desplegados). Lo marcado como verificado se comprobó desde el navegador (local con solicitudes interceptadas y producción con la red real); **la recepción de los eventos en Meta NO está confirmada por nosotros**.
+> **2026-10-26 (Gio):** confirmó que los eventos **están llegando a Meta y funcionan**. Decisión: se usan **ambos**, `Lead` (formulario) y `Contact` (WhatsApp), como conversiones de campaña; `Lead` **complementa** a `Contact`, no lo reemplaza. También confirmó en Meta que **no llega `SubscribedButtonClick`** (4.1 cerrado) y que **con la oposición activa no llega ningún evento** (4.7 cerrado).
 **Responsable del tema:** Gio (CM / Meta Ads de la clínica). **Coordinación técnica y deploys:** Bruno Sandoval.
 **Alcance de este documento:** explicar el estado actual del Meta Pixel en el sitio y lo que falta verificar o decidir. No contiene credenciales, tokens ni datos de la clínica.
 
@@ -95,7 +96,7 @@ Estas pruebas se hicieron en un servidor local de revisión (127.0.0.1) con la l
 
 ### 4.4 Evento estándar `Lead` a partir de `generate_lead`
 
-> **2026-10-19 (Gio):** elegida la opción A (Pixel sigue en el código). `if (window.fbq) fbq('track','Lead')` sin parámetros, junto al `generate_lead`. **2026-10-21: desplegado (`895d084`).** Verificado en local con solicitudes interceptadas: 1 `Lead` por envío exitoso; 0 si el backend responde `ok:false` o HTTP 502, si la validación del formulario falla o ante un doble envío; sin datos personales ni `cd[]`/`ud[]` en la petición. **No se hizo ningún envío real del formulario ni se generó un `Lead` real.** **Pendiente:** decidir si `Lead` es la conversión de campañas y si reemplaza o complementa a `Contact`; confirmar su recepción en Meta.
+> **2026-10-19 (Gio):** elegida la opción A (Pixel sigue en el código). `if (window.fbq) fbq('track','Lead')` sin parámetros, junto al `generate_lead`. **2026-10-21: desplegado (`895d084`).** Verificado en local con solicitudes interceptadas: 1 `Lead` por envío exitoso; 0 si el backend responde `ok:false` o HTTP 502, si la validación del formulario falla o ante un doble envío; sin datos personales ni `cd[]`/`ud[]` en la petición. **No se hizo ningún envío real del formulario ni se generó un `Lead` real.** ~~**Pendiente:** decidir si `Lead` es la conversión de campañas y si reemplaza o complementa a `Contact`; confirmar su recepción en Meta.~~ **2026-10-26 (Gio): resuelto.** Eventos recibidos en Meta; `Lead` y `Contact` se usan ambos como conversiones de campaña (se complementan).
 
 - **Estado:** implementado en el código (opción A) y desplegado el 2026-10-21; `generate_lead` sigue emitiéndose solo tras `{"ok":true}` y `Lead` en el mismo punto.
 - **Regla acordada:** `Lead` solo después de un formulario enviado con éxito; **sin parámetros personales** (ni nombre, teléfono, correo, tratamiento ni mensaje); idealmente sin parámetros.
@@ -151,6 +152,7 @@ Checklist (nada de esto ha sido comprobado desde Meta; no tuvimos acceso):
 - [ ] Estado de eventos automáticos / detección de clics en botones / eventos inferidos (4.1).
 - [ ] Estado de Advanced Matching automático y manual (4.2).
 - [ ] Nivel de uso compartido de datos y cookies propias (`_fbp`, `_fbc`).
+- [x] **2026-10-26 (Gio):** PageView, Contact y Lead llegan y funcionan; no llega SubscribedButtonClick; con la oposición activa no llega nada.
 - [ ] Eventos que realmente llegan (PageView, Contact, SubscribedButtonClick, otros) y su origen/dominio. Las visitas de validación del 2026-10-10 con `?preview=1` (deploy anterior y deploy `c446e04`) enviaron `PageView` reales; no se envió ningún `Contact` ni `Lead` de prueba. Las pruebas locales (127.0.0.1) se interceptaron y no llegaron a Meta.
 - [ ] Verificación del dominio y configuración de eventos agregados (AEM) si aplica.
 - [ ] Integraciones, CAPI o socios que también envíen eventos al mismo Pixel (duplicados).
