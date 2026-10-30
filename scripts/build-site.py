@@ -35,6 +35,8 @@ DOMAIN = "https://dalmaclinic.com.mx"
 # El script de GTM solo hace window.dataLayer = window.dataLayer || [], asi que convive con los
 # push() del sitio (click_whatsapp / generate_lead) y con el Meta Pixel existente sin tocarlos.
 GTM_ID = "GTM-MJGTQRV7"
+# Verificacion de dominio de Meta (valor publico proporcionado por Giovani el 2026-10-30). Solo en la Home ES (`/`).
+META_DOMAIN_VERIFICATION = '  <meta name="facebook-domain-verification" content="d4t89i9ei7zudl3y356biyuov6ahvr" />\n'
 GA_MEASUREMENT_ID = "G-CQ7R0YH9J1"  # publico; solo se usa para la bandera 'ga-disable-<ID>' de la desactivacion
 # Preferencia "Desactivar medicion y publicidad" (Aviso de privacidad). Se evalua ANTES de GTM y del Meta Pixel:
 # si el visitante la activo (localStorage 'dalma_tracking_optout' = '1'), no se carga GTM/Google Analytics y
@@ -768,6 +770,11 @@ def main():
 
             canonical = DOMAIN + ROUTES[lang][name]
             head = build_head(style_block, fonts_block, page_meta, name, lang, public_launch, canonical)
+            if name == "home" and lang == "es":
+                # Verificacion de dominio de Meta (solo la Home raiz): metaetiqueta en el HTML inicial.
+                if head.count('  <link rel="icon"') != 1:
+                    fail("No se encontro el punto de insercion de la verificacion de dominio de Meta")
+                head = head.replace('  <link rel="icon"', META_DOMAIN_VERIFICATION + '  <link rel="icon"', 1)
 
             page_script = "const SERVICIOS_ROUTE = '%s';\n%s" % (ROUTES[lang]["servicios"], script_full)
             if name == "servicios":
